@@ -1,10 +1,14 @@
 
 import './App.css';
+import Home from './Components/Home/Home';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <h2>This is payra client</h2>
+    <div>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+      </Routes>
     </div>
   );
 }
