@@ -5,6 +5,14 @@ import '../Banner/Banner.css'
 const Banner = () => {
     const navigate = useNavigate()
 
+    const navigateToRequestForBlood = () => {
+        navigate("/requestForBlood")
+    }
+
+    const navigateToDonorRegistration = () => {
+        navigate("/donorRegistration")
+    }
+
     return (
         <div className='h-screen banner-container flex justify-center items-center'>
             <div ata-aos="zoom-out">
@@ -13,10 +21,10 @@ const Banner = () => {
 
                 <div className='text-center md:flex md:justify-center'>
                     <div className='mb-5 md:mb-0 md:mx-4'>
-                        <button className='button h-11 md:h-12 w-48'>দাতা খুজুন</button>
+                        <button onClick={navigateToRequestForBlood} className='button h-11 md:h-12 w-48'>দাতা খুজুন</button>
                     </div>
                     <div>
-                        <button className='button md:mx-4 h-11 md:h-12 w-48'>রেজিষ্ট্রেশন করুন</button>
+                        <button onClick={navigateToDonorRegistration} className='button md:mx-4 h-11 md:h-12 w-48'>রেজিষ্ট্রেশন করুন</button>
                     </div>
                 </div>
             </div>

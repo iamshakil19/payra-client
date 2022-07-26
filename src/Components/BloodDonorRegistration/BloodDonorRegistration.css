@@ -1,0 +1,9 @@
+.donor-registration-bg{
+    background-image: url("../../Resources/bloodDonorRegistrationBG.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .3);
+    background-blend-mode: overlay;
+    background-position: center;
+    object-fit: cover;
+}
