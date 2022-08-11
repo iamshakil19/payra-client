@@ -12,11 +12,11 @@ const Header = () => {
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
-                    <li className=''><HashLink to="/"> <span className='nav-link active'>হোম</span></HashLink></li>
-                    <li><HashLink to="/donorRegistration"> <span className='nav-link'>রেজিষ্ট্রেশন করুন</span> </HashLink></li>
+                    <li className=''><HashLink to="/"> <span className='nav-link active text-center custom-width'>হোম</span></HashLink></li>
+                    <li><HashLink to="/donorRegistration"> <span className='nav-link active'>রেজিষ্ট্রেশন করুন</span> </HashLink></li>
                     <li><HashLink to="/"> <span className='nav-link'>যোগাযোগ করুন</span> </HashLink></li>
                     <li><HashLink to="/"> <span className='nav-link'>আমাদের সম্পর্কে</span> </HashLink></li>
-                    <li><HashLink to="/"> <span className='nav-link'>লগইন</span> </HashLink></li>
+                    <li><HashLink to="/"> <span className='nav-link text-center custom-width'>লগইন</span> </HashLink></li>
                 </ul>
             </nav>
         </div>
