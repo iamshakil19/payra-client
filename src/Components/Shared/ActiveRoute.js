@@ -8,7 +8,7 @@ function ActiveRoute({ children, to, ...props }) {
     return (
         <div>
             <Link
-                style={{color: match ? "red" : "black"}}
+                style={{color: match ? "#FE3C47" : "black"}}
                 to={to}
                 {...props}
             >

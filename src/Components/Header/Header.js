@@ -13,12 +13,12 @@ const Header = () => {
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
-                    <li><span className='nav-link active text-center custom-width'> <ActiveRoute to="/home">হোম</ActiveRoute></span></li>
-                    <li><span className='nav-link active'><ActiveRoute to="/donorRegistration">রেজিষ্ট্রেশন করুন</ActiveRoute></span></li>
-                    <li><span className='nav-link active'><ActiveRoute to="/contact">যোগাযোগ করুন</ActiveRoute></span></li>
-                    <li><span className='nav-link active'><ActiveRoute to="/aboutUs">আমাদের সম্পর্কে</ActiveRoute></span></li>
-                    <li><span className='nav-link active'><ActiveRoute to="/dashboard">ড্যাশবোর্ড</ActiveRoute></span></li>
-                    <li><span className='nav-link active'><ActiveRoute to="/login">লগইন</ActiveRoute></span></li>
+                    <li><span className='nav-link text-center custom-width hover:text-red-500'> <ActiveRoute to="/home"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>হোম</span></ActiveRoute></span></li>
+                    <li><span className='nav-link'><ActiveRoute to="/donorRegistration"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>রেজিষ্ট্রেশন করুন</span></ActiveRoute></span></li>
+                    <li><span className='nav-link'><ActiveRoute to="/contact"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>যোগাযোগ করুন</span></ActiveRoute></span></li>
+                    <li><span className='nav-link'><ActiveRoute to="/aboutUs"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>আমাদের সম্পর্কে</span></ActiveRoute></span></li>
+                    <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
+                    <li><span className='nav-link'><ActiveRoute to="/login"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>লগইন</span></ActiveRoute></span></li>
                 </ul>
             </nav>
         </div>

@@ -50,9 +50,6 @@ nav ul li .nav-link {
     color: #000000;
     box-shadow: 9px 12px 8px -8px rgba(0, 0, 0, 0.24);
 }
-nav ul li .nav-link:hover {
-    color: red;
-}
 
 nav .menu-btn {
     color: rgb(0, 0, 0);
@@ -95,12 +92,6 @@ nav .menu-btn {
 
     .custom-width{
         width: auto;
-    }
-
-    nav ul li .nav-link:hover,
-    nav ul .active {
-        background: none;
-        color: red;
     }
 
     nav .menu-btn {
