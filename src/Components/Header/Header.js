@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { HashLink } from 'react-router-hash-link';
 import './Header.css'
 import { FaStream } from "react-icons/fa";
 import ActiveRoute from '../Shared/ActiveRoute';
