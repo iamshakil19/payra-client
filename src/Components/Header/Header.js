@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { HashLink } from 'react-router-hash-link';
+// import { HashLink } from 'react-router-hash-link';
 import './Header.css'
-import { FaStream, FaTimes } from "react-icons/fa";
+import { FaStream } from "react-icons/fa";
+import ActiveRoute from '../Shared/ActiveRoute';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return (
         <div className='top-0 sticky z-50'>
             <nav>
-                <div className='logo-container'>PAYRA</div>
+                <div className='logo-container'> <Link to={"/"}>PAYRA</Link></div>
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
-                    <li className=''><HashLink to="/"> <span className='nav-link active text-center custom-width'>হোম</span></HashLink></li>
-                    <li><HashLink to="/donorRegistration"> <span className='nav-link active'>রেজিষ্ট্রেশন করুন</span> </HashLink></li>
-                    <li><HashLink to="/"> <span className='nav-link'>যোগাযোগ করুন</span> </HashLink></li>
-                    <li><HashLink to="/"> <span className='nav-link'>আমাদের সম্পর্কে</span> </HashLink></li>
-                    <li><HashLink to="/"> <span className='nav-link text-center custom-width'>লগইন</span> </HashLink></li>
+                    <li><span className='nav-link active text-center custom-width'> <ActiveRoute to="/home">হোম</ActiveRoute></span></li>
+                    <li><span className='nav-link active'><ActiveRoute to="/donorRegistration">রেজিষ্ট্রেশন করুন</ActiveRoute></span></li>
+                    <li><span className='nav-link active'><ActiveRoute to="/contact">যোগাযোগ করুন</ActiveRoute></span></li>
+                    <li><span className='nav-link active'><ActiveRoute to="/aboutUs">আমাদের সম্পর্কে</ActiveRoute></span></li>
+                    <li><span className='nav-link active'><ActiveRoute to="/login">লগইন</ActiveRoute></span></li>
                 </ul>
             </nav>
         </div>

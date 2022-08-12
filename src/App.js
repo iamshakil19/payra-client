@@ -2,17 +2,26 @@
 import './App.css';
 import Home from './Components/Home/Home';
 import { Route, Routes } from 'react-router-dom';
-import RequestForBlood from './Components/RequestForBlood/RequestForBlood';
 import BloodDonorRegistration from './Components/BloodDonorRegistration/BloodDonorRegistration';
+import { Toaster } from 'react-hot-toast';
+import Login from './Components/Login/Login';
+import Contact from './Components/Contact/Contact';
+import AboutUs from './Components/About/AboutUs';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/requestForBlood' element={<RequestForBlood/>}></Route>
-        <Route path='/donorRegistration' element={<BloodDonorRegistration/>}></Route>
+        <Route path='/home' element={<Home />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
+        <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
+        <Route path='/aboutUs' element={<AboutUs />}></Route>
+        <Route path='login' element={<Login />}></Route>
+        <Route path='*' element={<NotFound/>}></Route>
       </Routes>
+      <Toaster />
     </div>
   );
 }
