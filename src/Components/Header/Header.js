@@ -17,6 +17,7 @@ const Header = () => {
                     <li><span className='nav-link active'><ActiveRoute to="/donorRegistration">রেজিষ্ট্রেশন করুন</ActiveRoute></span></li>
                     <li><span className='nav-link active'><ActiveRoute to="/contact">যোগাযোগ করুন</ActiveRoute></span></li>
                     <li><span className='nav-link active'><ActiveRoute to="/aboutUs">আমাদের সম্পর্কে</ActiveRoute></span></li>
+                    <li><span className='nav-link active'><ActiveRoute to="/dashboard">ড্যাশবোর্ড</ActiveRoute></span></li>
                     <li><span className='nav-link active'><ActiveRoute to="/login">লগইন</ActiveRoute></span></li>
                 </ul>
             </nav>
