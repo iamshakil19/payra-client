@@ -68,30 +68,31 @@ const BloodDonorRegistration = () => {
                     <div>
                         <h1 class="text-4xl font-bold my-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
                         <form onSubmit={donorInfo}>
+                            
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your name ?</span>
+                                    <span class="label-text text-white">What is your name ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <input type="text" name='name' placeholder="Your Name" class="input input-sm input-bordered w-full max-w-xs" required />
                             </div>
 
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your age ?</span>
+                                    <span class="label-text text-white">What is your age ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
-                                <input type="number" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs" required />
+                                <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs" required />
                             </div>
 
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your Number ?</span>
+                                    <span class="label-text text-white">What is your Number ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <input type="number" name='number' placeholder="EX: 0123456789" class="input input-sm input-bordered w-full max-w-xs" required />
                             </div>
 
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Location ?</span>
+                                    <span class="label-text text-white">Your Location ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
                                 <select class="select select-bordered select-sm" name='location'>
@@ -109,7 +110,7 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs ">
                                 <label class="label">
-                                    <span class="label-text text-white">Your gender ?</span>
+                                    <span class="label-text text-white">Your gender ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='gender'>
                                     <option disabled selected value={"noGender"}>Select your gender</option>
@@ -124,7 +125,7 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs ">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Blood Group</span>
+                                    <span class="label-text text-white">Your Blood Group ? <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='bloodGroup'>
                                     <option disabled selected value={"noGroup"}>Select your blood group</option>

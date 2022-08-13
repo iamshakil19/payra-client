@@ -17,13 +17,6 @@ nav {
     padding: 0px 50px 0px 70px;
 }
 
-nav .logo-container {
-    color: rgb(0, 0, 0);
-    font-size: 30px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
 nav ul {
     display: flex;
     list-style: none;

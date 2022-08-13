@@ -3,13 +3,16 @@ import './Header.css'
 import { FaStream } from "react-icons/fa";
 import ActiveRoute from '../Shared/ActiveRoute';
 import { Link } from 'react-router-dom';
+import logo from "../../Resources/Logos/logo.png"
 
 const Header = () => {
 
     return (
         <div className='top-0 sticky z-50'>
             <nav>
-                <div className='logo-container'> <Link to={"/"}>PAYRA</Link></div>
+                <div className='logo-container'> <Link to={"/"}>
+                    <img className='w-24' src={logo} alt="" />
+                </Link></div>
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
