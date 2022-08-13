@@ -6,44 +6,45 @@ import toast from 'react-hot-toast';
 
 const BloodDonorRegistration = () => {
 
-    const [customLocationError, setCustomLocationError] = useState({
-        locationError: ""
+    const [customBloodGroupError, setCustomBloodGroupError] = useState({
+        bloodGroupError: ""
     })
     const [customGenderError, setCustomGenderError] = useState({
         genderError: ""
     })
-    const [customBloodGroupError, setCustomBloodGroupError] = useState({
-        bloodGroupError: ""
+    const [customDivisionError, setCustomDivisionError] = useState({
+        divisionError: ""
     })
+    const [customDistrictError, setCustomDistrictError] = useState({
+        districtError: ""
+    })
+    const [customPoliceError, setCustomPoliceError] = useState({
+        policeError: ""
+    })
+    const [customUnionError, setCustomUnionError] = useState({
+        unionError: ""
+    })
+    const [customVillageError, setCustomVillageError] = useState({
+        villageError: ""
+    })
+
+
 
     const donorInfo = event => {
         event.preventDefault()
         const name = event.target.name.value
         const age = event.target.age.value
-        const number = event.target.number.value
-        const location = event.target.location.value
+        const number1 = event.target.number1.value
+        const number2 = event.target.number2.value
+        const division = event.target.division.value
+        const district = event.target.district.value
+        const policeStation = event.target.policeStation.value
+        const union = event.target.union.value
+        const village = event.target.village.value
         const gender = event.target.gender.value
         const bloodGroup = event.target.bloodGroup.value
 
-        if (location === "noLocation") {
-            setCustomLocationError({ ...customLocationError, locationError: "Select your gender" })
-            toast.error("Select your location")
-            return
-        }
-        else {
-            setCustomLocationError({ ...customLocationError, locationError: "" })
-        }
-
-        if (gender === "noGender") {
-            setCustomGenderError({ ...customGenderError, genderError: "Select your gender" })
-            toast.error("Select your gender")
-            return
-        }
-        else {
-            setCustomGenderError({ ...customGenderError, genderError: "" })
-        }
-
-        if (bloodGroup === "noGroup") {
+        if (bloodGroup === "empty") {
             setCustomBloodGroupError({ ...customBloodGroupError, bloodGroupError: "Select your blood group" })
             toast.error("Select your blood group")
             return
@@ -52,7 +53,62 @@ const BloodDonorRegistration = () => {
             setCustomBloodGroupError({ ...customBloodGroupError, bloodGroupError: "" })
         }
 
-        console.log({ name, age, number, location, gender, bloodGroup });
+        if (gender === "empty") {
+            setCustomGenderError({ ...customGenderError, genderError: "Select your gender" })
+            toast.error("Select your gender")
+            return
+        }
+        else {
+            setCustomGenderError({ ...customGenderError, genderError: "" })
+        }
+
+        if (division === "empty") {
+            setCustomDivisionError({ ...customDivisionError, divisionError: "Select your division" })
+            toast.error("Select your division")
+            return
+        }
+        else {
+            setCustomDivisionError({ ...customDivisionError, divisionError: "" })
+        }
+
+        if (district === "empty") {
+            setCustomDistrictError({ ...customDistrictError, districtError: "Select your district" })
+            toast.error("Select your district")
+            return
+        }
+        else {
+            setCustomDistrictError({ ...customDistrictError, districtError: "" })
+        }
+
+        if (policeStation === "empty") {
+            setCustomPoliceError({ ...customPoliceError, policeError: "Select your police station" })
+            toast.error("Select your police station")
+            return
+        }
+        else {
+            setCustomPoliceError({ ...customPoliceError, policeError: "" })
+        }
+
+        if (union === "empty") {
+            setCustomUnionError({ ...customUnionError, unionError: "Select your union" })
+            toast.error("Select your union")
+            return
+        }
+        else {
+            setCustomUnionError({ ...customUnionError, unionError: "" })
+        }
+
+        if (village === "empty") {
+            setCustomVillageError({ ...customVillageError, villageError: "Select your village" })
+            toast.error("Select your village")
+            return
+        }
+        else {
+            setCustomVillageError({ ...customVillageError, villageError: "" })
+        }
+
+
+        console.log({ name, age, number1, number2, gender, bloodGroup, division, district, policeStation, union, village });
         toast.success("Your submission has been sent")
         event.target.reset()
     }
@@ -62,58 +118,70 @@ const BloodDonorRegistration = () => {
 
             <div class="hero min-h-screen">
                 <div class="hero-content flex-col lg:flex-row">
-                    <div>
+                    <div className='lg:mr-3'>
                         <img src={donorImg} class="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt='' />
                     </div>
-                    <div>
+                    <div className='lg:ml-3'>
                         <h1 class="text-4xl font-bold my-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
                         <form onSubmit={donorInfo}>
-                            
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text text-white">What is your name ? <span className='text-red-500 font-extrabold'>*</span></span>
-                                </label>
-                                <input type="text" name='name' placeholder="Your Name" class="input input-sm input-bordered w-full max-w-xs" required />
+
+                            <div className='lg:flex'>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your name <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+                                    <input type="text" name='name' placeholder="Type your Name" class="input input-sm input-bordered w-full max-w-xs" required />
+                                </div>
+
+                                <div class="form-control w-full max-w-xs lg:ml-5">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your Blood Group <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+                                    <select class="select select-bordered select-sm" name='bloodGroup'>
+                                        <option disabled selected value={"empty"}>Select your blood group</option>
+                                        <option value={"o+"}>O+</option>
+                                        <option value={"o-"}>O-</option>
+                                        <option value={"a+"}>A+</option>
+                                        <option value={"a-"}>A-</option>
+                                        <option value={"b+"}>B+</option>
+                                        <option value={"b-"}>B-</option>
+                                        <option value={"ab+"}>AB+</option>
+                                        <option value={"ab-"}>AB-</option>
+                                    </select>
+                                    {
+                                        customBloodGroupError?.bloodGroupError && <p className='text-red-500 mt-1 text-sm'>{customBloodGroupError.bloodGroupError}</p>
+                                    }
+                                </div>
                             </div>
 
-                            <div class="form-control w-full max-w-xs">
+                            <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your age ? <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your date of birth <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
-                                <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs" required />
+                                <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
                             </div>
 
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text text-white">What is your Number ? <span className='text-red-500 font-extrabold'>*</span></span>
-                                </label>
-                                <input type="number" name='number' placeholder="EX: 0123456789" class="input input-sm input-bordered w-full max-w-xs" required />
+                            <div className='lg:flex'>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your phone number <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+                                    <input type="number" name='number1' placeholder="EX: 01834567890" class="input input-sm input-bordered w-full max-w-xs" required />
+                                </div>
+                                <div class="form-control w-full max-w-xs lg:ml-5">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your 2nd phone number</span>
+                                    </label>
+                                    <input type="number" name='number2' placeholder="(optional)" class="input input-sm input-bordered w-full max-w-xs" />
+                                </div>
                             </div>
 
-                            <div class="form-control w-full max-w-xs">
+                            <div class="form-control w-full max-w-xs lg:max-w-full ">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Location ? <span className='text-red-500 font-extrabold'>*</span></span>
-                                </label>
-
-                                <select class="select select-bordered select-sm" name='location'>
-                                    <option disabled selected value={"noLocation"}>Select your location</option>
-                                    <option value={"joyrampotty"}>Joyrampotty</option>
-                                    <option value={"amboula"}>Amboula</option>
-                                    <option value={"bagdha"}>Bagdha</option>
-                                    <option value={"khajuria"}>Khajuria</option>
-                                    <option value={"bagdha"}>Bagdha</option>
-                                </select>
-                                {
-                                    customLocationError?.locationError && <p className='text-red-500 mt-1 text-sm'>{customLocationError?.locationError}</p>
-                                }
-                            </div>
-
-                            <div class="form-control w-full max-w-xs ">
-                                <label class="label">
-                                    <span class="label-text text-white">Your gender ? <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your gender <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='gender'>
-                                    <option disabled selected value={"noGender"}>Select your gender</option>
+                                    <option disabled selected value={"empty"}>Select your gender</option>
                                     <option value={"male"}>Male</option>
                                     <option value={"female"}>Female</option>
                                     <option value={"3rd"}>Rather not say</option>
@@ -123,27 +191,91 @@ const BloodDonorRegistration = () => {
                                 }
                             </div>
 
-                            <div class="form-control w-full max-w-xs ">
+                            <p className='text-white mt-4 font-bold'>Address</p>
+
+                            <div className='lg:flex'>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your division <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+
+                                    <select class="select select-bordered select-sm" name='division'>
+                                        <option disabled selected value={"empty"}>Select your division</option>
+                                        <option value={"barisal"}>Barisal</option>
+                                    </select>
+                                    {
+                                        customDivisionError?.divisionError && <p className='text-red-500 mt-1 text-sm'>{customDivisionError?.divisionError}</p>
+                                    }
+                                </div>
+                                <div class="form-control w-full max-w-xs lg:ml-5">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your district <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+
+                                    <select class="select select-bordered select-sm" name='district'>
+                                        <option disabled selected value={"empty"}>Select your district</option>
+                                        <option value={"barisal"}>Barisal</option>
+                                    </select>
+                                    {
+                                        customDistrictError?.districtError && <p className='text-red-500 mt-1 text-sm'>{customDistrictError?.districtError}</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Blood Group ? <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your police station <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
-                                <select class="select select-bordered select-sm" name='bloodGroup'>
-                                    <option disabled selected value={"noGroup"}>Select your blood group</option>
-                                    <option value={"o+"}>O+</option>
-                                    <option value={"o-"}>O-</option>
-                                    <option value={"a+"}>A+</option>
-                                    <option value={"a-"}>A-</option>
-                                    <option value={"b+"}>B+</option>
-                                    <option value={"b-"}>B-</option>
-                                    <option value={"ab+"}>AB+</option>
-                                    <option value={"ab-"}>AB-</option>
+
+                                <select class="select select-bordered select-sm" name='policeStation'>
+                                    <option disabled selected value={"empty"}>Select your Police Station</option>
+                                    <option value={"agailjhara"}>Agailjhara</option>
                                 </select>
                                 {
-                                    customBloodGroupError?.bloodGroupError && <p className='text-red-500 mt-1 text-sm'>{customBloodGroupError.bloodGroupError}</p>
+                                    customPoliceError?.policeError && <p className='text-red-500 mt-1 text-sm'>{customPoliceError?.policeError}</p>
                                 }
                             </div>
+
+                            <div className='lg:flex'>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your union <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+
+                                    <select class="select select-bordered select-sm" name='union'>
+                                        <option disabled selected value={"empty"}>Select your union</option>
+                                        <option value={"bagdha"}>Bagdha</option>
+                                        <option value={"bakal"}>Bakal</option>
+                                        <option value={"goila"}>Goila</option>
+                                        <option value={"rajihar"}>Rajihar</option>
+                                        <option value={"ratnapur"}>Ratnapur</option>
+                                    </select>
+                                    {
+                                        customUnionError?.unionError && <p className='text-red-500 mt-1 text-sm'>{customUnionError?.unionError}</p>
+                                    }
+                                </div>
+
+                                <div class="form-control w-full max-w-xs lg:ml-5">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your village <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+
+                                    <select class="select select-bordered select-sm" name='village'>
+                                        <option disabled selected value={"empty"}>Select your village</option>
+                                        <option value={"joyrampotty"}>Joyrampotty</option>
+                                        <option value={"amboula"}>Amboula</option>
+                                        <option value={"bagdha"}>Bagdha</option>
+                                        <option value={"khajuria"}>Khajuria</option>
+                                        <option value={"nimarpar"}>Nimarpar</option>
+                                    </select>
+                                    {
+                                        customVillageError?.villageError && <p className='text-red-500 mt-1 text-sm'>{customVillageError?.villageError}</p>
+                                    }
+                                </div>
+                            </div>
+
                             <div>
-                                <input className='btn w-full max-w-xs mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Submit" />
+                                <input className='btn w-full max-w-xs lg:max-w-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Submit" />
                             </div>
                         </form>
                     </div>
