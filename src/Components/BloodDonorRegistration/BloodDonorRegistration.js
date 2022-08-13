@@ -6,9 +6,11 @@ import toast from 'react-hot-toast';
 
 const BloodDonorRegistration = () => {
 
+    const [customLocationError, setCustomLocationError] = useState({
+        locationError: ""
+    })
     const [customGenderError, setCustomGenderError] = useState({
         genderError: ""
-
     })
     const [customBloodGroupError, setCustomBloodGroupError] = useState({
         bloodGroupError: ""
@@ -23,18 +25,27 @@ const BloodDonorRegistration = () => {
         const gender = event.target.gender.value
         const bloodGroup = event.target.bloodGroup.value
 
+        if (location === "noLocation") {
+            setCustomLocationError({ ...customLocationError, locationError: "Select your gender" })
+            toast.error("Select your location")
+            return
+        }
+        else {
+            setCustomLocationError({ ...customLocationError, locationError: "" })
+        }
+
         if (gender === "noGender") {
             setCustomGenderError({ ...customGenderError, genderError: "Select your gender" })
-            toast.error("Your submission failed")
+            toast.error("Select your gender")
             return
         }
         else {
             setCustomGenderError({ ...customGenderError, genderError: "" })
         }
 
-        if (bloodGroup === "nothing") {
+        if (bloodGroup === "noGroup") {
             setCustomBloodGroupError({ ...customBloodGroupError, bloodGroupError: "Select your blood group" })
-            toast.error("Your submission failed")
+            toast.error("Select your blood group")
             return
         }
         else {
@@ -52,7 +63,7 @@ const BloodDonorRegistration = () => {
             <div class="hero min-h-screen">
                 <div class="hero-content flex-col lg:flex-row">
                     <div>
-                        <img src={donorImg} class="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt=''/>
+                        <img src={donorImg} class="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt='' />
                     </div>
                     <div>
                         <h1 class="text-4xl font-bold my-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
@@ -80,14 +91,25 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your Location ?</span>
+                                    <span class="label-text text-white">Your Location ?</span>
                                 </label>
-                                <input type="text" name='location' placeholder="Your Location" class="input input-sm input-bordered w-full max-w-xs" required />
+
+                                <select class="select select-bordered select-sm" name='location'>
+                                    <option disabled selected value={"noLocation"}>Select your location</option>
+                                    <option value={"joyrampotty"}>Joyrampotty</option>
+                                    <option value={"amboula"}>Amboula</option>
+                                    <option value={"bagdha"}>Bagdha</option>
+                                    <option value={"khajuria"}>Khajuria</option>
+                                    <option value={"bagdha"}>Bagdha</option>
+                                </select>
+                                {
+                                    customLocationError?.locationError && <p className='text-red-500 mt-1 text-sm'>{customLocationError?.locationError}</p>
+                                }
                             </div>
 
                             <div class="form-control w-full max-w-xs ">
                                 <label class="label">
-                                    <span class="label-text text-white">What is your gender</span>
+                                    <span class="label-text text-white">Your gender ?</span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='gender'>
                                     <option disabled selected value={"noGender"}>Select your gender</option>
@@ -105,7 +127,7 @@ const BloodDonorRegistration = () => {
                                     <span class="label-text text-white">Your Blood Group</span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='bloodGroup'>
-                                    <option disabled selected value={"nothing"}>Select your blood group</option>
+                                    <option disabled selected value={"noGroup"}>Select your blood group</option>
                                     <option value={"o+"}>O+</option>
                                     <option value={"o-"}>O-</option>
                                     <option value={"a+"}>A+</option>
