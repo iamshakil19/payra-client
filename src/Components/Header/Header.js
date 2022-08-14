@@ -4,8 +4,17 @@ import { FaStream } from "react-icons/fa";
 import ActiveRoute from '../Shared/ActiveRoute';
 import { Link } from 'react-router-dom';
 import logo from "../../Resources/Logos/logo.png"
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
+
+    const [user, loading, error] = useAuthState(auth);
+
+    const handleLogout = () => {
+        signOut(auth)
+    }
 
     return (
         <div className='top-0 sticky z-50'>
@@ -20,8 +29,19 @@ const Header = () => {
                     <li><span className='nav-link'><ActiveRoute to="/donorRegistration"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>রেজিষ্ট্রেশন করুন</span></ActiveRoute></span></li>
                     <li><span className='nav-link'><ActiveRoute to="/contact"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>যোগাযোগ করুন</span></ActiveRoute></span></li>
                     <li><span className='nav-link'><ActiveRoute to="/aboutUs"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>আমাদের সম্পর্কে</span></ActiveRoute></span></li>
-                    <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
-                    <li><span className='nav-link'><ActiveRoute to="/login"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>লগইন</span></ActiveRoute></span></li>
+
+                    <>
+                        {
+                            user ?
+                                <>
+                                    <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
+                                    <li onClick={handleLogout} className=""><span className='nav-link lg:bg-black'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
+                                </>
+                                :
+                                <li><span className='nav-link lg:bg-[#FE3C47]'><ActiveRoute to="/login"><span className='lg:text-white'>লগইন</span></ActiveRoute></span></li>
+                        }
+                    </>
+
                 </ul>
             </nav>
         </div>
