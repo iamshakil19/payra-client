@@ -11,7 +11,7 @@ const Header = () => {
         <div className='top-0 sticky z-50'>
             <nav>
                 <div className='logo-container'> <Link to={"/"}>
-                    <img className='w-24' src={logo} alt="" />
+                    <img className='w-20' src={logo} alt="" />
                 </Link></div>
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>

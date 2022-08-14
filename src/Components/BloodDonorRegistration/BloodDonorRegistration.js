@@ -94,6 +94,7 @@ const BloodDonorRegistration = () => {
             toast.error("Select your union")
             return
         }
+        
         else {
             setCustomUnionError({ ...customUnionError, unionError: "" })
         }
@@ -103,6 +104,7 @@ const BloodDonorRegistration = () => {
             toast.error("Select your village")
             return
         }
+
         else {
             setCustomVillageError({ ...customVillageError, villageError: "" })
         }
@@ -113,10 +115,10 @@ const BloodDonorRegistration = () => {
         event.target.reset()
     }
     return (
-        <div className='donor-registration-bg'>
+        <div className='donor-registration-bg min-h-screen'>
             <Header></Header>
 
-            <div class="hero min-h-screen">
+            <div class="hero lg:mt-8">
                 <div class="hero-content flex-col lg:flex-row">
                     <div className='lg:mr-3'>
                         <img src={donorImg} class="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt='' />
@@ -128,9 +130,9 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your name <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your Name <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
-                                    <input type="text" name='name' placeholder="Type your Name" class="input input-sm input-bordered w-full max-w-xs" required />
+                                    <input type="text" name='name' placeholder="Type Your Name" class="input input-sm input-bordered w-full max-w-xs" required />
                                 </div>
 
                                 <div class="form-control w-full max-w-xs lg:ml-5">
@@ -138,7 +140,7 @@ const BloodDonorRegistration = () => {
                                         <span class="label-text text-white">Your Blood Group <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <select class="select select-bordered select-sm" name='bloodGroup'>
-                                        <option disabled selected value={"empty"}>Select your blood group</option>
+                                        <option disabled selected value={"empty"}>Select Your Blood Group</option>
                                         <option value={"o+"}>O+</option>
                                         <option value={"o-"}>O-</option>
                                         <option value={"a+"}>A+</option>
@@ -156,7 +158,7 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">Your date of birth <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your Date Of Birth <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
                             </div>
@@ -164,13 +166,13 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your phone number <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your Phone Number <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="number" name='number1' placeholder="EX: 01834567890" class="input input-sm input-bordered w-full max-w-xs" required />
                                 </div>
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your 2nd phone number</span>
+                                        <span class="label-text text-white">Your 2nd Phone Number</span>
                                     </label>
                                     <input type="number" name='number2' placeholder="(optional)" class="input input-sm input-bordered w-full max-w-xs" />
                                 </div>
@@ -178,10 +180,10 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs lg:max-w-full ">
                                 <label class="label">
-                                    <span class="label-text text-white">Your gender <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your Gender <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='gender'>
-                                    <option disabled selected value={"empty"}>Select your gender</option>
+                                    <option disabled selected value={"empty"}>Select Your Gender</option>
                                     <option value={"male"}>Male</option>
                                     <option value={"female"}>Female</option>
                                     <option value={"3rd"}>Rather not say</option>
@@ -196,11 +198,11 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your division <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your Division <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='division'>
-                                        <option disabled selected value={"empty"}>Select your division</option>
+                                        <option disabled selected value={"empty"}>Select Your Division</option>
                                         <option value={"barisal"}>Barisal</option>
                                     </select>
                                     {
@@ -209,11 +211,11 @@ const BloodDonorRegistration = () => {
                                 </div>
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your district <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your District <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='district'>
-                                        <option disabled selected value={"empty"}>Select your district</option>
+                                        <option disabled selected value={"empty"}>Select Your District</option>
                                         <option value={"barisal"}>Barisal</option>
                                     </select>
                                     {
@@ -224,11 +226,11 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">Your police station <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">Your Police Station <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
                                 <select class="select select-bordered select-sm" name='policeStation'>
-                                    <option disabled selected value={"empty"}>Select your Police Station</option>
+                                    <option disabled selected value={"empty"}>Select Your Police Station</option>
                                     <option value={"agailjhara"}>Agailjhara</option>
                                 </select>
                                 {
@@ -239,11 +241,11 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your union <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your Union <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='union'>
-                                        <option disabled selected value={"empty"}>Select your union</option>
+                                        <option disabled selected value={"empty"}>Select Your Union</option>
                                         <option value={"bagdha"}>Bagdha</option>
                                         <option value={"bakal"}>Bakal</option>
                                         <option value={"goila"}>Goila</option>
@@ -257,11 +259,11 @@ const BloodDonorRegistration = () => {
 
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your village <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">Your Village <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='village'>
-                                        <option disabled selected value={"empty"}>Select your village</option>
+                                        <option disabled selected value={"empty"}>Select Your Village</option>
                                         <option value={"joyrampotty"}>Joyrampotty</option>
                                         <option value={"amboula"}>Amboula</option>
                                         <option value={"bagdha"}>Bagdha</option>
