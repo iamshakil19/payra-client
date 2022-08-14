@@ -9,6 +9,7 @@ import Contact from './Components/Contact/Contact';
 import AboutUs from './Components/About/AboutUs';
 import NotFound from './Components/NotFound/NotFound';
 import Dashboard from './Components/Dashboard/Dashboard';
+import Registration from './Components/Registration/Registration';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='login' element={<Login />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/registration' element={<Registration/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
       </Routes>
       <Toaster />
