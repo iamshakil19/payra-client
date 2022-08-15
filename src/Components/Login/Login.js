@@ -7,6 +7,7 @@ import or from '../../Resources/divider.png'
 import googleLogo from '../../Resources/Logos/google2.png'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
 
@@ -20,18 +21,28 @@ const Login = () => {
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
+    ] = useSignInWithEmailAndPassword(auth);
 
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
-    const onSubmit = data => {
-        console.log(data)
-    };
+    let loginError;
 
-    if (googleUser) {
-        console.log(googleUser?.user);
+    if (loading || googleLoading) {
+        return <Loading />
     }
 
+    if (error || googleError) {
+        loginError = <p className='text-red-500 text-sm ml-2 mb-1'>{error?.message || googleError?.message}</p>
+    }
+
+    if (user || googleUser) {
+        console.log(user || googleUser);
+    }
+
+    const onSubmit = data => {
+        console.log(data)
+        signInWithEmailAndPassword(data.email, data.password)
+    };
 
     return (
         <div>
@@ -92,6 +103,8 @@ const Login = () => {
                                         {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
                                     </label>
                                 </div>
+
+                                {loginError}
 
                                 <input className='bg-[#303640] w-full mt-2 rounded-full btn' type="submit" value="Login" />
                             </form>
