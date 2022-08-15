@@ -94,7 +94,7 @@ const BloodDonorRegistration = () => {
             toast.error("Select your union")
             return
         }
-        
+
         else {
             setCustomUnionError({ ...customUnionError, unionError: "" })
         }
@@ -123,24 +123,24 @@ const BloodDonorRegistration = () => {
                     <div className='lg:mr-3'>
                         <img src={donorImg} class="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt='' />
                     </div>
+
                     <div className='lg:ml-3'>
                         <h1 class="text-4xl font-bold my-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
-                        <form onSubmit={donorInfo}>
 
+                        <form onSubmit={donorInfo}>
+                            <div class="form-control w-full max-w-xs lg:max-w-full">
+                                <label class="label">
+                                    <span class="label-text text-white">Your Name <span className='text-red-500 font-extrabold'>*</span></span>
+                                </label>
+                                <input type="text" name='name' placeholder="Type Your Name" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
+                            </div>
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
-                                    <label class="label">
-                                        <span class="label-text text-white">Your Name <span className='text-red-500 font-extrabold'>*</span></span>
-                                    </label>
-                                    <input type="text" name='name' placeholder="Type Your Name" class="input input-sm input-bordered w-full max-w-xs" required />
-                                </div>
-
-                                <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
                                         <span class="label-text text-white">Your Blood Group <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <select class="select select-bordered select-sm" name='bloodGroup'>
-                                        <option disabled selected value={"empty"}>Select Your Blood Group</option>
+                                        <option disabled selected value={"empty"}>Select Blood Group</option>
                                         <option value={"o+"}>O+</option>
                                         <option value={"o-"}>O-</option>
                                         <option value={"a+"}>A+</option>
@@ -154,14 +154,16 @@ const BloodDonorRegistration = () => {
                                         customBloodGroupError?.bloodGroupError && <p className='text-red-500 mt-1 text-sm'>{customBloodGroupError.bloodGroupError}</p>
                                     }
                                 </div>
+
+                                <div class="form-control w-full max-w-xs lg:max-w-full lg:ml-5">
+                                    <label class="label">
+                                        <span class="label-text text-white">Your Date Of Birth <span className='text-red-500 font-extrabold'>*</span></span>
+                                    </label>
+                                    <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
+                                </div>
                             </div>
 
-                            <div class="form-control w-full max-w-xs lg:max-w-full">
-                                <label class="label">
-                                    <span class="label-text text-white">Your Date Of Birth <span className='text-red-500 font-extrabold'>*</span></span>
-                                </label>
-                                <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
-                            </div>
+
 
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">

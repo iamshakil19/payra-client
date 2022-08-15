@@ -9,7 +9,9 @@ import Contact from './Components/Contact/Contact';
 import AboutUs from './Components/About/AboutUs';
 import NotFound from './Components/NotFound/NotFound';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Registration from './Components/Registration/Registration';
+import SignUp from './Components/SignUp/SignUp';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+
 
 function App() {
   return (
@@ -20,10 +22,16 @@ function App() {
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
+
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }></Route>
+
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/registration' element={<Registration/>}></Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/registration' element={<SignUp />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
       <Toaster />
     </div>
