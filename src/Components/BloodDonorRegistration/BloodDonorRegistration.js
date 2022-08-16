@@ -43,6 +43,7 @@ const BloodDonorRegistration = () => {
         const village = event.target.village.value
         const gender = event.target.gender.value
         const bloodGroup = event.target.bloodGroup.value
+        const status = "pending"
 
         if (bloodGroup === "empty") {
             setCustomBloodGroupError({ ...customBloodGroupError, bloodGroupError: "Select your blood group" })
@@ -109,10 +110,24 @@ const BloodDonorRegistration = () => {
             setCustomVillageError({ ...customVillageError, villageError: "" })
         }
 
+        const donorInfo = { name, age, number1, number2, gender, bloodGroup, division, district, policeStation, union, village, status }
 
-        console.log({ name, age, number1, number2, gender, bloodGroup, division, district, policeStation, union, village });
-        toast.success("Your submission has been sent")
-        event.target.reset()
+        fetch('http://localhost:5000/donor-request', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(donorInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    event.target.reset()
+                    toast.success("Your submission has been sent")
+                } else {
+                    toast.error("Submission failed")
+                }
+            })
     }
     return (
         <div className='donor-registration-bg min-h-screen'>
@@ -130,17 +145,17 @@ const BloodDonorRegistration = () => {
                         <form onSubmit={donorInfo}>
                             <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Name <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
-                                <input type="text" name='name' placeholder="Type Your Name" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
+                                <input type="text" name='name' placeholder="বাংলায় আপনার নাম লিখুন" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
                             </div>
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Blood Group <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">আপনার রক্তের গ্রুপ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <select class="select select-bordered select-sm" name='bloodGroup'>
-                                        <option disabled selected value={"empty"}>Select Blood Group</option>
+                                        <option disabled selected value={"empty"}>গ্রুপ সিলেক্ট করুন</option>
                                         <option value={"o+"}>O+</option>
                                         <option value={"o-"}>O-</option>
                                         <option value={"a+"}>A+</option>
@@ -157,7 +172,7 @@ const BloodDonorRegistration = () => {
 
                                 <div class="form-control w-full max-w-xs lg:max-w-full lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Date Of Birth <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">জন্ম তারিখ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="date" name='age' placeholder="Your Age" class="input input-sm input-bordered w-full max-w-xs lg:max-w-full" required />
                                 </div>
@@ -168,27 +183,27 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Phone Number <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
-                                    <input type="number" name='number1' placeholder="EX: 01834567890" class="input input-sm input-bordered w-full max-w-xs" required />
+                                    <input type="number" maxLength={11} name='number1' placeholder="EX: 01834567890" class="input input-sm input-bordered w-full max-w-xs" required />
                                 </div>
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your 2nd Phone Number</span>
+                                        <span class="label-text text-white">দ্বিতীয় ফোন নাম্বার</span>
                                     </label>
-                                    <input type="number" name='number2' placeholder="(optional)" class="input input-sm input-bordered w-full max-w-xs" />
+                                    <input type="number" name='number2' placeholder="(অপশনাল)" class="input input-sm input-bordered w-full max-w-xs" />
                                 </div>
                             </div>
 
                             <div class="form-control w-full max-w-xs lg:max-w-full ">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Gender <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">লিঙ্গ <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select class="select select-bordered select-sm" name='gender'>
                                     <option disabled selected value={"empty"}>Select Your Gender</option>
-                                    <option value={"male"}>Male</option>
-                                    <option value={"female"}>Female</option>
-                                    <option value={"3rd"}>Rather not say</option>
+                                    <option value={"পুরুষ"}>পুরুষ</option>
+                                    <option value={"মহিলা"}>মহিলা</option>
+                                    <option value={"হিজড়া"}>বলতে চাই না</option>
                                 </select>
                                 {
                                     customGenderError?.genderError && <p className='text-red-500 mt-1 text-sm'>{customGenderError?.genderError}</p>
@@ -200,12 +215,12 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Division <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">বিভাগ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='division'>
-                                        <option disabled selected value={"empty"}>Select Your Division</option>
-                                        <option value={"barisal"}>Barisal</option>
+                                        <option disabled selected value={"empty"}>বিভাগ সিলেক্ট করুন</option>
+                                        <option value={"বরিশাল"}>বরিশাল</option>
                                     </select>
                                     {
                                         customDivisionError?.divisionError && <p className='text-red-500 mt-1 text-sm'>{customDivisionError?.divisionError}</p>
@@ -213,12 +228,12 @@ const BloodDonorRegistration = () => {
                                 </div>
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your District <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">জেলা<span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='district'>
-                                        <option disabled selected value={"empty"}>Select Your District</option>
-                                        <option value={"barisal"}>Barisal</option>
+                                        <option disabled selected value={"empty"}>জেলা সিলেক্ট করুন</option>
+                                        <option value={"বরিশাল"}>বরিশাল</option>
                                     </select>
                                     {
                                         customDistrictError?.districtError && <p className='text-red-500 mt-1 text-sm'>{customDistrictError?.districtError}</p>
@@ -228,12 +243,12 @@ const BloodDonorRegistration = () => {
 
                             <div class="form-control w-full max-w-xs lg:max-w-full">
                                 <label class="label">
-                                    <span class="label-text text-white">Your Police Station <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span class="label-text text-white">থানা<span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
                                 <select class="select select-bordered select-sm" name='policeStation'>
-                                    <option disabled selected value={"empty"}>Select Your Police Station</option>
-                                    <option value={"agailjhara"}>Agailjhara</option>
+                                    <option disabled selected value={"empty"}>থানা সিলেক্ট করুন</option>
+                                    <option value={"আগৈলঝাড়া"}>আগৈলঝাড়া</option>
                                 </select>
                                 {
                                     customPoliceError?.policeError && <p className='text-red-500 mt-1 text-sm'>{customPoliceError?.policeError}</p>
@@ -243,16 +258,16 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div class="form-control w-full max-w-xs">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Union <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">ইউনিয়ন<span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='union'>
-                                        <option disabled selected value={"empty"}>Select Your Union</option>
-                                        <option value={"bagdha"}>Bagdha</option>
-                                        <option value={"bakal"}>Bakal</option>
-                                        <option value={"goila"}>Goila</option>
-                                        <option value={"rajihar"}>Rajihar</option>
-                                        <option value={"ratnapur"}>Ratnapur</option>
+                                        <option disabled selected value={"empty"}>ইউনিয়ন সিলেক্ট করুন</option>
+                                        <option value={"বাগধা"}>বাগধা</option>
+                                        <option value={"বাকাল"}>বাকাল</option>
+                                        <option value={"গৈলা"}>গৈলা</option>
+                                        <option value={"রাজিহার"}>রাজিহার</option>
+                                        <option value={"রত্নপুর"}>রত্নপুর</option>
                                     </select>
                                     {
                                         customUnionError?.unionError && <p className='text-red-500 mt-1 text-sm'>{customUnionError?.unionError}</p>
@@ -261,16 +276,16 @@ const BloodDonorRegistration = () => {
 
                                 <div class="form-control w-full max-w-xs lg:ml-5">
                                     <label class="label">
-                                        <span class="label-text text-white">Your Village <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span class="label-text text-white">গ্রাম<span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select class="select select-bordered select-sm" name='village'>
-                                        <option disabled selected value={"empty"}>Select Your Village</option>
-                                        <option value={"joyrampotty"}>Joyrampotty</option>
-                                        <option value={"amboula"}>Amboula</option>
-                                        <option value={"bagdha"}>Bagdha</option>
-                                        <option value={"khajuria"}>Khajuria</option>
-                                        <option value={"nimarpar"}>Nimarpar</option>
+                                        <option disabled selected value={"empty"}>গ্রাম সিলেক্ট করুন</option>
+                                        <option value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
+                                        <option value={"আমবৌলা"}>আমবৌলা</option>
+                                        <option value={"খাজুরিয়া"}>খাজুরিয়া</option>
+                                        <option value={"নিমারপাড়"}>নিমারপাড়</option>
+                                        <option value={"বাগধা"}>বাগধা</option>
                                     </select>
                                     {
                                         customVillageError?.villageError && <p className='text-red-500 mt-1 text-sm'>{customVillageError?.villageError}</p>
