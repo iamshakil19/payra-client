@@ -9,7 +9,7 @@
 }
 
 nav {
-    height: 65px;
+    height: 70px;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -20,7 +20,6 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
-    /* color: rgb(0, 0, 0); */
 }
 
 nav ul li .nav-link {
