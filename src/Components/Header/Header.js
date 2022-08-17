@@ -7,9 +7,10 @@ import logo from "../../Resources/Logos/logo.png"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
-
+    const location = useLocation()
     const [user, loading, error] = useAuthState(auth);
 
     const handleLogout = () => {
@@ -19,9 +20,17 @@ const Header = () => {
     return (
         <div className='top-0 sticky z-50'>
             <nav>
-                <div className='logo-container'> <Link to={"/"}>
-                    <img className='w-20' src={logo} alt="" />
-                </Link></div>
+
+                <div className='flex items-center'>
+                    {
+                        location.pathname.includes('dashboard') && <label for="dashboard-sidebar" class="drawer-button lg:hidden text-xl cursor-pointer text-black mr-5">
+                            <FaStream />
+                        </label>
+                    }
+                    <div className='logo-container'> <Link to={"/"}>
+                        <img className='w-20' src={logo} alt="" />
+                    </Link></div>
+                </div>
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
