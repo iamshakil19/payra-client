@@ -14,6 +14,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import Analytics from './Components/DashboardGroup/Analytics/Analytics';
 import Dashboard from './Components/DashboardGroup/Dashboard/Dashboard';
 import DonorList from './Components/DashboardGroup/DonorList/DonorList';
+import DonorRequest from './Components/DashboardGroup/DonorRequest/DonorRequest';
 
 
 
@@ -30,6 +31,10 @@ function App() {
         <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>}>
           <Route index element={<Analytics />}></Route>
           <Route path='donor-list' element={<DonorList />}></Route>
+          <Route path='donor-request' element={<DonorRequest />}></Route>
+          <Route path='donor-request' element={<DonorRequest />}></Route>
+          <Route path='donor-request' element={<DonorRequest />}></Route>
+          <Route path='donor-request' element={<DonorRequest />}></Route>
         </Route>
 
         <Route path='/login' element={<Login />}></Route>

@@ -20,14 +20,14 @@ const Header = () => {
     return (
         <div className='top-0 sticky z-50'>
             <nav>
-                    {
-                        location.pathname.includes('dashboard') && <label for="dashboard-sidebar" class="drawer-button lg:hidden text-xl cursor-pointer text-red-500">
-                            <FaStream />
-                        </label>
-                    }
-                    <div className='logo-container'> <Link to={"/"}>
-                        <img className='w-20' src={logo} alt="" />
-                    </Link></div>
+                {
+                    location.pathname.includes('dashboard') && <label for="dashboard-sidebar" class="drawer-button lg:hidden text-xl cursor-pointer text-red-500">
+                        <FaStream />
+                    </label>
+                }
+                <div className='logo-container'> <Link to={"/"}>
+                    <img className='w-20' src={logo} alt="" />
+                </Link></div>
 
                 <input type="checkbox" id='click' />
                 <label for="click" className='menu-btn'> <FaStream /> </label>

@@ -1,64 +1,41 @@
 import React from 'react';
-import Header from '../../Header/Header';
-import { FaChartLine, FaUsers } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import Header from '../../Header/Header'
+import { GrLineChart } from "react-icons/gr";
 import { BiDonateBlood } from "react-icons/bi";
-import { MdAdminPanelSettings, MdBloodtype } from "react-icons/md";
 import { BsChatSquareQuote } from "react-icons/bs";
-import { GiHummingbird } from "react-icons/gi";
-import './Dashboard.css'
+import { RiQuestionAnswerLine } from "react-icons/ri";
+import { FaUsers } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
+
 const Dashboard = () => {
 
     return (
         <div>
             <Header />
-            <div className='body'>
-                <div className="container">
-                    <div className="navigation">
-                    
-                        <ul>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-3xl'><GiHummingbird /></span>
-                                    <span className='title text-xl font-semibold'>Payra Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><FaChartLine /></span>
-                                    <span className='title'>Analytics</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><BiDonateBlood /></span>
-                                    <span className='title'>Donor List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><MdBloodtype /></span>
-                                    <span className='title'>Donor Request</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><BsChatSquareQuote /></span>
-                                    <span className='title'>Blood Request</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><FaUsers /></span>
-                                    <span className='title'>All User</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className=''>
-                                    <span className='icon text-2xl'><MdAdminPanelSettings /></span>
-                                    <span className='title'>Admin List</span>
-                                </a>
-                            </li>
+
+            <div>
+                <div class="drawer drawer-mobile">
+                    <input id="dashboard-sidebar" type="checkbox" class="drawer-toggle" />
+                    <div class="drawer-content">
+                        {/* <!-- Page content here --> */}
+                       
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="dashboard-sidebar" class="drawer-overlay"></label>
+                        <ul class="menu p-4 overflow-y-auto w-60 bg-base-300 text-base-content">
+                            {/* <!-- Sidebar content here --> */}
+                            <p className='font-bold text-center text-2xl mb-5 poppins-font'>Dashboard</p>
+
+                            <li ><Link to={"/dashboard"}> <span className='flex items-center poppins-font'> <span className=''><GrLineChart/></span> <span className='ml-3 text-[16px]'>Analytics</span> </span> </Link></li>
+                            <li><Link to={"/dashboard/donor-list"}><span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood/></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
+                            <li><Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <span><BsChatSquareQuote/></span> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link></li>
+                            <li><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine/> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link></li>
+                            <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers/> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
+                            <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <GrUserAdmin/> <span className='ml-3 text-[16px]'>All Admin</span> </span></Link></li>
                         </ul>
+
                     </div>
                 </div>
             </div>
