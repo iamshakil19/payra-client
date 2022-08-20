@@ -122,7 +122,7 @@ const BloodDonorRegistration = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    event.target.reset()
+                    // event.target.reset()
                     toast.success("Your submission has been sent")
                 } else {
                     toast.error("Submission failed")
@@ -140,7 +140,7 @@ const BloodDonorRegistration = () => {
                     </div>
 
                     <div className='lg:ml-3'>
-                        <h1 class="text-4xl font-bold my-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
+                        <h1 class="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
 
                         <form onSubmit={donorInfo}>
                             <div class="form-control w-full max-w-xs lg:max-w-full">

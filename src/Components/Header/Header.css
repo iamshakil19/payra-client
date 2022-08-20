@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.my-font {
+.bangla-font {
     font-family: 'Anek Bangla', sans-serif;
 }
 
@@ -34,7 +34,8 @@ nav ul li .nav-link {
     font-family: 'Anek Bangla', sans-serif;
     font-weight: 600;
 }
-.custom-width{
+
+.custom-width {
     width: 80px;
 }
 
@@ -82,7 +83,7 @@ nav .menu-btn {
         box-shadow: none;
     }
 
-    .custom-width{
+    .custom-width {
         width: auto;
     }
 
