@@ -24,7 +24,7 @@ const Dashboard = () => {
                     </div>
                     <div class="drawer-side">
                         <label for="dashboard-sidebar" class="drawer-overlay"></label>
-                        <ul class="menu p-4 overflow-y-auto w-60 bg-gradient-to-r from-[#538FFB] to-[#5B54FA] text-white rounded-tr-md">
+                        <ul class="menu p-4 overflow-y-auto w-60 bg-gradient-to-r from-[#538FFB] to-[#5c54fa] text-white rounded-tr-md">
                             {/* <!-- Sidebar content here --> */}
                             <p className='font-bold text-center text-2xl mb-5 poppins-font'>Dashboard</p>
 
