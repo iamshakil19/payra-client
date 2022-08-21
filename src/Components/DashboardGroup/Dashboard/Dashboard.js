@@ -12,22 +12,14 @@ import { useState } from 'react';
 import Loading from '../../Shared/Loading/Loading';
 
 const Dashboard = () => {
-    const [isIndicator, setIndicator] = useState(false)
+
     const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
         .then(res => res.json()))
-        
-        console.log(allDonorRequest?.length);
-        if(isLoading){
-            return <Loading/>
-        }
 
-    if ( allDonorRequest?.length > 0){
-        console.log("donor list 0 er caite boro");
-        setIndicator(true)
+    if (isLoading) {
+        return <Loading />
     }
-    else {
-        setIndicator(false)
-    }
+
 
     return (
         <div>
@@ -49,10 +41,11 @@ const Dashboard = () => {
 
                             <li ><Link to={"/dashboard"}> <span className='flex items-center poppins-font'> <BsFillPieChartFill /> <span className='ml-3 text-[16px]'>Analytics</span> </span> </Link></li>
                             <li><Link to={"/dashboard/donor-list"}><span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood /></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
-                            <li className='indicator'>
+                            <li className='relative'>
                                 <Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <BsChatSquareQuote /> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link>
-                                {isIndicator &&
-                                    <span class="indicator-item badge bg-orange-500 poppins-font w-2 border">{allDonorRequest?.length}</span>
+                                {
+                                    allDonorRequest?.length > 0 &&
+                                    <span class="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.length}</span>
                                 }
                             </li>
                             <li><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link></li>
