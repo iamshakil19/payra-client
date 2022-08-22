@@ -12,7 +12,7 @@ const {_id, name, age, gender, number1, bloodGroup, village} = donorRequest
             <td className='poppins-font'>{number1}</td>
             <td className='poppins-font uppercase'>{bloodGroup}</td>
             <td className='bangla-font'>{village}</td>
-            <td>Approve</td>
+            <td><button className='btn btn-xs btn-success'>Approve</button></td>
             <td>Delete</td>
         </tr>
     );
