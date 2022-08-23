@@ -23,7 +23,7 @@ const DonorRequestDeleteModal = ({ deleteDonorRequest, setDeleteDonorRequest, re
             <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">
                     <h3 class="font-bold text-lg text-red-500">Are you sure you want to delete this Request ?</h3>
-                    <p class="py-4">Once you delete it, you can,t bring it back.</p>
+                    <p class="py-4 text-red-500 font-semibold">Once you delete it, you can,t bring it back.</p>
                     <div class="modal-action">
                         <button onClick={() => handleDeleteRequest(_id)} className='btn bg-red-500 border-0 hover:bg-red-600'>Delete</button>
                         <label for="donor-request-delete-modal" class="btn">Cancel</label>

@@ -99,7 +99,7 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:max-w-full lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">জন্ম তারিখ <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white">জন্ম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="date" placeholder="Your Age" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.age && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("age", {
@@ -222,7 +222,7 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">জেলা<span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white">জেলা <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.district && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='district'
@@ -246,7 +246,7 @@ const BloodDonorRegistration = () => {
 
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
-                                    <span className="label-text text-white">থানা<span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span className="label-text text-white">থানা <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
                                 <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.policeStation && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
@@ -270,7 +270,7 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-white">ইউনিয়ন<span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white">ইউনিয়ন <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.union && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
@@ -297,7 +297,7 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">গ্রাম<span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white">গ্রাম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.village && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='village'
