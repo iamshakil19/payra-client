@@ -1,9 +1,8 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import donorImg from '../../../Resources/bloodImg.jpg'
 
-const DonorRequestRow = ({ donorRequest, index, setDeleteDonorRequest, refetch }) => {
-    const { _id, name, age, gender, number1, bloodGroup, village } = donorRequest
+const DonorRequestRow = ({ donorRequest, index, setDeleteDonorRequest, setProfileDonorRequest, refetch }) => {
+    const { _id, name, profileImg, age, gender, number1, bloodGroup, village } = donorRequest
 
     let newStatus = "verified"
 
@@ -33,7 +32,9 @@ const DonorRequestRow = ({ donorRequest, index, setDeleteDonorRequest, refetch }
             <td>
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <img src={donorImg} alt="" />
+                        <label onClick={() => setProfileDonorRequest(donorRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
+                            <img src={profileImg} alt="" />
+                        </label>
                     </div>
                 </div>
             </td>

@@ -10,9 +10,10 @@ const BloodDonorRegistration = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const status = "pending"
+    const profileImg = "https://i.ibb.co/KFpgBVC/bloodImg.jpg"
 
     const onSubmit = data => {
-        const newData = {...data, status}
+        const newData = {...data, status, profileImg}
 
         fetch('http://localhost:5000/donor-request', {
             method: 'POST',

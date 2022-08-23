@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading/Loading';
 import DonorRequestDeleteModal from './DonorRequestDeleteModal';
+import DonorRequestProfileModal from './DonorRequestProfileModal';
 import DonorRequestRow from './DonorRequestRow';
 
 const DonorRequest = () => {
     const [deleteDonorRequest, setDeleteDonorRequest] = useState(null)
+    const [profileDonorRequest, setProfileDonorRequest] = useState(null)
     const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
         .then(res => res.json()))
 
@@ -43,6 +45,7 @@ const DonorRequest = () => {
                                 refetch={refetch}
                                 index={index + 1}
                                 setDeleteDonorRequest={setDeleteDonorRequest}
+                                setProfileDonorRequest={setProfileDonorRequest}
                             ></DonorRequestRow>)
                         }
                     </tbody>
@@ -54,6 +57,13 @@ const DonorRequest = () => {
                     setDeleteDonorRequest={setDeleteDonorRequest}
                     refetch={refetch}
                 ></DonorRequestDeleteModal>
+            }
+            {
+                profileDonorRequest && <DonorRequestProfileModal
+                profileDonorRequest={profileDonorRequest}
+                setProfileDonorRequest={setProfileDonorRequest}
+                refetch={refetch}
+                ></DonorRequestProfileModal>
             }
         </div>
     );
