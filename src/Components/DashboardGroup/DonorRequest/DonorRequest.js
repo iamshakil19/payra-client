@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading/Loading';
+import DonorRequestDeleteModal from './DonorRequestDeleteModal';
 import DonorRequestRow from './DonorRequestRow';
 
 const DonorRequest = () => {
@@ -47,6 +48,13 @@ const DonorRequest = () => {
                     </tbody>
                 </table>
             </div>
+            {
+                deleteDonorRequest && <DonorRequestDeleteModal
+                    deleteDonorRequest={deleteDonorRequest}
+                    setDeleteDonorRequest={setDeleteDonorRequest}
+                    refetch={refetch}
+                ></DonorRequestDeleteModal>
+            }
         </div>
     );
 };
