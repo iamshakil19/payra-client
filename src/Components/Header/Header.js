@@ -21,7 +21,7 @@ const Header = () => {
         <div className='top-0 sticky z-50'>
             <nav>
                 {
-                    location.pathname.includes('dashboard') && <label for="dashboard-sidebar" class="drawer-button lg:hidden text-xl cursor-pointer text-red-500">
+                    location.pathname.includes('dashboard') && <label htmlFor="dashboard-sidebar" className="drawer-button lg:hidden text-xl cursor-pointer text-red-500">
                         <FaStream />
                     </label>
                 }
@@ -30,7 +30,7 @@ const Header = () => {
                 </Link></div>
 
                 <input type="checkbox" id='click' />
-                <label for="click" className='menu-btn'> <FaStream /> </label>
+                <label htmlFor="click" className='menu-btn'> <FaStream /> </label>
                 <ul>
                     <li><span className='nav-link text-center custom-width hover:text-red-500'> <ActiveRoute to="/home"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>হোম</span></ActiveRoute></span></li>
                     <li><span className='nav-link'><ActiveRoute to="/donorRegistration"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>রেজিষ্ট্রেশন করুন</span></ActiveRoute></span></li>
