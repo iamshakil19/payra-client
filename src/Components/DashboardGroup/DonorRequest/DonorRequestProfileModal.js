@@ -31,8 +31,8 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                             <img src={profileImg} alt='' />
                         </div>
                     </div>
-                    <h2 className='text-center poppins-font mt-2 text-lg'> <span className=''>Name: </span> <span className='font-bold text-green-600'>{name}</span> <span className='text-red-500 uppercase ml-2 font-bold'>({bloodGroup})</span></h2>
-                    <p className='text-center poppins-font'><span>Age:</span> <span className='font-semibold'>{age}</span></p>
+                    <h2 className='text-center poppins-font mt-2 text-lg'> <span className='bangla-font'>নাম: </span> <span className='font-bold text-green-600'>{name}</span> <span className='text-red-500 uppercase ml-2 font-bold'>({bloodGroup})</span></h2>
+                    <p className='text-center'><span className='bangla-font'>বয়স:</span> <span className='font-semibold poppins-font'>{age}</span></p>
 
                     <div className='flex justify-center items-center mt-1 mb-2'>
                         <div>
@@ -46,16 +46,16 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
 
                     <div className='flex justify-around'>
                         <div>
-                            <p className='mb-1'><span className='poppins-font'>Division: </span> <span className='bangla-font font-bold'>{division}</span></p>
-                            <p className='mb-1'><span className='poppins-font'>District: </span> <span className='bangla-font font-bold'>{district}</span></p>
-                            <p className='mb-1'><span className='poppins-font'>Union: </span> <span className='bangla-font font-bold'>{union}</span></p>
+                            <p className='mb-1 bangla-font'>বিভাগ: <span className='font-bold'>{division}</span></p>
+                            <p className='mb-1 bangla-font'>জেলা: <span className='font-bold'>{district}</span></p>
+                            <p className='mb-1 bangla-font'>ইউনিয়ন:  <span className='font-bold'>{union}</span></p>
 
                         </div>
 
                         <div>
-                            <p className='mb-1'><span className='poppins-font'>Gender: </span> <span className='bangla-font font-bold text-green-600'>{gender}</span></p>
-                            <p className='mb-1'><span className='poppins-font'>Station: </span> <span className='bangla-font font-bold'>{policeStation}</span></p>
-                            <p className='mb-1'><span className='poppins-font'>Village: </span> <span className='bangla-font font-bold'>{village}</span></p>
+                            <p className='mb-1 bangla-font'>লিঙ্গ: <span className='font-bold text-green-600'>{gender}</span></p>
+                            <p className='mb-1 bangla-font'>থানা: <span className='font-bold'>{policeStation}</span></p>
+                            <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
                         </div>
                     </div>
                     <div className='flex justify-around mt-3'>

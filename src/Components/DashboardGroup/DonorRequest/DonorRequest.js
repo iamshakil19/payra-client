@@ -24,16 +24,17 @@ const DonorRequest = () => {
 
                     <thead>
                         <tr>
-                            <th>SL</th>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Number</th>
-                            <th>Group</th>
-                            <th>Village</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th className='bangla-font text-[15px] '>সিরিয়াল</th>
+                            <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
+                            <th className='bangla-font text-[15px] pl-2'>নাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>বয়স</th>
+                            <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
+                            <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
+                            <th className='bangla-font text-[15px] pl-2'>গ্রুপ</th>
+                            <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
+                            <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>স্টাটাস</th>
+                            <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
 
                         </tr>
                     </thead>
