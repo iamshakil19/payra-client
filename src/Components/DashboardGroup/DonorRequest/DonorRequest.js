@@ -61,9 +61,10 @@ const DonorRequest = () => {
             }
             {
                 profileDonorRequest && <DonorRequestProfileModal
-                profileDonorRequest={profileDonorRequest}
-                setProfileDonorRequest={setProfileDonorRequest}
-                refetch={refetch}
+                    profileDonorRequest={profileDonorRequest}
+                    setProfileDonorRequest={setProfileDonorRequest}
+                    setDeleteDonorRequest={setDeleteDonorRequest}
+                    refetch={refetch}
                 ></DonorRequestProfileModal>
             }
         </div>

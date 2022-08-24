@@ -18,7 +18,7 @@ const DonorRequestDeleteModal = ({ deleteDonorRequest, setDeleteDonorRequest, re
             })
     }
     return (
-        <div>
+        <div className=''>
             <input type="checkbox" id="donor-request-delete-modal" class="modal-toggle" />
             <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">

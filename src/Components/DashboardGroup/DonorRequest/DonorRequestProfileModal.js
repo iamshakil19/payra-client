@@ -2,26 +2,56 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { FiPhoneCall } from "react-icons/fi";
 
-const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch }) => {
+const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch, setDeleteDonorRequest }) => {
 
     const { _id, profileImg, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
-    // const handleDeleteRequest = () => {
-    //     const url = `http://localhost:5000/donorRequest/${_id}`;
-    //     fetch(url, {
-    //         method: "DELETE"
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.deletedCount > 0) {
-    //                 refetch()
-    //                 setProfileDonorRequest(null)
-    //                 toast.success('Donor Request Deleted')
-    //             }
-    //         })
-    // }
+
+    let newStatus = "verified"
+
+    const handleProfileData = () => {
+        setTimeout(() => {
+            setProfileDonorRequest(null)
+            console.log("click hoice");
+        }, 10)
+    }
+
+    const handleStatus = () => {
+        const donorStatusInfo = {
+            status: newStatus
+        }
+        fetch(`http://localhost:5000/donorStatus/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(donorStatusInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+                setProfileDonorRequest(null)
+                toast.success('Donor Verified')
+            })
+    }
+
+    const handleDeleteRequest = () => {
+        const url = `http://localhost:5000/donorRequest/${_id}`;
+        fetch(url, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch()
+                    setProfileDonorRequest(null)
+                    toast.success('Donor Request Deleted')
+                }
+            })
+    }
 
     return (
-        <div>
+        <div className=''>
             <input type="checkbox" id="donor-request-profile-modal" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box">
@@ -59,9 +89,9 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                         </div>
                     </div>
                     <div className='flex justify-around mt-3'>
-                        <label for="donor-request-delete-modal" className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700'>Accept</label>
-                        
-                        <label for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                        <label onClick={() => { setDeleteDonorRequest(profileDonorRequest); handleProfileData() }} for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+
+                        <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700'>Accept</label>
                     </div>
                 </div>
             </div>
