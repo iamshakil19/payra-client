@@ -1,8 +1,8 @@
 
 import React from 'react';
 import toast from 'react-hot-toast';
-const DonorRequestDeleteModal = ({ deleteDonorRequest, setDeleteDonorRequest, refetch }) => {
-    const { _id } = deleteDonorRequest
+const DonorRequestDeleteModal = ({ donorData, setDonorData, refetch }) => {
+    const { _id } = donorData
     const handleDeleteRequest = () => {
         const url = `http://localhost:5000/donorRequest/${_id}`;
         fetch(url, {
@@ -12,7 +12,7 @@ const DonorRequestDeleteModal = ({ deleteDonorRequest, setDeleteDonorRequest, re
             .then(data => {
                 if (data.deletedCount > 0) {
                     refetch()
-                    setDeleteDonorRequest(null)
+                    setDonorData(null)
                     toast.success('Donor Request Deleted')
                 }
             })

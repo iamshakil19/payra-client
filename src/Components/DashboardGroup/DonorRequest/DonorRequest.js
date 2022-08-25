@@ -7,7 +7,7 @@ import DonorRequestProfileModal from './DonorRequestProfileModal';
 import DonorRequestRow from './DonorRequestRow';
 
 const DonorRequest = () => {
-    const [deleteDonorRequest, setDeleteDonorRequest] = useState(null)
+    const [donorData, setDonorData] = useState(null)
     const [profileDonorRequest, setProfileDonorRequest] = useState(null)
     const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
         .then(res => res.json()))
@@ -45,7 +45,7 @@ const DonorRequest = () => {
                                 donorRequest={donorRequest}
                                 refetch={refetch}
                                 index={index + 1}
-                                setDeleteDonorRequest={setDeleteDonorRequest}
+                                setDonorData={setDonorData}
                                 setProfileDonorRequest={setProfileDonorRequest}
                             ></DonorRequestRow>)
                         }
@@ -53,9 +53,9 @@ const DonorRequest = () => {
                 </table>
             </div>
             {
-                deleteDonorRequest && <DonorRequestDeleteModal
-                    deleteDonorRequest={deleteDonorRequest}
-                    setDeleteDonorRequest={setDeleteDonorRequest}
+                donorData && <DonorRequestDeleteModal
+                    donorData={donorData}
+                    setDonorData={setDonorData}
                     refetch={refetch}
                 ></DonorRequestDeleteModal>
             }
@@ -63,7 +63,7 @@ const DonorRequest = () => {
                 profileDonorRequest && <DonorRequestProfileModal
                     profileDonorRequest={profileDonorRequest}
                     setProfileDonorRequest={setProfileDonorRequest}
-                    setDeleteDonorRequest={setDeleteDonorRequest}
+                    setDonorData={setDonorData}
                     refetch={refetch}
                 ></DonorRequestProfileModal>
             }

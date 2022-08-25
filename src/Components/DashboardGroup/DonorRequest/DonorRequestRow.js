@@ -1,7 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const DonorRequestRow = ({ donorRequest, index, setDeleteDonorRequest, setProfileDonorRequest, refetch }) => {
+const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorRequest, refetch }) => {
     const { _id, name, profileImg, age, gender, number1, bloodGroup, union, village } = donorRequest
 
     let newStatus = "verified"
@@ -47,7 +47,7 @@ const DonorRequestRow = ({ donorRequest, index, setDeleteDonorRequest, setProfil
             <td className='bangla-font p-2'>{village}</td>
             <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-16 bg-green-600 border-0 hover:bg-green-700'>Accept</button></td>
             <td className='p-2'>
-                <label onClick={() => setDeleteDonorRequest(donorRequest)} for="donor-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                <label onClick={() => setDonorData(donorRequest)} for="donor-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
             </td>
         </tr>
     );

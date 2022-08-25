@@ -2,7 +2,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { FiPhoneCall } from "react-icons/fi";
 
-const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch, setDeleteDonorRequest }) => {
+const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch, setDonorData }) => {
 
     const { _id, profileImg, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
 
@@ -11,7 +11,6 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
     const handleProfileData = () => {
         setTimeout(() => {
             setProfileDonorRequest(null)
-            console.log("click hoice");
         }, 10)
     }
 
@@ -32,21 +31,6 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                 refetch()
                 setProfileDonorRequest(null)
                 toast.success('Donor Verified')
-            })
-    }
-
-    const handleDeleteRequest = () => {
-        const url = `http://localhost:5000/donorRequest/${_id}`;
-        fetch(url, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0) {
-                    refetch()
-                    setProfileDonorRequest(null)
-                    toast.success('Donor Request Deleted')
-                }
             })
     }
 
@@ -89,7 +73,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                         </div>
                     </div>
                     <div className='flex justify-around mt-3'>
-                        <label onClick={() => { setDeleteDonorRequest(profileDonorRequest); handleProfileData() }} for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                        <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
 
                         <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700'>Accept</label>
                     </div>
