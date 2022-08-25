@@ -1,9 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Loading from '../../Shared/Loading/Loading';
+import { useQuery } from 'react-query';
+import DonorListRow from './DonorListRow';
+import DonorListDeleteModal from './DonorListDeleteModal';
 
 const DonorList = () => {
+    const [donorData, setDonorData] = useState(null)
+
+    const { data: allDonorList, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/verified-donor')
+        .then(res => res.json()))
+
+    if (isLoading) {
+        return <Loading />
+    }
+
     return (
         <div>
-            <h2 className='text-blue-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel placeat quaerat officia animi ab quae! Harum repudiandae eaque, molestias deleniti numquam nam ratione ad a illum eum ipsa officiis error consequuntur quod sed autem. Distinctio quos velit molestiae, optio molestias laboriosam inventore fugit? Inventore harum autem cumque natus facere asperiores iste nihil! Dicta delectus nostrum cupiditate molestias, vitae dolor qui quae sunt sint! Ut culpa ducimus, sunt placeat sapiente nostrum sequi assumenda, animi eum, cum accusamus! Eveniet suscipit sequi quasi deserunt iure odit ullam? Maiores exercitationem nostrum recusandae libero dignissimos nihil, nulla voluptates tenetur ipsam enim. Iusto minima porro itaque explicabo dolore unde ipsa maiores mollitia consequatur laborum. Sunt eaque tempora deserunt delectus tempore, pariatur libero at culpa itaque et iure illo molestias quis eius quia suscipit nihil nisi excepturi architecto recusandae doloribus dignissimos? Officiis placeat dolores, fugit delectus corrupti pariatur et incidunt quis nostrum! Sint nobis dolorum eveniet nulla ad aliquid veniam explicabo praesentium neque, modi quia laudantium cum repudiandae mollitia at quod ducimus dolor saepe impedit vel incidunt culpa ipsum, quo dolores! Voluptatibus quam sequi ipsam deleniti, possimus odio soluta culpa accusantium sed autem veniam repellat ea ab dolore aliquid corporis fugit quisquam suscipit facere omnis aspernatur a! Laborum veritatis cumque nesciunt? Vel dolor aperiam dolores earum, facere vitae aut nostrum culpa quo quam consequatur! Nobis quos quaerat fugit? Asperiores saepe non, magni, id ipsum harum repellendus quidem delectus ipsa, maiores eum impedit possimus a pariatur qui? Illo magni soluta cum amet iusto, libero id, ipsa, maiores culpa debitis fugiat rem. Non deleniti mollitia officia minus, fugit molestias. Officiis accusantium tempore veniam iusto culpa iste doloribus dicta nemo in repellendus debitis ipsa neque tenetur itaque eligendi ratione numquam molestiae, quisquam iure. Expedita architecto necessitatibus nesciunt mollitia, adipisci perspiciatis repellendus odit quas eaque ex, impedit repellat dolores nemo aspernatur!</h2>
+            <h2 className='text-xl font-semibold poppins-font mb-4 text-center'>All Blood Donor List</h2>
+
+            <div className="overflow-x-auto">
+                <table className="table w-full">
+
+                    <thead>
+                        <tr>
+                            <th className='bangla-font text-[15px] '>সিরিয়াল</th>
+                            <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
+                            <th className='bangla-font text-[15px] pl-2'>নাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>বয়স</th>
+                            <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
+                            <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
+                            <th className='bangla-font text-[15px] pl-2'>গ্রুপ</th>
+                            <th className='bangla-font text-[15px] pl-2'>থানা</th>
+                            <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
+                            <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
+                            <th className='bangla-font text-[15px] pl-2'>শেষ রক্তদান</th>
+                            <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            allDonorList?.map((donorSingleData, index) => <DonorListRow
+                                key={donorSingleData._id}
+                                donorSingleData={donorSingleData}
+                                refetch={refetch}
+                                index={index + 1}
+                                setDonorData={setDonorData}
+                            ></DonorListRow>)
+                        }
+                    </tbody>
+                </table>
+            </div>
+            {
+                donorData && <DonorListDeleteModal
+                    donorData={donorData}
+                    setDonorData={setDonorData}
+                    refetch={refetch}
+                ></DonorListDeleteModal>
+            }
         </div>
     );
 };

@@ -6,11 +6,72 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 
 const BloodDonorRegistration = () => {
+    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    const ageCalculate = () => {
+        let today = new Date()
+        let inputDate = getValues('age')
+        console.log(inputDate);
+
+        let birthYear, birthMonth, BirthDate;
+
+        let birthDetails = {
+            year: inputDate.getFullYear(),
+            month: inputDate.getMonth() + 1,
+            date: inputDate.getDate()
+
+
+        }
+
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth() + 1;
+        let currentDate = today.getDate();
+
+        leapYearChecker(currentYear)
+
+        if (birthDetails.year > currentYear || (birthDetails.month > currentMonth && birthDetails.year == currentYear) || (birthDetails.date > currentDate && birthDetails.month == currentMonth && birthDetails.year == currentYear)) {
+            alert("Not Born Yet")
+            return
+        }
+
+        birthYear = currentYear - birthDetails.year;
+
+        if(currentMonth >= birthDetails.month ){
+            birthMonth = currentMonth - birthDetails.month
+        }else{
+            birthYear--;
+            birthMonth = 12 + currentMonth - birthDetails.month
+        }
+        if(currentDate >= birthDetails.date){
+            BirthDate = currentDate - birthDetails.date
+        } else{
+            birthMonth--;
+            let days = months[currentMonth - 2];
+            BirthDate = days + currentDate - birthDetails.date;
+            if(birthMonth < 0){
+                birthMonth = 11;
+                birthYear --;
+
+            }
+        }
+        console.log(birthYear, birthMonth, BirthDate);
+    }
+
+    const leapYearChecker = (year) => {
+        if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+            months[1] = 29;
+        } else {
+            months[1] = 28
+        }
+        console.log(year, months[1]);
+    }
+
+
 
     const status = "pending"
-    const profileImg = "https://i.ibb.co/KFpgBVC/bloodImg.jpg"
+    const profileImg = "https://i.ibb.co/SJQGfx9/male.jpg"
 
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }

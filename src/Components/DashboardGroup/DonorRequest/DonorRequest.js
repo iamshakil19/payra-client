@@ -18,7 +18,7 @@ const DonorRequest = () => {
 
     return (
         <div>
-            <h2 className='text-xl font-semibold poppins-font mb-4'>All Blood Donor Requests</h2>
+            <h2 className='text-xl font-semibold poppins-font mb-4 text-center'>All Blood Donor Requests</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
 

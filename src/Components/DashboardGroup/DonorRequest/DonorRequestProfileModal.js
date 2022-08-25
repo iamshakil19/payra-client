@@ -38,7 +38,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
         <div className=''>
             <input type="checkbox" id="donor-request-profile-modal" class="modal-toggle" />
             <div class="modal">
-                <div class="modal-box">
+                <div class="modal-box bg-[#F5F7FF]">
                     <label for="donor-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
