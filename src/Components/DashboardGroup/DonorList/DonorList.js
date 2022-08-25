@@ -7,7 +7,7 @@ import DonorListDeleteModal from './DonorListDeleteModal';
 const DonorList = () => {
     const [donorData, setDonorData] = useState(null)
 
-    const { data: allDonorList, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/verified-donor')
+    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor')
         .then(res => res.json()))
 
     if (isLoading) {
