@@ -39,10 +39,10 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
                 </div>
             </td>
             <td className='poppins-font p-2'>{name}</td>
+            <td className='poppins-font uppercase p-2'>{bloodGroup}</td>
             <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>
-            <td className='poppins-font uppercase p-2'>{bloodGroup}</td>
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-16 bg-green-600 border-0 hover:bg-green-700'>Accept</button></td>

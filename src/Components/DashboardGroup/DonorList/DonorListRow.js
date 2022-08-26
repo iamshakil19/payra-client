@@ -16,16 +16,15 @@ const DonorListRow = ({ donorSingleData, refetch, index, setDonorData }) => {
                 </div>
             </td>
             <td className='poppins-font p-2'>{name}</td>
+            <td className='poppins-font uppercase p-2'>{bloodGroup}</td>
             <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>
-            <td className='poppins-font uppercase p-2'>{bloodGroup}</td>
             <td className='bangla-font p-2'>{policeStation}</td>
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{"3 বার"}</td>
             <td className='bangla-font p-2'>{"11 দিন আগে"}</td>
-            
             <td className='p-2'>
                 <label onClick={() => setDonorData(donorSingleData)} for="donor-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
             </td>

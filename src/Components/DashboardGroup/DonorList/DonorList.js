@@ -16,7 +16,7 @@ const DonorList = () => {
 
     return (
         <div>
-            <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F]'>All Blood Donor List</h2>
+            <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>Blood Donor List</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -26,10 +26,10 @@ const DonorList = () => {
                             <th className='bangla-font text-[15px] '>সিরিয়াল</th>
                             <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>গ্রুপ</th>
                             <th className='bangla-font text-[15px] pl-2'>বয়স</th>
                             <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
-                            <th className='bangla-font text-[15px] pl-2'>গ্রুপ</th>
                             <th className='bangla-font text-[15px] pl-2'>থানা</th>
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>

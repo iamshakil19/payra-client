@@ -42,7 +42,7 @@ const Header = () => {
                             user ?
                                 <>
                                     <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
-                                    <li onClick={handleLogout} className=""><span className='nav-link lg:bg-[#303640]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
+                                    <li onClick={handleLogout} className=""><span className='nav-link lg:bg-[#17203F]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
                                 </>
                                 :
                                 <li><span className='nav-link lg:bg-[#FE3C47]'><ActiveRoute to="/login"><span className='lg:text-white'>লগইন</span></ActiveRoute></span></li>

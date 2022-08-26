@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from '../../Header/Header'
 import { BiDonateBlood } from "react-icons/bi";
 import { BsChatSquareQuote, BsFillPieChartFill } from "react-icons/bs";
@@ -16,6 +16,8 @@ import avatarImage from '../../../Resources/avatarImage.jpg'
 import './Dashboard.css'
 
 const Dashboard = () => {
+
+    const location = useLocation()
 
     const [user, loading, error] = useAuthState(auth);
 
@@ -37,17 +39,11 @@ const Dashboard = () => {
                     <div className="drawer-content bg-[#F5F7FF] px-2 pt-3 lg:px-5 lg:pt-4">
                         {/* <!-- Page content here --> */}
                         <div className='lg:flex lg:justify-between mb-2'>
-                            <div className='hidden lg:block'>text</div>
-                            <div className=''>
-                                <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by donor name' name='searchText' />
-                                    <button type='submit'><span className='search-icon'> <FaSearch/> </span></button>
-                                </form>
-                            </div>
+
                             <div className='lg:flex items-center hidden '>
                                 <div class="avatar online">
                                     <div class="w-10 rounded-full shadow-gray-500 shadow-lg cursor-pointer">
-                                        <img src={user ? user?.photoURL : avatarImage} alt="" />
+                                        <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
                                     </div>
                                 </div>
                                 <div className='ml-3'>
@@ -55,6 +51,12 @@ const Dashboard = () => {
                                     <p className='poppins-font text-sm font-extrabold opacity-80 text-[#17203F]'>Admin</p>
                                 </div>
                             </div>
+                            {location.pathname.includes('donor-list') && <div className=''>
+                                <form action="" className='search-bar'>
+                                    <input autoComplete='off' type="text" placeholder='Search by donor name' name='searchText' />
+                                    <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
+                                </form>
+                            </div>}
 
                         </div>
                         <Outlet />
