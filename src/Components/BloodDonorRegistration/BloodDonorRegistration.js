@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../Header/Header';
-import './BloodDonorRegistration.css'
 import donorImg from '../../Resources/blood-img-1.png'
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";

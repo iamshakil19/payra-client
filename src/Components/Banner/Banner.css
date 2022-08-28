@@ -7,6 +7,24 @@
     background-position: center;
     object-fit: cover;
 }
+.donor-registration-bg{
+    background-image: url("../../Resources/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: overlay;
+    background-position: center;
+    object-fit: cover;
+}
+.blood-request-bg{
+    background-image: url("../../Resources/contact-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: overlay;
+    background-position: center;
+    object-fit: cover;
+}
 
 .banner-title {
     font-family: 'Anek Bangla', sans-serif;

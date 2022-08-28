@@ -53,7 +53,13 @@ const Dashboard = () => {
                             </div>
                             {location.pathname.includes('donor-list') && <div className=''>
                                 <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by donor name' name='searchText' />
+                                    <input autoComplete='off' type="text" placeholder='Search by donor name' name='donorSearchText' />
+                                    <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
+                                </form>
+                            </div>}
+                            {location.pathname.includes('user-list') && <div className=''>
+                                <form action="" className='search-bar'>
+                                    <input autoComplete='off' type="text" placeholder='Search by username' name='userSearchText' />
                                     <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
                                 </form>
                             </div>}
