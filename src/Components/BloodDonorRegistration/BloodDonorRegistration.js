@@ -254,7 +254,7 @@ const BloodDonorRegistration = () => {
                                 }
                             </div>
 
-                            <p className='text-white mt-4 font-bold'>Address</p>
+                            <p className='text-white mt-4 font-bold'>ঠিকানা</p>
 
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
