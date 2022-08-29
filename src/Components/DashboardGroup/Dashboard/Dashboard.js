@@ -42,7 +42,7 @@ const Dashboard = () => {
 
                             <div className='lg:flex items-center hidden '>
                                 <div class="avatar online">
-                                    <div class="w-10 rounded-full shadow-gray-500 shadow-lg cursor-pointer">
+                                    <div class="w-10 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border-2">
                                         <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@ const Dashboard = () => {
                             <div className='flex items-center mt-12 px-4 lg:hidden'>
                                 <div class="avatar online">
                                     <div class="w-10 rounded-full cursor-pointer">
-                                        <img src={user ? user?.photoURL : avatarImage} alt="" />
+                                        <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
                                     </div>
                                 </div>
                                 <div className='ml-3'>
