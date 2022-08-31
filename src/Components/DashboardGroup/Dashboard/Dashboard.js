@@ -15,6 +15,7 @@ import auth from '../../../firebase.init';
 import avatarImage from '../../../Resources/avatarImage.jpg'
 import './Dashboard.css'
 
+
 const Dashboard = () => {
 
     const location = useLocation()
@@ -74,7 +75,7 @@ const Dashboard = () => {
                             <p className='font-bold text-center text-2xl mb-5 poppins-font'>Dashboard</p>
 
                             <li ><Link to={"/dashboard"}> <span className='flex items-center poppins-font'> <BsFillPieChartFill /> <span className='ml-3 text-[16px]'>Analytics</span> </span> </Link></li>
-                            <li><Link to={"/dashboard/donor-list"}><span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood /></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
+                            <li><Link to={"/dashboard/donor-list"}> <span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood /></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
                             <li className='relative'>
                                 <Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <BsChatSquareQuote /> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link>
                                 {
