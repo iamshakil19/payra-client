@@ -14,21 +14,19 @@ const Contact = () => {
         const newData = { ...data, status }
         console.log(newData);
 
-        // fetch('http://localhost:5000/donor-request', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newData)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             toast.success("Your submission has been sent")
-        //         } else {
-        //             toast.error("Submission failed")
-        //         }
-        //     })
+        fetch('http://localhost:5000/blood-request', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    toast.success("Your request has been sent")
+                }
+            })
     };
 
     return (
@@ -40,7 +38,7 @@ const Contact = () => {
 
                         <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center mb-3">জরুরি প্রয়োজনে কল করুন</h1>
 
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
                             <div class="card max-w-md shadow-xl image-full mx-auto h-52">
                                 <figure><img className='object-right-bottom' src={donorImg} alt="" /></figure>
 
@@ -99,7 +97,7 @@ const Contact = () => {
                             </div>
                         </div>
                         <div className='flex justify-center'>
-                            <button className='btn btn-primary mt-5'>See More</button>
+                            <button className='btn max-w-xs mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out'>See More</button>
                         </div>
                     </div>
 
