@@ -42,7 +42,7 @@ const Dashboard = () => {
 
                             <div className='lg:flex items-center hidden '>
                                 <div class="avatar online">
-                                    <div class="w-10 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border-2">
+                                    <div class="w-11 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border">
                                         <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
                                     </div>
                                 </div>

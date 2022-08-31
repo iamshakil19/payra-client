@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import Header from '../Header/Header';
-import donorImg from '../../Resources/blood-img-1.png'
+import donorImg from '../../Resources/shakil.jpg'
 
 const Contact = () => {
 
@@ -36,12 +36,75 @@ const Contact = () => {
             <Header />
             <div className="hero lg:mt-8">
                 <div className="hero-content flex-col lg:flex-row">
-                    <div className='lg:mr-3'>
-                        <img src={donorImg} className="max-w-lg rounded-lg shadow-2xl hidden lg:block" alt='' />
+                    <div className='lg:mr-3 mb-5'>
+
+                        <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center mb-3">জরুরি প্রয়োজনে কল করুন</h1>
+
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            <div class="card max-w-md shadow-xl image-full mx-auto h-52">
+                                <figure><img className='object-right-bottom' src={donorImg} alt="" /></figure>
+
+                                <div class="card-body px-0">
+                                    <div class="avatar mx-auto">
+                                        <div class="w-20 rounded-full">
+                                            <img src={donorImg} alt="" />
+                                        </div>
+                                    </div>
+
+                                    <h2 class="card-title px-5 flex justify-center">Shakil Ahmed</h2>
+                                    <p className='px-5 text-center'>Call: 01781121594</p>
+                                </div>
+                            </div>
+                            <div class="card max-w-md shadow-xl image-full mx-auto h-52">
+                                <figure><img className='object-right-bottom' src={donorImg} alt="" /></figure>
+
+                                <div class="card-body px-0">
+                                    <div class="avatar mx-auto">
+                                        <div class="w-20 rounded-full">
+                                            <img src={donorImg} alt="" />
+                                        </div>
+                                    </div>
+
+                                    <h2 class="card-title px-5 flex justify-center">Waheduzzaman Omit</h2>
+                                    <p className='px-5 text-center'>Call: 01781121594</p>
+                                </div>
+                            </div>
+                            <div class="card max-w-md shadow-xl image-full mx-auto h-52">
+                                <figure><img className='object-right-bottom' src={donorImg} alt="" /></figure>
+
+                                <div class="card-body px-0">
+                                    <div class="avatar mx-auto">
+                                        <div class="w-20 rounded-full">
+                                            <img src={donorImg} alt="" />
+                                        </div>
+                                    </div>
+
+                                    <h2 class="card-title px-5 flex justify-center">MD Rajib Daria</h2>
+                                    <p className='px-5 text-center'>Call: 01781121594</p>
+                                </div>
+                            </div>
+                            <div class="card max-w-md shadow-xl image-full mx-auto h-52">
+                                <figure><img className='object-right-bottom' src={donorImg} alt="" /></figure>
+
+                                <div class="card-body px-0">
+                                    <div class="avatar mx-auto">
+                                        <div class="w-20 rounded-full">
+                                            <img src={donorImg} alt="" />
+                                        </div>
+                                    </div>
+
+                                    <h2 class="card-title px-5 flex justify-center">H M Abu Yousuf</h2>
+                                    <p className='px-5 text-center'>Call: 01781121594</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex justify-center'>
+                            <button className='btn btn-primary mt-5'>See More</button>
+                        </div>
                     </div>
 
                     <div className='lg:ml-3'>
-                        <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center">রোগীর তথ্য দিন</h1>
+                        <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center mb-3">রোগীর তথ্য দিন</h1>
 
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-control w-full max-w-xs lg:max-w-full">
@@ -201,7 +264,7 @@ const Contact = () => {
                             </div>
 
                             <div className='lg:flex'>
-                            <div className="form-control w-full max-w-xs">
+                                <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text text-white">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
