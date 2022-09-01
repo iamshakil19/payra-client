@@ -18,6 +18,8 @@ import DonorRequest from './Components/DashboardGroup/DonorRequest/DonorRequest'
 import BloodRequest from './Components/DashboardGroup/BloodRequest/BloodRequest';
 import AllUser from './Components/DashboardGroup/AllUser/AllUser';
 import AllAdmin from './Components/DashboardGroup/AllAdmin/AllAdmin';
+import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/CompleteBloodRequest/CompleteBloodRequest';
+import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 
 
 
@@ -35,7 +37,12 @@ function App() {
           <Route index element={<Analytics />}></Route>
           <Route path='donor-list' element={<DonorList />}></Route>
           <Route path='donor-request' element={<DonorRequest />}></Route>
-          <Route path='blood-request' element={<BloodRequest />}></Route>
+
+          <Route path='blood-request' element={<BloodRequest />}>
+            <Route index element={<CompleteBloodRequest />}></Route>
+            <Route path='incomplete-blood-request' element={<IncompleteBloodRequest />}></Route>
+          </Route>
+
           <Route path='user-list' element={<AllUser />}></Route>
           <Route path='admin-list' element={<AllAdmin />}></Route>
         </Route>

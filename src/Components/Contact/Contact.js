@@ -8,7 +8,7 @@ const Contact = () => {
 
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
-    const status = "pending"
+    const status = "incomplete"
 
     const onSubmit = data => {
         const newData = { ...data, status }

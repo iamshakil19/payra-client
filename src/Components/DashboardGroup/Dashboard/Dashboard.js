@@ -22,10 +22,13 @@ const Dashboard = () => {
 
     const [user, loading, error] = useAuthState(auth);
 
-    const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
+    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
         .then(res => res.json()))
 
-    if (isLoading) {
+    const { data: incompleteBloodRequestList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request')
+        .then(res => res.json()))
+
+    if (donorLoading || bloodLoading) {
         return <Loading />
     }
 
@@ -83,7 +86,12 @@ const Dashboard = () => {
                                     <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.length}</span>
                                 }
                             </li>
-                            <li><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link></li>
+                            <li className='relative'><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link>
+                                {
+                                    incompleteBloodRequestList?.length > 0 &&
+                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
+                                }
+                            </li>
                             <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
                             <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
 
