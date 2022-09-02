@@ -8,22 +8,18 @@ import googleLogo from '../../Resources/Logos/google2.png'
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
+import useToken from '../Hooks/useToken';
 
 const Login = () => {
 
     const navigate = useNavigate()
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+    const [token] = useToken(user || googleUser)
     const navigateToRegister = () => {
         navigate("/registration")
     }
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useSignInWithEmailAndPassword(auth);
-
-    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
     let loginError;
     let location = useLocation();
@@ -37,7 +33,7 @@ const Login = () => {
         loginError = <p className='text-red-500 text-sm ml-2 mb-1'>{error?.message || googleError?.message}</p>
     }
 
-    if (user || googleUser) {
+    if (token) {
         navigate(from, { replace: true })
     }
 

@@ -8,41 +8,39 @@ import googleLogo from '../../Resources/Logos/google2.png'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
+import useToken from '../Hooks/useToken';
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+
+    const [token] = useToken(user || googleUser)
+
     const navigateToLogin = () => {
         navigate("/login")
     }
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
-
-    let loginError;
+    let signInError;
 
     if (loading || googleLoading || updating) {
         return <Loading />
     }
 
     if (error || googleError || updateError) {
-        loginError = <p className='text-red-500 text-sm ml-2 mb-1'>{error?.message || googleError?.message || updateError?.message}</p>
+        signInError = <p className='text-red-500 text-sm ml-2 mb-1'>{error?.message || googleError?.message || updateError?.message}</p>
     }
 
-    if (user || googleUser) {
-        console.log(user || googleUser);
+    if (token) {
+        navigate("/")
     }
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name });
-        navigate("/")
+        
     };
 
     return (
@@ -119,7 +117,7 @@ const SignUp = () => {
                                     </label>
                                 </div>
 
-                                {loginError}
+                                {signInError}
 
                                 <input className='bg-[#303640] w-full mt-2 rounded-full btn' type="submit" value="Sign Up" />
                             </form>

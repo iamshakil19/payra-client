@@ -3,12 +3,28 @@ import Loading from '../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import DonorListRow from './DonorListRow';
 import DonorListDeleteModal from './DonorListDeleteModal';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import auth from '../../../firebase.init';
 
 const DonorList = () => {
+    const navigate = useNavigate
     const [donorData, setDonorData] = useState(null)
 
-    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor')
-        .then(res => res.json()))
+    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor', {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
+            }
+            return res.json()
+        }))
 
     if (isLoading) {
         return <Loading />
