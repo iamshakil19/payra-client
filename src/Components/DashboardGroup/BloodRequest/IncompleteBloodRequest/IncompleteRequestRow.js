@@ -23,7 +23,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             .then(data => {
                 console.log(data);
                 refetch()
-                toast.success('Donor Verified')
+                toast.success('blood Donation Complete')
             })
     }
 
@@ -41,15 +41,15 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             </td>
             <td className='poppins-font p-2'>{patient_name}</td>
             <td className='poppins-font uppercase p-2'>{requested_bloodGroup}</td>
-            <td className='poppins-font p-2'>{blood_quantity}</td>
+            <td className='poppins-font p-2'>{blood_quantity} <span className='bangla-font'>ব্যাগ</span> </td>
             <td className='bangla-font p-2'>{date}</td>
-            <td className='poppins-font p-2'>{hemoglobin ? hemoglobin : "..."}</td>
+            <td className='poppins-font p-2'>{hemoglobin ? hemoglobin : <span className='bangla-font'>জানা নেই</span> }</td>
             <td className='bangla-font p-2'>{number1}</td>
             <td className='bangla-font p-2'>{patient_problem}</td>
             <td className='bangla-font p-2'>{donation_place}</td>
-            <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-16 bg-green-600 border-0 hover:bg-green-700'>Accept</button></td>
+            <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-20 bg-green-600 border-0 hover:bg-green-700'>Complete</button></td>
             <td className='p-2'>
-                <label onClick={() => setBloodRequestData(incompleteSingleBloodRequest)} for="donor-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                <label onClick={() => setBloodRequestData(incompleteSingleBloodRequest)} for="blood-request-delete-modal" className='btn btn-sm w-20 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
             </td>
         </tr>
     );
