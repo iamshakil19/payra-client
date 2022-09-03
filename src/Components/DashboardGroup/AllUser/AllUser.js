@@ -6,10 +6,12 @@ import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import AllUserRow from './AllUserRow';
 import UserDeleteModal from './UserDeleteModal';
+import AdminConfirmationModal from './AdminConfirmationModal';
 
 const AllUser = () => {
     const navigate = useNavigate
     const [userData, setUserData] = useState(null)
+    const [adminConfirmationData, setAdminConfirmationData] = useState(null)
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
         method: 'GET',
         headers: {
@@ -31,7 +33,7 @@ const AllUser = () => {
 
     return (
         <div>
-            <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>Blood Donor List</h2>
+            <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All User List</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -39,6 +41,7 @@ const AllUser = () => {
                     <thead>
                         <tr>
                             <th className='poppins-font text-[15px] '>SL</th>
+                            <th className='poppins-font text-[15px] '>UID</th>
                             <th className='poppins-font text-[15px] pl-2'>Email</th>
                             <th className='poppins-font text-[15px] pl-2'>Make Admin</th>
                             <th className='poppins-font text-[15px] pl-2'>Action</th>
@@ -53,6 +56,7 @@ const AllUser = () => {
                                 refetch={refetch}
                                 index={index + 1}
                                 setUserData={setUserData}
+                                setAdminConfirmationData={setAdminConfirmationData}
                             ></AllUserRow>)
                         }
                     </tbody>
@@ -64,6 +68,13 @@ const AllUser = () => {
                     setUserData={setUserData}
                     refetch={refetch}
                 ></UserDeleteModal>
+            }
+            {
+                adminConfirmationData && <AdminConfirmationModal
+                    adminConfirmationData={adminConfirmationData}
+                    setAdminConfirmationData={setAdminConfirmationData}
+                    refetch={refetch}
+                ></AdminConfirmationModal>
             }
         </div>
     );
