@@ -1,6 +1,32 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AdminConfirmationModal = ({ adminConfirmationData, setAdminConfirmationData, refetch }) => {
+    const { email } = adminConfirmationData
+    console.log(email);
+
+    const makeAdmin = () => {
+        fetch(`http://localhost:5000/user/admin/${email}`, {
+            method: 'PUT',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => {
+                if(res.status === 403){
+                    setAdminConfirmationData(null)
+                    toast.error('Super Admin can only create admin')
+                }
+                return res.json()
+            })
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    setAdminConfirmationData(null)
+                    refetch()
+                    toast.success('Successfully made an admin')
+                }
+            })
+    }
     return (
         <div className=''>
             <input type="checkbox" id="admin-confirmation-modal" class="modal-toggle" />
@@ -9,7 +35,7 @@ const AdminConfirmationModal = ({ adminConfirmationData, setAdminConfirmationDat
                     <h3 class="font-bold text-lg ">Are you sure you want to make <span className='text-green-600'>{adminConfirmationData.email}</span> as an admin ?</h3>
                     <p class="pt-3 font-semibold text-orange-400">He will get access to your dashboard !</p>
                     <div class="modal-action">
-                        <button  className='btn w-20 bg-green-600 hover:bg-green-700 border-0'>YES</button>
+                        <button onClick={makeAdmin} className='btn w-20 bg-green-600 hover:bg-green-700 border-0'>YES</button>
                         <label for="admin-confirmation-modal" class="btn w-20">Cancel</label>
                     </div>
                 </div>
