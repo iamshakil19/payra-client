@@ -20,6 +20,7 @@ import AllUser from './Components/DashboardGroup/AllUser/AllUser';
 import AllAdmin from './Components/DashboardGroup/AllAdmin/AllAdmin';
 import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/CompleteBloodRequest/CompleteBloodRequest';
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
+import Profile from './Components/Profile/Profile';
 
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
 
         <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>}>
           <Route index element={<Analytics />}></Route>

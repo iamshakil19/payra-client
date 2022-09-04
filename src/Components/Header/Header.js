@@ -8,10 +8,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
+import useAdmin from '../Hooks/useAdmin';
 
 const Header = () => {
     const location = useLocation()
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user)
 
     const handleLogout = () => {
         signOut(auth)
@@ -42,7 +44,12 @@ const Header = () => {
                         {
                             user ?
                                 <>
-                                    <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
+                                    {admin ? <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
+                                        :
+                                        <li><span className='nav-link'><ActiveRoute to="/profile"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>প্রোফাইল</span></ActiveRoute></span></li>}
+
+
+
                                     <li onClick={handleLogout} className=""><span className='nav-link lg:bg-[#17203F]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
                                 </>
                                 :
