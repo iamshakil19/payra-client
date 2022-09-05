@@ -7,21 +7,23 @@ const useAdmin = user => {
 
     useEffect(() => {
         const email = user?.email;
+        console.log(email);
         if (email) {
-            fetch(`http://localhost:5000/admin/${email}`, {
+            fetch(`http://localhost:5000/user/admin/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
-                    authorization : `Bearer ${localStorage.getItem('accessToken')}`
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data);
                     setAdmin(data.admin)
                     setAdminLoading(false)
                 })
         }
     }, [user])
-    return [admin]
+    return [admin, adminLoading]
 }
 export default useAdmin;
