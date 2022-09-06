@@ -6,7 +6,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
 
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = incompleteSingleBloodRequest
 
-    let newStatus = "complete"
+    let newStatus = "done"
 
     const handleStatus = () => {
         const bloodRequestStatusInfo = {

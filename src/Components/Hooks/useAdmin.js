@@ -9,7 +9,7 @@ const useAdmin = user => {
         const email = user?.email;
         console.log(email);
         if (email) {
-            fetch(`http://localhost:5000/user/admin/${email}`, {
+            fetch(`http://localhost:5000/admin/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -18,7 +18,7 @@ const useAdmin = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    console.log(data.admin);
                     setAdmin(data.admin)
                     setAdminLoading(false)
                 })

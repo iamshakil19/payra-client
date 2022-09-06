@@ -21,10 +21,21 @@ import AllAdmin from './Components/DashboardGroup/AllAdmin/AllAdmin';
 import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/CompleteBloodRequest/CompleteBloodRequest';
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 import Profile from './Components/Profile/Profile';
+import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
+import useAdmin from './Components/Hooks/useAdmin';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+
+
+
 
 
 
 function App() {
+
+  // const [user] = useAuthState(auth);
+  // const [admin] = useAdmin(user)
+
   return (
     <div>
       <Routes>
@@ -35,7 +46,7 @@ function App() {
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
 
-        <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>}>
+        <Route path='/dashboard' element={<Dashboard />}>
           <Route index element={<Analytics />}></Route>
           <Route path='donor-list' element={<DonorList />}></Route>
           <Route path='donor-request' element={<DonorRequest />}></Route>
