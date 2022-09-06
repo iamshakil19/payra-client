@@ -3,6 +3,7 @@ import Loading from '../../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import CompleteBloodRequestRow from './CompleteBloodRequestRow';
 import { useState } from 'react';
+import CompleteDeleteModal from './CompleteDeleteModal';
 
 const CompleteBloodRequest = () => {
 
@@ -27,8 +28,8 @@ const CompleteBloodRequest = () => {
                         <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
                         <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
+                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
                         <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
                         <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>
@@ -51,13 +52,13 @@ const CompleteBloodRequest = () => {
                 </tbody>
             </table>
 
-            {/* {
-                bloodRequestData && <IncompleteBloodDeleteModal
-                bloodRequestData={bloodRequestData}
-                setBloodRequestData={setBloodRequestData}
+            {
+                bloodRequestDeleteData && <CompleteDeleteModal
+                bloodRequestDeleteData={bloodRequestDeleteData}
+                setBloodRequestDeleteData={setBloodRequestDeleteData}
                     refetch={refetch}
-                ></IncompleteBloodDeleteModal>
-            } */}
+                ></CompleteDeleteModal>
+            }
 
         </div>
     );

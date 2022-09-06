@@ -26,8 +26,8 @@ const IncompleteBloodRequest = () => {
                         <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
                         <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
+                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
                         <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
                         <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
                         <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>

@@ -22,14 +22,14 @@ const CompleteBloodRequestRow = ({completeSingleBloodRequest, refetch, index, se
             <td className='poppins-font p-2'>{patient_name}</td>
             <td className='poppins-font uppercase p-2'>{requested_bloodGroup}</td>
             <td className='poppins-font p-2'>{blood_quantity} <span className='bangla-font'>ব্যাগ</span> </td>
-            <td className='bangla-font p-2'>{date}</td>
             <td className='poppins-font p-2'>{hemoglobin ? hemoglobin : <span className='bangla-font'>জানা নেই</span> }</td>
+            <td className='bangla-font p-2'>{date}</td>
             <td className='bangla-font p-2'>{number1}</td>
             <td className='bangla-font p-2'>{patient_problem}</td>
             <td className='bangla-font p-2'>{donation_place}</td>
             <td className='bangla-font p-2 capitalize'>{status}</td>
             <td className='p-2'>
-                <label onClick={() => setBloodRequestDeleteData(completeSingleBloodRequest)} for="blood-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                <label onClick={() => setBloodRequestDeleteData(completeSingleBloodRequest)} for="complete-blood-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
             </td>
         </tr>
     );

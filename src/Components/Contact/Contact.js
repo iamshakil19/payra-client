@@ -12,7 +12,6 @@ const Contact = () => {
 
     const onSubmit = data => {
         const newData = { ...data, status }
-        console.log(newData);
 
         fetch('http://localhost:5000/blood-request', {
             method: 'POST',
@@ -194,6 +193,7 @@ const Contact = () => {
                                         <option value={"4"}>4 ব্যাগ</option>
                                         <option value={"5"}>5 ব্যাগ</option>
                                         <option value={"6"}>6 ব্যাগ</option>
+                                        <option value={"6+"}>6+ ব্যাগ</option>
                                     </select>
                                     {
                                         errors?.blood_quantity && <label className="label">
