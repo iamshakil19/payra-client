@@ -20,7 +20,7 @@ const DonorRequest = () => {
         <div>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Blood Donor Requests</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-full ">
 
                     <thead>
                         <tr>

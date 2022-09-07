@@ -8,7 +8,7 @@ import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
 
 const DonorList = () => {
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const [donorData, setDonorData] = useState(null)
 
     const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor', {

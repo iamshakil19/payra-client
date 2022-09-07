@@ -9,7 +9,7 @@ import UserDeleteModal from './UserDeleteModal';
 import AdminConfirmationModal from './AdminConfirmationModal';
 
 const AllUser = () => {
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const [userData, setUserData] = useState(null)
     const [adminConfirmationData, setAdminConfirmationData] = useState(null)
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
@@ -42,6 +42,7 @@ const AllUser = () => {
                         <tr>
                             <th className='poppins-font text-[15px] '>SL</th>
                             <th className='poppins-font text-[15px] '>UID</th>
+                            <th className='poppins-font text-[15px] pl-2'>Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Email</th>
                             <th className='poppins-font text-[15px] pl-2'>Make Admin</th>
                             <th className='poppins-font text-[15px] pl-2'>Action</th>

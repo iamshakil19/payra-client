@@ -22,9 +22,6 @@ import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/Compl
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 import Profile from './Components/Profile/Profile';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
-import useAdmin from './Components/Hooks/useAdmin';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from './firebase.init';
 
 
 
@@ -32,9 +29,6 @@ import auth from './firebase.init';
 
 
 function App() {
-
-  // const [user] = useAuthState(auth);
-  // const [admin] = useAdmin(user)
 
   return (
     <div>
