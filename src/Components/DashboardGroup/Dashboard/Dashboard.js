@@ -6,6 +6,8 @@ import { BsChatSquareQuote, BsFillPieChartFill } from "react-icons/bs";
 import { RiQuestionAnswerLine } from "react-icons/ri";
 import { FaSearch, FaUsers } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { HiUserAdd } from "react-icons/hi";
 import { Outlet } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useState } from 'react';
@@ -56,13 +58,13 @@ const Dashboard = () => {
                             </div>
                             {location.pathname.includes('donor-list') && <div className=''>
                                 <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by donor name' name='donorSearchText' />
+                                    <input autoComplete='off' type="text" placeholder='Search by name' name='donorSearchText' />
                                     <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
                                 </form>
                             </div>}
                             {location.pathname.includes('user-list') && <div className=''>
                                 <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by username' name='userSearchText' />
+                                    <input autoComplete='off' type="text" placeholder='Search by email' name='userSearchText' />
                                     <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
                                 </form>
                             </div>}
@@ -92,6 +94,7 @@ const Dashboard = () => {
                                     <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
                                 }
                             </li>
+                            <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <HiUserAdd /> <span className='ml-3 text-[16px]'>Add Person</span> </span></Link></li>
                             <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
                             <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import avatarImg from '../../../../Resources/avatarImage.jpg'
+import { BsCheckCircleFill } from "react-icons/bs";
 
 
 const CompleteBloodRequestRow = ({completeSingleBloodRequest, refetch, index, setBloodRequestDeleteData, setBloodRequestProfileData}) => {
@@ -27,7 +28,7 @@ const CompleteBloodRequestRow = ({completeSingleBloodRequest, refetch, index, se
             <td className='bangla-font p-2'>{number1}</td>
             <td className='bangla-font p-2'>{patient_problem}</td>
             <td className='bangla-font p-2'>{donation_place}</td>
-            <td className='bangla-font p-2 capitalize'>{status}</td>
+            <td className='p-2 text-xl text-green-600'> <BsCheckCircleFill/> </td>
             <td className='p-2'>
                 <label onClick={() => setBloodRequestDeleteData(completeSingleBloodRequest)} for="complete-blood-request-delete-modal" className='btn btn-sm w-16 bg-red-500 border-0 hover:bg-red-600'>Delete</label>
             </td>
