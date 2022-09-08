@@ -22,6 +22,7 @@ import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/Compl
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 import Profile from './Components/Profile/Profile';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
+import AddContact from './Components/AddContact/AddContact';
 
 
 
@@ -50,6 +51,7 @@ function App() {
             <Route path='incomplete-blood-request' element={<IncompleteBloodRequest />}></Route>
           </Route>
 
+          <Route path='add-contact' element={<AddContact />}></Route>
           <Route path='user-list' element={<AllUser />}></Route>
           <Route path='admin-list' element={<AllAdmin />}></Route>
         </Route>

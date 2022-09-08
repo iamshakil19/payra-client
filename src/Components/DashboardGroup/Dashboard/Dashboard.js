@@ -15,6 +15,7 @@ import Loading from '../../Shared/Loading/Loading';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import avatarImage from '../../../Resources/avatarImage.jpg'
+import { MdPermContactCalendar } from "react-icons/md";
 import './Dashboard.css'
 
 
@@ -94,7 +95,7 @@ const Dashboard = () => {
                                     <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
                                 }
                             </li>
-                            <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <HiUserAdd /> <span className='ml-3 text-[16px]'>Add Person</span> </span></Link></li>
+                            <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
                             <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
                             <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
 

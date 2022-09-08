@@ -8,7 +8,7 @@ import { useQuery } from 'react-query';
 const AllAdmin = () => {
     const navigate = useNavigate()
 
-    const { data: admins, isLoading, refetch } = useQuery('admin', () => fetch('http://localhost:5000/payra-admin', {
+    const { data: admins, isLoading, refetch } = useQuery('admin', () => fetch('http://localhost:5000/all-admin', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
