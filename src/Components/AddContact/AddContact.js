@@ -1,29 +1,46 @@
 import React from 'react';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
+import { MdCloudUpload } from "react-icons/md";
 
 
 const AddContact = () => {
+
+
+    const [fileError, setFileError] = useState(null)
+
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        const newData = { ...data }
 
-        fetch('http://localhost:5000/donor-request', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    toast.success("Your submission has been sent")
-                } else {
-                    toast.error("Submission failed")
-                }
+        const fileSize = data?.image[0].size
+        if (fileSize > 1000000) {
+            setFileError('Maximum file size: 1 MB')
+            return
+        }
+        else {
+            setFileError(null)
+            const newData = { ...data }
+
+            fetch('http://localhost:5000/donor-requ', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newData)
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        toast.success("Your submission has been sent")
+                    } else {
+                        toast.error("Submission failed")
+                    }
+                })
+        }
+
     };
 
 
@@ -32,7 +49,7 @@ const AddContact = () => {
             <section>
                 <h2 className='text-[#141C39] font-semibold text-xl mb-3 mt-5 poppins-font'>Add Contact</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3'>
+                    <div className='grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-5 gap-3'>
                         <div className="form-control w-full mx-auto max-w-xs lg:max-w-full">
                             <label className="label">
                                 <span className="label-text text-[#141C39]"> নাম <span className='text-red-500 font-extrabold'>*</span></span>
@@ -51,7 +68,7 @@ const AddContact = () => {
                                 </label>
                             }
                         </div>
-                        <div className="form-control w-full max-w-xs">
+                        <div className="form-control mx-auto w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text text-[#141C39]">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
                             </label>
@@ -78,17 +95,7 @@ const AddContact = () => {
                             }
                         </div>
 
-
-
-
-
-
-
-
-
-
-
-                        <div className="form-control w-full max-w-xs">
+                        <div className="form-control mx-auto w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text text-[#141C39]">দ্বিতীয় ফোন নাম্বার </span>
                             </label>
@@ -112,11 +119,16 @@ const AddContact = () => {
                         </div>
 
 
-                        <div className="form-control w-full mx-auto max-w-xs lg:max-w-full">
-                            <label className="label">
-                                <span className="label-text text-[#141C39]">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
+                        <div className="form-control w-full sm:w-40 mx-auto sm:mx-0 max-w-xs lg:max-w-full">
+                            <label htmlFor="img" className='bg-[#141C39] text-center h-10 border border-[#141C39] rounded-lg cursor-pointer mt-5 sm:mt-9'>
+                                <span className='flex justify-center items-center mt-2 text-white'>
+                                    <span className='text-xl mx-1'><MdCloudUpload /></span> <span className='mx-1 font-semibold poppins-font text-sm'>Upload Image</span>
+                                </span>
                             </label>
-                            <input type="file" placeholder="আপনার নাম লিখুন" className={`input h-10 input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.image && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+
+                            <input type="file" id='img' name='image'
+                                accept="image/jpeg"
+                                className={`input hidden h-10 input-bordered w-full max-w-xs lg:max-w-full `}
                                 {...register("image", {
                                     required: {
                                         value: true,
@@ -129,10 +141,15 @@ const AddContact = () => {
                                     {errors.image?.type === 'required' && <span className="label-text-alt text-red-500">{errors.image.message}</span>}
                                 </label>
                             }
+                            {
+                                fileError && <label className="label">
+                                    <span className="label-text-alt text-red-500">{fileError}</span>
+                                </label>
+                            }
                         </div>
 
                         <div className='w-full text-center sm:text-start'>
-                            <input className='border border-black rounded-lg sm:mt-9 w-full sm:w-40 max-w-xs lg:max-w-full mt-5 bg-white text-black font-bold hover:bg-[#0F1631] h-10 hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Add" />
+                            <input className='border cursor-pointer border-black rounded-lg sm:mt-9 w-full sm:w-40 max-w-xs lg:max-w-full mt-5 bg-white text-black font-bold hover:bg-[#0F1631] h-10 hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Add" />
                         </div>
                     </div>
                 </form>
