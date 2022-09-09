@@ -11,7 +11,8 @@ const AllAdmin = () => {
     const { data: admins, isLoading, refetch } = useQuery('admin', () => fetch('http://localhost:5000/all-admin', {
         method: 'GET',
         headers: {
-            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     })
         .then(res => {
