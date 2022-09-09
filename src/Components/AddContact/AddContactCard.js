@@ -3,7 +3,7 @@ import Loading from '../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import ContactCardRow from './ContactCardRow';
 
-const AddContactCard = () => {
+const AddContactCard = ({isFormSubmit}) => {
     const { data: contacts, isLoading, refetch } = useQuery('contact', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
         headers: {
@@ -15,6 +15,10 @@ const AddContactCard = () => {
 
     if (isLoading) {
         return <Loading />
+    }
+
+    if(isFormSubmit){
+        refetch()
     }
 
     return (

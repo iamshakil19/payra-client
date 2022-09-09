@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import { MdCloudUpload } from "react-icons/md";
 
-const AddContactForm = () => {
+const AddContactForm = ({setIsFormSubmit}) => {
     const [fileError, setFileError] = useState(null)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
@@ -50,6 +50,7 @@ const AddContactForm = () => {
                                 if (inserted.insertedId) {
                                     toast.success('Admin contact added successfully')
                                     reset();
+                                    setIsFormSubmit(true)
                                 }
                             })
                     }
