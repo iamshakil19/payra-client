@@ -6,14 +6,15 @@ const AddContact = () => {
 
     const [isFormSubmit, setIsFormSubmit] = useState(false)
 
+
     return (
         <div>
             <AddContactForm
-            setIsFormSubmit={setIsFormSubmit}
+                setIsFormSubmit={setIsFormSubmit}
             ></AddContactForm>
 
             <AddContactCard
-            isFormSubmit={isFormSubmit}
+                isFormSubmit={isFormSubmit}
             ></AddContactCard>
         </div>
     );

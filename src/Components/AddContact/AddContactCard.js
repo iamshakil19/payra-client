@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import ContactCardRow from './ContactCardRow';
+import ContactDeleteModal from './ContactDeleteModal';
 
-const AddContactCard = ({isFormSubmit}) => {
+const AddContactCard = ({ isFormSubmit }) => {
+
+    const [contactDeleteData, setContactDeleteData] = useState(null)
+    const [contactUpdateData, setContactUpdateData] = useState(null)
+
     const { data: contacts, isLoading, refetch } = useQuery('contact', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
         headers: {
@@ -17,7 +22,7 @@ const AddContactCard = ({isFormSubmit}) => {
         return <Loading />
     }
 
-    if(isFormSubmit){
+    if (isFormSubmit) {
         refetch()
     }
 
@@ -29,9 +34,18 @@ const AddContactCard = ({isFormSubmit}) => {
                     contacts.map(contact => <ContactCardRow
                         key={contact._id}
                         contact={contact}
+                        setContactDeleteData={setContactDeleteData}
+                        setContactUpdateData={setContactUpdateData}
                     ></ContactCardRow>)
                 }
             </section>
+            {
+                contactDeleteData && <ContactDeleteModal
+                contactDeleteData={contactDeleteData}
+                setContactDeleteData={setContactDeleteData}
+                refetch={refetch}
+                ></ContactDeleteModal>
+            }
         </div>
     );
 };
