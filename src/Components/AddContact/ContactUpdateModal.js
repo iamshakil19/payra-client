@@ -1,15 +1,31 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 
 const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }) => {
 
-    const {name, number1, number2} = contactUpdateData
+    const { _id, name, number1, number2 } = contactUpdateData
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
-
+        fetch(`http://localhost:5000/contact/${_id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    refetch()
+                    setContactUpdateData(null)
+                    toast.success("Contact Updated")
+                }
+            })
     };
 
     const handleContactUpdateData = () => {
@@ -52,7 +68,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
                                     </label>
                                     <input defaultValue={number1} type="number" placeholder="Type your Number" className={`input h-10 input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.number1 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("number1", {
-                                            
+
                                             required: {
                                                 value: true,
                                                 message: "Number is required"
@@ -65,7 +81,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
                                                 value: 11,
                                                 message: 'Maximum length 11'
                                             },
-                                        
+
                                         })}
                                     />
                                     {
