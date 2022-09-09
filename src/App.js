@@ -5,10 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import BloodDonorRegistration from './Components/BloodDonorRegistration/BloodDonorRegistration';
 import { Toaster } from 'react-hot-toast';
 import Login from './Components/Login/Login';
-import Contact from './Components/Contact/Contact';
 import AboutUs from './Components/About/AboutUs';
 import NotFound from './Components/NotFound/NotFound';
-
 import SignUp from './Components/SignUp/SignUp';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import Analytics from './Components/DashboardGroup/Analytics/Analytics';
@@ -22,11 +20,8 @@ import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/Compl
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 import Profile from './Components/Profile/Profile';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
-import AddContact from './Components/AddContact/AddContact';
-
-
-
-
+import AddContact from './Components/DashboardGroup/AddContact/AddContact';
+import FrontEndContact from './Components/Contact/FrontEndContact';
 
 
 function App() {
@@ -36,7 +31,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
-        <Route path='/contact' element={<Contact />}></Route>
+        <Route path='/contact' element={<FrontEndContact />}></Route>
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/profile' element={<Profile />}></Route>

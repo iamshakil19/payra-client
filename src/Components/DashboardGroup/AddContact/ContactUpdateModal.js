@@ -6,7 +6,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
 
     const { _id, name, number1, number2 } = contactUpdateData
 
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
         fetch(`http://localhost:5000/contact/${_id}`, {
