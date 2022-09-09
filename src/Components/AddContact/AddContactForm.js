@@ -132,7 +132,7 @@ const AddContactForm = ({setIsFormSubmit}) => {
                     </div>
 
 
-                    <div className="form-control w-full sm:w-40 mx-auto sm:mx-0 max-w-xs lg:max-w-full">
+                    <div className="form-control w-full xl:w-40 mx-auto xl:mx-0 max-w-xs lg:max-w-full">
                         <label htmlFor="img" className='bg-[#141C39] text-center h-10 border border-[#141C39] rounded-lg cursor-pointer mt-5 sm:mt-9'>
                             <span className='flex justify-center items-center mt-2 text-white'>
                                 <span className='text-xl mx-1'><MdCloudUpload /></span> <span className='mx-1 font-semibold poppins-font text-sm'>Upload Image</span>

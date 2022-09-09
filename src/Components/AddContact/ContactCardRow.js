@@ -11,7 +11,7 @@ const ContactCardRow = ({ contact, setContactDeleteData, setContactUpdateData })
                     <div className='flex justify-between'>
                         <div className="avatar">
                             <div className="w-20 rounded-xl">
-                                <img src={img} />
+                                <img src={img} alt={`${name}`}/>
                             </div>
                         </div>
                         <div>
@@ -25,7 +25,6 @@ const ContactCardRow = ({ contact, setContactDeleteData, setContactUpdateData })
                             <label onClick={() => setContactDeleteData(contact)} for="contact-delete-modal" className='text-[#141C39] cursor-pointer text-2xl'><MdDelete /></label>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

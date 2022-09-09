@@ -3,6 +3,7 @@ import Loading from '../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import ContactCardRow from './ContactCardRow';
 import ContactDeleteModal from './ContactDeleteModal';
+import ContactUpdateModal from './ContactUpdateModal';
 
 const AddContactCard = ({ isFormSubmit }) => {
 
@@ -41,10 +42,17 @@ const AddContactCard = ({ isFormSubmit }) => {
             </section>
             {
                 contactDeleteData && <ContactDeleteModal
-                contactDeleteData={contactDeleteData}
-                setContactDeleteData={setContactDeleteData}
-                refetch={refetch}
+                    contactDeleteData={contactDeleteData}
+                    setContactDeleteData={setContactDeleteData}
+                    refetch={refetch}
                 ></ContactDeleteModal>
+            }
+            {
+                contactUpdateData && <ContactUpdateModal
+                    contactUpdateData={contactUpdateData}
+                    setContactUpdateData={setContactUpdateData}
+                    refetch={refetch}
+                ></ContactUpdateModal>
             }
         </div>
     );
