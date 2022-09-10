@@ -22,6 +22,7 @@ import Profile from './Components/Profile/Profile';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
 import AddContact from './Components/DashboardGroup/AddContact/AddContact';
 import FrontEndContact from './Components/Contact/FrontEndContact';
+import AllContact from './Components/Contact/AllContact';
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/contact' element={<FrontEndContact />}></Route>
+        <Route path='/all-contact' element={<AllContact />}></Route>
+
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/profile' element={<Profile />}></Route>

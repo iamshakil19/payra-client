@@ -5,8 +5,11 @@ import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
 import FrontEndContactCard from './FrontEndContactCard';
 import { useForm } from 'react-hook-form';
+import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
+    const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const status = "incomplete"
 
@@ -42,6 +45,10 @@ const Contact = () => {
             })
     };
 
+    const navigateToAllContact = () => {
+        navigate('/all-contact')
+    }
+
     return (
         <div className='donor-registration-bg min-h-screen'>
             <Header />
@@ -62,9 +69,14 @@ const Contact = () => {
                                     ></FrontEndContactCard>)
                                 }
                             </div>
-                            <div className='flex justify-center'>
-                                <button className='btn max-w-xs mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out'>See More</button>
+                            { contacts.length > 4 &&
+                                <div className='flex justify-center'>
+                                <button onClick={navigateToAllContact} className=' h-11 w-32 rounded-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center'>
+                                <span className='poppins-font mr-1'>See More</span>
+                                <span className='ml-1'> <FaArrowRight/> </span>
+                                </button>
                             </div>
+                            }
                         </div>
                     </section>
 
