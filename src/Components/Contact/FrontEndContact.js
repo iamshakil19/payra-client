@@ -69,7 +69,7 @@ const Contact = () => {
                                     ></FrontEndContactCard>)
                                 }
                             </div>
-                            { contacts.length > 4 &&
+                            { contacts?.length > 4 &&
                                 <div className='flex justify-center'>
                                 <button onClick={navigateToAllContact} className=' h-11 w-32 rounded-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center'>
                                 <span className='poppins-font mr-1'>See More</span>
