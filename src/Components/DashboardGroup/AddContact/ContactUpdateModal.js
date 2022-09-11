@@ -38,7 +38,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
             <input type="checkbox" id="contact-update-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
-                    <label onClick={handleContactUpdateData} htmlFor="contact-update-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label onClick={handleContactUpdateData} htmlFor="contact-update-modal" className="btn btn-sm btn-circle bg-[#0F1631] absolute right-2 top-2">✕</label>
                     <h2 className="font-bold text-lg">Update Your Contact Info</h2>
 
                     <div>
@@ -115,7 +115,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
                                 </div>
 
                                 <div className='w-full text-center sm:text-start sm:flex justify-end'>
-                                    <input className='border cursor-pointer border-black rounded-lg sm:mt-9 w-full sm:w-28 max-w-xs lg:max-w-full mt-5 bg-white text-black font-bold hover:bg-[#0F1631] h-9 hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Update" />
+                                    <input className='border cursor-pointer border-black rounded-lg sm:mt-9 w-full sm:w-28 max-w-xs lg:max-w-full mt-5 font-bold bg-[#0F1631] h-9 text-white transition-all duration-300 ease-in-out' type="submit" value="Update" />
                                 </div>
                             </div>
                         </form>

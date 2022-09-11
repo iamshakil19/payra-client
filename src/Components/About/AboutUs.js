@@ -3,11 +3,9 @@ import Header from '../Header/Header';
 
 
 const AboutUs = () => {
-
     return (
         <div>
             <Header/>
-
         </div>
     );
 };
