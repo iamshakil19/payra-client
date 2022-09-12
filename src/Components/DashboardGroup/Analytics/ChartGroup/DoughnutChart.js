@@ -167,11 +167,57 @@ const donorData = [
     },
   ]
 
-  for(let i = 0; i < donorData.length; i++){
-    
-  }
-
-
+  var obj = [
+    {
+      "id": "65:0",    
+      "status": "ORANGE"
+    },
+    {
+      "id": "65:0",
+      "name": "BIU",
+      "status": "GREEN"
+    },
+    {
+      "id": "65:0",
+      "name": "BIU",
+      "status": "ORANGE"
+    },
+    {
+      "id": "65:0",
+      "status": "YELLOW"
+    },
+    {
+      "id": "65:0",
+      "status": "RED"
+    },
+    {
+      "id": "65:0",
+      "status": "GREEN"
+    },
+    {
+      "id": "65:0",
+      "status": "GREEN"
+    },
+     {
+      "id": "65:0",
+      "status": "ORANGE"
+    },
+    {
+      "id": "65:0",
+      "status": "YELLOW"
+    },
+    {
+      "id": "65:0",
+      "status": "GREEN"
+    }
+  ] ;
+  
+  var rez=[];
+  donorData.forEach(function(item){
+    rez[item.bloodGroup] ? rez[item.bloodGroup]++ :  rez[item.bloodGroup] = 1;
+  });
+  console.log(rez[1]);
+  
 const options = {
     plugins: {
         legend: {

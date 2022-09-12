@@ -7,7 +7,7 @@ const Analytics = () => {
         <div>
             <div>
                 <DoughnutChart/>
-                <LineChart/>
+                {/* <LineChart/> */}
             </div>
             
         </div>
