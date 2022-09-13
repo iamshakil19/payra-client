@@ -82,7 +82,6 @@ const options = {
 }
 
 const data = {
-    
   labels: ['O+ Donor ', 'O- Donor ', 'A+ Donor ', 'A- Donor ', 'B+ Donor ', 'b- Donor ', 'AB+ Donor ', 'AB- Donor '],
   datasets: [
       {
@@ -114,10 +113,10 @@ const data = {
 };
 
     return (
-        <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg'>
+        <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg'>
             <p className='text-[#141C39] text-xl poppins-font font-semibold mb-4'>Blood Group Analytics</p>
             <div className='max-w-[340px] mx-auto relative'>
-              <p className='poppins-font font-extrabold absolute left-[120px] top-28 hidden lg:block text-lg'>Donors : {bloodData.length}</p>
+              <p className='poppins-font font-extrabold absolute left-[120px] top-[110px] hidden lg:block text-lg'>Donors : {bloodData.length}</p>
                 <Doughnut data={data} options={options}
                 />
             </div>

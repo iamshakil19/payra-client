@@ -4,14 +4,30 @@ import { useQuery } from 'react-query';
 import CompleteBloodRequestRow from './CompleteBloodRequestRow';
 import { useState } from 'react';
 import CompleteDeleteModal from './CompleteDeleteModal';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../../../firebase.init';
 
 const CompleteBloodRequest = () => {
-
+    const navigate = useNavigate()
     const [bloodRequestDeleteData, setBloodRequestDeleteData] = useState(null)
     const [bloodRequestProfileData, setBloodRequestProfileData] = useState(null)
 
-    const { data: completeBloodRequestList, isLoading, refetch } = useQuery('completeBloodList', () => fetch('http://localhost:5000/complete-blood-request')
-        .then(res => res.json()))
+    const { data: completeBloodRequestList, isLoading, refetch } = useQuery('completeBloodList', () => fetch('http://localhost:5000/complete-blood-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
+            }
+            return res.json()
+        }))
 
     if (isLoading) {
         return <Loading />
@@ -54,8 +70,8 @@ const CompleteBloodRequest = () => {
 
             {
                 bloodRequestDeleteData && <CompleteDeleteModal
-                bloodRequestDeleteData={bloodRequestDeleteData}
-                setBloodRequestDeleteData={setBloodRequestDeleteData}
+                    bloodRequestDeleteData={bloodRequestDeleteData}
+                    setBloodRequestDeleteData={setBloodRequestDeleteData}
                     refetch={refetch}
                 ></CompleteDeleteModal>
             }
