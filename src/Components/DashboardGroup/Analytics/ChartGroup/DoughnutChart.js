@@ -1,274 +1,123 @@
 import React from 'react';
-import { Doughnut, Bar, Line } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import Loading from '../../../Shared/Loading/Loading';
+import { useQuery } from 'react-query';
+import { signOut } from 'firebase/auth';
+import auth from '../../../../firebase.init';
+import { useNavigate } from 'react-router-dom';
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
-const donorData = [
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumi",
-      bloodGroup: "ab+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: "ami",
-      bloodGroup: "a+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumdfdfsi",
-      bloodGroup: "ab-",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tdumidsd",
-      bloodGroup: "b+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumidsss",
-      bloodGroup: "ab+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumidfdfdf",
-      bloodGroup: "a-",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " dfddtumi",
-      bloodGroup: "b+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " dsfdf",
-      bloodGroup: "a+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumi++",
-      bloodGroup: "b+",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-    {
-      _id: "631ceb77cafbc9d3a5ea5dd9",
-      name: " tumi--",
-      bloodGroup: "ab-",
-      age: "2022-09-12",
-      number1: "45545454545",
-      number2: "",
-      gender: "মহিলা",
-      division: "বরিশাল",
-      district: "বরিশাল",
-      policeStation: "আগৈলঝাড়া",
-      union: "বাগধা",
-      village: "খাজুরিয়া",
-      status: "verified",
-      profileImg: "https://i.ibb.co/SJQGfx9/male.jpg"
-    },
-  ]
-
-  var obj = [
-    {
-      "id": "65:0",    
-      "status": "ORANGE"
-    },
-    {
-      "id": "65:0",
-      "name": "BIU",
-      "status": "GREEN"
-    },
-    {
-      "id": "65:0",
-      "name": "BIU",
-      "status": "ORANGE"
-    },
-    {
-      "id": "65:0",
-      "status": "YELLOW"
-    },
-    {
-      "id": "65:0",
-      "status": "RED"
-    },
-    {
-      "id": "65:0",
-      "status": "GREEN"
-    },
-    {
-      "id": "65:0",
-      "status": "GREEN"
-    },
-     {
-      "id": "65:0",
-      "status": "ORANGE"
-    },
-    {
-      "id": "65:0",
-      "status": "YELLOW"
-    },
-    {
-      "id": "65:0",
-      "status": "GREEN"
+const DoughnutChart = () => {
+  const navigate = useNavigate()
+  const { data: bloodData, isLoading, refetch } = useQuery('bloodData', () => fetch('http://localhost:5000/verified-donor', {
+    method: 'GET',
+    headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
-  ] ;
-  
-  var rez=[];
-  donorData.forEach(function(item){
-    rez[item.bloodGroup] ? rez[item.bloodGroup]++ :  rez[item.bloodGroup] = 1;
-  });
-  console.log(rez[1]);
-  
-const options = {
-    plugins: {
-        legend: {
-            position: "bottom"
+})
+    .then(res => {
+        if (res.status === 401 || res.status === 403) {
+            signOut(auth)
+            localStorage.removeItem('accessToken')
+            navigate('/')
         }
-    }
+        return res.json()
+    }))
+
+if (isLoading) {
+    return <Loading />
 }
 
-const oPositive = 100;
+let oPositiveData = bloodData.filter(
+  (person) => person.bloodGroup === "o+"
+);
+const oPositiveLength = oPositiveData.length;
 
+let oNegativeData = bloodData.filter(
+  (person) => person.bloodGroup === "o-"
+);
+const oNegativeLength = oNegativeData.length;
 
+let aPositiveData = bloodData.filter(
+  (person) => person.bloodGroup === "a+"
+);
+const aPositiveLength = aPositiveData.length;
 
-export const data = {
+let aNegativeData = bloodData.filter(
+  (person) => person.bloodGroup === "a-"
+);
+const aNegativeLength = aNegativeData.length;
+
+let bPositiveData = bloodData.filter(
+  (person) => person.bloodGroup === "b+"
+);
+const bPositiveLength = bPositiveData.length;
+
+let bNegativeData = bloodData.filter(
+  (person) => person.bloodGroup === "b-"
+);
+const bNegativeLength = bNegativeData.length;
+
+let abPositiveData = bloodData.filter(
+  (person) => person.bloodGroup === "ab+"
+);
+const abPositiveLength = abPositiveData.length;
+
+let abNegativeData = bloodData.filter(
+  (person) => person.bloodGroup === "ab-"
+);
+const abNegativeLength = abNegativeData.length;
+
+const bloodGroupData = [oPositiveLength, oNegativeLength, aPositiveLength, aNegativeLength, bPositiveLength, bNegativeLength, abPositiveLength, abNegativeLength]
+
+const options = {
+  plugins: {
+      legend: {
+          position: "bottom"
+      }
+  }
+}
+
+const data = {
     
-    labels: ['O +', 'O -', 'A +', 'A -', 'B+', 'b -', 'AB +', 'AB -'],
-    datasets: [
-        {
-            label: 'Blood Group',
-            data: [`${oPositive}`, 80, 95, 55, 112, 15, 39, 135],
-            backgroundColor: [
-                '#ff6961',
-                '#59adf6',
-                '#f8f38d',
-                '#42d6a4',
-                '#9d94ff',
-                '#ffb480',
-                '#08cad1',
-                '#c780e8',
-            ],
-            borderColor: [
-                '#ff6961',
-                '#59adf6',
-                '#f8f38d',
-                '#42d6a4',
-                '#9d94ff',
-                '#ffb480',
-                '#08cad1',
-                '#c780e8',
-            ],
-            borderWidth: 1,
-        },
-    ],
+  labels: ['O+ Donor ', 'O- Donor ', 'A+ Donor ', 'A- Donor ', 'B+ Donor ', 'b- Donor ', 'AB+ Donor ', 'AB- Donor '],
+  datasets: [
+      {
+          label: 'Blood Group',
+          data: bloodGroupData,
+          backgroundColor: [
+              '#ff6961',
+              '#59adf6',
+              '#f8f38d',
+              '#42d6a4',
+              '#9d94ff',
+              '#ffb480',
+              '#08cad1',
+              '#c780e8',
+          ],
+          borderColor: [
+              '#ff6961',
+              '#59adf6',
+              '#f8f38d',
+              '#42d6a4',
+              '#9d94ff',
+              '#ffb480',
+              '#08cad1',
+              '#c780e8',
+          ],
+          borderWidth: 1,
+      },
+  ],
 };
 
-
-const DoughnutChart = () => {
-
     return (
-        <div className='border border-gray-300 rounded-xl p-4 mt-5 max-w-lg'>
-            <p className='text-[#141C39] text-xl poppins-font font-semibold mb-5'>Blood Group Analytics</p>
-            <div className='max-w-xs mx-auto'>
+        <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg'>
+            <p className='text-[#141C39] text-xl poppins-font font-semibold mb-4'>Blood Group Analytics</p>
+            <div className='max-w-[340px] mx-auto relative'>
+              <p className='poppins-font font-extrabold absolute left-[120px] top-28 hidden lg:block text-lg'>Donors : {bloodData.length}</p>
                 <Doughnut data={data} options={options}
                 />
             </div>

@@ -30,7 +30,6 @@ const DonorList = () => {
     if (isLoading) {
         return <Loading />
     }
-    console.log(allDonorList);
 
     return (
         <div>
