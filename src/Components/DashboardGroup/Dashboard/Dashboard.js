@@ -17,6 +17,7 @@ import auth from '../../../firebase.init';
 import avatarImage from '../../../Resources/avatarImage.jpg'
 import { MdPermContactCalendar } from "react-icons/md";
 import './Dashboard.css'
+import PageTitle from '../../Shared/PageTitle';
 
 
 const Dashboard = () => {
@@ -38,7 +39,7 @@ const Dashboard = () => {
     return (
         <div>
             <Header />
-
+            <PageTitle title={"Dashboard"}></PageTitle>
             <div className=''>
                 <div className="drawer drawer-mobile custom-height">
                     <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />

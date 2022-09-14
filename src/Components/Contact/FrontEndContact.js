@@ -7,6 +7,7 @@ import FrontEndContactCard from './FrontEndContactCard';
 import { useForm } from 'react-hook-form';
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import PageTitle from '../Shared/PageTitle';
 
 const Contact = () => {
     const navigate = useNavigate()
@@ -52,6 +53,7 @@ const Contact = () => {
     return (
         <div className='donor-registration-bg min-h-screen'>
             <Header />
+            <PageTitle title={"Contact For Blood"}></PageTitle>
             <div className="hero lg:mt-8">
                 <div className="hero-content flex-col lg:flex-row">
 
@@ -196,14 +198,10 @@ const Contact = () => {
 
                                 <div className="form-control w-full max-w-xs lg:max-w-full">
                                     <label className="label">
-                                        <span className="label-text text-white">সংক্ষেপে রোগীর সমস্যা লিখুন <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white">সংক্ষেপে রোগীর সমস্যা লিখুন </span>
                                     </label>
-                                    <input type="text" placeholder="রোগীর সমস্যা লিখুন" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.patient_problem && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                    <input type="text" placeholder="(অপশনাল)" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.patient_problem && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("patient_problem", {
-                                            required: {
-                                                value: true,
-                                                message: "Patient problem is required"
-                                            },
                                             maxLength: {
                                                 value: 20,
                                                 message: 'Maximum length 20'

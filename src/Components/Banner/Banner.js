@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import bg from '../../Resources/blood-bg.jpg'
 import '../Banner/Banner.css'
+import PageTitle from '../Shared/PageTitle';
 const Banner = () => {
     const navigate = useNavigate()
 
@@ -14,6 +15,7 @@ const Banner = () => {
 
     return (
         <div className='custom-height banner-container flex justify-center items-center'>
+            <PageTitle title={"Home"}></PageTitle>
             <div ata-aos="zoom-out">
                 <h2 className='text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center px-5 banner-title mb-5'>রক্ত দিন জীবন বাঁচান</h2>
                 <p className='text-white px-5 text-center banner-text mb-10 text-lg'>কেউ এগিয়ে আসুন! জরুরি ভিত্তিতে একজন মায়ের জন্য "রংপুরে" A+ রক্ত দরকার: ক্যান্সারের রোগীর জন্য আজকের [২৫-০৫-২০২২] মধ্যে ২ ব্যাগ "এ পজেটিভ" রক্ত দরকার।</p>

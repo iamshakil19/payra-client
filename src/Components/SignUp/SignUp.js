@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 import useToken from '../Hooks/useToken';
+import PageTitle from '../Shared/PageTitle';
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -46,6 +47,7 @@ const SignUp = () => {
     return (
         <div>
             <Header />
+            <PageTitle title={"Sign Up"}></PageTitle>
             <div>
                 <div className="hero bg-[#F5F7FF] custom-height">
                     <div className="hero-content flex-col lg:flex-row">

@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 import useToken from '../Hooks/useToken';
+import PageTitle from '../Shared/PageTitle';
 
 const Login = () => {
 
@@ -44,6 +45,7 @@ const Login = () => {
     return (
         <div>
             <Header />
+            <PageTitle title={"Login"}></PageTitle>
             <div>
                 <div className="hero custom-height bg-[#F5F7FF]">
                     <div className="hero-content flex-col lg:flex-row">

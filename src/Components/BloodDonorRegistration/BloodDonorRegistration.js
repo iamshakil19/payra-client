@@ -3,6 +3,8 @@ import Header from '../Header/Header';
 import donorImg from '../../Resources/blood-img-1.png'
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
+import PageTitle from '../Shared/PageTitle';
+
 
 const BloodDonorRegistration = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
@@ -97,6 +99,7 @@ const BloodDonorRegistration = () => {
     return (
         <div className='donor-registration-bg min-h-screen'>
             <Header></Header>
+            <PageTitle title={"Blood Donor Registration"}></PageTitle>
 
             <div className="hero lg:mt-8">
                 <div className="hero-content flex-col lg:flex-row">
