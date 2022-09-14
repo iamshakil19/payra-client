@@ -73,8 +73,6 @@ const RadarChart = () => {
       const abNegativeLength = abNegativeData.length;
       
       const completeDonation = [oPositiveLength, oNegativeLength, aPositiveLength, aNegativeLength, bPositiveLength, bNegativeLength, abPositiveLength, abNegativeLength]
-      console.log(completeDonationData);
-
     const options = {
         plugins: {
             legend: {
@@ -84,7 +82,7 @@ const RadarChart = () => {
     }
 
     const data = {
-        labels: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'],
+        labels: [`O+ : ${oPositiveLength}`, `O- : ${oNegativeLength}`, `A+ : ${aPositiveLength}`, `A- : ${aNegativeLength}`, `B+ : ${bPositiveLength}`, `B- : ${bNegativeLength}`, `AB+ : ${abPositiveLength}`, `AB- : ${abNegativeLength}`],
         datasets: [
             {
                 label: 'Complete Donation ',

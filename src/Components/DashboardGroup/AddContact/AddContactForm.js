@@ -140,7 +140,7 @@ const AddContactForm = ({setIsFormSubmit}) => {
                         </label>
 
                         <input type="file" id='img' name='image'
-                            accept="image/jpeg"
+                            accept="image/jpeg, image/png"
                             className={`input hidden h-10 input-bordered w-full max-w-xs lg:max-w-full `}
                             {...register("image", {
                                 required: {

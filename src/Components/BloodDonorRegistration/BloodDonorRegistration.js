@@ -245,7 +245,8 @@ const BloodDonorRegistration = () => {
                                     <option disabled selected value={""}>--Select Your Gender--</option>
                                     <option value={"পুরুষ"}>পুরুষ</option>
                                     <option value={"মহিলা"}>মহিলা</option>
-                                    <option value={"হিজড়া"}>বলতে চাই না</option>
+                                    <option value={"তৃতীয়"}>তৃতীয় লিঙ্গ</option>
+                                    <option value={"অজানা"}>বলতে চাই না</option>
                                 </select>
                                 {
                                     errors?.gender && <label className="label">
@@ -373,7 +374,15 @@ const BloodDonorRegistration = () => {
                                         <option value={"আমবৌলা"}>আমবৌলা</option>
                                         <option value={"খাজুরিয়া"}>খাজুরিয়া</option>
                                         <option value={"নিমারপাড়"}>নিমারপাড়</option>
-                                        <option value={"বাগধা"}>বাগধা</option>
+                                        <option value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
+                                        <option value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
+                                        <option value={"জোবারপাড়"}>জোবারপাড়</option>
+                                        <option value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
+                                        <option value={"আষ্কর"}>আষ্কর</option>
+                                        <option value={"কালিবাড়ি"}>কালিবাড়ি</option>
+                                        <option value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
+                                        <option value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
+                                        <option value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
                                     </select>
                                     {
                                         errors?.village && <label className="label">
