@@ -39,8 +39,8 @@ const Dashboard = () => {
         <div>
             <Header />
 
-            <div>
-                <div className="drawer drawer-mobile">
+            <div className=''>
+                <div className="drawer drawer-mobile custom-height">
                     <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content bg-[#F5F7FF] px-2 pt-3 lg:px-5 lg:pt-4">
                         {/* <!-- Page content here --> */}
@@ -71,7 +71,9 @@ const Dashboard = () => {
                             </div>}
 
                         </div>
+
                         <Outlet />
+
                     </div>
                     <div className="drawer-side">
                         <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>

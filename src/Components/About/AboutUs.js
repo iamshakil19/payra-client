@@ -6,6 +6,10 @@ const AboutUs = () => {
     return (
         <div>
             <Header/>
+            
+            <div>
+                <h2>This is about us</h2>
+            </div>
         </div>
     );
 };

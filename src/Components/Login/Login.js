@@ -45,7 +45,7 @@ const Login = () => {
         <div>
             <Header />
             <div>
-                <div className="hero min-h-screen bg-[#F5F7FF]">
+                <div className="hero custom-height bg-[#F5F7FF]">
                     <div className="hero-content flex-col lg:flex-row">
                         <img src={loginImg} className="max-w-lg rounded-lg hidden lg:block" alt='' />
 

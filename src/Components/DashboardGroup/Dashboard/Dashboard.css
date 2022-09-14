@@ -26,3 +26,7 @@
 .search-icon {
     color: white;
 }
+
+.custom-height{
+    height: calc(100vh - 70px)
+}
