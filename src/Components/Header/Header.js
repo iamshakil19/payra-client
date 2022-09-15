@@ -43,7 +43,7 @@ const Header = () => {
 
                     {
                         user && <>
-                            { admin ?
+                            { !admin ?
                                 <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
                                 :
                                 <li><span className='nav-link'><ActiveRoute to="/profile"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>প্রোফাইল</span></ActiveRoute></span></li>

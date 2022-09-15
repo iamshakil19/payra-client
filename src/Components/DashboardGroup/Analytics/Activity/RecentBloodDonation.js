@@ -29,7 +29,6 @@ const RecentBloodDonation = () => {
     }
 
     const latest5Donation = recentCompleteDonation.slice(0, 5)
-    console.log(latest5Donation);
 
     return (
         <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg'>

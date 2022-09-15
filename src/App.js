@@ -39,7 +39,7 @@ function App() {
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
 
-        <Route path='/dashboard' element={<Dashboard />}>
+        <Route path='/dashboard' element={ <Dashboard /> }>
           <Route index element={<Analytics />}></Route>
           <Route path='donor-list' element={<DonorList />}></Route>
           <Route path='donor-request' element={<DonorRequest />}></Route>
