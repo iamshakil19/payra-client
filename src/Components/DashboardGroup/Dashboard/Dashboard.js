@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../Header/Header'
 import { BiDonateBlood } from "react-icons/bi";
 import { BsChatSquareQuote, BsFillPieChartFill } from "react-icons/bs";
 import { RiQuestionAnswerLine } from "react-icons/ri";
 import { FaSearch, FaUsers } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { AiOutlineUserAdd } from "react-icons/ai";
-import { HiUserAdd } from "react-icons/hi";
 import { Outlet } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
 import Loading from '../../Shared/Loading/Loading';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
@@ -18,18 +15,46 @@ import avatarImage from '../../../Resources/avatarImage.jpg'
 import { MdPermContactCalendar } from "react-icons/md";
 import './Dashboard.css'
 import PageTitle from '../../Shared/PageTitle';
+import { signOut } from 'firebase/auth';
 
 
 const Dashboard = () => {
-
-    const location = useLocation()
+    const navigate = useNavigate()
+    let location = useLocation();
     const [user, loading, error] = useAuthState(auth);
 
-    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
-        .then(res => res.json()))
+    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
+            }
+            return res.json()
+        }))
 
-    const { data: incompleteBloodRequestList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request')
-        .then(res => res.json()))
+    const { data: incompleteBloodRequestList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
+
+            }
+            return res.json()
+        }))
 
     if (donorLoading || bloodLoading) {
         return <Loading />

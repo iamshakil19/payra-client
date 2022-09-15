@@ -3,14 +3,29 @@ import { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
+import { signOut } from 'firebase/auth';
+import auth from '../../../firebase.init';
 
 const BloodRequest = () => {
 
     const [isSelected, setSelected] = useState(true);
     const navigate = useNavigate()
 
-    const { data: incompleteBloodRequestList, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request')
-        .then(res => res.json()))
+    const { data: incompleteBloodRequestList, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
+            }
+            return res.json()
+        }))
 
     if (isLoading) {
         return <Loading />

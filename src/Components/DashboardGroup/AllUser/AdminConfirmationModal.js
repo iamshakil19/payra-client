@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 const AdminConfirmationModal = ({ adminConfirmationData, setAdminConfirmationData, refetch }) => {
     const { email } = adminConfirmationData
-    console.log(email);
 
     const makeAdmin = () => {
         fetch(`http://localhost:5000/user/admin/${email}`, {
@@ -15,7 +14,7 @@ const AdminConfirmationModal = ({ adminConfirmationData, setAdminConfirmationDat
             .then(res => {
                 if(res.status === 403){
                     setAdminConfirmationData(null)
-                    toast.error('Super Admin can only create admin')
+                    toast.error('Super Admin Can Only Create Admin')
                 }
                 return res.json()
             })
@@ -23,7 +22,7 @@ const AdminConfirmationModal = ({ adminConfirmationData, setAdminConfirmationDat
                 if (data.modifiedCount > 0) {
                     setAdminConfirmationData(null)
                     refetch()
-                    toast.success('Successfully made an admin')
+                    toast.success(`Congratulations ${email} Is Promoted To Admin`)
                 }
             })
     }

@@ -8,7 +8,6 @@ import Login from './Components/Login/Login';
 import AboutUs from './Components/About/AboutUs';
 import NotFound from './Components/NotFound/NotFound';
 import SignUp from './Components/SignUp/SignUp';
-import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import Analytics from './Components/DashboardGroup/Analytics/Analytics';
 import Dashboard from './Components/DashboardGroup/Dashboard/Dashboard';
 import DonorList from './Components/DashboardGroup/DonorList/DonorList';
@@ -19,6 +18,7 @@ import AllAdmin from './Components/DashboardGroup/AllAdmin/AllAdmin';
 import CompleteBloodRequest from './Components/DashboardGroup/BloodRequest/CompleteBloodRequest/CompleteBloodRequest';
 import IncompleteBloodRequest from './Components/DashboardGroup/BloodRequest/IncompleteBloodRequest/IncompleteBloodRequest';
 import Profile from './Components/Profile/Profile';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
 import AddContact from './Components/DashboardGroup/AddContact/AddContact';
 import FrontEndContact from './Components/Contact/FrontEndContact';
@@ -37,9 +37,9 @@ function App() {
 
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/profile' element={ <ProtectedRoute> <Profile /> </ProtectedRoute>}></Route>
 
-        <Route path='/dashboard' element={ <Dashboard /> }>
+        <Route path='/dashboard' element={ <RequireAdmin> <Dashboard /> </RequireAdmin> }>
           <Route index element={<Analytics />}></Route>
           <Route path='donor-list' element={<DonorList />}></Route>
           <Route path='donor-request' element={<DonorRequest />}></Route>

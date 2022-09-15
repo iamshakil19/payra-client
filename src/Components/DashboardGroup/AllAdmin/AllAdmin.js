@@ -1,16 +1,18 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import AllAdminRow from './AllAdminRow';
 import { useState } from 'react';
 
+
 const AllAdmin = () => {
     const navigate = useNavigate()
-const [adminDeleteData, setAdminDeleteData] = useState(null)
-const [superAdminConfirmationData, setSuperAdminConfirmationData] = useState(null)
+    const [adminDeleteData, setAdminDeleteData] = useState(null)
+    const [superAdminConfirmationData, setSuperAdminConfirmationData] = useState(null)
+
     const { data: admins, isLoading, refetch } = useQuery('admins', () => fetch('http://localhost:5000/all-admin', {
         method: 'GET',
         headers: {
@@ -30,7 +32,6 @@ const [superAdminConfirmationData, setSuperAdminConfirmationData] = useState(nul
     if (isLoading) {
         return <Loading />
     }
-
 
     return (
         <div>

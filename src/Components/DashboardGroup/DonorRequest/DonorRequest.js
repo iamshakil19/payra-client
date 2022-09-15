@@ -1,16 +1,34 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import DonorRequestDeleteModal from './DonorRequestDeleteModal';
 import DonorRequestProfileModal from './DonorRequestProfileModal';
 import DonorRequestRow from './DonorRequestRow';
 
 const DonorRequest = () => {
+    const navigate = useNavigate()
     const [donorData, setDonorData] = useState(null)
     const [profileDonorRequest, setProfileDonorRequest] = useState(null)
-    const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request')
-        .then(res => res.json()))
+
+        const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth)
+                    localStorage.removeItem('accessToken')
+                    navigate('/')
+                }
+                return res.json()
+            }))
 
     if (isLoading) {
         return <Loading />
