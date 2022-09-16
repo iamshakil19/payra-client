@@ -13,7 +13,7 @@ const CompleteBloodRequest = () => {
     const [bloodRequestDeleteData, setBloodRequestDeleteData] = useState(null)
     const [bloodRequestProfileData, setBloodRequestProfileData] = useState(null)
 
-    const { data: completeBloodRequestList, isLoading, refetch } = useQuery('completeBloodList', () => fetch('https://payra.onrender.com/complete-blood-request', {
+    const { data: completeBloodRequestList, isLoading, refetch } = useQuery('completeBloodList', () => fetch('http://localhost:5000/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

@@ -17,8 +17,8 @@ const Banner = () => {
         <div className='custom-height banner-container flex justify-center items-center'>
             <PageTitle title={"Home"}></PageTitle>
             <div ata-aos="zoom-out">
-                <h2 className='text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center px-5 banner-title mb-5'>রক্ত দিন জীবন বাঁচান</h2>
-                <p className='text-white px-5 text-center banner-text mb-10 text-lg'>কেউ এগিয়ে আসুন! জরুরি ভিত্তিতে একজন মায়ের জন্য "রংপুরে" A+ রক্ত দরকার: ক্যান্সারের রোগীর জন্য আজকের [২৫-০৫-২০২২] মধ্যে ২ ব্যাগ "এ পজেটিভ" রক্ত দরকার।</p>
+                <h2 className='text-white text-4xl md:text-5xl lg:text-6xl text-center px-5 banner-title mb-5'>রক্ত দিন জীবন বাঁচান</h2>
+                <p className='text-white px-5 text-center banner-text mb-10 text-lg'>সময় তুমি হার মেনেছ রক্তদানের কাছে, দশটি মিনিট করলে খরচ একটি জীবন বাঁচে ।</p>
 
                 <div className='text-center md:flex md:justify-center'>
                     <div className='mb-5 md:mb-0 md:mx-4'>

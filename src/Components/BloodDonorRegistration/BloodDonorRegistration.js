@@ -77,7 +77,7 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }
 
-        fetch('https://payra.onrender.com/donor-request', {
+        fetch('http://localhost:5000/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

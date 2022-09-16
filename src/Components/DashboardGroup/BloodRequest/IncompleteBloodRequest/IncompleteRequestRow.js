@@ -13,7 +13,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
         const bloodRequestStatusInfo = {
             status: newStatus
         }
-        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
+        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
