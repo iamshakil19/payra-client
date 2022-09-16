@@ -3,7 +3,7 @@ import { FaSuperpowers } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
 
-const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData, setSuperAdminConfirmationData }) => {
+const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
     const { email, name, role } = admin
 
     const handlePromotion = () => {

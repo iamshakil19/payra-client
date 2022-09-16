@@ -6,12 +6,12 @@ import Loading from '../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import AllAdminRow from './AllAdminRow';
 import { useState } from 'react';
+import AdminDeleteModal from './AdminDeleteModal';
 
 
 const AllAdmin = () => {
     const navigate = useNavigate()
     const [adminDeleteData, setAdminDeleteData] = useState(null)
-    const [superAdminConfirmationData, setSuperAdminConfirmationData] = useState(null)
 
     const { data: admins, isLoading, refetch } = useQuery('admins', () => fetch('http://localhost:5000/all-admin', {
         method: 'GET',
@@ -58,12 +58,19 @@ const AllAdmin = () => {
                                 refetch={refetch}
                                 index={index + 1}
                                 setAdminDeleteData={setAdminDeleteData}
-                                setSuperAdminConfirmationData={setSuperAdminConfirmationData}
                             ></AllAdminRow>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                adminDeleteData && <AdminDeleteModal
+                key={adminDeleteData._id}
+                adminDeleteData={adminDeleteData}
+                setAdminDeleteData={setAdminDeleteData}
+                refetch={refetch}
+                ></AdminDeleteModal>
+            }
         </div>
     );
 };
