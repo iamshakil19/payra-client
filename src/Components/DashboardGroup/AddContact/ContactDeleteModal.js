@@ -1,12 +1,12 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const ContactDeleteModal = ({contactDeleteData, setContactDeleteData, refetch}) => {
+const ContactDeleteModal = ({ contactDeleteData, setContactDeleteData, refetch }) => {
 
     const { _id } = contactDeleteData
 
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/delete-contact/${_id}`;
+        const url = `https://payra.onrender.com/delete-contact/${_id}`;
         fetch(url, {
             method: "DELETE"
         })

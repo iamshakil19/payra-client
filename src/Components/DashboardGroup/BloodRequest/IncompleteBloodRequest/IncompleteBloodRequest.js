@@ -12,21 +12,21 @@ const IncompleteBloodRequest = () => {
     const [bloodRequestData, setBloodRequestData] = useState(null)
     const [bloodRequestProfileData, setBloodRequestProfileData] = useState(null)
 
-        const { data: incompleteBloodRequestList, isLoading, refetch } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    const { data: incompleteBloodRequestList, isLoading, refetch } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
             }
-        })
-            .then(res => {
-                if (res.status === 401 || res.status === 403) {
-                    signOut(auth)
-                    localStorage.removeItem('accessToken')
-                    navigate('/')
-                }
-                return res.json()
-            }))
+            return res.json()
+        }))
 
     if (isLoading) {
         return <Loading />
@@ -69,8 +69,8 @@ const IncompleteBloodRequest = () => {
 
             {
                 bloodRequestData && <IncompleteBloodDeleteModal
-                bloodRequestData={bloodRequestData}
-                setBloodRequestData={setBloodRequestData}
+                    bloodRequestData={bloodRequestData}
+                    setBloodRequestData={setBloodRequestData}
                     refetch={refetch}
                 ></IncompleteBloodDeleteModal>
             }

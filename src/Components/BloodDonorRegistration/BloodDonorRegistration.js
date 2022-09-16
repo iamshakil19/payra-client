@@ -39,21 +39,21 @@ const BloodDonorRegistration = () => {
 
         birthYear = currentYear - birthDetails.year;
 
-        if(currentMonth >= birthDetails.month ){
+        if (currentMonth >= birthDetails.month) {
             birthMonth = currentMonth - birthDetails.month
-        }else{
+        } else {
             birthYear--;
             birthMonth = 12 + currentMonth - birthDetails.month
         }
-        if(currentDate >= birthDetails.date){
+        if (currentDate >= birthDetails.date) {
             BirthDate = currentDate - birthDetails.date
-        } else{
+        } else {
             birthMonth--;
             let days = months[currentMonth - 2];
             BirthDate = days + currentDate - birthDetails.date;
-            if(birthMonth < 0){
+            if (birthMonth < 0) {
                 birthMonth = 11;
-                birthYear --;
+                birthYear--;
 
             }
         }
@@ -77,7 +77,7 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }
 
-        fetch('http://localhost:5000/donor-request', {
+        fetch('https://payra.onrender.com/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

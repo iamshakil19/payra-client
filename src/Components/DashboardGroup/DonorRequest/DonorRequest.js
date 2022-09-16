@@ -14,21 +14,21 @@ const DonorRequest = () => {
     const [donorData, setDonorData] = useState(null)
     const [profileDonorRequest, setProfileDonorRequest] = useState(null)
 
-        const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('https://payra.onrender.com/donor-request', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth)
+                localStorage.removeItem('accessToken')
+                navigate('/')
             }
-        })
-            .then(res => {
-                if (res.status === 401 || res.status === 403) {
-                    signOut(auth)
-                    localStorage.removeItem('accessToken')
-                    navigate('/')
-                }
-                return res.json()
-            }))
+            return res.json()
+        }))
 
     if (isLoading) {
         return <Loading />

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import { MdCloudUpload } from "react-icons/md";
 
-const AddContactForm = ({setIsFormSubmit}) => {
+const AddContactForm = ({ setIsFormSubmit }) => {
     const [fileError, setFileError] = useState(null)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
@@ -37,7 +37,7 @@ const AddContactForm = ({setIsFormSubmit}) => {
                             number2: data.number2,
                             img: img
                         }
-                        fetch('http://localhost:5000/admin-contact', {
+                        fetch('https://payra.onrender.com/admin-contact', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',

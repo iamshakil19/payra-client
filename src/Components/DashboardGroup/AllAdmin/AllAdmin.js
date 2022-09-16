@@ -13,7 +13,7 @@ const AllAdmin = () => {
     const navigate = useNavigate()
     const [adminDeleteData, setAdminDeleteData] = useState(null)
 
-    const { data: admins, isLoading, refetch } = useQuery('admins', () => fetch('http://localhost:5000/all-admin', {
+    const { data: admins, isLoading, refetch } = useQuery('admins', () => fetch('https://payra.onrender.com/all-admin', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -65,10 +65,10 @@ const AllAdmin = () => {
             </div>
             {
                 adminDeleteData && <AdminDeleteModal
-                key={adminDeleteData._id}
-                adminDeleteData={adminDeleteData}
-                setAdminDeleteData={setAdminDeleteData}
-                refetch={refetch}
+                    key={adminDeleteData._id}
+                    adminDeleteData={adminDeleteData}
+                    setAdminDeleteData={setAdminDeleteData}
+                    refetch={refetch}
                 ></AdminDeleteModal>
             }
         </div>

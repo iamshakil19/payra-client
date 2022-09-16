@@ -8,7 +8,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const RecentBloodDonation = () => {
 
     const navigate = useNavigate()
-    const { data: recentCompleteDonation, isLoading} = useQuery('recentCompleteDonation', () => fetch('http://localhost:5000/complete-blood-request', {
+    const { data: recentCompleteDonation, isLoading } = useQuery('recentCompleteDonation', () => fetch('https://payra.onrender.com/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -32,11 +32,11 @@ const RecentBloodDonation = () => {
 
     return (
         <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg'>
-            <p className='text-[#141C39] text-xl poppins-font font-semibold mb-4 flex items-center'> <span className='mr-3 text-red-500 text-2xl'><BiDonateHeart/> </span>Recent Blood Donation</p>
+            <p className='text-[#141C39] text-xl poppins-font font-semibold mb-4 flex items-center'> <span className='mr-3 text-red-500 text-2xl'><BiDonateHeart /> </span>Recent Blood Donation</p>
 
             {
                 latest5Donation?.map(singleDonation => <div className='grid grid-cols-3 border-b py-1.5'> <p className='bangla-font'>{singleDonation.patient_name}</p> <p className='bangla-font text-center'>{singleDonation.blood_quantity
-                } ব্যাগ</p> <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleDonation.requested_bloodGroup}</p> </div> )
+                } ব্যাগ</p> <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleDonation.requested_bloodGroup}</p> </div>)
             }
         </div>
     );

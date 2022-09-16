@@ -14,7 +14,7 @@ const Contact = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const status = "incomplete"
 
-    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('http://localhost:5000/contacts', {
+    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('https://payra.onrender.com/contacts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -31,7 +31,7 @@ const Contact = () => {
     const onSubmit = data => {
         const newData = { ...data, status }
 
-        fetch('http://localhost:5000/blood-request', {
+        fetch('https://payra.onrender.com/blood-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -71,13 +71,13 @@ const Contact = () => {
                                     ></FrontEndContactCard>)
                                 }
                             </div>
-                            { contacts?.length > 4 &&
+                            {contacts?.length > 4 &&
                                 <div className='flex justify-center'>
-                                <button onClick={navigateToAllContact} className=' h-11 w-32 rounded-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center'>
-                                <span className='poppins-font mr-1'>See More</span>
-                                <span className='ml-1'> <FaArrowRight/> </span>
-                                </button>
-                            </div>
+                                    <button onClick={navigateToAllContact} className=' h-11 w-32 rounded-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center'>
+                                        <span className='poppins-font mr-1'>See More</span>
+                                        <span className='ml-1'> <FaArrowRight /> </span>
+                                    </button>
+                                </div>
                             }
                         </div>
                     </section>

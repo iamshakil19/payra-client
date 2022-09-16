@@ -1,11 +1,11 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const IncompleteBloodDeleteModal = ({setBloodRequestData, bloodRequestData, refetch}) => {
+const IncompleteBloodDeleteModal = ({ setBloodRequestData, bloodRequestData, refetch }) => {
 
     const { _id } = bloodRequestData
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/deleteBloodRequest/${_id}`;
+        const url = `https://payra.onrender.com/deleteBloodRequest/${_id}`;
         fetch(url, {
             method: "DELETE"
         })

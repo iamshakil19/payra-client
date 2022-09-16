@@ -9,7 +9,7 @@ import Loading from '../../../Shared/Loading/Loading';
 
 const AdminActivity = () => {
     const navigate = useNavigate()
-    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('http://localhost:5000/all-admin', {
+    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('https://payra.onrender.com/all-admin', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -42,7 +42,7 @@ const AdminActivity = () => {
                         :
                         <p className='poppins-font'>{singleAdmin.email}</p>
                     }
-                    { singleAdmin.role === "superAdmin" ?
+                    {singleAdmin.role === "superAdmin" ?
                         <p className='capitalize poppins-font text-red-500 font-bold text-center'>Super Admin</p>
                         :
                         <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleAdmin.role}</p>

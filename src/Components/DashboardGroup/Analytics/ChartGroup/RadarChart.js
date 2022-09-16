@@ -12,7 +12,7 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, 
 const RadarChart = () => {
 
     const navigate = useNavigate()
-    const { data: completeDonationData, isLoading, refetch } = useQuery('completeDonationData', () => fetch('http://localhost:5000/complete-blood-request', {
+    const { data: completeDonationData, isLoading, refetch } = useQuery('completeDonationData', () => fetch('https://payra.onrender.com/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -34,45 +34,45 @@ const RadarChart = () => {
 
     let oPositiveData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "o+"
-      );
-      const oPositiveLength = oPositiveData.length;
-      
-      let oNegativeData = completeDonationData.filter(
+    );
+    const oPositiveLength = oPositiveData.length;
+
+    let oNegativeData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "o-"
-      );
-      const oNegativeLength = oNegativeData.length;
-      
-      let aPositiveData = completeDonationData.filter(
+    );
+    const oNegativeLength = oNegativeData.length;
+
+    let aPositiveData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "a+"
-      );
-      const aPositiveLength = aPositiveData.length;
-      
-      let aNegativeData = completeDonationData.filter(
+    );
+    const aPositiveLength = aPositiveData.length;
+
+    let aNegativeData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "a-"
-      );
-      const aNegativeLength = aNegativeData.length;
-      
-      let bPositiveData = completeDonationData.filter(
+    );
+    const aNegativeLength = aNegativeData.length;
+
+    let bPositiveData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "b+"
-      );
-      const bPositiveLength = bPositiveData.length;
-      
-      let bNegativeData = completeDonationData.filter(
+    );
+    const bPositiveLength = bPositiveData.length;
+
+    let bNegativeData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "b-"
-      );
-      const bNegativeLength = bNegativeData.length;
-      
-      let abPositiveData = completeDonationData.filter(
+    );
+    const bNegativeLength = bNegativeData.length;
+
+    let abPositiveData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "ab+"
-      );
-      const abPositiveLength = abPositiveData.length;
-      
-      let abNegativeData = completeDonationData.filter(
+    );
+    const abPositiveLength = abPositiveData.length;
+
+    let abNegativeData = completeDonationData.filter(
         (person) => person.requested_bloodGroup === "ab-"
-      );
-      const abNegativeLength = abNegativeData.length;
-      
-      const completeDonation = [oPositiveLength, oNegativeLength, aPositiveLength, aNegativeLength, bPositiveLength, bNegativeLength, abPositiveLength, abNegativeLength]
+    );
+    const abNegativeLength = abNegativeData.length;
+
+    const completeDonation = [oPositiveLength, oNegativeLength, aPositiveLength, aNegativeLength, bPositiveLength, bNegativeLength, abPositiveLength, abNegativeLength]
     const options = {
         plugins: {
             legend: {
