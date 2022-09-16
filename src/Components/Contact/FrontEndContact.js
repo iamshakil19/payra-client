@@ -14,7 +14,7 @@ const Contact = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const status = "incomplete"
 
-    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('https://payra.onrender.com/contacts', {
+    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -31,7 +31,7 @@ const Contact = () => {
     const onSubmit = data => {
         const newData = { ...data, status }
 
-        fetch('https://payra.onrender.com/blood-request', {
+        fetch('http://localhost:5000/blood-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -86,7 +86,7 @@ const Contact = () => {
                         <div className='lg:ml-3'>
                             <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center mb-3">রোগীর তথ্য দিন</h1>
 
-                            <form onSubmit={handleSubmit(onSubmit)}>
+                            <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
                                 <div className="form-control w-full max-w-xs lg:max-w-full">
                                     <label className="label">
                                         <span className="label-text text-white">রোগীর নাম <span className='text-red-500 font-extrabold'>*</span></span>
@@ -140,7 +140,7 @@ const Contact = () => {
                                         <label className="label">
                                             <span className="label-text text-white">রক্তদানের তারিখ ও সময় <span className='text-red-500 font-extrabold'>*</span></span>
                                         </label>
-                                        <input type="datetime-local" placeholder="Your Age" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.date && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                        <input type="datetime-local" placeholder="Date" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.date && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("date", {
                                                 required: {
                                                     value: true,

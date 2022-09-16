@@ -77,7 +77,7 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }
 
-        fetch('https://payra.onrender.com/donor-request', {
+        fetch('http://localhost:5000/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -110,7 +110,7 @@ const BloodDonorRegistration = () => {
                     <div className='lg:ml-3'>
                         <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
 
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
                                     <span className="label-text text-white">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
