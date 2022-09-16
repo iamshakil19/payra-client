@@ -18,7 +18,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
         const donorStatusInfo = {
             status: newStatus
         }
-        fetch(`http://localhost:5000/donorStatus/${_id}`, {
+        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -41,7 +41,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                 <div class="modal-box bg-[#F5F7FF]">
                     <label for="donor-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
-                        <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
+                        <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             <img src={profileImg} alt='' />
                         </div>
                     </div>
@@ -73,10 +73,10 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                             <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
                         </div>
                     </div>
-                    <div className='flex justify-around mt-3'>
+                    <div className='flex justify-end mt-3'>
                         <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
 
-                        <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700'>Accept</label>
+                        <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700 ml-4'>Accept</label>
                     </div>
                 </div>
             </div>

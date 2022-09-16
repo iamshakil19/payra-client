@@ -13,7 +13,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
         const bloodRequestStatusInfo = {
             status: newStatus
         }
-        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
+        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -24,7 +24,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             .then(data => {
                 console.log(data);
                 refetch()
-                toast.success('blood Donation Complete')
+                toast.success('Blood Donation Complete')
             })
     }
 
@@ -33,8 +33,8 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             <th className='p-2 pl-4 poppins-font w-7 '>{index}</th>
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
-                    <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setBloodRequestProfileData(incompleteSingleBloodRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
+                    <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
+                        <label onClick={() => setBloodRequestProfileData(incompleteSingleBloodRequest)} for="incomplete-blood-request-profile-modal" className='cursor-pointer'>
                             <img src={avatarImg} alt="" />
                         </label>
                     </div>

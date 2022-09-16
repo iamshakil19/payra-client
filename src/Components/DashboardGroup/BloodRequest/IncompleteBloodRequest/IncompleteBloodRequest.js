@@ -6,13 +6,14 @@ import IncompleteBloodDeleteModal from './IncompleteBloodDeleteModal';
 import { signOut } from 'firebase/auth';
 import auth from '../../../../firebase.init';
 import { useNavigate } from 'react-router-dom';
+import IncompleteBloodProfileModal from './IncompleteBloodProfileModal';
 
 const IncompleteBloodRequest = () => {
     const navigate = useNavigate()
     const [bloodRequestData, setBloodRequestData] = useState(null)
     const [bloodRequestProfileData, setBloodRequestProfileData] = useState(null)
 
-    const { data: incompleteBloodRequestList, isLoading, refetch } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
+    const { data: incompleteBloodRequestList, isLoading, refetch } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -73,6 +74,14 @@ const IncompleteBloodRequest = () => {
                     setBloodRequestData={setBloodRequestData}
                     refetch={refetch}
                 ></IncompleteBloodDeleteModal>
+            }
+            {
+                bloodRequestProfileData && <IncompleteBloodProfileModal
+                    bloodRequestProfileData={bloodRequestProfileData}
+                    setBloodRequestProfileData={setBloodRequestProfileData}
+                    setBloodRequestData={setBloodRequestData}
+                    refetch={refetch}
+                ></IncompleteBloodProfileModal>
             }
 
         </div>

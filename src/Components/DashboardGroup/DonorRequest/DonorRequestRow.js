@@ -11,7 +11,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
         const donorStatusInfo = {
             status: newStatus
         }
-        fetch(`http://localhost:5000/donorStatus/${_id}`, {
+        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -32,7 +32,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             <th className='p-2 pl-4 poppins-font w-7 '>{index}</th>
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
-                    <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
+                    <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setProfileDonorRequest(donorRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
                             <img src={profileImg} alt="" />
                         </label>
