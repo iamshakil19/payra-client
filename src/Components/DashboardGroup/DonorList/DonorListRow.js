@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 
-const DonorListRow = ({ donorSingleData, refetch, index, setDonorData }) => {
+const DonorListRow = ({ donorSingleData, index, setDonorData, setDonorProfileData }) => {
     const { _id, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
 
     return (
@@ -10,7 +10,7 @@ const DonorListRow = ({ donorSingleData, refetch, index, setDonorData }) => {
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label for="donor-request-profile-modal" className='cursor-pointer'>
+                        <label onClick={() => setDonorProfileData(donorSingleData)} for="verified-donor-profile-modal" className='cursor-pointer'>
                             <img src={profileImg} alt="" />
                         </label>
                     </div>

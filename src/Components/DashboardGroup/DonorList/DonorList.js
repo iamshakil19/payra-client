@@ -6,12 +6,14 @@ import DonorListDeleteModal from './DonorListDeleteModal';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
+import DonorListProfileModal from './DonorListProfileModal';
 
 const DonorList = () => {
     const navigate = useNavigate()
     const [donorData, setDonorData] = useState(null)
+    const [donorProfileData, setDonorProfileData] = useState(null)
 
-    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor', {
+    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('https://payra.onrender.com/verified-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -64,6 +66,7 @@ const DonorList = () => {
                                 refetch={refetch}
                                 index={index + 1}
                                 setDonorData={setDonorData}
+                                setDonorProfileData={setDonorProfileData}
                             ></DonorListRow>)
                         }
                     </tbody>
@@ -75,6 +78,15 @@ const DonorList = () => {
                     setDonorData={setDonorData}
                     refetch={refetch}
                 ></DonorListDeleteModal>
+            }
+
+            {
+                donorProfileData && <DonorListProfileModal
+                    key={donorProfileData._id}
+                    donorProfileData={donorProfileData}
+                    setDonorProfileData={setDonorProfileData}
+                    refetch={setDonorProfileData}
+                ></DonorListProfileModal>
             }
         </div>
     );
