@@ -11,7 +11,7 @@ const DonorList = () => {
     const navigate = useNavigate()
     const [donorData, setDonorData] = useState(null)
 
-    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('https://payra.onrender.com/verified-donor', {
+    const { data: allDonorList, isLoading, refetch } = useQuery('donorList', () => fetch('http://localhost:5000/verified-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

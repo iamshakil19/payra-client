@@ -14,7 +14,7 @@ const CompleteBloodRequestRow = ({completeSingleBloodRequest, refetch, index, se
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setBloodRequestProfileData(completeSingleBloodRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
+                        <label onClick={() => setBloodRequestProfileData(completeSingleBloodRequest)} for="complete-blood-profile-modal" className='cursor-pointer'>
                             <img src={avatarImg} alt="" />
                         </label>
                     </div>

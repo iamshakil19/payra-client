@@ -9,7 +9,7 @@ import Loading from '../../../Shared/Loading/Loading';
 
 const AdminActivity = () => {
     const navigate = useNavigate()
-    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('https://payra.onrender.com/all-admin', {
+    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('http://localhost:5000/all-admin', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -37,8 +37,8 @@ const AdminActivity = () => {
 
             {
                 latest5Admins?.map(singleAdmin => <div className='grid grid-cols-2 border-b py-1.5'>
-                    {singleAdmin.email.length > 18 ?
-                        <p className='poppins-font'>{singleAdmin.email.slice(0, 18)}...</p>
+                    {singleAdmin.email.length > 16 ?
+                        <p className='poppins-font'>{singleAdmin.email.slice(0, 16)}...</p>
                         :
                         <p className='poppins-font'>{singleAdmin.email}</p>
                     }

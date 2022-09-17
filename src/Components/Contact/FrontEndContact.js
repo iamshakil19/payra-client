@@ -14,7 +14,7 @@ const Contact = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const status = "incomplete"
 
-    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('https://payra.onrender.com/contacts', {
+    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -31,7 +31,7 @@ const Contact = () => {
     const onSubmit = data => {
         const newData = { ...data, status }
 
-        fetch('https://payra.onrender.com/blood-request', {
+        fetch('http://localhost:5000/blood-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
