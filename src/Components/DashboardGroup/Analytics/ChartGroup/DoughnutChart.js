@@ -11,7 +11,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = () => {
   const navigate = useNavigate()
-  const { data: bloodData, isLoading, refetch } = useQuery('bloodData', () => fetch('https://payra.onrender.com/verified-donor', {
+  const { data: bloodData, isLoading, refetch } = useQuery('bloodData', () => fetch('http://localhost:5000/verified-donor', {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -88,24 +88,24 @@ const DoughnutChart = () => {
         label: 'Blood Group',
         data: bloodGroupData,
         backgroundColor: [
-          '#ff6961',
-          '#59adf6',
-          '#f8f38d',
-          '#42d6a4',
-          '#9d94ff',
-          '#ffb480',
-          '#08cad1',
-          '#c780e8',
+          '#F16963',
+          '#F9B280',
+          '#F7F08D',
+          '#5DC09B',
+          '#6075EA',
+          '#00BDFF',
+          '#B3DD57',
+          '#CA69E2',
         ],
         borderColor: [
-          '#ff6961',
-          '#59adf6',
-          '#f8f38d',
-          '#42d6a4',
-          '#9d94ff',
-          '#ffb480',
-          '#08cad1',
-          '#c780e8',
+          '#F16963',
+          '#F9B280',
+          '#F7F08D',
+          '#5DC09B',
+          '#6075EA',
+          '#00BDFF',
+          '#B3DD57',
+          '#CA69E2',
         ],
         borderWidth: 1,
       },

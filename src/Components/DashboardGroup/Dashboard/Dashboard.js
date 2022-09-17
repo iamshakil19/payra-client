@@ -16,6 +16,7 @@ import { MdPermContactCalendar } from "react-icons/md";
 import './Dashboard.css'
 import PageTitle from '../../Shared/PageTitle';
 import { signOut } from 'firebase/auth';
+import Footer from '../../Shared/Footer/Footer';
 
 
 const Dashboard = () => {
@@ -23,7 +24,7 @@ const Dashboard = () => {
     let location = useLocation();
     const [user, loading, error] = useAuthState(auth);
 
-    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('https://payra.onrender.com/donor-request', {
+    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -39,7 +40,7 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    const { data: incompleteBloodRequestList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+    const { data: incompleteBloodRequestList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

@@ -8,7 +8,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const RecentBloodDonation = () => {
 
     const navigate = useNavigate()
-    const { data: recentCompleteDonation, isLoading } = useQuery('recentCompleteDonation', () => fetch('https://payra.onrender.com/complete-blood-request', {
+    const { data: recentCompleteDonation, isLoading } = useQuery('recentCompleteDonation', () => fetch('http://localhost:5000/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

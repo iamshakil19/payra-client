@@ -4,6 +4,7 @@ import donorImg from '../../Resources/blood-img-1.png'
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import PageTitle from '../Shared/PageTitle';
+import Footer from '../Shared/Footer/Footer';
 
 
 const BloodDonorRegistration = () => {
@@ -77,7 +78,7 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }
 
-        fetch('https://payra.onrender.com/donor-request', {
+        fetch('http://localhost:5000/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -402,6 +403,7 @@ const BloodDonorRegistration = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
