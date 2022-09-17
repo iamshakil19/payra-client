@@ -78,7 +78,7 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const newData = { ...data, status, profileImg }
 
-        fetch('http://localhost:5000/donor-request', {
+        fetch('https://payra.onrender.com/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -403,7 +403,7 @@ const BloodDonorRegistration = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 };

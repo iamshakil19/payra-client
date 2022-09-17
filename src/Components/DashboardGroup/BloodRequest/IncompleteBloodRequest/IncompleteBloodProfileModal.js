@@ -19,7 +19,7 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
         const bloodRequestStatusInfo = {
             status: newStatus
         }
-        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
+        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
