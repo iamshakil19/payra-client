@@ -17,6 +17,7 @@ import './Dashboard.css'
 import PageTitle from '../../Shared/PageTitle';
 import { signOut } from 'firebase/auth';
 import useAdmin from '../../Hooks/useAdmin';
+import { AiFillSetting } from "react-icons/ai";
 
 
 const Dashboard = () => {
@@ -129,6 +130,7 @@ const Dashboard = () => {
                             <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
                             <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
                             <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
+                            <li><Link to={"/dashboard/settings"}><span className='flex items-center poppins-font'> <span className='text-lg'><AiFillSetting /></span> <span className='ml-2 text-[16px]'>Settings</span> </span></Link></li>
 
                             <div className='flex items-center mt-12 px-4 lg:hidden'>
                                 <div class="avatar online">
