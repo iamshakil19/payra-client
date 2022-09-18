@@ -74,7 +74,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                         </div>
                     </div>
                     <div className='flex justify-end mt-3'>
-                        <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} for="donor-request-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                        <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} for="donor-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
 
                         <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700 ml-4'>Accept</label>
                     </div>

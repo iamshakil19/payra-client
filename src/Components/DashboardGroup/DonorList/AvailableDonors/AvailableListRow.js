@@ -1,16 +1,15 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 
-const DonorListRow = ({ donorSingleData, index, setDonorData, setDonorProfileData }) => {
+const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setDonorProfileData }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
-
     return (
         <tr className='hover'>
             <th className='p-2 pl-4 poppins-font w-7'>{index}</th>
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setDonorProfileData(donorSingleData)} for="verified-donor-profile-modal" className='cursor-pointer'>
+                        <label onClick={() => setDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
                             <img src={profileImg} alt="" />
                         </label>
                     </div>
@@ -27,10 +26,10 @@ const DonorListRow = ({ donorSingleData, index, setDonorData, setDonorProfileDat
             <td className='bangla-font p-2'>{donationCount} বার</td>
             <td className='bangla-font p-2'>{"11 দিন আগে"}</td>
             <td className='p-2'>
-                <label onClick={() => setDonorData(donorSingleData)} for="donor-request-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete/></span></label>
+                <label onClick={() => setAvailableDonorData(donorSingleData)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>
         </tr>
     );
 };
 
-export default DonorListRow;
+export default AvailableListRow;

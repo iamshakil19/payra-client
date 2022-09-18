@@ -23,6 +23,8 @@ import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
 import AddContact from './Components/DashboardGroup/AddContact/AddContact';
 import FrontEndContact from './Components/Contact/FrontEndContact';
 import AllContact from './Components/Contact/AllContact';
+import AvailableDonor from './Components/DashboardGroup/DonorList/AvailableDonors/AvailableDonor';
+import UnavailableDonor from './Components/DashboardGroup/DonorList/UnavailableDonors/UnavailableDonor';
 
 
 function App() {
@@ -37,11 +39,16 @@ function App() {
 
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
-        <Route path='/profile' element={ <ProtectedRoute> <Profile /> </ProtectedRoute>}></Route>
+        <Route path='/profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute>}></Route>
 
-        <Route path='/dashboard' element={ <RequireAdmin> <Dashboard /> </RequireAdmin> }>
+        <Route path='/dashboard' element={<RequireAdmin> <Dashboard /> </RequireAdmin>}>
           <Route index element={<Analytics />}></Route>
-          <Route path='donor-list' element={<DonorList />}></Route>
+
+          <Route path='donor-list' element={<DonorList />}>
+            <Route index element={<AvailableDonor />}></Route>
+            <Route path='unavailableDonor' element={<UnavailableDonor />}></Route>
+          </Route>
+
           <Route path='donor-request' element={<DonorRequest />}></Route>
 
           <Route path='blood-request' element={<BloodRequest />}>

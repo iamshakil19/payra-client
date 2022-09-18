@@ -1,15 +1,16 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
 
-const DonorListProfileModal = ({ donorProfileData, setDonorProfileData, refetch }) => {
+const AvailableProfileModal = ({ donorProfileData, setDonorProfileData, refetch }) => {
+
     const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available } = donorProfileData
 
     return (
         <div className=''>
-            <input type="checkbox" id="verified-donor-profile-modal" class="modal-toggle" />
+            <input type="checkbox" id="available-donor-profile-modal" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box bg-[#F5F7FF]">
-                    <label for="verified-donor-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label for="available-donor-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             <img src={profileImg} alt='' />
@@ -48,4 +49,4 @@ const DonorListProfileModal = ({ donorProfileData, setDonorProfileData, refetch 
     );
 };
 
-export default DonorListProfileModal;
+export default AvailableProfileModal;
