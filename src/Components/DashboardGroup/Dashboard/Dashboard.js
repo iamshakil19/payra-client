@@ -138,7 +138,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className='ml-3'>
                                     <p className='poppins-font font-bold text-white text-sm'>{user?.displayName}</p>
-                                    <p className='poppins-font text-sm font-extrabold opacity-70 text-white'>Admin</p>
+                                    <p className='poppins-font text-sm font-extrabold opacity-70 text-white capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
                                 </div>
                             </div>
                         </ul>
