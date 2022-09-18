@@ -6,11 +6,21 @@ const ContactDeleteModal = ({ contactDeleteData, setContactDeleteData, refetch }
     const { _id } = contactDeleteData
 
     const handleDeleteData = () => {
-        const url = `https://payra.onrender.com/delete-contact/${_id}`;
+        const url = `http://localhost:5000/delete-contact/${_id}`;
         fetch(url, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403) {
+                    setContactDeleteData(null)
+                    toast.error('Super Admin Can Only Delete Contact')
+                }
+                return res.json()
+            })
             .then(data => {
                 if (data.deletedCount > 0) {
                     refetch()

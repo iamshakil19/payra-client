@@ -49,7 +49,7 @@ const Footer = () => {
                 <div className='md:flex justify-center'>
                     <div>
                         <h3 className='text-slate-200 poppins-font font-bold  text-[16px] mb-3'>NEWSLETTER</h3>
-                        <p className='max-w-[250px] text-slate-200'>Subscribe now to receive monthly news & personalised offers!</p>
+                        <p className='max-w-[250px] text-slate-200 poppins-font'>Subscribe now to receive monthly news & personalised offers!</p>
 
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='flex items-center mt-5'>
