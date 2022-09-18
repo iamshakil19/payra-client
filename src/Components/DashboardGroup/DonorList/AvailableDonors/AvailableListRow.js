@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 
-const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setDonorProfileData }) => {
+const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
     return (
         <tr className='hover'>
@@ -9,7 +9,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setDo
             <td className='p-2 pt-3 pb-1.5'>
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
+                        <label onClick={() => setAvailableDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
                             <img src={profileImg} alt="" />
                         </label>
                     </div>

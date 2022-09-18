@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
 
-const AvailableProfileModal = ({ donorProfileData, setDonorProfileData, refetch }) => {
+const AvailableProfileModal = ({ availableDonorProfileData, setAvailableDonorProfileData, refetch }) => {
 
-    const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available } = donorProfileData
+    const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available } = availableDonorProfileData
 
     return (
         <div className=''>

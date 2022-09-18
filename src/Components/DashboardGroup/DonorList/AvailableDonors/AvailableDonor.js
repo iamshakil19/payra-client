@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-
-
 import AvailableListRow from './AvailableListRow';
 import AvailableDeleteModal from './AvailableDeleteModal';
 import AvailableProfileModal from './AvailableProfileModal';
@@ -13,7 +11,7 @@ import auth from '../../../../firebase.init';
 const AvailableDonor = () => {
     const navigate = useNavigate()
     const [availableDonorData, setAvailableDonorData] = useState(null)
-    const [donorProfileData, setDonorProfileData] = useState(null)
+    const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
 
     const { data: availableDonorList, isLoading, refetch } = useQuery('availableDonorList', () => fetch('http://localhost:5000/available-donor', {
         method: 'GET',
@@ -65,7 +63,7 @@ const AvailableDonor = () => {
                                 refetch={refetch}
                                 index={index + 1}
                                 setAvailableDonorData={setAvailableDonorData}
-                                setDonorProfileData={setDonorProfileData}
+                                setAvailableDonorProfileData={setAvailableDonorProfileData}
                             ></AvailableListRow>)
                         }
                     </tbody>
@@ -80,11 +78,11 @@ const AvailableDonor = () => {
             }
 
             {
-                donorProfileData && <AvailableProfileModal
-                    key={donorProfileData._id}
-                    donorProfileData={donorProfileData}
-                    setDonorProfileData={setDonorProfileData}
-                    refetch={setDonorProfileData}
+                availableDonorProfileData && <AvailableProfileModal
+                    key={availableDonorProfileData._id}
+                    availableDonorProfileData={availableDonorProfileData}
+                    setAvailableDonorProfileData={setAvailableDonorProfileData}
+                    refetch={refetch}
                 ></AvailableProfileModal>
             }
         </div>
