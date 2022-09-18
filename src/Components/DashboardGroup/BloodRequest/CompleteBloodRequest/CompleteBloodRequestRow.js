@@ -5,8 +5,7 @@ import { MdDelete } from "react-icons/md";
 
 const CompleteBloodRequestRow = ({completeSingleBloodRequest, refetch, index, setBloodRequestDeleteData, setBloodRequestProfileData}) => {
     
-    const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place, status
-    } = completeSingleBloodRequest
+    const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = completeSingleBloodRequest
 
     return (
         <tr className='hover'>

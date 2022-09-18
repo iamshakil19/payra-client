@@ -43,21 +43,19 @@ const BloodRequest = () => {
 
     return (
         <div>
-            <div>
-                <section className='px-2 sm:px-0 pt-2'>
-                    <div className='flex space-x-1 rounded-xl bg-[#0E1530] p-1 max-w-md mx-auto mb-4'>
-                        <button onClick={handleComplete} className={`w-full rounded-lg py-2.5 text-sm font-semibold ${isSelected ? "bg-white text-[#141C39]" : "text-white "}`}>Complete</button>
-                        <button onClick={handleInComplete} className={`relative w-full rounded-lg py-2.5 text-sm font-semibold ${!isSelected ? "bg-white text-[#141C39]" : "text-white "} `}>Incomplete
-                            {
-                                incompleteBloodRequestList?.length > 0 &&
-                                <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
-                            }
-                        </button>
-                    </div>
-                </section>
+            <section className='px-2 sm:px-0 pt-2'>
+                <div className='flex space-x-1 rounded-xl bg-[#0E1530] p-1 max-w-md mx-auto mb-4'>
+                    <button onClick={handleComplete} className={`w-full rounded-lg py-2.5 text-sm font-semibold ${isSelected ? "bg-white text-[#141C39]" : "text-white "}`}>Complete</button>
+                    <button onClick={handleInComplete} className={`relative w-full rounded-lg py-2.5 text-sm font-semibold ${!isSelected ? "bg-white text-[#141C39]" : "text-white "} `}>Incomplete
+                        {
+                            incompleteBloodRequestList?.length > 0 &&
+                            <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
+                        }
+                    </button>
+                </div>
+            </section>
 
-                <Outlet />
-            </div>
+            <Outlet />
         </div>
     );
 };

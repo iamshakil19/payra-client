@@ -2,7 +2,7 @@ import React from 'react';
 import { MdDelete } from "react-icons/md";
 
 const DonorListRow = ({ donorSingleData, index, setDonorData, setDonorProfileData }) => {
-    const { _id, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
+    const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
 
     return (
         <tr className='hover'>
@@ -24,7 +24,7 @@ const DonorListRow = ({ donorSingleData, index, setDonorData, setDonorProfileDat
             <td className='bangla-font p-2'>{policeStation}</td>
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
-            <td className='bangla-font p-2'>{"3 বার"}</td>
+            <td className='bangla-font p-2'>{donationCount} বার</td>
             <td className='bangla-font p-2'>{"11 দিন আগে"}</td>
             <td className='p-2'>
                 <label onClick={() => setDonorData(donorSingleData)} for="donor-request-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete/></span></label>

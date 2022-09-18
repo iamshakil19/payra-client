@@ -1,8 +1,8 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
 
-const DonorListProfileModal = ({donorProfileData, setDonorProfileData, refetch}) => {
-    const { _id, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district } = donorProfileData
+const DonorListProfileModal = ({ donorProfileData, setDonorProfileData, refetch }) => {
+    const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available } = donorProfileData
 
     return (
         <div className=''>
@@ -33,12 +33,13 @@ const DonorListProfileModal = ({donorProfileData, setDonorProfileData, refetch})
                             <p className='mb-1 bangla-font'>বিভাগ: <span className='font-bold'>{division}</span></p>
                             <p className='mb-1 bangla-font'>জেলা: <span className='font-bold'>{district}</span></p>
                             <p className='mb-1 bangla-font'>থানা: <span className='font-bold'>{policeStation}</span></p>
+                            <p className='mb-1 bangla-font'>ইউনিয়ন:  <span className='font-bold'>{union}</span></p>
+                            <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
                         </div>
 
                         <div className='text-right'>
                             <p className='mb-1 bangla-font'>লিঙ্গ: <span className='font-bold text-green-600'>{gender}</span></p>
-                            <p className='mb-1 bangla-font'>ইউনিয়ন:  <span className='font-bold'>{union}</span></p>
-                            <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
+                            <p className='mb-1 bangla-font'>মোট রক্তদান:  <span className='font-bold'>{donationCount} বার</span></p>
                         </div>
                     </div>
                 </div>
