@@ -13,7 +13,7 @@ const UnavailableDonor = () => {
     const [unavailableDonorData, setUnavailableDonorData] = useState(null)
     const [unavailableDonorProfileData, setUnavailableDonorProfileData] = useState(null)
 
-    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('http://localhost:5000/unavailable-donor', {
+    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('https://payra.onrender.com/unavailable-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -71,8 +71,8 @@ const UnavailableDonor = () => {
             </div>
             {
                 unavailableDonorData && <UnavailableDeleteModal
-                unavailableDonorData={unavailableDonorData}
-                setUnavailableDonorData={setUnavailableDonorData}
+                    unavailableDonorData={unavailableDonorData}
+                    setUnavailableDonorData={setUnavailableDonorData}
                     refetch={refetch}
                 ></UnavailableDeleteModal>
             }
