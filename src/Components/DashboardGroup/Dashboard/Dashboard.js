@@ -16,13 +16,16 @@ import { MdPermContactCalendar } from "react-icons/md";
 import './Dashboard.css'
 import PageTitle from '../../Shared/PageTitle';
 import { signOut } from 'firebase/auth';
-import Footer from '../../Shared/Footer/Footer';
+import useAdmin from '../../Hooks/useAdmin';
 
 
 const Dashboard = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate("")
     let location = useLocation();
     const [user, loading, error] = useAuthState(auth);
+
+    const [admin, adminLoading, adminRole] = useAdmin(user)
+
 
     const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
@@ -57,10 +60,9 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    if (donorLoading || bloodLoading) {
+    if (donorLoading || bloodLoading || adminLoading || loading) {
         return <Loading />
     }
-
 
     return (
         <div>
@@ -81,7 +83,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className='ml-3'>
                                     <p className='poppins-font font-bold text-[#17203F]'>{user?.displayName}</p>
-                                    <p className='poppins-font text-sm font-extrabold opacity-80 text-[#17203F]'>Admin</p>
+                                    <p className='poppins-font text-sm font-extrabold opacity-80 text-[#17203F] capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
                                 </div>
                             </div>
                             {location.pathname.includes('donor-list') && <div className=''>

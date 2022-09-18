@@ -3,6 +3,7 @@ import { useState } from "react"
 
 const useAdmin = user => {
     const [admin, setAdmin] = useState(false)
+    const [adminRole, setAdminRole] = useState()
     const [adminLoading, setAdminLoading] = useState(true)
 
     useEffect(() => {
@@ -19,10 +20,12 @@ const useAdmin = user => {
                 .then(data => {
                     console.log(data);
                     setAdmin(data.admin)
+                    setAdminRole(data.role)
                     setAdminLoading(false)
                 })
         }
     }, [user])
-    return [admin, adminLoading]
+
+    return [admin, adminLoading, adminRole]
 }
 export default useAdmin;
