@@ -6,11 +6,14 @@ import PageTitle from '../Shared/PageTitle';
 const Profile = () => {
     return (
         <div>
-            <Header/>
+            <Header />
             <PageTitle title={"Profile"}></PageTitle>
-            <h2>This Is User Profile Page</h2>
 
-            <Footer/>
+            <div>
+                <h2 className='text-center py-5 text-3xl text-slate-400 font-bold poppins-font'>Coming Soon</h2>
+            </div>
+
+            <Footer />
         </div>
     );
 };

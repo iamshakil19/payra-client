@@ -10,7 +10,7 @@ const AboutUs = () => {
             <Header/>
             <PageTitle title={"About"}></PageTitle>
             <div>
-                <h2>This is about us</h2>
+            <h2 className='text-center py-5 text-3xl text-slate-400 font-bold poppins-font'>Coming Soon</h2>
             </div>
 
             <Footer/>
