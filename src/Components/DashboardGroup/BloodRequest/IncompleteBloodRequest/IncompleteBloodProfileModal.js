@@ -5,7 +5,6 @@ import { FiPhoneCall } from "react-icons/fi";
 
 const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestProfileData, refetch, setBloodRequestData }) => {
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = bloodRequestProfileData
-    console.log(bloodRequestProfileData);
 
     let newStatus = "done"
 

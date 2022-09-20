@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
 
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id } = donorSingleData
 
-
-
-    // var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
-    // const donateDate = new Date()
-    // console.log(donateDate);
-
-
+    // const myDonationDate = '09-20-2022 16:45:00'
 
 
     const handleDonate = () => {
+        var date = new Date(new Date().getTime()+(90*24*60*60*1000));
+        let donateTime = date.toLocaleDateString();
+        console.log(donateTime);
+
+        const bloodRequestStatusInfo = {
+            donateTime: date
+        }
         fetch(`http://localhost:5000/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
+            },
+            body: JSON.stringify(bloodRequestStatusInfo)
         })
             .then(res => res.json())
             .then(data => {
@@ -28,19 +30,6 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
                 refetch()
                 toast.success('Blood Donation Counted')
             })
-    }
-
-    const handleDonationTime = () => {
-        // fetch(`http://localhost:5000/donationDate/${_id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     })
     }
 
     return (
@@ -64,7 +53,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
-            <td className='bangla-font p-2'><span onClick={() => { handleDonate(); handleDonationTime() }} className='btn btn-sm'>Donate</span></td>
+            <td className='bangla-font p-2'><span onClick={() =>  handleDonate() } className='btn btn-sm'>Donate</span></td>
             <td className='p-2'>
                 <label onClick={() => { setAvailableDonorData(donorSingleData) }} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>

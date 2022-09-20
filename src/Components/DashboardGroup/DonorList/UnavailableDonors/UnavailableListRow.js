@@ -1,57 +1,60 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MdDelete } from "react-icons/md";
+import toast from 'react-hot-toast';
 
-const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, setUnavailableDonorProfileData }) => {
 
-    const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village } = donorSingleData
+const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, setUnavailableDonorProfileData, refetch }) => {
 
-        // var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
+    const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id, time } = donorSingleData
 
-        const [timerDays, setTimerDays] = useState();
-        const [timerHours, setTimerHours] = useState();
-        const [timerMinutes, setTimerMinutes] = useState();
-        const [timerSeconds, setTimerSeconds] = useState();
-    
-            // var date = new Date(new Date().getTime());
-            var date = new Date(new Date('September 19 2022 07:51:48'));
-            // console.log(date);
+    const handleDonate = () => {
+        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                toast.success(`${name} is now available for Donation`)
+            })
+    }
 
-            let interval = useRef();
+    const [days, setDays] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
 
-    const startTimer = () => {
-        const countdownDate = new Date(date).getTime();
-    
-        interval = setInterval(() => {
-          const now = new Date().getTime();
-          const distance = countdownDate - now;
-    
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-          if (distance < 0) {
-            // Stop
-            clearInterval(interval.current);
-            console.log('Timer Sesh');
-          } else {
-            // Update
-            setTimerDays(days);
-            setTimerHours(hours);
-            setTimerMinutes(minutes);
-            setTimerSeconds(seconds);
-          }
-        }, 1000);
-      };
-    
-      useEffect(() => {
-        startTimer();
-        return () => {
-          clearInterval(interval.current);
-        };
-      });
+    useEffect(() => {
+
+        const target = new Date(time)
+        const interval = setInterval(() => {
+            const now = new Date()
+            const difference = target.getTime() - now.getTime()
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24))
+            setDays(d)
+
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+            setHours(h)
+
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+            setMinutes(m)
+
+            const s = Math.floor((difference % (1000 * 60)) / 1000)
+            setSeconds(s)
+
+            if (d <= 0 && h <= 0 && m <= 0 && s <= m) {
+                handleDonate()
+                return clearInterval(interval)
+            }
+
+        }, 1000)
+        return () => clearInterval(interval)
+    }, [])
+
 
     return (
         <tr className='hover'>
@@ -74,7 +77,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
-            <td className='bangla-font p-2'>{timerDays} D : {timerHours} H : {timerMinutes} M : {timerSeconds} S</td>
+            <td className='bangla-font p-2'>{days} D : {hours} H : {minutes} M : {seconds} S</td>
             <td className='p-2'>
                 <label onClick={() => setUnavailableDonorData(donorSingleData)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>

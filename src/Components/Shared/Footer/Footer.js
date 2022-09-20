@@ -66,7 +66,7 @@ const Footer = () => {
                                         }
                                     })}
                                 />
-                                <input className='border text-sm py-1.5 px-2 text-slate-100 poppins-font rounded-r-full font-semibold hover:text-black hover:bg-slate-100 cursor-pointer transition-all duration-300 ease-in-out' type="submit" value="Submit" />
+                                <input className='border text-sm py-1.5 px-2 poppins-font rounded-r-full font-semibold text-black bg-slate-100 cursor-pointer transition-all duration-300 ease-in-out' type="submit" value="Submit" />
                             </div>
                         </form>
                     </div>
