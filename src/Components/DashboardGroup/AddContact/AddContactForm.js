@@ -37,7 +37,7 @@ const AddContactForm = ({ setIsFormSubmit }) => {
                             number2: data.number2,
                             img: img
                         }
-                        fetch('https://payra.onrender.com/admin-contact', {
+                        fetch('http://localhost:5000/admin-contact', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
