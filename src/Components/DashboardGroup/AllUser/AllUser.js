@@ -12,7 +12,7 @@ const AllUser = () => {
     const navigate = useNavigate()
     const [userData, setUserData] = useState(null)
     const [adminConfirmationData, setAdminConfirmationData] = useState(null)
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://payra.onrender.com/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

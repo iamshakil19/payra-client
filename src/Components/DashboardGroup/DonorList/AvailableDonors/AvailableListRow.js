@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id } = donorSingleData
 
-    // const myDonationDate = '09-20-2022 16:45:00'
+    const myDonationDate = '09-24-2022 01:03:00'
 
 
     const handleDonate = () => {
@@ -14,9 +14,9 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
         console.log(donateTime);
 
         const bloodRequestStatusInfo = {
-            donateTime: date
+            donateTime: myDonationDate
         }
-        fetch(`https://payra.onrender.com/donationCount/${_id}`, {
+        fetch(`http://localhost:5000/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

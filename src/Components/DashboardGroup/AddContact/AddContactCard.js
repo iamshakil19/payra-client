@@ -10,7 +10,7 @@ const AddContactCard = ({ isFormSubmit }) => {
     const [contactDeleteData, setContactDeleteData] = useState(null)
     const [contactUpdateData, setContactUpdateData] = useState(null)
 
-    const { data: contacts, isLoading, refetch } = useQuery('contact', () => fetch('https://payra.onrender.com/contacts', {
+    const { data: contacts, isLoading, refetch } = useQuery('contact', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
