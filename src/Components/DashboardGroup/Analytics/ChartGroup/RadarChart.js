@@ -12,7 +12,7 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, 
 const RadarChart = () => {
 
     const navigate = useNavigate()
-    const { data: completeDonationData, isLoading, refetch } = useQuery('completeDonationData', () => fetch('http://localhost:5000/complete-blood-request', {
+    const { data: completeDonationData, isLoading, refetch } = useQuery('completeDonationData', () => fetch('https://payra.onrender.com/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
