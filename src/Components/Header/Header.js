@@ -10,15 +10,24 @@ import { signOut } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import avatarImage from '../../Resources/avatarImage.jpg'
+import Loading from '../Shared/Loading/Loading';
 
 const Header = () => {
     const location = useLocation()
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const [admin] = useAdmin(user)
+
+
 
     const handleLogout = () => {
         signOut(auth)
         localStorage.removeItem('accessToken')
+    }
+
+    if (loading) {
+        return <div class="flex items-center justify-center ml-2 h-[70px]">
+            <div class="w-10 h-10 border-b-2 border-red-500 rounded-full animate-spin"></div>
+        </div>
     }
 
     return (
