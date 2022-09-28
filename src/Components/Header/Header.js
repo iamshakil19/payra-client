@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import './Header.css'
 import { FaStream } from "react-icons/fa";
 import ActiveRoute from '../Shared/ActiveRoute';
@@ -9,6 +9,7 @@ import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
+import avatarImage from '../../Resources/avatarImage.jpg'
 
 const Header = () => {
     const location = useLocation()
@@ -43,23 +44,43 @@ const Header = () => {
 
                     {
                         user && <>
-                            { admin ?
-                                <li><span className='nav-link'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
+                            {admin ?
+                                <li className='lg:hidden'><span className='nav-link lg:hidden'><ActiveRoute to="/dashboard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>ড্যাশবোর্ড</span></ActiveRoute></span></li>
                                 :
-                                <li><span className='nav-link'><ActiveRoute to="/profile"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>প্রোফাইল</span></ActiveRoute></span></li>
+                                <li className='lg:hidden'><span className='nav-link lg:hidden'><ActiveRoute to="/profile"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>প্রোফাইল</span></ActiveRoute></span></li>
                             }
                         </>
                     }
 
 
-
-
-                    {user ?
-                        <li onClick={handleLogout} className=""><span className='nav-link lg:bg-[#17203F]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
-                        :
+                    {user && <li onClick={handleLogout} className="lg:hidden"><span className='nav-link lg:bg-[#17203F]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
+                    }
+                    {!user &&
                         <li><span className='nav-link lg:bg-[#FE3C47]'><ActiveRoute to="/login"><span className='lg:text-white'>লগইন</span></ActiveRoute></span></li>
                     }
+                    {user &&
+                        <div className="dropdown dropdown-end hidden lg:block ml-3">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                </div>
+                            </label>
+                            <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
 
+                                {admin ?
+                                    <li className='font-semibold'> <Link to={"/dashboard"}>Dashboard</Link> </li>
+                                    :
+                                    <li className='font-semibold'>
+                                        <Link to="/profile" className="justify-between">
+                                            Profile
+                                            <span className="badge bg-green-500 border-0">New</span>
+                                        </Link>
+                                    </li>
+                                }
+
+                                <li onClick={handleLogout} className="font-semibold text-red-500"> <a>Logout</a> </li>
+                            </ul>
+                        </div>}
                 </ul>
             </nav>
         </div>
