@@ -8,7 +8,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id, time } = donorSingleData
 
     const handleDonate = () => {
-        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
+        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -36,13 +36,10 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
 
             const d = Math.floor(difference / (1000 * 60 * 60 * 24))
             setDays(d)
-
             const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
             setHours(h)
-
             const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
             setMinutes(m)
-
             const s = Math.floor((difference % (1000 * 60)) / 1000)
             setSeconds(s)
 
@@ -50,10 +47,10 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
                 handleDonate()
                 return clearInterval(interval)
             }
-
         }, 1000)
         return () => clearInterval(interval)
-    }, [seconds])
+
+    }, [])
 
 
     return (

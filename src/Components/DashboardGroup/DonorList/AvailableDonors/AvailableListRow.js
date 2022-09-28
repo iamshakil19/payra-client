@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
 
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id } = donorSingleData
 
-    const myDonationDate = '09-24-2022 01:30:00'
-    let donateTime = myDonationDate.toLocaleDateString();
-
+    const donateTime = '09-24-2022 03:01:00'
 
     const handleDonate = () => {
         var date = new Date(new Date().getTime() + (90 * 24 * 60 * 60 * 1000));
@@ -17,7 +15,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
         const bloodRequestStatusInfo = {
             donateTime: donateTime
         }
-        fetch(`http://localhost:5000/donationCount/${_id}`, {
+        fetch(`https://payra.onrender.com/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

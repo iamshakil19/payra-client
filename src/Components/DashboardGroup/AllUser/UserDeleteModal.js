@@ -5,7 +5,7 @@ const UserDeleteModal = ({ userData, setUserData, refetch }) => {
 
     const { _id } = userData
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/deleteUser/${_id}`;
+        const url = `https://payra.onrender.com/deleteUser/${_id}`;
         fetch(url, {
             method: "DELETE"
         })
