@@ -1,9 +1,27 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
+import toast from 'react-hot-toast';
 
-const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDonorProfileData, refetch }) => {
+const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDonorProfileData, refetch, daysProfile, hoursProfile }) => {
 
-    const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available } = unavailableDonorProfileData
+    const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available, _id } = unavailableDonorProfileData
+
+    const handleDonate = () => {
+        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                setUnavailableDonorProfileData(null)
+                toast.success(`${name} is now available for Donation`)
+            })
+    }
+
 
     return (
         <div className=''>
@@ -41,6 +59,8 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
                         <div className='text-right'>
                             <p className='mb-1 bangla-font'>লিঙ্গ: <span className='font-bold text-green-600'>{gender}</span></p>
                             <p className='mb-1 bangla-font'>মোট রক্তদান:  <span className='font-bold'>{donationCount} বার</span></p>
+                            <p className='mb-1 bangla-font'>সময় বাকি: <span className='font-bold'>{daysProfile} D : {hoursProfile} H</span></p>
+                            <p className='mb-1 bangla-font'>সম্পূর্ণ: <button onClick={handleDonate} className='btn btn-xs ml-4'>Done</button></p>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,10 @@ const UnavailableDonor = () => {
     const [unavailableDonorData, setUnavailableDonorData] = useState(null)
     const [unavailableDonorProfileData, setUnavailableDonorProfileData] = useState(null)
 
-    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('https://payra.onrender.com/unavailable-donor', {
+    const [daysProfile, setDaysProfile] = useState(0);
+    const [hoursProfile, setHoursProfile] = useState(0);
+
+    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('http://localhost:5000/unavailable-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -52,6 +55,7 @@ const UnavailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
                             <th className='bangla-font text-[15px] pl-2'>উপস্থিতি</th>
+                            <th className='bangla-font text-[15px] pl-2'>সম্পূর্ণ</th>
                             <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
                         </tr>
                     </thead>
@@ -64,6 +68,8 @@ const UnavailableDonor = () => {
                                 index={index + 1}
                                 setUnavailableDonorData={setUnavailableDonorData}
                                 setUnavailableDonorProfileData={setUnavailableDonorProfileData}
+                                setDaysProfile={setDaysProfile}
+                                setHoursProfile={setHoursProfile}
                             ></UnavailableListRow>)
                         }
                     </tbody>
@@ -83,6 +89,8 @@ const UnavailableDonor = () => {
                     unavailableDonorProfileData={unavailableDonorProfileData}
                     setUnavailableDonorProfileData={setUnavailableDonorProfileData}
                     refetch={refetch}
+                    daysProfile={daysProfile}
+                    hoursProfile={hoursProfile}
                 ></UnavailableProfileModal>
             }
         </div>

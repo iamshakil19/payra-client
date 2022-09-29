@@ -14,7 +14,7 @@ const DonorRequest = () => {
     const [donorData, setDonorData] = useState(null)
     const [profileDonorRequest, setProfileDonorRequest] = useState(null)
 
-    const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('https://payra.onrender.com/donor-request', {
+    const { data: allDonorRequest, isLoading, refetch } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
