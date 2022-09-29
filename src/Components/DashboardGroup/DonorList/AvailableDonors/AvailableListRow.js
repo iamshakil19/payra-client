@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
     const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id } = donorSingleData
 
-    const donateTime = '09-24-2022 03:01:00'
+    const donateTime = '09-29-2022 11:58:00'
 
     const handleDonate = () => {
         var date = new Date(new Date().getTime() + (90 * 24 * 60 * 60 * 1000));
