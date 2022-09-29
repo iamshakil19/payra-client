@@ -6,7 +6,7 @@ import FrontEndContactCard from './FrontEndContactCard';
 
 const AllContact = () => {
 
-    const { data: allContacts, isLoading } = useQuery('allContacts', () => fetch('http://localhost:5000/contacts', {
+    const { data: allContacts, isLoading } = useQuery('allContacts', () => fetch('https://payra.onrender.com/contacts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

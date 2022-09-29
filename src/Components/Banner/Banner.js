@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import bg from '../../Resources/blood-bg.jpg'
 import '../Banner/Banner.css'
 import PageTitle from '../Shared/PageTitle';
 const Banner = () => {
@@ -14,7 +13,7 @@ const Banner = () => {
     }
 
     return (
-        <div className='custom-height banner-container flex justify-center items-center'>
+        <div className='custom-height banner-container flex justify-center items-center relative'>
             <PageTitle title={"Home"}></PageTitle>
             <div ata-aos="zoom-out">
                 <h2 className='text-white text-4xl md:text-5xl lg:text-6xl text-center px-5 banner-title mb-5'>রক্ত দিন জীবন বাঁচান</h2>
@@ -29,6 +28,9 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
+
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpayradonation&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=991291448447106"  width="340" height="130" style={{border: "none;overflow:hidden", borderRadius: "5px", position: "absolute"}} className=" bottom-0 right-auto sm:right-2 mb-2" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title='payra'></iframe>
+
         </div>
     );
 };

@@ -13,7 +13,7 @@ const AvailableDonor = () => {
     const [availableDonorData, setAvailableDonorData] = useState(null)
     const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
 
-    const { data: availableDonorList, isLoading, refetch } = useQuery('availableDonorList', () => fetch('http://localhost:5000/available-donor', {
+    const { data: availableDonorList, isLoading, refetch } = useQuery('availableDonorList', () => fetch('https://payra.onrender.com/available-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
