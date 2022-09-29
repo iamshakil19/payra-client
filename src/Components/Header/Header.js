@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import './Header.css'
 import { FaStream } from "react-icons/fa";
 import ActiveRoute from '../Shared/ActiveRoute';
@@ -10,7 +10,6 @@ import { signOut } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import avatarImage from '../../Resources/avatarImage.jpg'
-import Loading from '../Shared/Loading/Loading';
 
 const Header = () => {
     const location = useLocation()
@@ -61,7 +60,6 @@ const Header = () => {
                         </>
                     }
 
-
                     {user && <li onClick={handleLogout} className="lg:hidden"><span className='nav-link lg:bg-[#17203F]'><span className='lg:text-white cursor-pointer'>লগ আউট</span></span></li>
                     }
                     {!user &&
@@ -86,6 +84,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                 }
+                                <li className='font-semibold'> <Link to={"/"}>Leader Board</Link> </li>
 
                                 <li onClick={handleLogout} className="font-semibold text-red-500"> <a>Logout</a> </li>
                             </ul>

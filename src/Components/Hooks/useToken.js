@@ -7,11 +7,9 @@ const useToken = user => {
     useEffect(() => {
         const email = user?.user?.email;
         const displayName = user?.user?.displayName
-
-
         const currentUser = { email: email, name: displayName }
         if (email) {
-            fetch(`https://payra.onrender.com/user/${email}`, {
+            fetch(`http://localhost:5000/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -25,7 +23,6 @@ const useToken = user => {
                     setToken(accessToken)
                 })
         }
-
     }, [user])
     return [token]
 }

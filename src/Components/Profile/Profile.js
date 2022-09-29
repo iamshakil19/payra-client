@@ -13,8 +13,6 @@ const Profile = () => {
     if (loading) {
         return <Loading/>
     }
-
-
     return (
         <div>
             <Header />
