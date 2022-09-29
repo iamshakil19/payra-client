@@ -16,7 +16,7 @@ const UnavailableDonor = () => {
     const [daysProfile, setDaysProfile] = useState(0);
     const [hoursProfile, setHoursProfile] = useState(0);
 
-    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('http://localhost:5000/unavailable-donor', {
+    const { data: unavailableDonorList, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('https://payra.onrender.com/unavailable-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
