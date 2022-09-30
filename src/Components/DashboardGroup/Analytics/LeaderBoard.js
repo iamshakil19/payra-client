@@ -9,7 +9,7 @@ import Loading from '../../Shared/Loading/Loading';
 const LeaderBoard = () => {
 
     const navigate = useNavigate()
-    const { data: recentDonor, isLoading, refetch } = useQuery('recentDonor', () => fetch('http://localhost:5000/verified-donor', {
+    const { data: topDonor, isLoading, refetch } = useQuery('topDonor', () => fetch('https://payra.onrender.com/top-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -29,7 +29,7 @@ const LeaderBoard = () => {
         return <Loading />
     }
 
-    const latest5Donor = recentDonor.slice(0, 5)
+    const leaderBoardTopper = topDonor.slice(0, 5)
 
     return (
         <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg bg-[#fe3c46ea]'>
@@ -41,7 +41,7 @@ const LeaderBoard = () => {
                 <span className='text-right'>মোট রক্তদান</span>
             </p>
 
-            { latest5Donor?.map ((singleDonor, index) => <div className='grid grid-cols-3 bg-white py-3.5 px-2 sm:px-5 rounded-lg mb-3'>
+            {leaderBoardTopper?.map((singleDonor, index) => <div className='grid grid-cols-3 bg-white py-3.5 px-2 sm:px-5 rounded-lg mb-3'>
                 {
                     console.log(singleDonor)
                 }
