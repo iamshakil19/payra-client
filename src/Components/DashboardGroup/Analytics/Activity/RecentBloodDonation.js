@@ -8,7 +8,7 @@ import Loading from '../../../Shared/Loading/Loading';
 const RecentBloodDonation = () => {
 
     const navigate = useNavigate()
-    const { data: recentCompleteDonation, isLoading } = useQuery('recentCompleteDonation', () => fetch('https://payra.onrender.com/complete-blood-request', {
+    const { data, isLoading } = useQuery('recentCompleteDonation', () => fetch('http://localhost:5000/complete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -28,7 +28,7 @@ const RecentBloodDonation = () => {
         return <Loading />
     }
 
-    const latest5Donation = recentCompleteDonation.slice(0, 5)
+    const latest5Donation = data?.completeBloodRequestList.slice(0, 5)
 
     return (
         <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg'>

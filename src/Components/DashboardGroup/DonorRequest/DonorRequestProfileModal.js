@@ -18,7 +18,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
         const donorStatusInfo = {
             status: newStatus
         }
-        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
+        fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
