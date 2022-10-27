@@ -11,7 +11,7 @@ const BloodRequest = () => {
     const [isSelected, setSelected] = useState(true);
     const navigate = useNavigate()
 
-    const { data: incompleteBloodRequestList, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
+    const { data, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -48,8 +48,8 @@ const BloodRequest = () => {
                     <button onClick={handleComplete} className={`w-full rounded-lg py-2.5 text-sm font-semibold ${isSelected ? "bg-white text-[#141C39]" : "text-white "}`}>Complete</button>
                     <button onClick={handleInComplete} className={`relative w-full rounded-lg py-2.5 text-sm font-semibold ${!isSelected ? "bg-white text-[#141C39]" : "text-white "} `}>Incomplete
                         {
-                            incompleteBloodRequestList?.length > 0 &&
-                            <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodRequestList?.length}</span>
+                            data?.totalCount > 0 &&
+                            <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{data?.totalCount}</span>
                         }
                     </button>
                 </div>

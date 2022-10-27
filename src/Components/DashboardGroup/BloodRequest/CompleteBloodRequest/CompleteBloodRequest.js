@@ -47,8 +47,8 @@ const CompleteBloodRequest = () => {
             return
         }
         setPageNumber(pageNumber + 1)
-
     }
+
 
     return (
         <div className="overflow-x-auto">
@@ -60,6 +60,7 @@ const CompleteBloodRequest = () => {
                         <option className='font-semibold' value="15">15</option>
                         <option className='font-semibold' value="25">25</option>
                         <option className='font-semibold' value="50">50</option>
+                        <option className='font-semibold' value="100">100</option>
                     </select>
                 </p>
             </div>
