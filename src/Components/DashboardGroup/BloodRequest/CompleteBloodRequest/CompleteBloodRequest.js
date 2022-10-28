@@ -17,7 +17,7 @@ const CompleteBloodRequest = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['completeBloodList', limit, pageNumber], () => fetch(`https://payra.onrender.com/complete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
+    const { data, isLoading, refetch } = useQuery(['completeBloodList', limit, pageNumber], () => fetch(`http://localhost:5000/complete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -51,67 +51,70 @@ const CompleteBloodRequest = () => {
 
 
     return (
-        <div className="overflow-x-auto">
-            <div className='mb-3 hidden lg:block'>
-                <p className='text-right'>
-                    <span className='poppins-font'>Show : </span>
-                    <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
-                        <option selected className='font-semibold' value="10">10</option>
-                        <option className='font-semibold' value="15">15</option>
-                        <option className='font-semibold' value="25">25</option>
-                        <option className='font-semibold' value="50">50</option>
-                        <option className='font-semibold' value="100">100</option>
-                    </select>
-                </p>
+        <div>
+            <div className="overflow-x-auto">
+                <div className='mb-3 hidden lg:block'>
+                    <p className='text-right'>
+                        <span className='poppins-font'>Show : </span>
+                        <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
+                            <option selected className='font-semibold' value="10">10</option>
+                            <option className='font-semibold' value="15">15</option>
+                            <option className='font-semibold' value="25">25</option>
+                            <option className='font-semibold' value="50">50</option>
+                            <option className='font-semibold' value="100">100</option>
+                        </select>
+                    </p>
+                </div>
+                <table className="table w-full">
+
+                    <thead>
+                        <tr>
+                            <th className='bangla-font text-[15px] '>সিরিয়াল</th>
+                            <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
+                            <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
+                            <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
+                            <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
+                            <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>
+                            <th className='bangla-font text-[15px] pl-2'>স্টাটাস</th>
+                            <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            data?.completeBloodRequestList?.map((completeSingleBloodRequest, index) => <CompleteBloodRequestRow
+                                key={completeSingleBloodRequest._id}
+                                completeSingleBloodRequest={completeSingleBloodRequest}
+                                refetch={refetch}
+                                index={index + 1}
+                                setBloodRequestDeleteData={setBloodRequestDeleteData}
+                                setBloodRequestProfileData={setBloodRequestProfileData}
+                            ></CompleteBloodRequestRow>)
+                        }
+                    </tbody>
+                </table>
+
+                {
+                    bloodRequestDeleteData && <CompleteDeleteModal
+                        bloodRequestDeleteData={bloodRequestDeleteData}
+                        setBloodRequestDeleteData={setBloodRequestDeleteData}
+                        refetch={refetch}
+                    ></CompleteDeleteModal>
+                }
+
+                {
+                    bloodRequestProfileData && <CompleteBloodProfileModal
+                        key={bloodRequestProfileData._id}
+                        bloodRequestProfileData={bloodRequestProfileData}
+                    ></CompleteBloodProfileModal>
+                }
+
+
             </div>
-            <table className="table w-full">
-
-                <thead>
-                    <tr>
-                        <th className='bangla-font text-[15px] '>সিরিয়াল</th>
-                        <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
-                        <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
-                        <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
-                        <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
-                        <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>
-                        <th className='bangla-font text-[15px] pl-2'>স্টাটাস</th>
-                        <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data?.completeBloodRequestList?.map((completeSingleBloodRequest, index) => <CompleteBloodRequestRow
-                            key={completeSingleBloodRequest._id}
-                            completeSingleBloodRequest={completeSingleBloodRequest}
-                            refetch={refetch}
-                            index={index + 1}
-                            setBloodRequestDeleteData={setBloodRequestDeleteData}
-                            setBloodRequestProfileData={setBloodRequestProfileData}
-                        ></CompleteBloodRequestRow>)
-                    }
-                </tbody>
-            </table>
-
-            {
-                bloodRequestDeleteData && <CompleteDeleteModal
-                    bloodRequestDeleteData={bloodRequestDeleteData}
-                    setBloodRequestDeleteData={setBloodRequestDeleteData}
-                    refetch={refetch}
-                ></CompleteDeleteModal>
-            }
-
-            {
-                bloodRequestProfileData && <CompleteBloodProfileModal
-                    key={bloodRequestProfileData._id}
-                    bloodRequestProfileData={bloodRequestProfileData}
-                ></CompleteBloodProfileModal>
-            }
-
             <div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
                 <div className="flex flex-1 justify-between sm:hidden">
                     <span
@@ -140,8 +143,8 @@ const CompleteBloodRequest = () => {
                             <span className="font-medium">{data.totalCount}</span> results
                         </p>
                     </div>
-                    <div>
 
+                    <div>
                         <nav className="isolate inline-flex -space-x-px rounded-md bg-[#F5F7FF]" aria-label="Pagination">
                             <span
                                 onClick={handlePreviousButton}

@@ -16,7 +16,7 @@ const IncompleteBloodRequest = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['incompleteBloodList', limit, pageNumber], () => fetch(`https://payra.onrender.com/incomplete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
+    const { data, isLoading, refetch } = useQuery(['incompleteBloodList', limit, pageNumber], () => fetch(`http://localhost:5000/incomplete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -50,68 +50,70 @@ const IncompleteBloodRequest = () => {
 
 
     return (
-        <div className="overflow-x-auto">
-            <div className='mb-3 hidden lg:block'>
-                <p className='text-right'>
-                    <span className='poppins-font'>Show : </span>
-                    <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
-                        <option selected className='font-semibold' value="10">10</option>
-                        <option className='font-semibold' value="15">15</option>
-                        <option className='font-semibold' value="25">25</option>
-                        <option className='font-semibold' value="50">50</option>
-                        <option className='font-semibold' value="100">100</option>
-                    </select>
-                </p>
+        <div>
+            <div className="overflow-x-auto">
+                <div className='mb-3 hidden lg:block'>
+                    <p className='text-right'>
+                        <span className='poppins-font'>Show : </span>
+                        <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
+                            <option selected className='font-semibold' value="10">10</option>
+                            <option className='font-semibold' value="15">15</option>
+                            <option className='font-semibold' value="25">25</option>
+                            <option className='font-semibold' value="50">50</option>
+                            <option className='font-semibold' value="100">100</option>
+                        </select>
+                    </p>
+                </div>
+                <table className="table w-full">
+
+                    <thead>
+                        <tr>
+                            <th className='bangla-font text-[15px] '>সিরিয়াল</th>
+                            <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
+                            <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
+                            <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
+                            <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
+                            <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
+                            <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>
+                            <th className='bangla-font text-[15px] pl-2'>স্টাটাস</th>
+                            <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            data?.incompleteBloodRequestList?.map((incompleteSingleBloodRequest, index) => <IncompleteRequestRow
+                                key={incompleteSingleBloodRequest._id}
+                                incompleteSingleBloodRequest={incompleteSingleBloodRequest}
+                                refetch={refetch}
+                                index={index + 1}
+                                setBloodRequestData={setBloodRequestData}
+                                setBloodRequestProfileData={setBloodRequestProfileData}
+                            ></IncompleteRequestRow>)
+                        }
+                    </tbody>
+                </table>
+
+                {
+                    bloodRequestData && <IncompleteBloodDeleteModal
+                        bloodRequestData={bloodRequestData}
+                        setBloodRequestData={setBloodRequestData}
+                        refetch={refetch}
+                    ></IncompleteBloodDeleteModal>
+                }
+                {
+                    bloodRequestProfileData && <IncompleteBloodProfileModal
+                        bloodRequestProfileData={bloodRequestProfileData}
+                        setBloodRequestProfileData={setBloodRequestProfileData}
+                        setBloodRequestData={setBloodRequestData}
+                        refetch={refetch}
+                    ></IncompleteBloodProfileModal>
+                }
+
             </div>
-            <table className="table w-full">
-
-                <thead>
-                    <tr>
-                        <th className='bangla-font text-[15px] '>সিরিয়াল</th>
-                        <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
-                        <th className='bangla-font text-[15px] pl-2'>রোগীর নাম</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তের গ্রুপ</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তের পরিমাণ</th>
-                        <th className='bangla-font text-[15px] pl-2'>হিমোগ্লোবিন</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের তারিখ</th>
-                        <th className='bangla-font text-[15px] pl-2'>ফোন নাম্বার</th>
-                        <th className='bangla-font text-[15px] pl-2'>রোগীর সমস্যা</th>
-                        <th className='bangla-font text-[15px] pl-2'>রক্তদানের স্থান</th>
-                        <th className='bangla-font text-[15px] pl-2'>স্টাটাস</th>
-                        <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data?.incompleteBloodRequestList?.map((incompleteSingleBloodRequest, index) => <IncompleteRequestRow
-                            key={incompleteSingleBloodRequest._id}
-                            incompleteSingleBloodRequest={incompleteSingleBloodRequest}
-                            refetch={refetch}
-                            index={index + 1}
-                            setBloodRequestData={setBloodRequestData}
-                            setBloodRequestProfileData={setBloodRequestProfileData}
-                        ></IncompleteRequestRow>)
-                    }
-                </tbody>
-            </table>
-
-            {
-                bloodRequestData && <IncompleteBloodDeleteModal
-                    bloodRequestData={bloodRequestData}
-                    setBloodRequestData={setBloodRequestData}
-                    refetch={refetch}
-                ></IncompleteBloodDeleteModal>
-            }
-            {
-                bloodRequestProfileData && <IncompleteBloodProfileModal
-                    bloodRequestProfileData={bloodRequestProfileData}
-                    setBloodRequestProfileData={setBloodRequestProfileData}
-                    setBloodRequestData={setBloodRequestData}
-                    refetch={refetch}
-                ></IncompleteBloodProfileModal>
-            }
-
             <div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
                 <div className="flex flex-1 justify-between sm:hidden">
                     <span
@@ -158,7 +160,6 @@ const IncompleteBloodRequest = () => {
                                     {number + 1}
                                 </span>)
                             }
-
                             <span
                                 onClick={handleNextButton}
                                 className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
@@ -170,7 +171,6 @@ const IncompleteBloodRequest = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

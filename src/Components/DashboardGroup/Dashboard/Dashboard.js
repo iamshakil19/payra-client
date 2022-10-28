@@ -28,7 +28,7 @@ const Dashboard = () => {
     const [admin, adminLoading, adminRole] = useAdmin(user)
 
 
-    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('https://payra.onrender.com/donor-request', {
+    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -44,7 +44,7 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    const { data, bloodLoading } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+    const { data: incompleteBloodList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -117,14 +117,14 @@ const Dashboard = () => {
                             <li className='relative'>
                                 <Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <BsChatSquareQuote /> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link>
                                 {
-                                    allDonorRequest?.length > 0 &&
-                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.length}</span>
+                                    allDonorRequest?.totalCount > 0 &&
+                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.totalCount}</span>
                                 }
                             </li>
                             <li className='relative'><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link>
                                 {
-                                    data?.totalCount > 0 &&
-                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{data?.totalCount}</span>
+                                    incompleteBloodList?.totalCount > 0 &&
+                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodList?.totalCount}</span>
                                 }
                             </li>
                             <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
