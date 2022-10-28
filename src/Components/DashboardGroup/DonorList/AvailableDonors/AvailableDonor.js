@@ -15,8 +15,10 @@ const AvailableDonor = () => {
     const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
+    const acceptedTime = "acceptedTime"
+    const [sortByDonateCount, setSortByDonateCount] = useState(acceptedTime)
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -51,8 +53,8 @@ const AvailableDonor = () => {
     return (
         <div>
             <div className="overflow-x-auto">
-                <div className='mb-3 hidden lg:block'>
-                    <p className='text-right'>
+                <div className='mb-3 lg:block hidden text-right w-full'>
+                    <p className='inline'>
                         <span className='poppins-font'>Show : </span>
                         <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
                             <option selected className='font-semibold' value="10">10</option>
@@ -60,6 +62,14 @@ const AvailableDonor = () => {
                             <option className='font-semibold' value="25">25</option>
                             <option className='font-semibold' value="50">50</option>
                             <option className='font-semibold' value="100">100</option>
+                        </select>
+                    </p>
+                    <p className='inline ml-5'>
+                        <span className='poppins-font'>Sort By : </span>
+                        <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
+                            <option selected className='font-semibold text-sm' value="acceptedTime">Default</option>
+                            <option className='font-semibold text-sm' value="donationCount">Donation (High → Low)</option>
+
                         </select>
                     </p>
                 </div>
@@ -113,7 +123,7 @@ const AvailableDonor = () => {
                 ></AvailableProfileModal>
             }
 
-<div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
+            <div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
                 <div className="flex flex-1 justify-between sm:hidden">
                     <span
                         onClick={handlePreviousButton}

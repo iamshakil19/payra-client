@@ -7,6 +7,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
     const { _id, profileImg, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
 
     let newStatus = "verified"
+    const acceptedTime = new Date()
 
     const handleProfileData = () => {
         setTimeout(() => {
@@ -16,7 +17,8 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
 
     const handleStatus = () => {
         const donorStatusInfo = {
-            status: newStatus
+            status: newStatus,
+            acceptedTime: acceptedTime
         }
         fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',

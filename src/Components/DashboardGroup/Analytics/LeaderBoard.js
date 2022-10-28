@@ -44,7 +44,7 @@ const LeaderBoard = () => {
             {leaderBoardTopper?.map((singleDonor, index) => <div className='grid grid-cols-3 bg-white py-3.5 px-2 sm:px-5 rounded-lg mb-3'>
                 <p className='poppins-font flex items-center font-semibold text-sm'> <span className='mr-3'>{index + 1}</span> {singleDonor.name} <span className='ml-3'> <img className='w-5 mb-1' src={crwon} alt="" /> </span></p>
                 <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleDonor.bloodGroup}</p>
-                <p className='bangla-font text-right text-red-500 font-bold'>{singleDonor.donationCount} বার</p>
+                <p className='bangla-font text-right text-red-500 font-bold'>{singleDonor.donationCount }   বার</p>
             </div>)
             }
 

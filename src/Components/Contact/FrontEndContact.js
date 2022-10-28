@@ -14,7 +14,7 @@ const Contact = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const status = "incomplete"
-    const submissionTime = new Date()
+
 
     const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('http://localhost:5000/contacts', {
         method: 'GET',
@@ -31,7 +31,7 @@ const Contact = () => {
     const top4Data = contacts.slice(0, 4)
 
     const onSubmit = data => {
-        const newData = { ...data, status, submissionTime }
+        const newData = { ...data, status }
 
         fetch('http://localhost:5000/blood-request', {
             method: 'POST',

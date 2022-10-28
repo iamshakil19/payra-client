@@ -8,10 +8,12 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = incompleteSingleBloodRequest
 
     let newStatus = "done"
+    const submissionTime = new Date()
 
     const handleStatus = () => {
         const bloodRequestStatusInfo = {
-            status: newStatus
+            status: newStatus,
+            submissionTime: submissionTime
         }
         fetch(`http://localhost:5000/blood-request-status/${_id}`, {
             method: 'PATCH',

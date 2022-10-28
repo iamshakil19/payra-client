@@ -6,10 +6,12 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
     const { _id, name, profileImg, age, gender, number1, bloodGroup, union, village } = donorRequest
 
     let newStatus = "verified"
+    const acceptedTime = new Date()
 
     const handleStatus = () => {
         const donorStatusInfo = {
-            status: newStatus
+            status: newStatus,
+            acceptedTime: acceptedTime
         }
         fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',
