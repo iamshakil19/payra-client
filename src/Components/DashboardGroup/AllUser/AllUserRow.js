@@ -1,13 +1,12 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 const AllUserRow = ({ user, refetch, setUserData, index, setAdminConfirmationData }) => {
-    const { email, name, _id, role } = user
+    const { email, name, role } = user
 
 
     return (
         <tr className='hover'>
             <th className='p-2 pl-4 poppins-font w-7 '>{index}</th>
-            <td className='poppins-font p-2 '>{_id}</td>
             <td className='poppins-font p-2 '>{name}</td>
             <td className='poppins-font p-2 '>{email}</td>
             <td className='p-2'>

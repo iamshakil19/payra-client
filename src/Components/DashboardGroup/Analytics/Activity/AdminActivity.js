@@ -9,7 +9,7 @@ import Loading from '../../../Shared/Loading/Loading';
 
 const AdminActivity = () => {
     const navigate = useNavigate()
-    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('http://localhost:5000/all-admin', {
+    const { data: recentAdmins, isLoading } = useQuery('recentAdmins', () => fetch('https://payra.onrender.com/all-admin', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -35,6 +35,10 @@ const AdminActivity = () => {
         <div className='border border-gray-300 rounded-xl p-4 mt-5 w-lg shadow-lg'>
             <p className='text-[#141C39] text-xl poppins-font font-semibold mb-4 flex items-center'> <span className='mr-3 text-red-500 text-2xl'><TbActivityHeartbeat /> </span>Admin activity</p>
 
+            <div className='grid grid-cols-2 border-b py-1.5'>
+                <p className='bangla-font font-bold'>ইমেইল</p>
+                <p className='capitalize bangla-font text-red-500 font-bold text-center'>ভূমিকা</p>
+            </div>
             {
                 latest5Admins?.map(singleAdmin => <div className='grid grid-cols-2 border-b py-1.5'>
                     {singleAdmin.email.length > 16 ?
@@ -43,9 +47,9 @@ const AdminActivity = () => {
                         <p className='poppins-font'>{singleAdmin.email}</p>
                     }
                     {singleAdmin.role === "superAdmin" ?
-                        <p className='capitalize poppins-font text-red-500 font-bold text-center'>Super Admin</p>
+                        <p className='capitalize poppins-font text-red-500 text-center'>Super Admin</p>
                         :
-                        <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleAdmin.role}</p>
+                        <p className='capitalize poppins-font text-red-500 text-center'>{singleAdmin.role}</p>
                     }
                 </div>)
             }
