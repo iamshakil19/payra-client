@@ -11,7 +11,7 @@ const BloodRequest = () => {
     const [isSelected, setSelected] = useState(true);
     const navigate = useNavigate()
 
-    const { data, isLoading } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+    const { data, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

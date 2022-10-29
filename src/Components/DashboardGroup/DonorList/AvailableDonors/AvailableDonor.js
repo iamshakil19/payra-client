@@ -8,9 +8,13 @@ import AvailableProfileModal from './AvailableProfileModal';
 import Loading from '../../../Shared/Loading/Loading';
 import auth from '../../../../firebase.init';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { useContext } from 'react';
+import { DonorContext } from '../../Dashboard/Dashboard';
 
 const AvailableDonor = () => {
     const navigate = useNavigate()
+    const donorSearchData = useContext(DonorContext)
+
     const [availableDonorData, setAvailableDonorData] = useState(null)
     const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
     const [limit, setLimit] = useState(10)
@@ -18,7 +22,7 @@ const AvailableDonor = () => {
     const acceptedTime = "acceptedTime"
     const [sortByDonateCount, setSortByDonateCount] = useState(acceptedTime)
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount], () => fetch(`https://payra.onrender.com/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

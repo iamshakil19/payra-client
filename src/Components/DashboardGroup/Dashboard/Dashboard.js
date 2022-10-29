@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../Header/Header'
 import { BiDonateBlood } from "react-icons/bi";
@@ -18,17 +18,21 @@ import PageTitle from '../../Shared/PageTitle';
 import { signOut } from 'firebase/auth';
 import useAdmin from '../../Hooks/useAdmin';
 import { AiFillSetting } from "react-icons/ai";
+import AvailableDonor from '../DonorList/AvailableDonors/AvailableDonor';
 
+export const DonorContext = createContext()
 
 const Dashboard = () => {
     const navigate = useNavigate("")
     let location = useLocation();
+    const [donorSearchData, setDonorSearchData] = useState("")
+
     const [user, loading, error] = useAuthState(auth);
 
     const [admin, adminLoading, adminRole] = useAdmin(user)
 
 
-    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('https://payra.onrender.com/donor-request', {
+    const { data: allDonorRequest, donorLoading } = useQuery('donorRequest', () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -44,7 +48,7 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    const { data: incompleteBloodList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+    const { data: incompleteBloodList, bloodLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -66,88 +70,90 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
-            <Header />
-            <PageTitle title={"Dashboard"}></PageTitle>
-            <div className=''>
-                <div className="drawer drawer-mobile custom-height">
-                    <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
-                    <div className="drawer-content bg-[#F5F7FF] px-2 pt-3 lg:px-5 lg:pt-4">
-                        {/* <!-- Page content here --> */}
-                        <div className='lg:flex lg:justify-between mb-2'>
+        <DonorContext.Provider value={donorSearchData}>
+            <div>
+                <Header />
+                <PageTitle title={"Dashboard"}></PageTitle>
+                <div className=''>
+                    <div className="drawer drawer-mobile custom-height">
+                        <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
+                        <div className="drawer-content bg-[#F5F7FF] px-2 pt-3 lg:px-5 lg:pt-4">
+                            {/* <!-- Page content here --> */}
+                            <div className='lg:flex lg:justify-between mb-2'>
 
-                            <div className='lg:flex items-center hidden '>
-                                <div class="avatar online">
-                                    <div class="w-11 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border">
-                                        <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                <div className='lg:flex items-center hidden '>
+                                    <div class="avatar online">
+                                        <div class="w-11 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border">
+                                            <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                        </div>
+                                    </div>
+                                    <div className='ml-3'>
+                                        <p className='poppins-font font-bold text-[#17203F]'>{user?.displayName}</p>
+                                        <p className='poppins-font text-sm font-extrabold opacity-80 text-[#17203F] capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
                                     </div>
                                 </div>
-                                <div className='ml-3'>
-                                    <p className='poppins-font font-bold text-[#17203F]'>{user?.displayName}</p>
-                                    <p className='poppins-font text-sm font-extrabold opacity-80 text-[#17203F] capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
-                                </div>
+                                {location.pathname.includes('donor-list') && <div className=''>
+                                    <form action="" className='search-bar'>
+                                        <input onChange={(e) => setDonorSearchData(e.target.value)} autoComplete='off' type="text" placeholder='Search by name' name='donorSearchText' />
+                                        <button disabled type=''><span className='search-icon cursor-pointer'> <FaSearch /> </span></button>
+                                    </form>
+                                </div>}
+                                {location.pathname.includes('user-list') && <div className=''>
+                                    <form action="" className='search-bar'>
+                                        <input autoComplete='off' type="text" placeholder='Search by email' name='userSearchText' />
+                                        <button disabled type=''><span className='search-icon cursor-pointer'> <FaSearch /> </span></button>
+                                    </form>
+                                </div>}
+
                             </div>
-                            {location.pathname.includes('donor-list') && <div className=''>
-                                <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by name' name='donorSearchText' />
-                                    <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
-                                </form>
-                            </div>}
-                            {location.pathname.includes('user-list') && <div className=''>
-                                <form action="" className='search-bar'>
-                                    <input autoComplete='off' type="text" placeholder='Search by email' name='userSearchText' />
-                                    <button type='submit'><span className='search-icon'> <FaSearch /> </span></button>
-                                </form>
-                            </div>}
+
+                            <Outlet />
 
                         </div>
+                        <div className="drawer-side">
+                            <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
+                            <ul className="menu p-4 overflow-y-auto w-60 bg-gradient-to-r from-[#0d142e] to-[#17203F] text-white rounded-tr-md">
+                                {/* <!-- Sidebar content here --> */}
+                                <p className='font-bold text-center text-2xl mb-5 poppins-font'>Dashboard</p>
 
-                        <Outlet />
+                                <li ><Link to={"/dashboard"}> <span className='flex items-center poppins-font'> <BsFillPieChartFill /> <span className='ml-3 text-[16px]'>Analytics</span> </span> </Link></li>
+                                <li><Link to={"/dashboard/donor-list"}> <span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood /></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
 
-                    </div>
-                    <div className="drawer-side">
-                        <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-                        <ul className="menu p-4 overflow-y-auto w-60 bg-gradient-to-r from-[#0d142e] to-[#17203F] text-white rounded-tr-md">
-                            {/* <!-- Sidebar content here --> */}
-                            <p className='font-bold text-center text-2xl mb-5 poppins-font'>Dashboard</p>
+                                <li className='relative'>
+                                    <Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <BsChatSquareQuote /> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link>
+                                    {
+                                        allDonorRequest?.totalCount > 0 &&
+                                        <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.totalCount}</span>
+                                    }
+                                </li>
+                                <li className='relative'><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link>
+                                    {
+                                        incompleteBloodList?.totalCount > 0 &&
+                                        <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodList?.totalCount}</span>
+                                    }
+                                </li>
+                                <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
+                                <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
+                                <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
+                                <li><Link to={"/dashboard/settings"}><span className='flex items-center poppins-font'> <span className='text-lg'><AiFillSetting /></span> <span className='ml-2 text-[16px]'>Settings</span> </span></Link></li>
 
-                            <li ><Link to={"/dashboard"}> <span className='flex items-center poppins-font'> <BsFillPieChartFill /> <span className='ml-3 text-[16px]'>Analytics</span> </span> </Link></li>
-                            <li><Link to={"/dashboard/donor-list"}> <span className='flex items-center poppins-font'> <span className='text-xl'><BiDonateBlood /></span> <span className='ml-2 text-[16px]'>Donors List</span> </span></Link></li>
-
-                            <li className='relative'>
-                                <Link to={"/dashboard/donor-request"}><span className='flex items-center poppins-font'> <BsChatSquareQuote /> <span className='ml-3 text-[16px]'>Donor Request</span> </span></Link>
-                                {
-                                    allDonorRequest?.totalCount > 0 &&
-                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{allDonorRequest?.totalCount}</span>
-                                }
-                            </li>
-                            <li className='relative'><Link to={"/dashboard/blood-request"}><span className='flex items-center poppins-font'> <RiQuestionAnswerLine /> <span className='ml-3 text-[16px]'>Blood Request</span> </span></Link>
-                                {
-                                    incompleteBloodList?.totalCount > 0 &&
-                                    <span className="indicator-item badge bg-orange-500 poppins-font w-2 border absolute top-0 right-0 font-bold">{incompleteBloodList?.totalCount}</span>
-                                }
-                            </li>
-                            <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
-                            <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
-                            <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
-                            <li><Link to={"/dashboard/settings"}><span className='flex items-center poppins-font'> <span className='text-lg'><AiFillSetting /></span> <span className='ml-2 text-[16px]'>Settings</span> </span></Link></li>
-
-                            <div className='flex items-center mt-12 px-4 lg:hidden'>
-                                <div class="avatar online">
-                                    <div class="w-10 rounded-full cursor-pointer">
-                                        <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                <div className='flex items-center mt-12 px-4 lg:hidden'>
+                                    <div class="avatar online">
+                                        <div class="w-10 rounded-full cursor-pointer">
+                                            <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                        </div>
+                                    </div>
+                                    <div className='ml-3'>
+                                        <p className='poppins-font font-bold text-white text-sm'>{user?.displayName}</p>
+                                        <p className='poppins-font text-sm font-extrabold opacity-70 text-white capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
                                     </div>
                                 </div>
-                                <div className='ml-3'>
-                                    <p className='poppins-font font-bold text-white text-sm'>{user?.displayName}</p>
-                                    <p className='poppins-font text-sm font-extrabold opacity-70 text-white capitalize'>{adminRole === "superAdmin" ? "Super Admin" : adminRole}</p>
-                                </div>
-                            </div>
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </DonorContext.Provider>
     );
 };
 

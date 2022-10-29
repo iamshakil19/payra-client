@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -8,18 +8,21 @@ import UnavailableListRow from './UnavailableListRow';
 import UnavailableDeleteModal from './UnavailableDeleteModal';
 import UnavailableProfileModal from './UnavailableProfileModal';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { DonorContext } from '../../Dashboard/Dashboard';
 
 const UnavailableDonor = () => {
     const navigate = useNavigate()
+
+    const donorSearchData = useContext(DonorContext)
+
     const [unavailableDonorData, setUnavailableDonorData] = useState(null)
     const [unavailableDonorProfileData, setUnavailableDonorProfileData] = useState(null)
-
     const [daysProfile, setDaysProfile] = useState(0);
     const [hoursProfile, setHoursProfile] = useState(0);
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery('unavailableDonorList', () => fetch('https://payra.onrender.com/unavailable-donor', {
+    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`http://localhost:5000/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

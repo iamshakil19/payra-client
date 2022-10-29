@@ -13,7 +13,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             status: newStatus,
             acceptedTime: acceptedTime
         }
-        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
+        fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
