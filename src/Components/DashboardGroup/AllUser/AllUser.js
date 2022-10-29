@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -8,15 +8,17 @@ import AllUserRow from './AllUserRow';
 import UserDeleteModal from './UserDeleteModal';
 import AdminConfirmationModal from './AdminConfirmationModal';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { UserContext } from '../Dashboard/Dashboard';
 
 const AllUser = () => {
     const navigate = useNavigate()
+    const userSearchData = useContext(UserContext)
     const [userData, setUserData] = useState(null)
     const [adminConfirmationData, setAdminConfirmationData] = useState(null)
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['users', limit, pageNumber], () => fetch(`http://localhost:5000/users?limit=${limit}&pageNumber=${pageNumber}`, {
+    const { data, isLoading, refetch } = useQuery(['users', limit, pageNumber, userSearchData], () => fetch(`http://localhost:5000/users?limit=${limit}&pageNumber=${pageNumber}&userSearchData=${userSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -133,7 +135,7 @@ const AllUser = () => {
                                 <span className="font-medium"> {(pageNumber + 1) * limit} </span>
                             }
                             of{' '}
-                            <span className="font-medium">{data.totalCount}</span> results
+                            <span className="font-medium">{data?.totalCount}</span> results
                         </p>
                     </div>
                     <div>

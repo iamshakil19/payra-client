@@ -12,9 +12,7 @@ import { DonorContext } from '../../Dashboard/Dashboard';
 
 const UnavailableDonor = () => {
     const navigate = useNavigate()
-
     const donorSearchData = useContext(DonorContext)
-
     const [unavailableDonorData, setUnavailableDonorData] = useState(null)
     const [unavailableDonorProfileData, setUnavailableDonorProfileData] = useState(null)
     const [daysProfile, setDaysProfile] = useState(0);
@@ -149,7 +147,7 @@ const UnavailableDonor = () => {
                                 <span className="font-medium"> {(pageNumber + 1) * limit} </span>
                             }
                             of{' '}
-                            <span className="font-medium">{data.totalCount}</span> results
+                            <span className="font-medium">{data?.totalCount}</span> results
                         </p>
                     </div>
 
