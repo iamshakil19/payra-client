@@ -2,11 +2,15 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import avatarImg from '../../../../Resources/avatarImage.jpg'
 import { MdDelete } from "react-icons/md";
+import { useContext } from 'react';
+import { IncompleteBloodContext } from '../../Dashboard/Dashboard';
+
 
 const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, setBloodRequestData, setBloodRequestProfileData }) => {
 
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = incompleteSingleBloodRequest
 
+    const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     let newStatus = "done"
     const submissionTime = new Date()
 
@@ -15,7 +19,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             status: newStatus,
             submissionTime: submissionTime
         }
-        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
+        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -26,6 +30,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             .then(data => {
                 console.log(data);
                 refetch()
+                setIncompleteRefetch(current => !current)
                 toast.success('Blood Donation Complete')
             })
     }

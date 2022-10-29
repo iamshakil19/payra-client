@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import avatarImg from '../../../../Resources/avatarImage.jpg'
 import { FiPhoneCall } from "react-icons/fi";
+import { IncompleteBloodContext } from '../../Dashboard/Dashboard';
+
 
 const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestProfileData, refetch, setBloodRequestData }) => {
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = bloodRequestProfileData
 
-    let newStatus = "done"
+    const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
+    const newStatus = "done"
     const submissionTime = new Date()
     const handleProfileData = () => {
         setTimeout(() => {
@@ -19,7 +22,7 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
             status: newStatus,
             submissionTime: submissionTime
         }
-        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
+        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -30,6 +33,7 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
             .then(data => {
                 console.log(data);
                 refetch()
+                setIncompleteRefetch(current => !current)
                 setBloodRequestProfileData(null)
                 toast.success('Blood Donation Complete')
             })

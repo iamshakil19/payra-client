@@ -22,7 +22,7 @@ const AvailableDonor = () => {
     const acceptedTime = "acceptedTime"
     const [sortByDonateCount, setSortByDonateCount] = useState(acceptedTime)
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`https://payra.onrender.com/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

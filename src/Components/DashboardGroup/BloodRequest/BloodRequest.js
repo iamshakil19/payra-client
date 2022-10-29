@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
+import { IncompleteBloodContext } from '../Dashboard/Dashboard';
 
 const BloodRequest = () => {
-
+    const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     const [isSelected, setSelected] = useState(true);
     const navigate = useNavigate()
 
-    const { data, isLoading } = useQuery('incompleteBloodList', () => fetch('http://localhost:5000/incomplete-blood-request', {
+    const { data, isLoading, } = useQuery(['incompleteBloodList', incompleteRefetch], () => fetch('https://payra.onrender.com/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -30,8 +31,6 @@ const BloodRequest = () => {
     if (isLoading) {
         return <Loading />
     }
-
-
     const handleComplete = () => {
         setSelected(true)
         navigate("/dashboard/blood-request")
@@ -42,6 +41,7 @@ const BloodRequest = () => {
     }
 
     return (
+
         <div>
             <section className='px-2 sm:px-0 pt-2'>
                 <div className='flex space-x-1 rounded-xl bg-[#0E1530] p-1 max-w-md mx-auto mb-4'>
@@ -57,6 +57,7 @@ const BloodRequest = () => {
 
             <Outlet />
         </div>
+
     );
 };
 

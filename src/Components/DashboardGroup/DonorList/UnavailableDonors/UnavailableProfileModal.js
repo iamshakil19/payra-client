@@ -7,7 +7,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
     const { donationCount, name, profileImg, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available, _id } = unavailableDonorProfileData
 
     const handleDonate = () => {
-        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
+        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

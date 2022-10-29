@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { MdDelete } from "react-icons/md";
+import { IncompleteBloodContext } from '../Dashboard/Dashboard';
 
 const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorRequest, refetch }) => {
     const { _id, name, profileImg, age, gender, number1, bloodGroup, union, village } = donorRequest
-
+    const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     let newStatus = "verified"
     const acceptedTime = new Date()
 
@@ -13,7 +14,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             status: newStatus,
             acceptedTime: acceptedTime
         }
-        fetch(`http://localhost:5000/donorStatus/${_id}`, {
+        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -24,6 +25,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             .then(data => {
                 console.log(data);
                 refetch()
+                setIncompleteRefetch(current => !current)
                 toast.success('Donor Verified')
             })
     }

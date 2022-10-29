@@ -20,7 +20,7 @@ const UnavailableDonor = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`http://localhost:5000/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`https://payra.onrender.com/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
