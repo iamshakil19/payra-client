@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -10,6 +10,9 @@ import auth from '../../../../firebase.init';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useContext } from 'react';
 import { DonorContext } from '../../Dashboard/Dashboard';
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
 
 const AvailableDonor = () => {
     const navigate = useNavigate()
@@ -22,7 +25,7 @@ const AvailableDonor = () => {
     const acceptedTime = "acceptedTime"
     const [sortByDonateCount, setSortByDonateCount] = useState(acceptedTime)
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`https://payra.onrender.com/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -54,31 +57,92 @@ const AvailableDonor = () => {
         setPageNumber(pageNumber + 1)
     }
 
+
+
+
+
     return (
         <div>
-            <div className="overflow-x-auto">
-                <div className='mb-3 lg:block hidden text-right w-full'>
-                    <p className='inline'>
-                        <span className='poppins-font'>Show : </span>
-                        <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
-                            <option selected className='font-semibold' value="10">10</option>
-                            <option className='font-semibold' value="15">15</option>
-                            <option className='font-semibold' value="25">25</option>
-                            <option className='font-semibold' value="50">50</option>
-                            <option className='font-semibold' value="100">100</option>
-                        </select>
-                    </p>
-                    <p className='inline ml-5'>
-                        <span className='poppins-font'>Sort By : </span>
-                        <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
-                            <option selected className='font-semibold text-sm' value="acceptedTime">Default</option>
-                            <option className='font-semibold text-sm' value="donationCount">Donation (High → Low)</option>
+            <div className='flex items-center justify-between mb-3'>
+                <div className="z-50 w-56">
+                    <Menu as="div" className="relative inline-block text-left">
+                        <div>
+                            <Menu.Button className="inline-flex w-full justify-center rounded-md bg-[#0F1631] px-4 py-2 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                                Advance Filter
+                                <ChevronDownIcon
+                                    className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+                                    aria-hidden="true"
+                                />
+                            </Menu.Button>
+                        </div>
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-300"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75" 
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="absolute left-0 mt-2 w-52 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="px-1 py-1 ">
 
-                        </select>
-                    </p>
+                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Union</span>
+                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
+                                        <option className='poppins-font' selected value="">Default</option>
+                                        <option className='bangla-font' value="বাগধা">বাগধা</option>
+                                        <option className='bangla-font' value="বাকাল">বাকাল</option>
+                                        <option className='bangla-font' value="গৈলা">গৈলা</option>
+                                        <option className='bangla-font' value="রাজিহার">রাজিহার</option>
+                                        <option className='bangla-font' value="রত্নপুর">রত্নপুর</option>
+                                    </select>
+
+                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block mt-2'>Village</span>
+                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
+                                        <option className='poppins-font' selected value="">Default</option>
+                                        <option className='bangla-font' value="জয়রামপট্টি">জয়রামপট্টি</option>
+                                        <option className='bangla-font' value="আমবৌলা">আমবৌলা</option>
+                                        <option className='bangla-font' value="নিমারপাড়">নিমারপাড়</option>
+                                    </select>
+
+                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block mt-2'>Gender</span>
+                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
+                                        <option className='poppins-font' selected value="">Default</option>
+                                        <option className='bangla-font' value="পুরুষ">পুরুষ</option>
+                                        <option className='bangla-font' value="মহিলা">মহিলা</option>
+                                        <option className='bangla-font' value="তৃতীয়">তৃতীয়</option>
+                                    </select>
+                                </div>
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
                 </div>
-                <table className="table w-full">
+                <div>
+                    <div className='lg:block hidden text-right w-full'>
+                        <p className='inline'>
+                            <span className='poppins-font'>Show : </span>
+                            <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
+                                <option selected className='font-semibold' value="10">10</option>
+                                <option className='font-semibold' value="15">15</option>
+                                <option className='font-semibold' value="25">25</option>
+                                <option className='font-semibold' value="50">50</option>
+                                <option className='font-semibold' value="100">100</option>
+                            </select>
+                        </p>
+                        <p className='inline ml-5'>
+                            <span className='poppins-font'>Sort By : </span>
+                            <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
+                                <option selected className='font-semibold text-sm' value="acceptedTime">Default</option>
+                                <option className='font-semibold text-sm' value="donationCount">Donation (High → Low)</option>
 
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th className='bangla-font text-[15px] '>সিরিয়াল</th>

@@ -6,7 +6,7 @@ const UnavailableDeleteModal = ({ unavailableDonorData, setUnavailableDonorData,
 
     const { _id } = unavailableDonorData
     const handleDeleteData = () => {
-        const url = `https://payra.onrender.com/donorRequest/${_id}`;
+        const url = `http://localhost:5000/donorRequest/${_id}`;
         fetch(url, {
             method: "DELETE"
         })
