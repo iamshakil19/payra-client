@@ -32,42 +32,42 @@ const DoughnutChart = () => {
   }
 
   let oPositiveData = bloodData.filter(
-    (person) => person.bloodGroup === "o+"
+    (person) => person.bloodGroup === "oPositive"
   );
   const oPositiveLength = oPositiveData.length;
 
   let oNegativeData = bloodData.filter(
-    (person) => person.bloodGroup === "o-"
+    (person) => person.bloodGroup === "oNegative"
   );
   const oNegativeLength = oNegativeData.length;
 
   let aPositiveData = bloodData.filter(
-    (person) => person.bloodGroup === "a+"
+    (person) => person.bloodGroup === "aPositive"
   );
   const aPositiveLength = aPositiveData.length;
 
   let aNegativeData = bloodData.filter(
-    (person) => person.bloodGroup === "a-"
+    (person) => person.bloodGroup === "aNegative"
   );
   const aNegativeLength = aNegativeData.length;
 
   let bPositiveData = bloodData.filter(
-    (person) => person.bloodGroup === "b+"
+    (person) => person.bloodGroup === "bPositive"
   );
   const bPositiveLength = bPositiveData.length;
 
   let bNegativeData = bloodData.filter(
-    (person) => person.bloodGroup === "b-"
+    (person) => person.bloodGroup === "bNegative"
   );
   const bNegativeLength = bNegativeData.length;
 
   let abPositiveData = bloodData.filter(
-    (person) => person.bloodGroup === "ab+"
+    (person) => person.bloodGroup === "abPositive"
   );
   const abPositiveLength = abPositiveData.length;
 
   let abNegativeData = bloodData.filter(
-    (person) => person.bloodGroup === "ab-"
+    (person) => person.bloodGroup === "abNegative"
   );
   const abNegativeLength = abNegativeData.length;
 

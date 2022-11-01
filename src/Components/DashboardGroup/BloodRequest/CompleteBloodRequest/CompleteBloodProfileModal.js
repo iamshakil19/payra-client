@@ -21,7 +21,32 @@ const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
                     <div className='flex justify-center'>
                         <div className='text-start'>
                             <h2 className=' poppins-font mt-2 text-lg'> <span className='bangla-font'>রোগীর নাম: </span> <span className='font-bold text-green-600'>{patient_name}</span></h2>
-                            <p className=''><span className='bangla-font'>রক্তের গ্রুপ:</span> <span className='text-red-500 uppercase font-bold'>({requested_bloodGroup})</span></p>
+                            <p className=''><span className='bangla-font'>রক্তের গ্রুপ: </span>
+                                {requested_bloodGroup === "oPositive" &&
+                                    <span className='text-red-500 uppercase font-bold'>(O+)</span>
+                                }
+                                {requested_bloodGroup === "oNegative" &&
+                                    <span className='text-red-500 uppercase font-bold'>(O-)</span>
+                                }
+                                {requested_bloodGroup === "aPositive" &&
+                                    <span className='text-red-500 uppercase font-bold'>(A+)</span>
+                                }
+                                {requested_bloodGroup === "aNegative" &&
+                                    <span className='text-red-500 uppercase font-bold'>(A-)</span>
+                                }
+                                {requested_bloodGroup === "bPositive" &&
+                                    <span className='text-red-500 uppercase font-bold'>(B+)</span>
+                                }
+                                {requested_bloodGroup === "bNegative" &&
+                                    <span className='text-red-500 uppercase font-bold'>(B-)</span>
+                                }
+                                {requested_bloodGroup === "abPositive" &&
+                                    <span className='text-red-500 uppercase font-bold'>(AB+)</span>
+                                }
+                                {requested_bloodGroup === "abNegative" &&
+                                    <span className='text-red-500 uppercase font-bold'>(AB-)</span>
+                                }
+                            </p>
                             <p className=''><span className='bangla-font'>রক্তদানের তারিখ:</span> <span className='font-semibold poppins-font'>{date}</span></p>
 
                             <div className='flex justify-center items-center mt-1 mb-2'>
@@ -38,7 +63,7 @@ const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
                             <p className='mb-1 bangla-font'>হিমোগ্লোবিন: <span className='font-bold '> {hemoglobin ? hemoglobin : <span className='bangla-font'>জানা নেই</span>}</span></p>
                             <p className='mb-1 bangla-font'>রোগীর সমস্যা:  <span className='font-bold'>{patient_problem}</span></p>
                             <div className='mb-1 bangla-font flex'>স্টাটাস:
-                                <span className='text-xl text-green-600 ml-2'><BsCheckCircleFill/></span>
+                                <span className='text-xl text-green-600 ml-2'><BsCheckCircleFill /></span>
                             </div>
                         </div>
                     </div>

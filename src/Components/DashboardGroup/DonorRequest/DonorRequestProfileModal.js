@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FiPhoneCall } from "react-icons/fi";
 import { IncompleteBloodContext } from '../Dashboard/Dashboard';
+import avatarImg from '../../../Resources/avatarImage.jpg'
 
 const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch, setDonorData }) => {
 
-    const { _id, profileImg, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
+    const { _id, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
     const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     let newStatus = "verified"
     const acceptedTime = new Date()
@@ -46,10 +47,36 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                     <label for="donor-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
-                            <img src={profileImg} alt='' />
+                            <img src={avatarImg} alt='' />
                         </div>
                     </div>
-                    <h2 className='text-center poppins-font mt-2 text-lg'> <span className='bangla-font'>নাম: </span> <span className='font-bold text-green-600'>{name}</span> <span className='text-red-500 uppercase ml-2 font-bold'>({bloodGroup})</span></h2>
+                    <h2 className='text-center poppins-font mt-2 text-lg'> <span className='bangla-font'>নাম:
+                    </span> <span className='font-bold text-green-600'>{name}</span>
+                        {bloodGroup === "oPositive" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(O+)</span>
+                        }
+                        {bloodGroup === "oNegative" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(O-)</span>
+                        }
+                        {bloodGroup === "aPositive" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(A+)</span>
+                        }
+                        {bloodGroup === "aNegative" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(A-)</span>
+                        }
+                        {bloodGroup === "bPositive" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(B+)</span>
+                        }
+                        {bloodGroup === "bNegative" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(B-)</span>
+                        }
+                        {bloodGroup === "abPositive" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(AB+)</span>
+                        }
+                        {bloodGroup === "abNegative" &&
+                            <span className='text-red-500 uppercase ml-2 font-bold'>(AB-)</span>
+                        }
+                    </h2>
                     <p className='text-center'><span className='bangla-font'>বয়স:</span> <span className='font-semibold poppins-font'>{age}</span></p>
 
                     <div className='flex justify-center items-center mt-1 mb-2'>

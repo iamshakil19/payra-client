@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
-
+import avatarImg from '../../../../Resources/avatarImage.jpg'
 
 const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, setUnavailableDonorProfileData, refetch, setDaysProfile, setHoursProfile }) => {
 
-    const { donationCount, name, profileImg, age, gender, number1, bloodGroup, policeStation, union, village, _id, time } = donorSingleData
+    const { donationCount, name, age, gender, number1, bloodGroup, policeStation, union, village, _id, time } = donorSingleData
 
     const handleDonate = () => {
         fetch(`http://localhost:5000/handleAvailability/${_id}`, {
@@ -62,13 +62,36 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setUnavailableDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
-                            <img src={profileImg} alt="" />
+                            <img src={avatarImg} alt="" />
                         </label>
                     </div>
                 </div>
             </td>
             <td className='poppins-font p-2'>{name}</td>
-            <td className='poppins-font uppercase p-2'>{bloodGroup}</td>
+            {bloodGroup === "oPositive" &&
+                <td className='poppins-font uppercase p-2 '>O+</td>
+            }
+            {bloodGroup === "oNegative" &&
+                <td className='poppins-font uppercase p-2 '>O-</td>
+            }
+            {bloodGroup === "aPositive" &&
+                <td className='poppins-font uppercase p-2 '>A+</td>
+            }
+            {bloodGroup === "aNegative" &&
+                <td className='poppins-font uppercase p-2 '>A-</td>
+            }
+            {bloodGroup === "bPositive" &&
+                <td className='poppins-font uppercase p-2 '>B+</td>
+            }
+            {bloodGroup === "bNegative" &&
+                <td className='poppins-font uppercase p-2 '>B-</td>
+            }
+            {bloodGroup === "abPositive" &&
+                <td className='poppins-font uppercase p-2 '>AB+</td>
+            }
+            {bloodGroup === "abNegative" &&
+                <td className='poppins-font uppercase p-2 '>AB-</td>
+            }
             <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>

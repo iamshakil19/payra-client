@@ -35,42 +35,42 @@ const RadarChart = () => {
     const completeDonationData = completeData?.completeBloodRequestList
 
     let oPositiveData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "o+"
+        (person) => person.requested_bloodGroup === "oPositive"
     );
     const oPositiveLength = oPositiveData.length;
 
     let oNegativeData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "o-"
+        (person) => person.requested_bloodGroup === "oNegative"
     );
     const oNegativeLength = oNegativeData.length;
 
     let aPositiveData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "a+"
+        (person) => person.requested_bloodGroup === "aPositive"
     );
     const aPositiveLength = aPositiveData.length;
 
     let aNegativeData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "a-"
+        (person) => person.requested_bloodGroup === "aNegative"
     );
     const aNegativeLength = aNegativeData.length;
 
     let bPositiveData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "b+"
+        (person) => person.requested_bloodGroup === "bPositive"
     );
     const bPositiveLength = bPositiveData.length;
 
     let bNegativeData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "b-"
+        (person) => person.requested_bloodGroup === "bNegative"
     );
     const bNegativeLength = bNegativeData.length;
 
     let abPositiveData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "ab+"
+        (person) => person.requested_bloodGroup === "abPositive"
     );
     const abPositiveLength = abPositiveData.length;
 
     let abNegativeData = completeDonationData.filter(
-        (person) => person.requested_bloodGroup === "ab-"
+        (person) => person.requested_bloodGroup === "abNegative"
     );
     const abNegativeLength = abNegativeData.length;
 

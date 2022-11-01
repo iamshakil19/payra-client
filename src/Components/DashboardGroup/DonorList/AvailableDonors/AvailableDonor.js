@@ -22,10 +22,14 @@ const AvailableDonor = () => {
     const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
-    const acceptedTime = "acceptedTime"
-    const [sortByDonateCount, setSortByDonateCount] = useState(acceptedTime)
+    const [sortByDonateCount, setSortByDonateCount] = useState("acceptedTime")
+    const [policeStationFilterData, setPoliceStationFilterData] = useState("")
+    const [unionFilterData, setUnionFilterData] = useState("")
+    const [villageFilterData, setVillageFilterData] = useState("")
+    const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
+    const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, unionFilterData, villageFilterData, bloodGroupFilterData, policeStationFilterData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -58,7 +62,7 @@ const AvailableDonor = () => {
     }
 
 
-
+    console.log(unionFilterData);
 
 
     return (
@@ -67,10 +71,10 @@ const AvailableDonor = () => {
                 <div className="z-50 w-56">
                     <Menu as="div" className="relative inline-block text-left">
                         <div>
-                            <Menu.Button className="inline-flex w-full justify-center rounded-md bg-[#0F1631] px-4 py-2 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                                Advance Filter
+                            <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-200 border border-slate-500">
+                                Filter
                                 <ChevronDownIcon
-                                    className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+                                    className="ml-2 -mr-1 h-5 w-5 "
                                     aria-hidden="true"
                                 />
                             </Menu.Button>
@@ -78,40 +82,90 @@ const AvailableDonor = () => {
                         <Transition
                             as={Fragment}
                             enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-300"
                             enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75" 
+                            enterFrom="transform opacity-0 scale-95"
+
+                            leave="transition ease-in duration-75"
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute left-0 mt-2 w-52 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="px-1 py-1 ">
+                            <Menu.Items className="absolute left-0 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="px-3 py-3 rounded-md shadow-md border border-gray-300">
 
-                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Union</span>
-                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
-                                        <option className='poppins-font' selected value="">Default</option>
-                                        <option className='bangla-font' value="বাগধা">বাগধা</option>
-                                        <option className='bangla-font' value="বাকাল">বাকাল</option>
-                                        <option className='bangla-font' value="গৈলা">গৈলা</option>
-                                        <option className='bangla-font' value="রাজিহার">রাজিহার</option>
-                                        <option className='bangla-font' value="রত্নপুর">রত্নপুর</option>
-                                    </select>
+                                    <section className='grid grid-cols-2 gap-3'>
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Police Station</span>
+                                            <select name="" id="union" onChange={(e) => setPoliceStationFilterData(e.target.value)} defaultValue={policeStationFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                <option className='bangla-font' value="আগৈলঝাড়া">আগৈলঝাড়া</option>
 
-                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block mt-2'>Village</span>
-                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
-                                        <option className='poppins-font' selected value="">Default</option>
-                                        <option className='bangla-font' value="জয়রামপট্টি">জয়রামপট্টি</option>
-                                        <option className='bangla-font' value="আমবৌলা">আমবৌলা</option>
-                                        <option className='bangla-font' value="নিমারপাড়">নিমারপাড়</option>
-                                    </select>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Union</span>
+                                            <select name="" id="union" onChange={(e) => setUnionFilterData(e.target.value)} defaultValue={unionFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                <option className='bangla-font' value="বাগধা">বাগধা</option>
+                                                <option className='bangla-font' value="বাকাল">বাকাল</option>
+                                                <option className='bangla-font' value="গৈলা">গৈলা</option>
+                                                <option className='bangla-font' value="রাজিহার">রাজিহার</option>
+                                                <option className='bangla-font' value="রত্নপুর">রত্নপুর</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Village</span>
+                                            <select name="" id="union" onChange={(e) => setVillageFilterData(e.target.value)} defaultValue={villageFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                <option className='bangla-font' value="জয়রামপট্টি">জয়রামপট্টি</option>
+                                                <option className='bangla-font' value="আমবৌলা">আমবৌলা</option>
+                                                <option className='bangla-font' value="নিমারপাড়">নিমারপাড়</option>
+                                                <option className='bangla-font' value="আষ্কর">আষ্কর</option>
+                                                <option className='bangla-font' value="জোবারপাড়">জোবারপাড়</option>
+                                                <option className='bangla-font' value="কালিবাড়ি">কালিবাড়ি</option>
+                                                <option className='bangla-font' value="নাঘিরপাড়">নাঘিরপাড়</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Blood Group</span>
+                                            <select name="" id="union" onChange={(e) => setBloodGroupFilterData(e.target.value)} defaultValue={bloodGroupFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                <option className='bangla-font' value="oPositive">O+</option>
+                                                <option className='bangla-font' value="oNegative">O-</option>
+                                                <option className='bangla-font' value="aPositive">A+</option>
+                                                <option className='bangla-font' value="aNegative">A-</option>
+                                                <option className='bangla-font' value="bPositive">B+</option>
+                                                <option className='bangla-font' value="bNegative">B-</option>
+                                                <option className='bangla-font' value="abPositive">AB+</option>
+                                                <option className='bangla-font' value="abNegative">AB-</option>
+                                            </select>
+                                        </div>
+                                    </section>
 
                                     <span className='poppins-font font-semibold ml-1 mb-1 inline-block mt-2'>Gender</span>
-                                    <select name="" id="union" className='w-full border border-gray-400 rounded-md py-1'>
-                                        <option className='poppins-font' selected value="">Default</option>
-                                        <option className='bangla-font' value="পুরুষ">পুরুষ</option>
-                                        <option className='bangla-font' value="মহিলা">মহিলা</option>
-                                        <option className='bangla-font' value="তৃতীয়">তৃতীয়</option>
-                                    </select>
+                                    <div className='flex items-center justify-between'>
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" onClick={(e) => setGenderFilterData({ ...genderFilterData, man: e.target.checked })} name="পুরুষ" id="পুরুষ" value={"পুরুষ"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="পুরুষ" className='bangla-font ml-2'>পুরুষ</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="মহিলা" id="মহিলা" value={"মহিলা"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="মহিলা" className='bangla-font ml-2'>মহিলা</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="তৃতীয়" id="তৃতীয়" value={"তৃতীয়"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="তৃতীয়" className='bangla-font ml-2'>তৃতীয়</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="অজানা" id="অজানা" value={"অজানা"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="অজানা" className='bangla-font ml-2'>অজানা</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </Menu.Items>
                         </Transition>
@@ -134,7 +188,6 @@ const AvailableDonor = () => {
                             <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
                                 <option selected className='font-semibold text-sm' value="acceptedTime">Default</option>
                                 <option className='font-semibold text-sm' value="donationCount">Donation (High → Low)</option>
-
                             </select>
                         </p>
                     </div>

@@ -48,7 +48,30 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
                 </div>
             </td>
             <td className='poppins-font p-2 '>{patient_name}</td>
-            <td className='poppins-font uppercase p-2 '>{requested_bloodGroup}</td>
+            { requested_bloodGroup === "oPositive" &&
+                <td className='poppins-font uppercase p-2 '>O+</td>
+            }
+            { requested_bloodGroup === "oNegative" &&
+                <td className='poppins-font uppercase p-2 '>O-</td>
+            }
+            { requested_bloodGroup === "aPositive" &&
+                <td className='poppins-font uppercase p-2 '>A+</td>
+            }
+            { requested_bloodGroup === "aNegative" &&
+                <td className='poppins-font uppercase p-2 '>A-</td>
+            }
+            { requested_bloodGroup === "bPositive" &&
+                <td className='poppins-font uppercase p-2 '>B+</td>
+            }
+            { requested_bloodGroup === "bNegative" &&
+                <td className='poppins-font uppercase p-2 '>B-</td>
+            }
+            { requested_bloodGroup === "abPositive" &&
+                <td className='poppins-font uppercase p-2 '>AB+</td>
+            }
+            { requested_bloodGroup === "abNegative" &&
+                <td className='poppins-font uppercase p-2 '>AB-</td>
+            }
             <td className='poppins-font p-2 '>{blood_quantity} <span className='bangla-font'>ব্যাগ</span> </td>
             <td className='poppins-font p-2 '>{hemoglobin ? hemoglobin : <span className='bangla-font'>জানা নেই</span>}</td>
             <td className='bangla-font p-2 '>{date}</td>

@@ -10,73 +10,10 @@ import Footer from '../Shared/Footer/Footer';
 const BloodDonorRegistration = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
-    const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    const ageCalculate = () => {
-        let today = new Date()
-        let inputDate = getValues('age')
-        console.log(inputDate);
-
-        let birthYear, birthMonth, BirthDate;
-
-        let birthDetails = {
-            year: inputDate.getFullYear(),
-            month: inputDate.getMonth() + 1,
-            date: inputDate.getDate()
-
-
-        }
-
-        let currentYear = today.getFullYear();
-        let currentMonth = today.getMonth() + 1;
-        let currentDate = today.getDate();
-
-        leapYearChecker(currentYear)
-
-        if (birthDetails.year > currentYear || (birthDetails.month > currentMonth && birthDetails.year == currentYear) || (birthDetails.date > currentDate && birthDetails.month == currentMonth && birthDetails.year == currentYear)) {
-            alert("Not Born Yet")
-            return
-        }
-
-        birthYear = currentYear - birthDetails.year;
-
-        if (currentMonth >= birthDetails.month) {
-            birthMonth = currentMonth - birthDetails.month
-        } else {
-            birthYear--;
-            birthMonth = 12 + currentMonth - birthDetails.month
-        }
-        if (currentDate >= birthDetails.date) {
-            BirthDate = currentDate - birthDetails.date
-        } else {
-            birthMonth--;
-            let days = months[currentMonth - 2];
-            BirthDate = days + currentDate - birthDetails.date;
-            if (birthMonth < 0) {
-                birthMonth = 11;
-                birthYear--;
-
-            }
-        }
-        console.log(birthYear, birthMonth, BirthDate);
-    }
-
-    const leapYearChecker = (year) => {
-        if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
-            months[1] = 29;
-        } else {
-            months[1] = 28
-        }
-        console.log(year, months[1]);
-    }
-
-
-
     const status = "pending"
-    const profileImg = "https://i.ibb.co/SJQGfx9/male.jpg"
 
     const onSubmit = data => {
-        const newData = { ...data, status, profileImg }
+        const newData = { ...data, status }
 
         fetch('http://localhost:5000/donor-request', {
             method: 'POST',
@@ -111,7 +48,7 @@ const BloodDonorRegistration = () => {
                     <div className='lg:ml-3'>
                         <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center">আপনার তথ্য দিন</h1>
 
-                        <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
+                        <form onSubmit={handleSubmit(onSubmit)} autocomplete="off" >
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
                                     <span className="label-text text-white">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
@@ -145,14 +82,14 @@ const BloodDonorRegistration = () => {
                                         })}
                                     >
                                         <option selected disabled value={""}>--Select Your Group--</option>
-                                        <option value={"o+"}>O+</option>
-                                        <option value={"o-"}>O-</option>
-                                        <option value={"a+"}>A+</option>
-                                        <option value={"a-"}>A-</option>
-                                        <option value={"b+"}>B+</option>
-                                        <option value={"b-"}>B-</option>
-                                        <option value={"ab+"}>AB+</option>
-                                        <option value={"ab-"}>AB-</option>
+                                        <option value={"oPositive"}>O+</option>
+                                        <option value={"oNegative"}>O-</option>
+                                        <option value={"aPositive"}>A+</option>
+                                        <option value={"aNegative"}>A-</option>
+                                        <option value={"bPositive"}>B+</option>
+                                        <option value={"bNegative"}>B-</option>
+                                        <option value={"abPositive"}>AB+</option>
+                                        <option value={"abNegative"}>AB-</option>
                                     </select>
                                     {
                                         errors?.bloodGroup && <label className="label">

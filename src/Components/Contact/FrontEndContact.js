@@ -122,14 +122,14 @@ const Contact = () => {
                                             })}
                                         >
                                             <option selected disabled value={""}>--Select Blood Group--</option>
-                                            <option value={"o+"}>O+</option>
-                                            <option value={"o-"}>O-</option>
-                                            <option value={"a+"}>A+</option>
-                                            <option value={"a-"}>A-</option>
-                                            <option value={"b+"}>B+</option>
-                                            <option value={"b-"}>B-</option>
-                                            <option value={"ab+"}>AB+</option>
-                                            <option value={"ab-"}>AB-</option>
+                                            <option value={"oPositive"}>O+</option>
+                                            <option value={"oNegative"}>O-</option>
+                                            <option value={"aPositive"}>A+</option>
+                                            <option value={"aNegative"}>A-</option>
+                                            <option value={"bPositive"}>B+</option>
+                                            <option value={"bNegative"}>B-</option>
+                                            <option value={"abPositive"}>AB+</option>
+                                            <option value={"abNegative"}>AB-</option>
                                         </select>
                                         {
                                             errors?.requested_bloodGroup && <label className="label">

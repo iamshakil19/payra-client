@@ -38,7 +38,33 @@ const RecentDonor = () => {
             <div className='grid grid-cols-3 border-b py-1.5'> <p className='bangla-font font-bold'>রক্ত দাতা</p> <p className='bangla-font text-center font-bold'>লিঙ্গ</p> <p className='capitalize bangla-font text-red-500 font-bold text-center'>গ্রুপ</p> </div>
 
             {
-                latest5Donor?.map(singleDonor => <div className='grid grid-cols-3 border-b py-1.5'> <p className='bangla-font'>{singleDonor.name}</p> <p className='bangla-font text-center'>{singleDonor.gender}</p> <p className='capitalize poppins-font text-red-500 text-center'>{singleDonor.bloodGroup}</p> </div>)
+                latest5Donor?.map(singleDonor => <div className='grid grid-cols-3 border-b py-1.5'> <p className='bangla-font'>{singleDonor.name}</p> <p className='bangla-font text-center'>{singleDonor.gender}</p>
+
+                    {singleDonor.bloodGroup === "oPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>O+</p>
+                    }
+                    {singleDonor.bloodGroup === "oNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>O-</p>
+                    }
+                    {singleDonor.bloodGroup === "aPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>A+</p>
+                    }
+                    {singleDonor.bloodGroup === "aNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>A-</p>
+                    }
+                    {singleDonor.bloodGroup === "bPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>B+</p>
+                    }
+                    {singleDonor.bloodGroup === "bNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>B-</p>
+                    }
+                    {singleDonor.bloodGroup === "abPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>AB+</p>
+                    }
+                    {singleDonor.bloodGroup === "abNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>AB-</p>
+                    }
+                </div>)
             }
         </div>
     );

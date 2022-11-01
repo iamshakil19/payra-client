@@ -47,7 +47,30 @@ const LeaderBoard = () => {
                     :
                     <p className='poppins-font flex items-center font-semibold text-sm'> <span className='mr-3'>{index + 1}</span> {singleDonor.name} <span className='ml-3'> <img className='w-5 mb-1' src={crwon} alt="" /> </span></p>
                 }
-                <p className='capitalize poppins-font text-red-500 font-bold text-center'>{singleDonor.bloodGroup}</p>
+                {singleDonor.bloodGroup === "oPositive" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>O+</p>
+                }
+                {singleDonor.bloodGroup === "oNegative" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>O-</p>
+                }
+                {singleDonor.bloodGroup === "aPositive" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>A+</p>
+                }
+                {singleDonor.bloodGroup === "aNegative" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>A-</p>
+                }
+                {singleDonor.bloodGroup === "bPositive" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>B+</p>
+                }
+                {singleDonor.bloodGroup === "bNegative" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>B-</p>
+                }
+                {singleDonor.bloodGroup === "abPositive" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>AB+</p>
+                }
+                {singleDonor.bloodGroup === "abNegative" &&
+                    <p className='capitalize poppins-font text-red-500 font-bold text-center'>AB-</p>
+                }
                 <p className='bangla-font text-right text-red-500 font-bold'>{singleDonor.donationCount}   বার</p>
             </div>)
             }

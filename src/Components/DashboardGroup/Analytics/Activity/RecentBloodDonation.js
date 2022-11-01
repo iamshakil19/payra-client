@@ -38,7 +38,32 @@ const RecentBloodDonation = () => {
             {
                 latest5Donation?.map(singleDonation => <div className='grid grid-cols-3 border-b py-1.5'> <p className='bangla-font'>{singleDonation.patient_name}</p>
                     <p className='bangla-font text-center'>{singleDonation.blood_quantity} ব্যাগ</p>
-                    <p className='capitalize poppins-font text-red-500 text-center'>{singleDonation.requested_bloodGroup}</p> </div>)
+
+                    {singleDonation.requested_bloodGroup === "oPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>O+</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "oNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>O-</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "aPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>A+</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "aNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>A-</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "bPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>B+</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "bNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>B-</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "abPositive" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>AB+</p>
+                    }
+                    {singleDonation.requested_bloodGroup === "abNegative" &&
+                        <p className='capitalize poppins-font text-red-500 text-center'>AB-</p>
+                    }
+                </div>)
             }
         </div>
     );
