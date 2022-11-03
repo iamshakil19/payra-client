@@ -68,7 +68,7 @@ const AvailableDonor = () => {
     return (
         <div>
             <div className='flex items-center justify-between mb-3'>
-                <div className="z-50 w-56">
+                <div className="z-50 w-56 lg:block hidden">
                     <Menu as="div" className="relative inline-block text-left">
                         <div>
                             <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-200 border border-slate-500">
@@ -118,13 +118,19 @@ const AvailableDonor = () => {
                                             <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Village</span>
                                             <select name="" id="union" onChange={(e) => setVillageFilterData(e.target.value)} defaultValue={villageFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
                                                 <option className='poppins-font' selected value="">Default</option>
-                                                <option className='bangla-font' value="জয়রামপট্টি">জয়রামপট্টি</option>
-                                                <option className='bangla-font' value="আমবৌলা">আমবৌলা</option>
-                                                <option className='bangla-font' value="নিমারপাড়">নিমারপাড়</option>
-                                                <option className='bangla-font' value="আষ্কর">আষ্কর</option>
-                                                <option className='bangla-font' value="জোবারপাড়">জোবারপাড়</option>
-                                                <option className='bangla-font' value="কালিবাড়ি">কালিবাড়ি</option>
-                                                <option className='bangla-font' value="নাঘিরপাড়">নাঘিরপাড়</option>
+                                                <option className='bangla-font' value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
+                                                <option className='bangla-font' value={"আমবৌলা"}>আমবৌলা</option>
+                                                <option className='bangla-font' value={"খাজুরিয়া"}>খাজুরিয়া</option>
+                                                <option className='bangla-font' value={"নিমারপাড়"}>নিমারপাড়</option>
+                                                <option className='bangla-font' value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
+                                                <option className='bangla-font' value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
+                                                <option className='bangla-font' value={"জোবারপাড়"}>জোবারপাড়</option>
+                                                <option className='bangla-font' value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
+                                                <option className='bangla-font' value={"আষ্কর"}>আষ্কর</option>
+                                                <option className='bangla-font' value={"কালিবাড়ি"}>কালিবাড়ি</option>
+                                                <option className='bangla-font' value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
+                                                <option className='bangla-font' value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
+                                                <option className='bangla-font' value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
                                             </select>
                                         </div>
 

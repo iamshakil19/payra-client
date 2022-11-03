@@ -5,14 +5,19 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import PageTitle from '../Shared/PageTitle';
 import Footer from '../Shared/Footer/Footer';
-
+import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading/Loading';
 
 const BloodDonorRegistration = () => {
+
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+    const [selectedDivision, setSelectedDivision] = useState("")
+    const [selectedDistrict, setSelectedDistrict] = useState("")
 
     const status = "pending"
 
     const onSubmit = data => {
+        console.log(data);
         const newData = { ...data, status }
 
         fetch('http://localhost:5000/donor-request', {
@@ -32,7 +37,33 @@ const BloodDonorRegistration = () => {
             })
     };
 
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
 
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+
+        const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision)
+
+    if (divisionIsLoading || districtIsLoading) {
+        return <Loading />
+    }
+
+    console.log(selectedDistrict);
+    // console.log(districtFilter);
 
     return (
         <div className='donor-registration-bg min-h-screen'>
@@ -51,7 +82,7 @@ const BloodDonorRegistration = () => {
                         <form onSubmit={handleSubmit(onSubmit)} autocomplete="off" >
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
-                                    <span className="label-text text-white">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span className="label-text text-white bangla-font text-[16px]">আপনার নাম <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <input type="text" placeholder="আপনার নাম লিখুন" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.name && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                     {...register("name", {
@@ -71,7 +102,7 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-white">আপনার রক্তের গ্রুপ <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">আপনার রক্তের গ্রুপ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <select className={`select select-bordered select-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.bloodGroup && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("bloodGroup", {
@@ -81,15 +112,15 @@ const BloodDonorRegistration = () => {
                                             }
                                         })}
                                     >
-                                        <option selected disabled value={""}>--Select Your Group--</option>
-                                        <option value={"oPositive"}>O+</option>
-                                        <option value={"oNegative"}>O-</option>
-                                        <option value={"aPositive"}>A+</option>
-                                        <option value={"aNegative"}>A-</option>
-                                        <option value={"bPositive"}>B+</option>
-                                        <option value={"bNegative"}>B-</option>
-                                        <option value={"abPositive"}>AB+</option>
-                                        <option value={"abNegative"}>AB-</option>
+                                        <option className='poppins-font' selected disabled value={""}>--Select Your Group--</option>
+                                        <option className='poppins-font' value={"oPositive"}>O+</option>
+                                        <option className='poppins-font' value={"oNegative"}>O-</option>
+                                        <option className='poppins-font' value={"aPositive"}>A+</option>
+                                        <option className='poppins-font' value={"aNegative"}>A-</option>
+                                        <option className='poppins-font' value={"bPositive"}>B+</option>
+                                        <option className='poppins-font' value={"bNegative"}>B-</option>
+                                        <option className='poppins-font' value={"abPositive"}>AB+</option>
+                                        <option className='poppins-font' value={"abNegative"}>AB-</option>
                                     </select>
                                     {
                                         errors?.bloodGroup && <label className="label">
@@ -100,7 +131,7 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:max-w-full lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">জন্ম <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">জন্ম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="date" placeholder="Your Age" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.age && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("age", {
@@ -123,7 +154,7 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-white">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="number" name='number1' placeholder="EX: 01834567890" className={`input input-sm input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.number1 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("number1", {
@@ -149,7 +180,7 @@ const BloodDonorRegistration = () => {
                                 </div>
                                 <div className="form-control w-full max-w-xs lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">দ্বিতীয় ফোন নাম্বার</span>
+                                        <span className="label-text text-white bangla-font text-[16px]">দ্বিতীয় ফোন নাম্বার</span>
                                     </label>
                                     <input type="number" placeholder="(অপশনাল)" className={`input input-sm input-bordered w-full max-w-xs focus:ring-blue-500 focus:ring-1 ${errors.number2 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("number2", {
@@ -173,7 +204,7 @@ const BloodDonorRegistration = () => {
 
                             <div className="form-control w-full max-w-xs lg:max-w-full ">
                                 <label className="label">
-                                    <span className="label-text text-white">লিঙ্গ <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span className="label-text text-white bangla-font text-[16px]">লিঙ্গ <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
                                 <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.gender && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                     {...register("gender", {
@@ -183,11 +214,11 @@ const BloodDonorRegistration = () => {
                                         }
                                     })}
                                 >
-                                    <option disabled selected value={""}>--Select Your Gender--</option>
-                                    <option value={"পুরুষ"}>পুরুষ</option>
-                                    <option value={"মহিলা"}>মহিলা</option>
-                                    <option value={"তৃতীয়"}>তৃতীয় লিঙ্গ</option>
-                                    <option value={"অজানা"}>বলতে চাই না</option>
+                                    <option className='poppins-font' disabled selected value={""}>--Select Your Gender--</option>
+                                    <option className='bangla-font' value={"পুরুষ"}>পুরুষ</option>
+                                    <option className='bangla-font' value={"মহিলা"}>মহিলা</option>
+                                    <option className='bangla-font' value={"তৃতীয়"}>তৃতীয় লিঙ্গ</option>
+                                    <option className='bangla-font' value={"অজানা"}>বলতে চাই না</option>
                                 </select>
                                 {
                                     errors?.gender && <label className="label">
@@ -196,24 +227,27 @@ const BloodDonorRegistration = () => {
                                 }
                             </div>
 
-                            <p className='text-white mt-4 font-bold'>ঠিকানা</p>
+                            <p className='text-white mt-4 font-bold bangla-font text-[17px]'>ঠিকানা</p>
 
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-white">বিভাগ <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">বিভাগ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.division && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                    <select defaultValue={selectedDivision} className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.division && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("division", {
                                             required: {
                                                 value: true,
                                                 message: "Division is required"
-                                            }
+                                            },
+                                            onChange: (e) => setSelectedDivision(e.target.value)
                                         })}
                                     >
-                                        <option disabled selected value={""}>--Select Your Division--</option>
-                                        <option value={"বরিশাল"}>বরিশাল</option>
+                                        <option className='poppins-font' disabled selected value={""}>--Select Your Division--</option>
+                                        {divisionData?.divisions.map((division, index) =>
+                                            <option className='bangla-font' key={index} value={division.division_id}>{division.bn_name}</option>)
+                                        }
                                     </select>
                                     {
                                         errors?.division && <label className="label">
@@ -224,19 +258,22 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">জেলা <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">জেলা <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.district && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='district'
+                                    <select defaultValue={selectedDistrict} className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.district && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='district'
                                         {...register("district", {
                                             required: {
                                                 value: true,
                                                 message: "District is required"
-                                            }
+                                            },
+                                            onChange: (e) => setSelectedDistrict(e.target.value)
                                         })}
                                     >
-                                        <option disabled selected value={""}>--Select Your District--</option>
-                                        <option value={"বরিশাল"}>বরিশাল</option>
+                                        <option className='poppins-font' disabled selected value={""}>--Select Your District--</option>
+                                        {districtFilter?.map((district, index) =>
+                                            <option className='bangla-font' key={index} value={[district.district_id, district.bn_name]}>{district.bn_name}</option>)
+                                        }
                                     </select>
                                     {
                                         errors?.district && <label className="label">
@@ -248,7 +285,7 @@ const BloodDonorRegistration = () => {
 
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
-                                    <span className="label-text text-white">থানা <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span className="label-text text-white bangla-font text-[16px]">থানা <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
                                 <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.policeStation && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
@@ -259,8 +296,8 @@ const BloodDonorRegistration = () => {
                                         }
                                     })}
                                 >
-                                    <option disabled selected value={""}>--Select Your Police Station--</option>
-                                    <option value={"আগৈলঝাড়া"}>আগৈলঝাড়া</option>
+                                    <option className='poppins-font' disabled selected value={""}>--Select Your Police Station--</option>
+                                    <option className='bangla-font' value={"আগৈলঝাড়া"}>আগৈলঝাড়া</option>
                                 </select>
                                 {
                                     errors?.policeStation && <label className="label">
@@ -272,7 +309,7 @@ const BloodDonorRegistration = () => {
                             <div className='lg:flex'>
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-white">ইউনিয়ন <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">ইউনিয়ন <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.union && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
@@ -283,12 +320,12 @@ const BloodDonorRegistration = () => {
                                             }
                                         })}
                                     >
-                                        <option disabled selected value={""}>--Select Your Union--</option>
-                                        <option value={"বাগধা"}>বাগধা</option>
-                                        <option value={"বাকাল"}>বাকাল</option>
-                                        <option value={"গৈলা"}>গৈলা</option>
-                                        <option value={"রাজিহার"}>রাজিহার</option>
-                                        <option value={"রত্নপুর"}>রত্নপুর</option>
+                                        <option className='poppins-font' disabled selected value={""}>--Select Your Union--</option>
+                                        <option className='bangla-font' value={"বাগধা"}>বাগধা</option>
+                                        <option className='bangla-font' value={"বাকাল"}>বাকাল</option>
+                                        <option className='bangla-font' value={"গৈলা"}>গৈলা</option>
+                                        <option className='bangla-font' value={"রাজিহার"}>রাজিহার</option>
+                                        <option className='bangla-font' value={"রত্নপুর"}>রত্নপুর</option>
                                     </select>
                                     {
                                         errors?.union && <label className="label">
@@ -299,7 +336,7 @@ const BloodDonorRegistration = () => {
 
                                 <div className="form-control w-full max-w-xs lg:ml-5">
                                     <label className="label">
-                                        <span className="label-text text-white">গ্রাম <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">গ্রাম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
                                     <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.village && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='village'
@@ -310,20 +347,20 @@ const BloodDonorRegistration = () => {
                                             }
                                         })}
                                     >
-                                        <option disabled selected value={""}>--Select Your Village--</option>
-                                        <option value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
-                                        <option value={"আমবৌলা"}>আমবৌলা</option>
-                                        <option value={"খাজুরিয়া"}>খাজুরিয়া</option>
-                                        <option value={"নিমারপাড়"}>নিমারপাড়</option>
-                                        <option value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
-                                        <option value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
-                                        <option value={"জোবারপাড়"}>জোবারপাড়</option>
-                                        <option value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
-                                        <option value={"আষ্কর"}>আষ্কর</option>
-                                        <option value={"কালিবাড়ি"}>কালিবাড়ি</option>
-                                        <option value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
-                                        <option value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
-                                        <option value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
+                                        <option className='poppins-font' disabled selected value={""}>--Select Your Village--</option>
+                                        <option className='bangla-font' value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
+                                        <option className='bangla-font' value={"আমবৌলা"}>আমবৌলা</option>
+                                        <option className='bangla-font' value={"খাজুরিয়া"}>খাজুরিয়া</option>
+                                        <option className='bangla-font' value={"নিমারপাড়"}>নিমারপাড়</option>
+                                        <option className='bangla-font' value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
+                                        <option className='bangla-font' value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
+                                        <option className='bangla-font' value={"জোবারপাড়"}>জোবারপাড়</option>
+                                        <option className='bangla-font' value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
+                                        <option className='bangla-font' value={"আষ্কর"}>আষ্কর</option>
+                                        <option className='bangla-font' value={"কালিবাড়ি"}>কালিবাড়ি</option>
+                                        <option className='bangla-font' value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
+                                        <option className='bangla-font' value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
+                                        <option className='bangla-font' value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
                                     </select>
                                     {
                                         errors?.village && <label className="label">

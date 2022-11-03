@@ -91,7 +91,7 @@ const Contact = () => {
                             <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
                                 <div className="form-control w-full max-w-xs lg:max-w-full">
                                     <label className="label">
-                                        <span className="label-text text-white">রোগীর নাম <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">রোগীর নাম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="text" placeholder="রোগীর নাম লিখুন" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.patient_name && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("patient_name", {
@@ -111,7 +111,7 @@ const Contact = () => {
                                 <div className='lg:flex'>
                                     <div className="form-control w-full max-w-xs">
                                         <label className="label">
-                                            <span className="label-text text-white">রক্তের গ্রুপ <span className='text-red-500 font-extrabold'>*</span></span>
+                                            <span className="label-text text-white bangla-font text-[16px]">রক্তের গ্রুপ <span className='text-red-500 font-extrabold'>*</span></span>
                                         </label>
                                         <select className={`select select-bordered select-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.requested_bloodGroup && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("requested_bloodGroup", {
@@ -121,15 +121,15 @@ const Contact = () => {
                                                 }
                                             })}
                                         >
-                                            <option selected disabled value={""}>--Select Blood Group--</option>
-                                            <option value={"oPositive"}>O+</option>
-                                            <option value={"oNegative"}>O-</option>
-                                            <option value={"aPositive"}>A+</option>
-                                            <option value={"aNegative"}>A-</option>
-                                            <option value={"bPositive"}>B+</option>
-                                            <option value={"bNegative"}>B-</option>
-                                            <option value={"abPositive"}>AB+</option>
-                                            <option value={"abNegative"}>AB-</option>
+                                            <option className='poppins-font' selected disabled value={""}>--Select Blood Group--</option>
+                                            <option className='poppins-font' value={"oPositive"}>O+</option>
+                                            <option className='poppins-font' value={"oNegative"}>O-</option>
+                                            <option className='poppins-font' value={"aPositive"}>A+</option>
+                                            <option className='poppins-font' value={"aNegative"}>A-</option>
+                                            <option className='poppins-font' value={"bPositive"}>B+</option>
+                                            <option className='poppins-font' value={"bNegative"}>B-</option>
+                                            <option className='poppins-font' value={"abPositive"}>AB+</option>
+                                            <option className='poppins-font' value={"abNegative"}>AB-</option>
                                         </select>
                                         {
                                             errors?.requested_bloodGroup && <label className="label">
@@ -140,7 +140,7 @@ const Contact = () => {
 
                                     <div className="form-control w-full max-w-xs lg:max-w-full lg:ml-5">
                                         <label className="label">
-                                            <span className="label-text text-white">রক্তদানের তারিখ ও সময় <span className='text-red-500 font-extrabold'>*</span></span>
+                                            <span className="label-text text-white bangla-font text-[16px]">রক্তদানের তারিখ ও সময় <span className='text-red-500 font-extrabold'>*</span></span>
                                         </label>
                                         <input type="datetime-local" placeholder="Date" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.date && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("date", {
@@ -161,7 +161,7 @@ const Contact = () => {
                                 <div className='lg:flex'>
                                     <div className="form-control w-full max-w-xs">
                                         <label className="label">
-                                            <span className="label-text text-white">রক্তের পরিমাণ <span className='text-red-500 font-extrabold'>*</span></span>
+                                            <span className="label-text text-white bangla-font text-[16px]">রক্তের পরিমাণ <span className='text-red-500 font-extrabold'>*</span></span>
                                         </label>
                                         <select className={`select select-bordered select-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.blood_quantity && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("blood_quantity", {
@@ -171,14 +171,14 @@ const Contact = () => {
                                                 }
                                             })}
                                         >
-                                            <option selected disabled value={""}>--Blood Bag Quantity--</option>
-                                            <option value={"1"}>1 ব্যাগ </option>
-                                            <option value={"2"}>2 ব্যাগ</option>
-                                            <option value={"3"}>3 ব্যাগ</option>
-                                            <option value={"4"}>4 ব্যাগ</option>
-                                            <option value={"5"}>5 ব্যাগ</option>
-                                            <option value={"6"}>6 ব্যাগ</option>
-                                            <option value={"6+"}>6+ ব্যাগ</option>
+                                            <option className='poppins-font' selected disabled value={""}>--Blood Bag Quantity--</option>
+                                            <option className='bangla-font' value={"1"}>1 ব্যাগ </option>
+                                            <option className='bangla-font' value={"2"}>2 ব্যাগ</option>
+                                            <option className='bangla-font' value={"3"}>3 ব্যাগ</option>
+                                            <option className='bangla-font' value={"4"}>4 ব্যাগ</option>
+                                            <option className='bangla-font' value={"5"}>5 ব্যাগ</option>
+                                            <option className='bangla-font' value={"6"}>6 ব্যাগ</option>
+                                            <option className='bangla-font' value={"6+"}>6+ ব্যাগ</option>
                                         </select>
                                         {
                                             errors?.blood_quantity && <label className="label">
@@ -188,7 +188,7 @@ const Contact = () => {
                                     </div>
                                     <div className="form-control w-full max-w-xs lg:ml-5">
                                         <label className="label">
-                                            <span className="label-text text-white">হিমোগ্লোবিন</span>
+                                            <span className="label-text text-white bangla-font text-[16px]">হিমোগ্লোবিন</span>
                                         </label>
                                         <input type="text" placeholder="(অপশনাল)" className={`input input-sm input-bordered w-full max-w-xs focus:ring-blue-500 focus:ring-1`}
                                             {...register("hemoglobin", {
@@ -200,7 +200,7 @@ const Contact = () => {
 
                                 <div className="form-control w-full max-w-xs lg:max-w-full">
                                     <label className="label">
-                                        <span className="label-text text-white">সংক্ষেপে রোগীর সমস্যা লিখুন </span>
+                                        <span className="label-text text-white bangla-font text-[16px]">সংক্ষেপে রোগীর সমস্যা লিখুন </span>
                                     </label>
                                     <input type="text" placeholder="(অপশনাল)" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.patient_problem && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("patient_problem", {
@@ -217,11 +217,11 @@ const Contact = () => {
                                     }
                                 </div>
 
-                                <p className='text-white mt-4 font-bold'>ঠিকানা</p>
+                                <p className='text-white mt-4 font-bold bangla-font text-[17px]'>ঠিকানা</p>
 
                                 <div className="form-control w-full max-w-xs lg:max-w-full">
                                     <label className="label">
-                                        <span className="label-text text-white">রক্তদানের স্থান <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-white bangla-font text-[16px]">রক্তদানের স্থান <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input type="text" placeholder="রক্তদানের স্থানের নাম লিখুন" className={`input input-sm input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.donation_place && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("donation_place", {
@@ -245,7 +245,7 @@ const Contact = () => {
                                 <div className='lg:flex'>
                                     <div className="form-control w-full max-w-xs">
                                         <label className="label">
-                                            <span className="label-text text-white">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
+                                            <span className="label-text text-white bangla-font text-[16px]">ফোন নাম্বার <span className='text-red-500 font-extrabold'>*</span></span>
                                         </label>
                                         <input type="number" name='number1' placeholder="EX: 01834567890" className={`input input-sm input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.number1 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("number1", {
@@ -271,7 +271,7 @@ const Contact = () => {
                                     </div>
                                     <div className="form-control w-full max-w-xs lg:ml-5">
                                         <label className="label">
-                                            <span className="label-text text-white">দ্বিতীয় ফোন নাম্বার</span>
+                                            <span className="label-text text-white bangla-font text-[16px]">দ্বিতীয় ফোন নাম্বার</span>
                                         </label>
                                         <input type="number" placeholder="(অপশনাল)" className={`input input-sm input-bordered w-full max-w-xs focus:ring-blue-500 focus:ring-1 ${errors.number2 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                             {...register("number2", {
