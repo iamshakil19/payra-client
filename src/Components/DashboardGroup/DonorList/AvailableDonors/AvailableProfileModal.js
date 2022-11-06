@@ -60,7 +60,7 @@ const AvailableProfileModal = ({ availableDonorProfileData, setAvailableDonorPro
                         <div>
                             <p className='mb-1 bangla-font'>বিভাগ: <span className='font-bold'>{division}</span></p>
                             <p className='mb-1 bangla-font'>জেলা: <span className='font-bold'>{district}</span></p>
-                            <p className='mb-1 bangla-font'>থানা: <span className='font-bold'>{policeStation}</span></p>
+                            <p className='mb-1 bangla-font'>উপজেলা: <span className='font-bold'>{policeStation}</span></p>
                             <p className='mb-1 bangla-font'>ইউনিয়ন:  <span className='font-bold'>{union}</span></p>
                             <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
                         </div>

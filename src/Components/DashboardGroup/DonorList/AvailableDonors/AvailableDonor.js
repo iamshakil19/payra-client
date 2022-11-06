@@ -94,11 +94,10 @@ const AvailableDonor = () => {
 
                                     <section className='grid grid-cols-2 gap-3'>
                                         <div>
-                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Police Station</span>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Upazila</span>
                                             <select name="" id="union" onChange={(e) => setPoliceStationFilterData(e.target.value)} defaultValue={policeStationFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
                                                 <option className='poppins-font' selected value="">Default</option>
                                                 <option className='bangla-font' value="আগৈলঝাড়া">আগৈলঝাড়া</option>
-
                                             </select>
                                         </div>
 
@@ -211,7 +210,7 @@ const AvailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>বয়স</th>
                             <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
-                            <th className='bangla-font text-[15px] pl-2'>থানা</th>
+                            <th className='bangla-font text-[15px] pl-2'>উপজেলা</th>
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>

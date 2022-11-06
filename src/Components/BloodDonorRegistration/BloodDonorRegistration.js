@@ -13,12 +13,16 @@ const BloodDonorRegistration = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
     const [selectedDivision, setSelectedDivision] = useState("")
     const [selectedDistrict, setSelectedDistrict] = useState("")
+    const [selectedUpazila, setSelectedUpazila] = useState("")
 
     const status = "pending"
 
     const onSubmit = data => {
-        console.log(data);
-        const newData = { ...data, status }
+        const division = data?.division.split(',')[1]
+        const district = data?.district.split(',')[1]
+        const policeStation = data?.policeStation.split(',')[1]
+        const newData = { ...data, division, district, policeStation, status }
+        // console.log(newData);
 
         fetch('http://localhost:5000/donor-request', {
             method: 'POST',
@@ -55,15 +59,25 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
 
-        const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision)
 
-    if (divisionIsLoading || districtIsLoading) {
+    const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
+
+    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
+
+    if (divisionIsLoading || districtIsLoading || upazilaIsLoading) {
         return <Loading />
     }
+    // console.log(selectedUpazila.split(",")[1]);
 
-    console.log(selectedDistrict);
-    // console.log(districtFilter);
 
     return (
         <div className='donor-registration-bg min-h-screen'>
@@ -235,7 +249,7 @@ const BloodDonorRegistration = () => {
                                         <span className="label-text text-white bangla-font text-[16px]">বিভাগ <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select defaultValue={selectedDivision} className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.division && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                    <select defaultValue={selectedDivision} className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.division && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("division", {
                                             required: {
                                                 value: true,
@@ -246,8 +260,7 @@ const BloodDonorRegistration = () => {
                                     >
                                         <option className='poppins-font' disabled selected value={""}>--Select Your Division--</option>
                                         {divisionData?.divisions.map((division, index) =>
-                                            <option className='bangla-font' key={index} value={division.division_id}>{division.bn_name}</option>)
-                                        }
+                                            <option className='bangla-font' key={index} value={[division.division_id, division.bn_name]}>{division.bn_name}</option>)}
                                     </select>
                                     {
                                         errors?.division && <label className="label">
@@ -261,7 +274,7 @@ const BloodDonorRegistration = () => {
                                         <span className="label-text text-white bangla-font text-[16px]">জেলা <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select defaultValue={selectedDistrict} className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.district && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='district'
+                                    <select defaultValue={selectedDistrict} className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.district && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='district'
                                         {...register("district", {
                                             required: {
                                                 value: true,
@@ -285,19 +298,22 @@ const BloodDonorRegistration = () => {
 
                             <div className="form-control w-full max-w-xs lg:max-w-full">
                                 <label className="label">
-                                    <span className="label-text text-white bangla-font text-[16px]">থানা <span className='text-red-500 font-extrabold'>*</span></span>
+                                    <span className="label-text text-white bangla-font text-[16px]">উপজেলা <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
-                                <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.policeStation && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                <select defaultValue={selectedUpazila} className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.policeStation && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                     {...register("policeStation", {
                                         required: {
                                             value: true,
                                             message: "Police Station is required"
-                                        }
+                                        },
+                                        onChange: (e) => setSelectedUpazila(e.target.value)
                                     })}
                                 >
-                                    <option className='poppins-font' disabled selected value={""}>--Select Your Police Station--</option>
-                                    <option className='bangla-font' value={"আগৈলঝাড়া"}>আগৈলঝাড়া</option>
+                                    <option className='poppins-font' disabled selected value={""}>--Select Your Upazila--</option>
+                                    {upazilaFilter?.map((upazila, index) =>
+                                        <option className='bangla-font' key={index} value={[upazila.upazila_id, upazila.bn_name]}>{upazila.bn_name}</option>)
+                                    }
                                 </select>
                                 {
                                     errors?.policeStation && <label className="label">
@@ -312,7 +328,7 @@ const BloodDonorRegistration = () => {
                                         <span className="label-text text-white bangla-font text-[16px]">ইউনিয়ন <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.union && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                    <select className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.union && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("union", {
                                             required: {
                                                 value: true,
@@ -339,7 +355,7 @@ const BloodDonorRegistration = () => {
                                         <span className="label-text text-white bangla-font text-[16px]">গ্রাম <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
 
-                                    <select className={`select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.village && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='village'
+                                    <select className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.village && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`} name='village'
                                         {...register("village", {
                                             required: {
                                                 value: true,

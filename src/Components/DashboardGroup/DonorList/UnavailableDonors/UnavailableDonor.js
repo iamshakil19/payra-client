@@ -78,7 +78,7 @@ const UnavailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>বয়স</th>
                             <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
-                            <th className='bangla-font text-[15px] pl-2'>থানা</th>
+                            <th className='bangla-font text-[15px] pl-2'>উপজেলা</th>
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
