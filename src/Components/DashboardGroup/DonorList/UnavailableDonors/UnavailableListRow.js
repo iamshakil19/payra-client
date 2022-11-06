@@ -5,7 +5,7 @@ import avatarImg from '../../../../Resources/avatarImage.jpg'
 
 const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, setUnavailableDonorProfileData, refetch, setDaysProfile, setHoursProfile }) => {
 
-    const { donationCount, name, age, gender, number1, bloodGroup, policeStation, union, village, _id, time } = donorSingleData
+    const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id, time } = donorSingleData
 
     const handleDonate = () => {
         fetch(`http://localhost:5000/handleAvailability/${_id}`, {
@@ -95,7 +95,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
             <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>
-            <td className='bangla-font p-2'>{policeStation}</td>
+            <td className='bangla-font p-2'>{upazila}</td>
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>

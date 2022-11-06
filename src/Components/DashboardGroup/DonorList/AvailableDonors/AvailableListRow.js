@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import avatarImg from '../../../../Resources/avatarImage.jpg'
 
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
-    const { donationCount, name, age, gender, number1, bloodGroup, policeStation, union, village, _id } = donorSingleData
+    const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id } = donorSingleData
 
     const handleDonate = () => {
         const date = new Date(new Date().getTime() + (90 * 24 * 60 * 60 * 1000));
@@ -72,7 +72,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>
-            <td className='bangla-font p-2'>{policeStation}</td>
+            <td className='bangla-font p-2'>{upazila}</td>
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>

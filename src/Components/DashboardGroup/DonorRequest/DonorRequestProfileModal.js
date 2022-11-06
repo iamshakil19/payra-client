@@ -6,7 +6,7 @@ import avatarImg from '../../../Resources/avatarImage.jpg'
 
 const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest, refetch, setDonorData }) => {
 
-    const { _id, name, bloodGroup, age, number1, number2, gender, division, district, policeStation, union, village, status } = profileDonorRequest
+    const { _id, name, bloodGroup, age, number1, number2, gender, division, district, upazila, union, village, status } = profileDonorRequest
     const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     let newStatus = "verified"
     const acceptedTime = new Date()
@@ -93,7 +93,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                         <div>
                             <p className='mb-1 bangla-font'>বিভাগ: <span className='font-bold'>{division}</span></p>
                             <p className='mb-1 bangla-font'>জেলা: <span className='font-bold'>{district}</span></p>
-                            <p className='mb-1 bangla-font'>উপজেলা: <span className='font-bold'>{policeStation}</span></p>
+                            <p className='mb-1 bangla-font'>উপজেলা: <span className='font-bold'>{upazila}</span></p>
 
 
                         </div>

@@ -18,18 +18,36 @@ const AvailableDonor = () => {
     const navigate = useNavigate()
     const donorSearchData = useContext(DonorContext)
 
+
     const [availableDonorData, setAvailableDonorData] = useState(null)
     const [availableDonorProfileData, setAvailableDonorProfileData] = useState(null)
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
     const [sortByDonateCount, setSortByDonateCount] = useState("acceptedTime")
-    const [policeStationFilterData, setPoliceStationFilterData] = useState("")
+
+    const [selectedDivision, setSelectedDivision] = useState("")
+    let divisionFilterData = selectedDivision.split(",")[1]
+    if(!divisionFilterData){
+        divisionFilterData = ""
+    }
+    const [selectedDistrict, setSelectedDistrict] = useState("")
+    let districtFilterData = selectedDistrict.split(",")[1]
+    if(!districtFilterData){
+        districtFilterData = ""
+    }
+
+    const [selectedUpazila, setSelectedUpazila] = useState("")
+    let upazilaFilterData = selectedUpazila.split(",")[1]
+    if(!upazilaFilterData){
+        upazilaFilterData = ""
+    }
+
     const [unionFilterData, setUnionFilterData] = useState("")
     const [villageFilterData, setVillageFilterData] = useState("")
     const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
     const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, unionFilterData, villageFilterData, bloodGroupFilterData, policeStationFilterData], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, unionFilterData, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -45,7 +63,37 @@ const AvailableDonor = () => {
             return res.json()
         }))
 
-    if (isLoading) {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
+    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
+
+    if (isLoading || divisionIsLoading || districtIsLoading || upazilaIsLoading) {
         return <Loading />
     }
 
@@ -62,7 +110,7 @@ const AvailableDonor = () => {
     }
 
 
-    console.log(unionFilterData);
+    // console.log(selectedDivision.split(",")[0]);
 
 
     return (
@@ -94,10 +142,32 @@ const AvailableDonor = () => {
 
                                     <section className='grid grid-cols-2 gap-3'>
                                         <div>
-                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Upazila</span>
-                                            <select name="" id="union" onChange={(e) => setPoliceStationFilterData(e.target.value)} defaultValue={policeStationFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Division</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedDivision(e.target.value)} defaultValue={selectedDivision} className='w-full border border-gray-400 rounded-md py-0.5'>
                                                 <option className='poppins-font' selected value="">Default</option>
-                                                <option className='bangla-font' value="আগৈলঝাড়া">আগৈলঝাড়া</option>
+                                                {divisionData?.divisions.map((division, index) =>
+                                                    <option className='bangla-font' key={index} value={[division.division_id, division.bn_name]}>{division.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>District</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedDistrict(e.target.value)} defaultValue={selectedDistrict} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {districtFilter?.map((district, index) =>
+                                                    <option className='bangla-font' key={index} value={[district.district_id, district.bn_name]}>{district.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Upazila</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedUpazila(e.target.value)} defaultValue={selectedUpazila} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {upazilaFilter?.map((upazila, index) =>
+                                                    <option className='bangla-font' key={index} value={[upazila.upazila_id, upazila.bn_name]}>{upazila.bn_name}</option>)
+                                                }
                                             </select>
                                         </div>
 

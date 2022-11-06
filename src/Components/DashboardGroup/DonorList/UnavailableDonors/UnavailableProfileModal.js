@@ -5,7 +5,7 @@ import avatarImg from '../../../../Resources/avatarImage.jpg'
 
 const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDonorProfileData, refetch, daysProfile, hoursProfile }) => {
 
-    const { donationCount, name, age, gender, number1, number2, bloodGroup, policeStation, union, village, division, district, available, _id } = unavailableDonorProfileData
+    const { donationCount, name, age, gender, number1, number2, bloodGroup, upazila, union, village, division, district, available, _id } = unavailableDonorProfileData
 
     const handleDonate = () => {
         fetch(`http://localhost:5000/handleAvailability/${_id}`, {
@@ -78,7 +78,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
                         <div>
                             <p className='mb-1 bangla-font'>বিভাগ: <span className='font-bold'>{division}</span></p>
                             <p className='mb-1 bangla-font'>জেলা: <span className='font-bold'>{district}</span></p>
-                            <p className='mb-1 bangla-font'>উপজেলা: <span className='font-bold'>{policeStation}</span></p>
+                            <p className='mb-1 bangla-font'>উপজেলা: <span className='font-bold'>{upazila}</span></p>
                             <p className='mb-1 bangla-font'>ইউনিয়ন:  <span className='font-bold'>{union}</span></p>
                             <p className='mb-1'><span className='bangla-font'>গ্রাম: </span> <span className='bangla-font font-bold'>{village}</span></p>
                         </div>

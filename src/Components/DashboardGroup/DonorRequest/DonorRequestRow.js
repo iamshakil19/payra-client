@@ -5,7 +5,7 @@ import { IncompleteBloodContext } from '../Dashboard/Dashboard';
 import avatarImg from '../../../Resources/avatarImage.jpg'
 
 const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorRequest, refetch }) => {
-    const { _id, name, age, gender, number1, bloodGroup, union, village } = donorRequest
+    const { _id, name, age, gender, number1, bloodGroup, union, upazila, village } = donorRequest
     const [incompleteRefetch, setIncompleteRefetch] = useContext(IncompleteBloodContext)
     let newStatus = "verified"
     const acceptedTime = new Date()
@@ -72,6 +72,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             <td className='poppins-font p-2 '>{age}</td>
             <td className='bangla-font p-2 '>{gender}</td>
             <td className='poppins-font p-2 '>{number1}</td>
+            <td className='bangla-font p-2 '>{upazila}</td>
             <td className='bangla-font p-2 '>{union}</td>
             <td className='bangla-font p-2 '>{village}</td>
             <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-16 bg-green-600 border-0 hover:bg-green-700'>Accept</button></td>

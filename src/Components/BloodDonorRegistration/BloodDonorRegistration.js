@@ -20,8 +20,8 @@ const BloodDonorRegistration = () => {
     const onSubmit = data => {
         const division = data?.division.split(',')[1]
         const district = data?.district.split(',')[1]
-        const policeStation = data?.policeStation.split(',')[1]
-        const newData = { ...data, division, district, policeStation, status }
+        const upazila = data?.upazila.split(',')[1]
+        const newData = { ...data, division, district, upazila, status }
         // console.log(newData);
 
         fetch('http://localhost:5000/donor-request', {
@@ -301,11 +301,11 @@ const BloodDonorRegistration = () => {
                                     <span className="label-text text-white bangla-font text-[16px]">উপজেলা <span className='text-red-500 font-extrabold'>*</span></span>
                                 </label>
 
-                                <select defaultValue={selectedUpazila} className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.policeStation && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
-                                    {...register("policeStation", {
+                                <select defaultValue={selectedUpazila} className={`bangla-font select select-bordered select-sm focus:ring-blue-500 focus:ring-1 ${errors.upazila && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
+                                    {...register("upazila", {
                                         required: {
                                             value: true,
-                                            message: "Police Station is required"
+                                            message: "Upazila Station is required"
                                         },
                                         onChange: (e) => setSelectedUpazila(e.target.value)
                                     })}
@@ -316,8 +316,8 @@ const BloodDonorRegistration = () => {
                                     }
                                 </select>
                                 {
-                                    errors?.policeStation && <label className="label">
-                                        {errors?.policeStation && <span className="label-text-alt text-red-500">{errors.policeStation.message}</span>}
+                                    errors?.upazila && <label className="label">
+                                        {errors?.upazila && <span className="label-text-alt text-red-500">{errors.upazila.message}</span>}
                                     </label>
                                 }
                             </div>
