@@ -27,27 +27,33 @@ const AvailableDonor = () => {
 
     const [selectedDivision, setSelectedDivision] = useState("")
     let divisionFilterData = selectedDivision.split(",")[1]
-    if(!divisionFilterData){
+    if (!divisionFilterData) {
         divisionFilterData = ""
     }
     const [selectedDistrict, setSelectedDistrict] = useState("")
     let districtFilterData = selectedDistrict.split(",")[1]
-    if(!districtFilterData){
+    if (!districtFilterData) {
         districtFilterData = ""
     }
 
     const [selectedUpazila, setSelectedUpazila] = useState("")
     let upazilaFilterData = selectedUpazila.split(",")[1]
-    if(!upazilaFilterData){
+    if (!upazilaFilterData) {
         upazilaFilterData = ""
     }
 
-    const [unionFilterData, setUnionFilterData] = useState("")
+    const [selectedUnion, setSelectedUnion] = useState("")
+    let unionFilterData = selectedUnion.split(",")[1]
+    if (!unionFilterData) {
+        unionFilterData = ""
+    }
+
+
     const [villageFilterData, setVillageFilterData] = useState("")
     const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
     const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, unionFilterData, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`https://payra.onrender.com/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -63,7 +69,7 @@ const AvailableDonor = () => {
             return res.json()
         }))
 
-    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('https://payra.onrender.com/divisions', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -72,7 +78,7 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('https://payra.onrender.com/districts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -81,7 +87,25 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('https://payra.onrender.com/upazilas', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('https://payra.onrender.com/unions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('https://payra.onrender.com/villages', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -92,8 +116,10 @@ const AvailableDonor = () => {
 
     const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
     const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
+    const unionFilter = unionData?.unions?.filter((singleUnion) => singleUnion.upazila_id === selectedUpazila.split(",")[0])
+    const villageFilter = villageData?.villages?.filter((singleVillage) => singleVillage.union_id === selectedUnion.split(",")[0])
 
-    if (isLoading || divisionIsLoading || districtIsLoading || upazilaIsLoading) {
+    if (isLoading || divisionIsLoading || districtIsLoading || upazilaIsLoading || unionIsLoading || villageIsLoading) {
         return <Loading />
     }
 
@@ -173,13 +199,11 @@ const AvailableDonor = () => {
 
                                         <div>
                                             <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Union</span>
-                                            <select name="" id="union" onChange={(e) => setUnionFilterData(e.target.value)} defaultValue={unionFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                            <select name="" id="union" onChange={(e) => setSelectedUnion(e.target.value)} defaultValue={unionFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
                                                 <option className='poppins-font' selected value="">Default</option>
-                                                <option className='bangla-font' value="বাগধা">বাগধা</option>
-                                                <option className='bangla-font' value="বাকাল">বাকাল</option>
-                                                <option className='bangla-font' value="গৈলা">গৈলা</option>
-                                                <option className='bangla-font' value="রাজিহার">রাজিহার</option>
-                                                <option className='bangla-font' value="রত্নপুর">রত্নপুর</option>
+                                                {unionFilter?.map((union, index) =>
+                                                    <option className='bangla-font' key={index} value={[union.union_id, union.bn_name]}>{union.bn_name}</option>)
+                                                }
                                             </select>
                                         </div>
 
@@ -187,19 +211,9 @@ const AvailableDonor = () => {
                                             <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Village</span>
                                             <select name="" id="union" onChange={(e) => setVillageFilterData(e.target.value)} defaultValue={villageFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
                                                 <option className='poppins-font' selected value="">Default</option>
-                                                <option className='bangla-font' value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
-                                                <option className='bangla-font' value={"আমবৌলা"}>আমবৌলা</option>
-                                                <option className='bangla-font' value={"খাজুরিয়া"}>খাজুরিয়া</option>
-                                                <option className='bangla-font' value={"নিমারপাড়"}>নিমারপাড়</option>
-                                                <option className='bangla-font' value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
-                                                <option className='bangla-font' value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
-                                                <option className='bangla-font' value={"জোবারপাড়"}>জোবারপাড়</option>
-                                                <option className='bangla-font' value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
-                                                <option className='bangla-font' value={"আষ্কর"}>আষ্কর</option>
-                                                <option className='bangla-font' value={"কালিবাড়ি"}>কালিবাড়ি</option>
-                                                <option className='bangla-font' value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
-                                                <option className='bangla-font' value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
-                                                <option className='bangla-font' value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
+                                                {villageFilter?.map((village, index) =>
+                                                    <option className='bangla-font' key={index} value={village.bn_name}>{village.bn_name}</option>)
+                                                }
                                             </select>
                                         </div>
 

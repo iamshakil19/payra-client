@@ -19,7 +19,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
             status: newStatus,
             submissionTime: submissionTime
         }
-        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
+        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -48,28 +48,28 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
                 </div>
             </td>
             <td className='poppins-font p-2 '>{patient_name}</td>
-            { requested_bloodGroup === "oPositive" &&
+            {requested_bloodGroup === "oPositive" &&
                 <td className='poppins-font uppercase p-2 '>O+</td>
             }
-            { requested_bloodGroup === "oNegative" &&
+            {requested_bloodGroup === "oNegative" &&
                 <td className='poppins-font uppercase p-2 '>O-</td>
             }
-            { requested_bloodGroup === "aPositive" &&
+            {requested_bloodGroup === "aPositive" &&
                 <td className='poppins-font uppercase p-2 '>A+</td>
             }
-            { requested_bloodGroup === "aNegative" &&
+            {requested_bloodGroup === "aNegative" &&
                 <td className='poppins-font uppercase p-2 '>A-</td>
             }
-            { requested_bloodGroup === "bPositive" &&
+            {requested_bloodGroup === "bPositive" &&
                 <td className='poppins-font uppercase p-2 '>B+</td>
             }
-            { requested_bloodGroup === "bNegative" &&
+            {requested_bloodGroup === "bNegative" &&
                 <td className='poppins-font uppercase p-2 '>B-</td>
             }
-            { requested_bloodGroup === "abPositive" &&
+            {requested_bloodGroup === "abPositive" &&
                 <td className='poppins-font uppercase p-2 '>AB+</td>
             }
-            { requested_bloodGroup === "abNegative" &&
+            {requested_bloodGroup === "abNegative" &&
                 <td className='poppins-font uppercase p-2 '>AB-</td>
             }
             <td className='poppins-font p-2 '>{blood_quantity} <span className='bangla-font'>ব্যাগ</span> </td>

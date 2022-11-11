@@ -36,7 +36,7 @@ const Dashboard = () => {
     const [admin, adminLoading, adminRole] = useAdmin(user)
 
 
-    const { data: allDonorRequest, donorLoading } = useQuery(['donorRequest', incompleteRefetch], () => fetch('http://localhost:5000/donor-request', {
+    const { data: allDonorRequest, donorLoading } = useQuery(['donorRequest', incompleteRefetch], () => fetch('https://payra.onrender.com/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -52,7 +52,7 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    const { data: incompleteBloodList, bloodLoading } = useQuery(['incompleteBloodList', incompleteRefetch], () => fetch('http://localhost:5000/incomplete-blood-request', {
+    const { data: incompleteBloodList, bloodLoading } = useQuery(['incompleteBloodList', incompleteRefetch], () => fetch('https://payra.onrender.com/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

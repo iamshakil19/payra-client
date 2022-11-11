@@ -8,7 +8,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
     const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id, time } = donorSingleData
 
     const handleDonate = () => {
-        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
+        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -99,7 +99,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
-            <td className='bangla-font p-2'>{days} D : {hours} H : {minutes} M : {seconds} S</td>
+            <td className='bangla-font p-2'>{days} D : {hours} H : {minutes} M</td>
             <td className='bangla-font p-2'><button onClick={handleDonate} className='btn btn-sm'>Done</button></td>
             <td className='p-2'>
                 <label onClick={() => setUnavailableDonorData(donorSingleData)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>

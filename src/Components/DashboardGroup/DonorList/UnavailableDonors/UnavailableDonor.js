@@ -20,7 +20,7 @@ const UnavailableDonor = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`http://localhost:5000/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`https://payra.onrender.com/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -82,7 +82,7 @@ const UnavailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
-                            <th className='bangla-font text-[15px] pl-2'>উপস্থিতি</th>
+                            <th className='bangla-font text-[15px] pl-2'>সময় বাকি</th>
                             <th className='bangla-font text-[15px] pl-2'>সম্পূর্ণ</th>
                             <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
                         </tr>
