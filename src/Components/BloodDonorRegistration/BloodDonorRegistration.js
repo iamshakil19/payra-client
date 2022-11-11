@@ -28,7 +28,7 @@ const BloodDonorRegistration = () => {
         const newData = { ...data, division, district, upazila, union, status }
         // console.log(newData);
 
-        fetch('https://payra.onrender.com/donor-request', {
+        fetch('http://localhost:5000/donor-request', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -45,7 +45,7 @@ const BloodDonorRegistration = () => {
             })
     };
 
-    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('https://payra.onrender.com/divisions', {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -54,7 +54,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('https://payra.onrender.com/districts', {
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -63,7 +63,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('https://payra.onrender.com/upazilas', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -72,7 +72,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('https://payra.onrender.com/unions', {
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unions', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -81,7 +81,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('https://payra.onrender.com/villages', {
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villages', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

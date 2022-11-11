@@ -16,7 +16,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             donateTime: donateTime,
             donateButtonClickTime: donateButtonClickTime
         }
-        fetch(`https://payra.onrender.com/donationCount/${_id}`, {
+        fetch(`http://localhost:5000/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

@@ -8,7 +8,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
     const { donationCount, name, age, gender, number1, number2, bloodGroup, upazila, union, village, division, district, available, _id } = unavailableDonorProfileData
 
     const handleDonate = () => {
-        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
+        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -86,7 +86,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
                         <div className='text-right'>
                             <p className='mb-1 bangla-font'>লিঙ্গ: <span className='font-bold text-green-600'>{gender}</span></p>
                             <p className='mb-1 bangla-font'>মোট রক্তদান:  <span className='font-bold'>{donationCount} বার</span></p>
-                            <p className='mb-1 bangla-font'>সময় বাকি: <span className='font-bold'>{daysProfile} D : {hoursProfile} H</span></p>
+                            <p className='mb-1 bangla-font'>সময় বাকি: <span className='font-bold'>{daysProfile} D</span></p>
                             <p className='mb-1 bangla-font'>সম্পূর্ণ: <button onClick={handleDonate} className='btn btn-xs ml-4'>Done</button></p>
                         </div>
                     </div>

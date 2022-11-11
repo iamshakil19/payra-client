@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -7,8 +7,9 @@ import auth from '../../../../firebase.init';
 import UnavailableListRow from './UnavailableListRow';
 import UnavailableDeleteModal from './UnavailableDeleteModal';
 import UnavailableProfileModal from './UnavailableProfileModal';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { DonorContext } from '../../Dashboard/Dashboard';
+import { Menu, Transition } from '@headlessui/react'
 
 const UnavailableDonor = () => {
     const navigate = useNavigate()
@@ -20,7 +21,36 @@ const UnavailableDonor = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, donorSearchData], () => fetch(`https://payra.onrender.com/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&donorSearchData=${donorSearchData}`, {
+    const [sortByDonateCount, setSortByDonateCount] = useState("donateButtonClickTime,1")
+
+    const [selectedDivision, setSelectedDivision] = useState("")
+    let divisionFilterData = selectedDivision.split(",")[1]
+    if (!divisionFilterData) {
+        divisionFilterData = ""
+    }
+    const [selectedDistrict, setSelectedDistrict] = useState("")
+    let districtFilterData = selectedDistrict.split(",")[1]
+    if (!districtFilterData) {
+        districtFilterData = ""
+    }
+
+    const [selectedUpazila, setSelectedUpazila] = useState("")
+    let upazilaFilterData = selectedUpazila.split(",")[1]
+    if (!upazilaFilterData) {
+        upazilaFilterData = ""
+    }
+
+    const [selectedUnion, setSelectedUnion] = useState("")
+    let unionFilterData = selectedUnion.split(",")[1]
+    if (!unionFilterData) {
+        unionFilterData = ""
+    }
+
+    const [villageFilterData, setVillageFilterData] = useState("")
+    const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
+    const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
+
+    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`http://localhost:5000/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -36,7 +66,57 @@ const UnavailableDonor = () => {
             return res.json()
         }))
 
-    if (isLoading) {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villages', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
+    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
+    const unionFilter = unionData?.unions?.filter((singleUnion) => singleUnion.upazila_id === selectedUpazila.split(",")[0])
+    const villageFilter = villageData?.villages?.filter((singleVillage) => singleVillage.union_id === selectedUnion.split(",")[0])
+
+    if (isLoading || divisionIsLoading || districtIsLoading || upazilaIsLoading || unionIsLoading || villageIsLoading) {
         return <Loading />
     }
 
@@ -51,22 +131,151 @@ const UnavailableDonor = () => {
         }
         setPageNumber(pageNumber + 1)
     }
-
+console.log(data);
     return (
         <div>
-            <div className="overflow-x-auto">
-                <div className='mb-3 hidden lg:block'>
-                    <p className='text-right'>
-                        <span className='poppins-font'>Show : </span>
-                        <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
-                            <option selected className='font-semibold' value="10">10</option>
-                            <option className='font-semibold' value="15">15</option>
-                            <option className='font-semibold' value="25">25</option>
-                            <option className='font-semibold' value="50">50</option>
-                            <option className='font-semibold' value="100">100</option>
-                        </select>
-                    </p>
+            <div className='flex items-center justify-between mb-3'>
+                <div className="z-50 w-56 lg:block hidden">
+                    <Menu as="div" className="relative inline-block text-left">
+                        <div>
+                            <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-200 border border-slate-500">
+                                Filter
+                                <ChevronDownIcon
+                                    className="ml-2 -mr-1 h-5 w-5 "
+                                    aria-hidden="true"
+                                />
+                            </Menu.Button>
+                        </div>
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterTo="transform opacity-100 scale-100"
+                            enterFrom="transform opacity-0 scale-95"
+
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="absolute left-0 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="px-3 py-3 rounded-md shadow-md border border-gray-300">
+
+                                    <section className='grid grid-cols-2 gap-3'>
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Division</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedDivision(e.target.value)} defaultValue={selectedDivision} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {divisionData?.divisions.map((division, index) =>
+                                                    <option className='bangla-font' key={index} value={[division.division_id, division.bn_name]}>{division.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>District</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedDistrict(e.target.value)} defaultValue={selectedDistrict} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {districtFilter?.map((district, index) =>
+                                                    <option className='bangla-font' key={index} value={[district.district_id, district.bn_name]}>{district.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Upazila</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedUpazila(e.target.value)} defaultValue={selectedUpazila} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {upazilaFilter?.map((upazila, index) =>
+                                                    <option className='bangla-font' key={index} value={[upazila.upazila_id, upazila.bn_name]}>{upazila.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Union</span>
+                                            <select name="" id="union" onChange={(e) => setSelectedUnion(e.target.value)} defaultValue={unionFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {unionFilter?.map((union, index) =>
+                                                    <option className='bangla-font' key={index} value={[union.union_id, union.bn_name]}>{union.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Village</span>
+                                            <select name="" id="union" onChange={(e) => setVillageFilterData(e.target.value)} defaultValue={villageFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                {villageFilter?.map((village, index) =>
+                                                    <option className='bangla-font' key={index} value={village.bn_name}>{village.bn_name}</option>)
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <span className='poppins-font font-semibold ml-1 mb-1 inline-block'>Blood Group</span>
+                                            <select name="" id="union" onChange={(e) => setBloodGroupFilterData(e.target.value)} defaultValue={bloodGroupFilterData} className='w-full border border-gray-400 rounded-md py-0.5'>
+                                                <option className='poppins-font' selected value="">Default</option>
+                                                <option className='bangla-font' value="oPositive">O+</option>
+                                                <option className='bangla-font' value="oNegative">O-</option>
+                                                <option className='bangla-font' value="aPositive">A+</option>
+                                                <option className='bangla-font' value="aNegative">A-</option>
+                                                <option className='bangla-font' value="bPositive">B+</option>
+                                                <option className='bangla-font' value="bNegative">B-</option>
+                                                <option className='bangla-font' value="abPositive">AB+</option>
+                                                <option className='bangla-font' value="abNegative">AB-</option>
+                                            </select>
+                                        </div>
+                                    </section>
+
+                                    <span className='poppins-font font-semibold ml-1 mb-1 inline-block mt-2'>Gender</span>
+                                    <div className='flex items-center justify-between'>
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" onClick={(e) => setGenderFilterData({ ...genderFilterData, man: e.target.checked })} name="পুরুষ" id="পুরুষ" value={"পুরুষ"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="পুরুষ" className='bangla-font ml-2'>পুরুষ</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="মহিলা" id="মহিলা" value={"মহিলা"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="মহিলা" className='bangla-font ml-2'>মহিলা</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="তৃতীয়" id="তৃতীয়" value={"তৃতীয়"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="তৃতীয়" className='bangla-font ml-2'>তৃতীয়</label>
+                                        </div>
+
+                                        <div className='flex items-center'>
+                                            <input type="checkbox" name="অজানা" id="অজানা" value={"অজানা"} className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300" />
+                                            <label htmlFor="অজানা" className='bangla-font ml-2'>অজানা</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
                 </div>
+                <div>
+                    <div className='lg:block hidden text-right w-full'>
+                        <p className='inline'>
+                            <span className='poppins-font'>Show : </span>
+                            <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
+                                <option selected className='font-semibold' value="10">10</option>
+                                <option className='font-semibold' value="15">15</option>
+                                <option className='font-semibold' value="25">25</option>
+                                <option className='font-semibold' value="50">50</option>
+                                <option className='font-semibold' value="100">100</option>
+                            </select>
+                        </p>
+                        <p className='inline ml-5'>
+                            <span className='poppins-font'>Sort By : </span>
+                            <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
+                                <option selected className='font-semibold text-sm' value="donateButtonClickTime,1">Default</option>
+                                <option className='font-semibold text-sm' value="donationCount,-1">Donation (High → Low)</option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="overflow-x-auto">
                 <table className="table w-full">
 
                     <thead>
