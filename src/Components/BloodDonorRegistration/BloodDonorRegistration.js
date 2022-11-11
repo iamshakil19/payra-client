@@ -8,12 +8,15 @@ import Footer from '../Shared/Footer/Footer';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
 
+
 const BloodDonorRegistration = () => {
 
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+
     const [selectedDivision, setSelectedDivision] = useState("")
     const [selectedDistrict, setSelectedDistrict] = useState("")
     const [selectedUpazila, setSelectedUpazila] = useState("")
+    const [selectedUnion, setSelectedUnion] = useState("")
 
     const status = "pending"
 
@@ -21,7 +24,8 @@ const BloodDonorRegistration = () => {
         const division = data?.division.split(',')[1]
         const district = data?.district.split(',')[1]
         const upazila = data?.upazila.split(',')[1]
-        const newData = { ...data, division, district, upazila, status }
+        const union = data?.union.split(',')[1]
+        const newData = { ...data, division, district, upazila, union, status }
         // console.log(newData);
 
         fetch('http://localhost:5000/donor-request', {
@@ -68,16 +72,36 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unions', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villages', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+
 
     const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
 
     const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
 
-    if (divisionIsLoading || districtIsLoading || upazilaIsLoading) {
+    const unionFilter = unionData?.unions?.filter((singleUnion) => singleUnion.upazila_id === selectedUpazila.split(",")[0])
+
+    const villageFilter = villageData?.villages?.filter((singleVillage) => singleVillage.union_id === selectedUnion.split(",")[0])
+
+    if (divisionIsLoading || districtIsLoading || upazilaIsLoading || unionIsLoading || villageIsLoading) {
         return <Loading />
     }
-    // console.log(selectedUpazila.split(",")[1]);
-
 
     return (
         <div className='donor-registration-bg min-h-screen'>
@@ -333,15 +357,14 @@ const BloodDonorRegistration = () => {
                                             required: {
                                                 value: true,
                                                 message: "Union is required"
-                                            }
+                                            },
+                                            onChange: (e) => setSelectedUnion(e.target.value)
                                         })}
                                     >
                                         <option className='poppins-font' disabled selected value={""}>--Select Your Union--</option>
-                                        <option className='bangla-font' value={"বাগধা"}>বাগধা</option>
-                                        <option className='bangla-font' value={"বাকাল"}>বাকাল</option>
-                                        <option className='bangla-font' value={"গৈলা"}>গৈলা</option>
-                                        <option className='bangla-font' value={"রাজিহার"}>রাজিহার</option>
-                                        <option className='bangla-font' value={"রত্নপুর"}>রত্নপুর</option>
+                                        {unionFilter?.map((union, index) =>
+                                            <option className='bangla-font' key={index} value={[union.union_id, union.bn_name]}>{union.bn_name}</option>)
+                                        }
                                     </select>
                                     {
                                         errors?.union && <label className="label">
@@ -364,19 +387,10 @@ const BloodDonorRegistration = () => {
                                         })}
                                     >
                                         <option className='poppins-font' disabled selected value={""}>--Select Your Village--</option>
-                                        <option className='bangla-font' value={"জয়রামপট্টি"}>জয়রামপট্টি</option>
-                                        <option className='bangla-font' value={"আমবৌলা"}>আমবৌলা</option>
-                                        <option className='bangla-font' value={"খাজুরিয়া"}>খাজুরিয়া</option>
-                                        <option className='bangla-font' value={"নিমারপাড়"}>নিমারপাড়</option>
-                                        <option className='bangla-font' value={"পূর্ব_বাগধা"}>পূর্ব বাগধা</option>
-                                        <option className='bangla-font' value={"পশ্চিম_বাগধা"}>পশ্চিম বাগধা</option>
-                                        <option className='bangla-font' value={"জোবারপাড়"}>জোবারপাড়</option>
-                                        <option className='bangla-font' value={"চক্রিবাড়ি"}>চক্রিবাড়ি</option>
-                                        <option className='bangla-font' value={"আষ্কর"}>আষ্কর</option>
-                                        <option className='bangla-font' value={"কালিবাড়ি"}>কালিবাড়ি</option>
-                                        <option className='bangla-font' value={"সোমাইরপাড়"}>সোমাইরপাড়</option>
-                                        <option className='bangla-font' value={"নাঘিরপাড়"}>নাঘিরপাড়</option>
-                                        <option className='bangla-font' value={"চাত্রিশিরা"}>চাঁদত্রিশিরা</option>
+
+                                        {villageFilter?.map((village, index) =>
+                                            <option className='bangla-font' key={index} value={village.bn_name}>{village.bn_name}</option>)
+                                        }
                                     </select>
                                     {
                                         errors?.village && <label className="label">
@@ -385,7 +399,6 @@ const BloodDonorRegistration = () => {
                                     }
                                 </div>
                             </div>
-
                             <div>
                                 <input className='btn w-full max-w-xs lg:max-w-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out' type="submit" value="Submit" />
                             </div>

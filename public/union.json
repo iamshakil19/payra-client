@@ -1,0 +1,32 @@
+[
+    {
+        "union_id": "1",
+        "upazila_id": "9",
+        "name": "Bagdha",
+        "bn_name": "বাগধা"
+    },
+    {
+        "union_id": "2",
+        "upazila_id": "9",
+        "name": "Bakal",
+        "bn_name": "বাকাল"
+    },
+    {
+        "union_id": "3",
+        "upazila_id": "9",
+        "name": "Goila",
+        "bn_name": "গৈলা"
+    },
+    {
+        "union_id": "4",
+        "upazila_id": "9",
+        "name": "Rajihar",
+        "bn_name": "রাজিহার"
+    },
+    {
+        "union_id": "5",
+        "upazila_id": "9",
+        "name": "Rantapur",
+        "bn_name": "রত্নপুর"
+    }
+]
