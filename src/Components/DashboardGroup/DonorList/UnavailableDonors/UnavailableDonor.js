@@ -255,7 +255,7 @@ console.log(data);
                 </div>
                 <div>
                     <div className='lg:block hidden text-right w-full'>
-                        <p className='inline'>
+                        <div className='inline'>
                             <span className='poppins-font'>Show : </span>
                             <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
                                 <option selected className='font-semibold' value="10">10</option>
@@ -264,14 +264,14 @@ console.log(data);
                                 <option className='font-semibold' value="50">50</option>
                                 <option className='font-semibold' value="100">100</option>
                             </select>
-                        </p>
-                        <p className='inline ml-5'>
+                        </div>
+                        <div className='inline ml-5'>
                             <span className='poppins-font'>Sort By : </span>
                             <select onChange={(e) => setSortByDonateCount(e.target.value)} defaultValue={sortByDonateCount} className="py-1 px-1 bg-slate-200 outline-none rounded-sm poppins-font font-semibold w-32 text-[15px]">
                                 <option selected className='font-semibold text-sm' value="donateButtonClickTime,1">Default</option>
                                 <option className='font-semibold text-sm' value="donationCount,-1">Donation (High → Low)</option>
                             </select>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

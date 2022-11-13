@@ -26,6 +26,7 @@ import AllContact from './Components/Contact/AllContact';
 import AvailableDonor from './Components/DashboardGroup/DonorList/AvailableDonors/AvailableDonor';
 import UnavailableDonor from './Components/DashboardGroup/DonorList/UnavailableDonors/UnavailableDonor';
 import Settings from './Components/DashboardGroup/Settings/Settings';
+import Address from './Components/DashboardGroup/Address/Address';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path='add-contact' element={<AddContact />}></Route>
           <Route path='user-list' element={<AllUser />}></Route>
           <Route path='admin-list' element={<AllAdmin />}></Route>
+          <Route path='address' element={<Address />}></Route>
           <Route path='settings' element={<Settings />}></Route>
         </Route>
 

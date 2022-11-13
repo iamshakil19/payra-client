@@ -5,7 +5,7 @@ import { BiDonateBlood } from "react-icons/bi";
 import { BsChatSquareQuote, BsFillPieChartFill } from "react-icons/bs";
 import { RiQuestionAnswerLine } from "react-icons/ri";
 import { FaSearch, FaUsers } from "react-icons/fa";
-import { MdAdminPanelSettings } from "react-icons/md";
+import { MdAdminPanelSettings, MdLocationOn } from "react-icons/md";
 import { Outlet } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading/Loading';
@@ -141,6 +141,8 @@ const Dashboard = () => {
                                         <li><Link to={"/dashboard/add-contact"}><span className='flex items-center poppins-font'> <MdPermContactCalendar /> <span className='ml-3 text-[16px]'>Add Contact</span> </span></Link></li>
                                         <li><Link to={"/dashboard/user-list"}><span className='flex items-center poppins-font'> <FaUsers /> <span className='ml-3 text-[16px]'>All User</span> </span></Link></li>
                                         <li><Link to={"/dashboard/admin-list"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdAdminPanelSettings /></span> <span className='ml-2 text-[16px]'>All Admin</span> </span></Link></li>
+                                        <li><Link to={"/dashboard/address"}><span className='flex items-center poppins-font'> <span className='text-lg'><MdLocationOn /></span> <span className='ml-2 text-[16px]'>Address</span> </span></Link></li>
+
                                         <li><Link to={"/dashboard/settings"}><span className='flex items-center poppins-font'> <span className='text-lg'><AiFillSetting /></span> <span className='ml-2 text-[16px]'>Settings</span> </span></Link></li>
 
                                         <div className='flex items-center mt-12 px-4 lg:hidden'>

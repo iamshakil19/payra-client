@@ -57,7 +57,7 @@ const AllUser = () => {
             <div className="overflow-x-auto">
 
                 <div className='mb-3 hidden lg:block'>
-                    <p className='text-right'>
+                    <div className='text-right'>
                         <span className='poppins-font'>Show : </span>
                         <select onChange={(e) => setLimit(e.target.value)} defaultValue={limit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
                             <option selected className='font-semibold' value="10">10</option>
@@ -66,7 +66,7 @@ const AllUser = () => {
                             <option className='font-semibold' value="50">50</option>
                             <option className='font-semibold' value="100">100</option>
                         </select>
-                    </p>
+                    </div>
                 </div>
 
                 <table className="table w-full">

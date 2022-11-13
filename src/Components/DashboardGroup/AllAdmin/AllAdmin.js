@@ -35,7 +35,7 @@ const AllAdmin = () => {
 
     return (
         <div>
-            <h2 className='text-[#141C39] font-semibold text-xl mb-3 mt-10 sm:mt-5 poppins-font text-center sm:text-start'>All Admins</h2>
+            <h2 className='text-[#141C39] font-semibold text-xl mb-3 sm:mt-5 poppins-font text-center'>All Admins</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
