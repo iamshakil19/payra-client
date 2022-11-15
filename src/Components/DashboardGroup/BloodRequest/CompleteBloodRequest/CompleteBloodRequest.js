@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 import CompleteBloodProfileModal from './CompleteBloodProfileModal';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import ReactPaginate from 'react-paginate';
 
 const CompleteBloodRequest = () => {
     const navigate = useNavigate()
@@ -33,25 +34,13 @@ const CompleteBloodRequest = () => {
             return res.json()
         }))
 
-    if (isLoading) {
-        return <Loading />
-    }
-
-    const handlePreviousButton = () => {
-        if (pageNumber >= 1) {
-            setPageNumber(pageNumber - 1)
-        }
-    }
-    const handleNextButton = () => {
-        if (pageNumber === data?.pageCount - 1) {
-            return
-        }
-        setPageNumber(pageNumber + 1)
-    }
+    const handlePageClick = (event) => {
+        setPageNumber(event.selected)
+    };
 
 
     return (
-        <div>
+        <div className='mb-5'>
             <div className="overflow-x-auto">
                 <div className='mb-3 hidden lg:block'>
                     <p className='text-right'>
@@ -115,63 +104,24 @@ const CompleteBloodRequest = () => {
 
 
             </div>
-            <div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
-                <div className="flex flex-1 justify-between sm:hidden">
-                    <span
-                        onClick={handlePreviousButton}
-                        className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Previous
-                    </span>
-                    <span
-                        onClick={handleNextButton}
-                        className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Next
-                    </span>
-                </div>
-                <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                    <div>
-                        <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">{(limit * pageNumber) + 1} </span> to
-                            {(pageNumber + 1) * limit >= data?.totalCount ?
-                                <span className="font-medium"> {data?.totalCount} </span>
-                                :
-                                <span className="font-medium"> {(pageNumber + 1) * limit} </span>
-                            }
-                            of{' '}
-                            <span className="font-medium">{data.totalCount}</span> results
-                        </p>
-                    </div>
 
-                    <div>
-                        <nav className="isolate inline-flex -space-x-px rounded-md bg-[#F5F7FF]" aria-label="Pagination">
-                            <span
-                                onClick={handlePreviousButton}
-                                className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-                            >
-                                <span className="sr-only">Previous</span>
-                                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                            </span>
-
-                            {
-                                [...Array(data?.pageCount).keys()].map(number => <span onClick={() => setPageNumber(number)}
-                                    className={`relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm  text-gray-500 hover:bg-gray-50 focus:z-20 cursor-pointer poppins-font font-semibold ${pageNumber === number ? "z-10 bg-indigo-100 border-indigo-500 text-indigo-600" : ""}`}
-                                >
-                                    {number + 1}
-                                </span>)
-                            }
-
-                            <span
-                                onClick={handleNextButton}
-                                className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-                            >
-                                <span className="sr-only">Next</span>
-                                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                            </span>
-                        </nav>
-                    </div>
-                </div>
+            <div>
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={data?.pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                    breakClassName="hidden lg:block py-[8px] px-[15px] cursor-pointer rounded-sm"
+                    containerClassName="list-none flex items-center justify-end poppins-font text-[17px] mt-5"
+                    pageLinkClassName=' cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 hidden lg:block bg-white text-gray-500 px-4 py-2 text-sm'
+                    previousLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-l-md mr-3 lg:mr-0 hover:border-indigo-500'
+                    nextLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 ml-3 lg:ml-0 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-r-md hover:border-indigo-500'
+                    activeLinkClassName='z-10 bg-indigo-100 border-indigo-500 text-indigo-600'
+                />
             </div>
         </div>
 

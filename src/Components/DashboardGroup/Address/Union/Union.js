@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import Loading from '../../../Shared/Loading/Loading';
 import UnionAddModal from './UnionAddModal';
+import UnionDeleteModal from './UnionDeleteModal';
 import UnionRow from './UnionRow';
 
 const Union = () => {
@@ -11,8 +12,9 @@ const Union = () => {
     const [unionLimit, setunionLimit] = useState(5)
     const [unionPageNumber, setUnionPageNumber] = useState(0)
     const [isUnionAddModal, setIsUnionAddModal] = useState(false)
+    const [unionDeleteData, setUnionDeleteData] = useState(null)
 
-    const { data, unionIsLoading, refetch } = useQuery(['union', unionLimit, unionPageNumber, unionSearchData], () => fetch(`http://localhost:5000/unions?unionLimit=${unionLimit}&unionPageNumber=${unionPageNumber}&unionSearchData=${unionSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['union', unionLimit, unionPageNumber, unionSearchData], () => fetch(`http://localhost:5000/unions?unionLimit=${unionLimit}&unionPageNumber=${unionPageNumber}&unionSearchData=${unionSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -25,9 +27,6 @@ const Union = () => {
         setUnionPageNumber(event.selected)
     };
 
-    if (unionIsLoading) {
-        return <Loading />
-    }
 
     return (
         <div className='mb-5'>
@@ -79,6 +78,7 @@ const Union = () => {
                                 union={union}
                                 refetch={refetch}
                                 index={index + 1}
+                                setUnionDeleteData={setUnionDeleteData}
                             ></UnionRow>)
                         }
                     </tbody>
@@ -86,7 +86,18 @@ const Union = () => {
             </div>
 
             {
-                isUnionAddModal && <UnionAddModal />
+                isUnionAddModal && <UnionAddModal
+                    setIsUnionAddModal={setIsUnionAddModal}
+                    refetch={refetch}
+                ></UnionAddModal>
+            }
+
+            {
+                unionDeleteData && <UnionDeleteModal
+                    refetch={refetch}
+                    unionDeleteData={unionDeleteData}
+                    setUnionDeleteData={setUnionDeleteData}
+                ></UnionDeleteModal>
             }
 
             <div>

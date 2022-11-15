@@ -10,6 +10,7 @@ import UnavailableProfileModal from './UnavailableProfileModal';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { DonorContext } from '../../Dashboard/Dashboard';
 import { Menu, Transition } from '@headlessui/react'
+import ReactPaginate from 'react-paginate';
 
 const UnavailableDonor = () => {
     const navigate = useNavigate()
@@ -84,7 +85,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilasForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -93,7 +94,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unions', {
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unionsForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -102,7 +103,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villages', {
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villagesForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -111,34 +112,23 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
-    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
-    const unionFilter = unionData?.unions?.filter((singleUnion) => singleUnion.upazila_id === selectedUpazila.split(",")[0])
-    const villageFilter = villageData?.villages?.filter((singleVillage) => singleVillage.union_id === selectedUnion.split(",")[0])
+    const districtFilter = districtData?.districts?.filter((singleDistrict) => Number(singleDistrict.division_id) === Number(selectedDivision.split(",")[0]))
+    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => Number(singleUpazila.district_id) === Number(selectedDistrict.split(",")[0]))
+    const unionFilter = unionData?.unions?.filter((singleUnion) => Number(singleUnion.upazila_id) === Number(selectedUpazila.split(",")[0]))
+    const villageFilter = villageData?.villages?.filter((singleVillage) => Number(singleVillage.union_id) === Number(selectedUnion.split(",")[0]))
 
-    if (isLoading || divisionIsLoading || districtIsLoading || upazilaIsLoading || unionIsLoading || villageIsLoading) {
-        return <Loading />
-    }
 
-    const handlePreviousButton = () => {
-        if (pageNumber >= 1) {
-            setPageNumber(pageNumber - 1)
-        }
-    }
-    const handleNextButton = () => {
-        if (pageNumber === data?.pageCount - 1) {
-            return
-        }
-        setPageNumber(pageNumber + 1)
-    }
-console.log(data);
+    const handlePageClick = (event) => {
+        setPageNumber(event.selected)
+    };
+
     return (
-        <div>
+        <div className='mb-5'>
             <div className='flex items-center justify-between mb-3'>
                 <div className="z-50 w-56 lg:block hidden">
                     <Menu as="div" className="relative inline-block text-left">
                         <div>
-                            <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-200 border border-slate-500">
+                            <Menu.Button className="inline-flex w-full justify-center shadow-md rounded-md px-4 py-2 text-sm font-medium bg-slate-100 border border-slate-500">
                                 Filter
                                 <ChevronDownIcon
                                     className="ml-2 -mr-1 h-5 w-5 "
@@ -156,7 +146,7 @@ console.log(data);
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute left-0 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="absolute left-0 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-[#F5F7FF] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="px-3 py-3 rounded-md shadow-md border border-gray-300">
 
                                     <section className='grid grid-cols-2 gap-3'>
@@ -331,63 +321,23 @@ console.log(data);
                 ></UnavailableProfileModal>
             }
 
-            <div className="flex items-center justify-between border-t px-4 py-3 sm:px-6 bg-[#F5F7FF]">
-                <div className="flex flex-1 justify-between sm:hidden">
-                    <span
-                        onClick={handlePreviousButton}
-                        className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Previous
-                    </span>
-                    <span
-                        onClick={handleNextButton}
-                        className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Next
-                    </span>
-                </div>
-                <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                    <div>
-                        <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">{(limit * pageNumber) + 1} </span> to
-                            {(pageNumber + 1) * limit >= data?.totalCount ?
-                                <span className="font-medium"> {data?.totalCount} </span>
-                                :
-                                <span className="font-medium"> {(pageNumber + 1) * limit} </span>
-                            }
-                            of{' '}
-                            <span className="font-medium">{data?.totalCount}</span> results
-                        </p>
-                    </div>
-
-                    <div>
-                        <nav className="isolate inline-flex -space-x-px rounded-md bg-[#F5F7FF]" aria-label="Pagination">
-                            <span
-                                onClick={handlePreviousButton}
-                                className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-                            >
-                                <span className="sr-only">Previous</span>
-                                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                            </span>
-
-                            {
-                                [...Array(data?.pageCount).keys()].map(number => <span onClick={() => setPageNumber(number)}
-                                    className={`relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm  text-gray-500 hover:bg-gray-50 focus:z-20 cursor-pointer poppins-font font-semibold ${pageNumber === number ? "z-10 bg-indigo-100 border-indigo-500 text-indigo-600" : ""}`}
-                                >
-                                    {number + 1}
-                                </span>)
-                            }
-
-                            <span
-                                onClick={handleNextButton}
-                                className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-                            >
-                                <span className="sr-only">Next</span>
-                                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                            </span>
-                        </nav>
-                    </div>
-                </div>
+            <div>
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={data?.pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                    breakClassName="hidden lg:block py-[8px] px-[15px] cursor-pointer rounded-sm"
+                    containerClassName="list-none flex items-center justify-end poppins-font text-[17px] mt-5"
+                    pageLinkClassName=' cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 hidden lg:block bg-white text-gray-500 px-4 py-2 text-sm'
+                    previousLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-l-md mr-3 lg:mr-0 hover:border-indigo-500'
+                    nextLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 ml-3 lg:ml-0 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-r-md hover:border-indigo-500'
+                    activeLinkClassName='z-10 bg-indigo-100 border-indigo-500 text-indigo-600'
+                />
             </div>
         </div>
     );

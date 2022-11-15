@@ -12,7 +12,7 @@ import Footer from '../Shared/Footer/Footer';
 
 const Contact = () => {
     const navigate = useNavigate()
-    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+    const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
     const status = "incomplete"
 
 
@@ -44,6 +44,7 @@ const Contact = () => {
             .then(data => {
                 if (data.insertedId) {
                     toast.success("Your request has been sent")
+                    reset()
                 }
             })
     };

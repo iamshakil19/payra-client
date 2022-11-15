@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import Loading from '../../../Shared/Loading/Loading';
 import VillageAddModal from './VillageAddModal';
+import VillageDeleteModal from './VillageDeleteModal';
 import VillageRow from './VillageRow';
 
 const Village = () => {
@@ -12,8 +13,9 @@ const Village = () => {
     const [villageLimit, setVillageLimit] = useState(5)
     const [isVillageAddModal, setIsVillageAddModal] = useState(false)
     const [villagePageNumber, setVillagePageNumber] = useState(0)
+    const [villageDeleteData, setVillageDeleteData] = useState(null)
 
-    const { data, villageIsLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`http://localhost:5000/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`http://localhost:5000/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -25,10 +27,6 @@ const Village = () => {
     const handlePageClick = (event) => {
         setVillagePageNumber(event.selected)
     };
-
-    if (villageIsLoading) {
-        return <Loading />
-    }
 
     return (
         <div className='mb-5'>
@@ -79,6 +77,7 @@ const Village = () => {
                                 village={village}
                                 refetch={refetch}
                                 index={index + 1}
+                                setVillageDeleteData={setVillageDeleteData}
                             ></VillageRow>)
                         }
                     </tbody>
@@ -86,7 +85,18 @@ const Village = () => {
             </div>
 
             {
-                isVillageAddModal && <VillageAddModal />
+                isVillageAddModal && <VillageAddModal
+                refetch={refetch}
+                setIsVillageAddModal={setIsVillageAddModal}
+                ></VillageAddModal>
+            }
+
+            {
+                villageDeleteData && <VillageDeleteModal
+                refetch={refetch}
+                setVillageDeleteData={setVillageDeleteData}
+                villageDeleteData={villageDeleteData}
+                ></VillageDeleteModal>
             }
 
             <div>

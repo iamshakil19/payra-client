@@ -9,10 +9,6 @@ const UpazilaRow = ({upazila, index, refetch}) => {
             <td className='bangla-font p-2 '>{bn_name}</td>
             <td className='poppins-font p-2 '>{upazila_id}</td>
             <td className='poppins-font p-2 '>{district_id}</td>
-            <td className='poppins-font p-2 '>
-                <button className='btn btn-sm bg-[#17203F] poppins-font'>Edit</button>
-            </td>
-            
         </tr>
     );
 };

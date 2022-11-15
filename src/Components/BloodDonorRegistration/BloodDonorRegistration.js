@@ -11,7 +11,7 @@ import Loading from '../Shared/Loading/Loading';
 
 const BloodDonorRegistration = () => {
 
-    const { register, formState: { errors }, handleSubmit, getValues } = useForm();
+    const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
 
     const [selectedDivision, setSelectedDivision] = useState("")
     const [selectedDistrict, setSelectedDistrict] = useState("")
@@ -39,6 +39,7 @@ const BloodDonorRegistration = () => {
             .then(data => {
                 if (data.insertedId) {
                     toast.success("Your submission has been sent")
+                    reset()
                 } else {
                     toast.error("Submission failed")
                 }
@@ -63,7 +64,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilas', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilasForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -72,7 +73,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unions', {
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unionsForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -81,7 +82,7 @@ const BloodDonorRegistration = () => {
     })
         .then(res => res.json()))
 
-    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villages', {
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villagesForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -91,15 +92,15 @@ const BloodDonorRegistration = () => {
         .then(res => res.json()))
 
 
-    const districtFilter = districtData?.districts?.filter((singleDistrict) => singleDistrict.division_id === selectedDivision.split(",")[0])
-    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => singleUpazila.district_id === selectedDistrict.split(",")[0])
-    const unionFilter = unionData?.unions?.filter((singleUnion) => singleUnion.upazila_id === selectedUpazila.split(",")[0])
-    const villageFilter = villageData?.villages?.filter((singleVillage) => singleVillage.union_id === selectedUnion.split(",")[0])
+    const districtFilter = districtData?.districts?.filter((singleDistrict) => Number(singleDistrict.division_id) === Number(selectedDivision.split(",")[0]))
+    const upazilaFilter = upazilaData?.upazilas?.filter((singleUpazila) => Number(singleUpazila.district_id) === Number(selectedDistrict.split(",")[0]))
+    const unionFilter = unionData?.unions?.filter((singleUnion) => Number(singleUnion.upazila_id) === Number(selectedUpazila.split(",")[0]))
+    const villageFilter = villageData?.villages?.filter((singleVillage) => Number(singleVillage.union_id) === Number(selectedUnion.split(",")[0]))
 
     if (divisionIsLoading || districtIsLoading || upazilaIsLoading || unionIsLoading || villageIsLoading) {
         return <Loading />
     }
-
+    console.log(unionData);
     return (
         <div className='donor-registration-bg min-h-screen'>
             <Header></Header>

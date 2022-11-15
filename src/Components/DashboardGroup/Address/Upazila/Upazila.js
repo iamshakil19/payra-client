@@ -12,7 +12,7 @@ const Upazila = () => {
     const [upazilaPageNumber, setUpazilaPageNumber] = useState(0)
 
 
-    const { data, upazilaIsLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`http://localhost:5000/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`http://localhost:5000/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -24,10 +24,6 @@ const Upazila = () => {
     const handlePageClick = (event) => {
         setUpazilaPageNumber(event.selected)
     };
-
-    if (upazilaIsLoading) {
-        return <Loading />
-    }
 
     return (
         <div className='mb-5'>
@@ -65,7 +61,6 @@ const Upazila = () => {
                             <th className='poppins-font text-[15px] pl-2'>Bangla Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Upazila Id</th>
                             <th className='poppins-font text-[15px] pl-2'>District Id</th>
-                            <th className='poppins-font text-[15px] pl-2'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
