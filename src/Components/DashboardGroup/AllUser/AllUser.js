@@ -16,10 +16,10 @@ const AllUser = () => {
     const userSearchData = useContext(UserContext)
     const [userData, setUserData] = useState(null)
     const [adminConfirmationData, setAdminConfirmationData] = useState(null)
-    const [limit, setLimit] = useState(5)
+    const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['users', limit, pageNumber, userSearchData], () => fetch(`https://payra.onrender.com/users?limit=${limit}&pageNumber=${pageNumber}&userSearchData=${userSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['users', limit, pageNumber, userSearchData], () => fetch(`http://localhost:5000/users?limit=${limit}&pageNumber=${pageNumber}&userSearchData=${userSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

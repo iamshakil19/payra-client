@@ -8,7 +8,7 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
     const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id, time } = donorSingleData
 
     const handleDonate = () => {
-        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
+        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

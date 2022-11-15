@@ -15,7 +15,7 @@ const Village = () => {
     const [villagePageNumber, setVillagePageNumber] = useState(0)
     const [villageDeleteData, setVillageDeleteData] = useState(null)
 
-    const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`https://payra.onrender.com/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`http://localhost:5000/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
