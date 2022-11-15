@@ -15,7 +15,7 @@ const Village = () => {
     const [villagePageNumber, setVillagePageNumber] = useState(0)
     const [villageDeleteData, setVillageDeleteData] = useState(null)
 
-    const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`http://localhost:5000/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`https://payra.onrender.com/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -86,16 +86,16 @@ const Village = () => {
 
             {
                 isVillageAddModal && <VillageAddModal
-                refetch={refetch}
-                setIsVillageAddModal={setIsVillageAddModal}
+                    refetch={refetch}
+                    setIsVillageAddModal={setIsVillageAddModal}
                 ></VillageAddModal>
             }
 
             {
                 villageDeleteData && <VillageDeleteModal
-                refetch={refetch}
-                setVillageDeleteData={setVillageDeleteData}
-                villageDeleteData={villageDeleteData}
+                    refetch={refetch}
+                    setVillageDeleteData={setVillageDeleteData}
+                    villageDeleteData={villageDeleteData}
                 ></VillageDeleteModal>
             }
 
