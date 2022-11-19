@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import toast from 'react-hot-toast';
 import maleUser from '../../../../Resources/male-user.png'
 import femaleUser from '../../../../Resources/female-user.png'
 import user from '../../../../Resources/user.png'
 
-const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
+const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch, setEditDonorData }) => {
     const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id } = donorSingleData
 
     const handleDonate = () => {
@@ -18,7 +18,7 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             donateTime: donateTime,
             donateButtonClickTime: donateButtonClickTime
         }
-        fetch(`https://payra.onrender.com/donationCount/${_id}`, {
+        fetch(`http://localhost:5000/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -89,7 +89,9 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
-            <td className='bangla-font p-2'><span className='btn btn-sm'>Edit</span></td>
+            <td className='bangla-font p-2'>
+                <label onClick={() => { setEditDonorData(donorSingleData) }} for="edit-donor-modal" className=' w-8 h-8 text-center bg-indigo-200 text-xl text-indigo-800 border border-indigo-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-indigo-500 hover:text-white hover:border-indigo-600 transition-all ease-in-out duration-200'><span className=''><MdEdit /></span></label>
+            </td>
 
             <td className='bangla-font p-2'><span onClick={() => handleDonate()} className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'>Donate</span></td>
             <td className='p-2'>

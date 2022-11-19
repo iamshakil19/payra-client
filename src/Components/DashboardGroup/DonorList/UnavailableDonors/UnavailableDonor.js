@@ -11,11 +11,13 @@ import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/r
 import { DonorContext } from '../../Dashboard/Dashboard';
 import { Menu, Transition } from '@headlessui/react'
 import ReactPaginate from 'react-paginate';
+import UnavailableDonorEditModal from './UnavailableDonorEditModal';
 
 const UnavailableDonor = () => {
     const navigate = useNavigate()
     const donorSearchData = useContext(DonorContext)
     const [unavailableDonorData, setUnavailableDonorData] = useState(null)
+    const [editUnavailableDonor, setEditUnavailableDonor] = useState(null)
     const [unavailableDonorProfileData, setUnavailableDonorProfileData] = useState(null)
     const [daysProfile, setDaysProfile] = useState(0);
     const [hoursProfile, setHoursProfile] = useState(0);
@@ -51,7 +53,7 @@ const UnavailableDonor = () => {
     const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
     const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
 
-    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`https://payra.onrender.com/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
+    const { data, isLoading, refetch } = useQuery(['unavailableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`http://localhost:5000/unavailable-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -67,7 +69,7 @@ const UnavailableDonor = () => {
             return res.json()
         }))
 
-    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('https://payra.onrender.com/divisions', {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -76,7 +78,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('https://payra.onrender.com/districts', {
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -85,7 +87,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('https://payra.onrender.com/upazilasForForm', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilasForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -94,7 +96,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('https://payra.onrender.com/unionsForForm', {
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unionsForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -103,7 +105,7 @@ const UnavailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('https://payra.onrender.com/villagesForForm', {
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villagesForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -281,6 +283,7 @@ const UnavailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
+                            <th className='bangla-font text-[15px] pl-2'>সংশোধন</th>
                             <th className='bangla-font text-[15px] pl-2'>সময় বাকি</th>
                             <th className='bangla-font text-[15px] pl-2'>সম্পূর্ণ</th>
                             <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
@@ -297,6 +300,7 @@ const UnavailableDonor = () => {
                                 setUnavailableDonorProfileData={setUnavailableDonorProfileData}
                                 setDaysProfile={setDaysProfile}
                                 setHoursProfile={setHoursProfile}
+                                setEditUnavailableDonor={setEditUnavailableDonor}
                             ></UnavailableListRow>)
                         }
                     </tbody>
@@ -319,6 +323,14 @@ const UnavailableDonor = () => {
                     daysProfile={daysProfile}
                     hoursProfile={hoursProfile}
                 ></UnavailableProfileModal>
+            }
+
+            {
+                editUnavailableDonor && <UnavailableDonorEditModal
+                refetch={refetch}
+                editUnavailableDonor={editUnavailableDonor}
+                setEditUnavailableDonor={setEditUnavailableDonor}
+                ></UnavailableDonorEditModal>
             }
 
             <div>

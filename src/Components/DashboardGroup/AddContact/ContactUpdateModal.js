@@ -9,7 +9,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        fetch(`https://payra.onrender.com/contact/${_id}`, {
+        fetch(`http://localhost:5000/contact/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',
@@ -34,7 +34,6 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
 
     return (
         <div>
-
             <input type="checkbox" id="contact-update-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
@@ -64,7 +63,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
                                 </div>
                                 <div className="form-control mx-auto w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-[#141C39]">Your Phone Number <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-[#141C39]">Phone Number <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input defaultValue={number1} type="number" placeholder="Type your Number" className={`input h-10 input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.number1 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("number1", {
@@ -93,7 +92,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
 
                                 <div className="form-control mx-auto w-full max-w-xs">
                                     <label className="label">
-                                        <span className="label-text text-[#141C39]">Your Second Phone Number </span>
+                                        <span className="label-text text-[#141C39]">Second Phone Number </span>
                                     </label>
                                     <input defaultValue={number2} type="number" placeholder="( Optional )" className={`input h-10 input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.number2 && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("number2", {
