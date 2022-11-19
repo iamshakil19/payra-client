@@ -276,7 +276,6 @@ const UnavailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>প্রোফাইল</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রুপ</th>
-                            <th className='bangla-font text-[15px] pl-2'>বয়স</th>
                             <th className='bangla-font text-[15px] pl-2'>লিঙ্গ</th>
                             <th className='bangla-font text-[15px] pl-2'>নাম্বার</th>
                             <th className='bangla-font text-[15px] pl-2'>উপজেলা</th>

@@ -7,7 +7,7 @@ import user from '../../../../Resources/user.png'
 
 const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, setUnavailableDonorProfileData, refetch, setDaysProfile, setHoursProfile, setEditUnavailableDonor }) => {
 
-    const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id, time } = donorSingleData
+    const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id, time, note } = donorSingleData
 
     const handleDonate = () => {
         fetch(`http://localhost:5000/handleAvailability/${_id}`, {
@@ -55,7 +55,6 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
         return () => clearInterval(interval)
 
     }, [])
-
 
     return (
         <tr className='hover'>
@@ -105,7 +104,6 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
             {bloodGroup === "abNegative" &&
                 <td className='poppins-font uppercase p-2 '>AB-</td>
             }
-            <td className='poppins-font p-2'>{age}</td>
             <td className='bangla-font p-2'>{gender}</td>
             <td className='poppins-font p-2'>{number1}</td>
             <td className='bangla-font p-2'>{upazila}</td>
@@ -116,7 +114,10 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
                 <label onClick={() => setEditUnavailableDonor(donorSingleData)} for="edit-unavailableDonor-modal" className=' w-8 h-8 text-center bg-indigo-200 text-xl text-indigo-800 border border-indigo-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-indigo-500 hover:text-white hover:border-indigo-600 transition-all ease-in-out duration-200'><span className=''><MdEdit /></span></label>
             </td>
             <td className='bangla-font p-2'>{days} D : {hours} H : {minutes} M</td>
-            <td className='bangla-font p-2'><button onClick={handleDonate} className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'>Done</button></td>
+            <td className='bangla-font p-2 relative'><button onClick={handleDonate} className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'>Done</button>
+            { note > 0 &&
+                <div className="badge poppins-font absolute -left-3 top-0">{note}</div>}
+            </td>
             <td className='p-2'>
                 <label onClick={() => setUnavailableDonorData(donorSingleData)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>

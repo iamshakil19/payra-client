@@ -14,6 +14,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import ReactPaginate from 'react-paginate';
 import AvailableDonorEditModal from './AvailableDonorEditModal';
+import DonateModal from './DonateModal';
 
 
 const AvailableDonor = () => {
@@ -30,6 +31,7 @@ const AvailableDonor = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
     const [sortByDonateCount, setSortByDonateCount] = useState("acceptedTime")
+    const [donateModal, setDonateModal] = useState(null)
 
     const [selectedDivision, setSelectedDivision] = useState("")
     let divisionFilterData = selectedDivision.split(",")[1]
@@ -308,6 +310,7 @@ const AvailableDonor = () => {
                                 setAvailableDonorData={setAvailableDonorData}
                                 setAvailableDonorProfileData={setAvailableDonorProfileData}
                                 setEditDonorData={setEditDonorData}
+                                setDonateModal={setDonateModal}
                             ></AvailableListRow>)
                         }
                     </tbody>
@@ -331,10 +334,18 @@ const AvailableDonor = () => {
 
             {
                 editDonorData && <AvailableDonorEditModal
-                editDonorData={editDonorData}
-                setEditDonorData={setEditDonorData}
-                refetch={refetch}
+                    editDonorData={editDonorData}
+                    setEditDonorData={setEditDonorData}
+                    refetch={refetch}
                 ></AvailableDonorEditModal>
+            }
+
+            {
+                donateModal && <DonateModal
+                    donateModal={donateModal}
+                    setDonateModal={setDonateModal}
+                    refetch={refetch}
+                ></DonateModal>
             }
 
             <div>
