@@ -291,6 +291,7 @@ const AvailableDonor = () => {
                             <th className='bangla-font text-[15px] pl-2'>ইউনিয়ন</th>
                             <th className='bangla-font text-[15px] pl-2'>গ্রাম</th>
                             <th className='bangla-font text-[15px] pl-2'>মোট রক্তদান</th>
+                            <th className='bangla-font text-[15px] pl-2'>সংশোধন</th>
                             <th className='bangla-font text-[15px] pl-2'>উপস্থিতি</th>
                             <th className='bangla-font text-[15px] pl-2'>অ্যাকশন</th>
                         </tr>

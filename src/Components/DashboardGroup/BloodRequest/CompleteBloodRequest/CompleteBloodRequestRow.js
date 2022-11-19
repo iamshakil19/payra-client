@@ -1,8 +1,7 @@
 import React from 'react';
-import avatarImg from '../../../../Resources/avatarImage.jpg'
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
-import { useState } from 'react';
+import user from '../../../../Resources/user.png'
 
 const CompleteBloodRequestRow = ({ completeSingleBloodRequest, refetch, index, setBloodRequestDeleteData, setBloodRequestProfileData }) => {
 
@@ -15,7 +14,7 @@ const CompleteBloodRequestRow = ({ completeSingleBloodRequest, refetch, index, s
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setBloodRequestProfileData(completeSingleBloodRequest)} for="complete-blood-profile-modal" className='cursor-pointer'>
-                            <img src={avatarImg} alt="" />
+                            <img src={user} alt="" />
                         </label>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
-import avatarImg from '../../../../Resources/avatarImage.jpg'
 import { BsCheckCircleFill } from "react-icons/bs";
+import user from '../../../../Resources/user.png'
+
 
 const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
     const { _id, patient_name, date, blood_quantity, number1, number2, requested_bloodGroup, hemoglobin, patient_problem, donation_place } = bloodRequestProfileData
@@ -15,7 +16,7 @@ const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
                     <label for="complete-blood-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
-                            <img src={avatarImg} alt='' />
+                            <img src={user} alt='' />
                         </div>
                     </div>
                     <div className='flex justify-center'>

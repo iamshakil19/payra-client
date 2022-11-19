@@ -1,6 +1,8 @@
 import React from 'react';
 import { FiPhoneCall } from "react-icons/fi";
-import avatarImg from '../../../../Resources/avatarImage.jpg'
+import maleUser from '../../../../Resources/male-user.png'
+import femaleUser from '../../../../Resources/female-user.png'
+import user from '../../../../Resources/user.png'
 
 const AvailableProfileModal = ({ availableDonorProfileData, setAvailableDonorProfileData, refetch }) => {
 
@@ -14,7 +16,18 @@ const AvailableProfileModal = ({ availableDonorProfileData, setAvailableDonorPro
                     <label for="available-donor-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
-                            <img src={avatarImg} alt='' />
+                            {gender === "পুরুষ" &&
+                                <img src={maleUser} alt="" />
+                            }
+                            {gender === "মহিলা" &&
+                                <img src={femaleUser} alt="" />
+                            }
+                            {gender === "তৃতীয়" &&
+                                <img src={user} alt="" />
+                            }
+                            {gender === "অজানা" &&
+                                <img src={user} alt="" />
+                            }
                         </div>
                     </div>
                     <h2 className='text-center poppins-font mt-2 text-lg'> <span className='bangla-font'>নাম: </span>

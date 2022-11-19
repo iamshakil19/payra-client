@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
-import avatarImg from '../../../../Resources/avatarImage.jpg'
+import maleUser from '../../../../Resources/male-user.png'
+import femaleUser from '../../../../Resources/female-user.png'
+import user from '../../../../Resources/user.png'
 
 const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAvailableDonorProfileData, refetch }) => {
     const { donationCount, name, age, gender, number1, bloodGroup, upazila, union, village, _id } = donorSingleData
@@ -39,7 +41,18 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setAvailableDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
-                            <img src={avatarImg} alt="" />
+                            {gender === "পুরুষ" &&
+                                <img src={maleUser} alt="" />
+                            }
+                            {gender === "মহিলা" &&
+                                <img src={femaleUser} alt="" />
+                            }
+                            {gender === "তৃতীয়" &&
+                                <img src={user} alt="" />
+                            }
+                            {gender === "অজানা" &&
+                                <img src={user} alt="" />
+                            }
                         </label>
                     </div>
                 </div>
@@ -76,7 +89,9 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             <td className='bangla-font p-2'>{union}</td>
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
-            <td className='bangla-font p-2'><span onClick={() => handleDonate()} className='btn btn-sm'>Donate</span></td>
+            <td className='bangla-font p-2'><span className='btn btn-sm'>Edit</span></td>
+
+            <td className='bangla-font p-2'><span onClick={() => handleDonate()} className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'>Donate</span></td>
             <td className='p-2'>
                 <label onClick={() => { setAvailableDonorData(donorSingleData) }} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>

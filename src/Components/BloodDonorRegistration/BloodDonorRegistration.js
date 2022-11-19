@@ -7,6 +7,7 @@ import PageTitle from '../Shared/PageTitle';
 import Footer from '../Shared/Footer/Footer';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
+import { useEffect } from 'react';
 
 
 const BloodDonorRegistration = () => {
@@ -45,6 +46,9 @@ const BloodDonorRegistration = () => {
                 }
             })
     };
+    useEffect(() => {
+        toast.error("বিভাগ সিলেক্টে বিভাগ না পেলে ৩০ সেকেন্ড পরে আবার ট্রাই করুন।")
+    }, [])
 
     const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('https://payra.onrender.com/divisions', {
         method: 'GET',

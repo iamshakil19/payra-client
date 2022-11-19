@@ -40,7 +40,7 @@ const Banner = () => {
                 </div>
             </div>
 
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpayradonation&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=991291448447106" width="340" height="130" style={{ border: "none;overflow:hidden", borderRadius: "5px", position: "absolute" }} className=" bottom-0 right-auto sm:right-2 mb-2" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title='payra'></iframe>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FpayraBloodDonation&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=991291448447106" width="340" height="130" style={{ border: "none;overflow:hidden", borderRadius: "5px", position: "absolute" }} className=" bottom-0 right-auto sm:right-2 mb-2" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title='payra'></iframe>
 
         </div>
     );

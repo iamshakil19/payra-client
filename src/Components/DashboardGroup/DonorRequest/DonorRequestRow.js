@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { MdDelete } from "react-icons/md";
 import { IncompleteBloodContext } from '../Dashboard/Dashboard';
-import avatarImg from '../../../Resources/avatarImage.jpg'
+import maleUser from '../../../Resources/male-user.png'
+import femaleUser from '../../../Resources/female-user.png'
+import user from '../../../Resources/user.png'
 
 const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorRequest, refetch }) => {
     const { _id, name, age, gender, number1, bloodGroup, union, upazila, village } = donorRequest
@@ -39,7 +41,18 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setProfileDonorRequest(donorRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
-                            <img src={avatarImg} alt="" />
+                            {gender === "পুরুষ" &&
+                                <img src={maleUser} alt="" />
+                            }
+                            {gender === "মহিলা" &&
+                                <img src={femaleUser} alt="" />
+                            }
+                            {gender === "তৃতীয়" &&
+                                <img src={user} alt="" />
+                            }
+                            {gender === "অজানা" &&
+                                <img src={user} alt="" />
+                            }
                         </label>
                     </div>
                 </div>

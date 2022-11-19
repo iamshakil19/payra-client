@@ -1,9 +1,9 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import avatarImg from '../../../../Resources/avatarImage.jpg'
 import { MdDelete } from "react-icons/md";
 import { useContext } from 'react';
 import { IncompleteBloodContext } from '../../Dashboard/Dashboard';
+import user from '../../../../Resources/user.png'
 
 
 const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, setBloodRequestData, setBloodRequestProfileData }) => {
@@ -42,7 +42,7 @@ const IncompleteRequestRow = ({ incompleteSingleBloodRequest, refetch, index, se
                 <div class="avatar cursor-pointer">
                     <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
                         <label onClick={() => setBloodRequestProfileData(incompleteSingleBloodRequest)} for="incomplete-blood-request-profile-modal" className='cursor-pointer'>
-                            <img src={avatarImg} alt="" />
+                            <img src={user} alt="" />
                         </label>
                     </div>
                 </div>

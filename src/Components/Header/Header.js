@@ -9,7 +9,7 @@ import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
-import avatarImage from '../../Resources/avatarImage.jpg'
+import userImage from '../../Resources/user.png'
 import { AiOutlineMenu } from "react-icons/ai";
 
 const Header = () => {
@@ -70,7 +70,7 @@ const Header = () => {
                         <div className="dropdown dropdown-end hidden lg:block ml-3">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src={user?.photoURL ? user.photoURL : avatarImage} alt="" />
+                                    <img src={user?.photoURL ? user.photoURL : userImage} alt="" />
                                 </div>
                             </label>
                             <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

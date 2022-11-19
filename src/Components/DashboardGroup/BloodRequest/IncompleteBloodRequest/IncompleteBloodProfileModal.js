@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import avatarImg from '../../../../Resources/avatarImage.jpg'
+
 import { FiPhoneCall } from "react-icons/fi";
 import { IncompleteBloodContext } from '../../Dashboard/Dashboard';
+import user from '../../../../Resources/user.png'
 
 
 const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestProfileData, refetch, setBloodRequestData }) => {
@@ -48,7 +49,7 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
                     <label for="incomplete-blood-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div class="avatar w-full">
                         <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
-                            <img src={avatarImg} alt='' />
+                            <img src={user} alt='' />
                         </div>
                     </div>
                     <div className='flex justify-center'>
