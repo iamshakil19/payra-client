@@ -29,6 +29,7 @@ const Header = () => {
             <div class="w-10 h-10 border-b-2 border-red-500 rounded-full animate-spin"></div>
         </div>
     }
+ 
 
     return (
         <div className='top-0 sticky z-50'>
@@ -38,6 +39,7 @@ const Header = () => {
                         <AiOutlineMenu />
                     </label>
                 }
+                
                 <div className='logo-container'> <Link to={"/"}>
                     <img className='w-20' src={logo} alt="" />
                 </Link></div>
@@ -50,6 +52,8 @@ const Header = () => {
                     <li><span className='nav-link'><ActiveRoute to="/contact"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>যোগাযোগ করুন</span></ActiveRoute></span></li>
 
                     <li><span className='nav-link'><ActiveRoute to="/aboutUs"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>আমাদের সম্পর্কে</span></ActiveRoute></span></li>
+
+                    <li className='lg:hidden'><span className='nav-link'><ActiveRoute to="/leaderBoard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>লিডারবোর্ড</span></ActiveRoute></span></li>
 
                     {
                         user && <>
@@ -85,7 +89,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                 }
-                                <li className='font-semibold'> <Link to={"/"}>Leader Board</Link> </li>
+                                <li className='font-semibold'> <Link to={"/leaderBoard"}>Leader Board</Link> </li>
 
                                 <li onClick={handleLogout} className="font-semibold text-red-500"> <a>Logout</a> </li>
                             </ul>

@@ -326,9 +326,9 @@ const UnavailableDonor = () => {
 
             {
                 editUnavailableDonor && <UnavailableDonorEditModal
-                refetch={refetch}
-                editUnavailableDonor={editUnavailableDonor}
-                setEditUnavailableDonor={setEditUnavailableDonor}
+                    refetch={refetch}
+                    editUnavailableDonor={editUnavailableDonor}
+                    setEditUnavailableDonor={setEditUnavailableDonor}
                 ></UnavailableDonorEditModal>
             }
 

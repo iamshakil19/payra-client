@@ -115,8 +115,8 @@ const UnavailableListRow = ({ donorSingleData, index, setUnavailableDonorData, s
             </td>
             <td className='bangla-font p-2'>{days} D : {hours} H : {minutes} M</td>
             <td className='bangla-font p-2 relative'><button onClick={handleDonate} className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'>Done</button>
-            { note > 0 &&
-                <div className="badge poppins-font absolute -left-3 top-0">{note}</div>}
+                {note > 0 &&
+                    <div className="badge poppins-font absolute -left-3 top-0">{note}</div>}
             </td>
             <td className='p-2'>
                 <label onClick={() => setUnavailableDonorData(donorSingleData)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>

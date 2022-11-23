@@ -27,6 +27,7 @@ import AvailableDonor from './Components/DashboardGroup/DonorList/AvailableDonor
 import UnavailableDonor from './Components/DashboardGroup/DonorList/UnavailableDonors/UnavailableDonor';
 import Settings from './Components/DashboardGroup/Settings/Settings';
 import Address from './Components/DashboardGroup/Address/Address';
+import LeaderBoard from './Components/LeaderBoard/LeaderBoard';
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Route path='settings' element={<Settings />}></Route>
         </Route>
 
+        <Route path='/leaderBoard' element={<LeaderBoard />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/registration' element={<SignUp />}></Route>
         <Route path='*' element={<NotFound />}></Route>

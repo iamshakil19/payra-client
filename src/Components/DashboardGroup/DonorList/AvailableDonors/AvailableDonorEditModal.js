@@ -113,7 +113,7 @@ const AvailableDonorEditModal = ({ refetch, editDonorData, setEditDonorData }) =
                                         </label>
                                     }
                                 </div>
-                                
+
                                 <div className="form-control mx-auto w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text text-[#141C39] poppins-font">Phone Number <span className='text-red-500 font-extrabold'>*</span></span>
@@ -185,7 +185,7 @@ const AvailableDonorEditModal = ({ refetch, editDonorData, setEditDonorData }) =
                                     }
                                 </div>
 
-                                
+
 
                                 <div className='w-full text-center sm:text-start sm:flex justify-end'>
                                     <input className='border cursor-pointer border-black rounded-lg sm:mt-9 w-full sm:w-28 max-w-xs lg:max-w-full mt-5 font-bold bg-[#0F1631] h-9 text-white transition-all duration-300 ease-in-out' type="submit" value="Update" />
