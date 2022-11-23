@@ -28,6 +28,8 @@ const Village = () => {
         setVillagePageNumber(event.selected)
     };
 
+    const skipIndex = (villageLimit * villagePageNumber) + 1
+
     return (
         <div className='mb-5'>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Village</h2>
@@ -76,7 +78,7 @@ const Village = () => {
                                 key={village._id}
                                 village={village}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setVillageDeleteData={setVillageDeleteData}
                             ></VillageRow>)
                         }

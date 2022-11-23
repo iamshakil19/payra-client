@@ -39,6 +39,7 @@ const AllUser = () => {
     const handlePageClick = (event) => {
         setPageNumber(event.selected)
     };
+    const skipIndex = (limit * pageNumber) + 1
 
     return (
         <div className='mb-5'>
@@ -76,7 +77,7 @@ const AllUser = () => {
                                 key={user._id}
                                 user={user}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setUserData={setUserData}
                                 setAdminConfirmationData={setAdminConfirmationData}
                             ></AllUserRow>)

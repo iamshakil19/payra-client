@@ -123,6 +123,7 @@ const UnavailableDonor = () => {
     const handlePageClick = (event) => {
         setPageNumber(event.selected)
     };
+    const skipIndex = (limit * pageNumber) + 1
 
     return (
         <div className='mb-5'>
@@ -294,7 +295,7 @@ const UnavailableDonor = () => {
                                 key={donorSingleData._id}
                                 donorSingleData={donorSingleData}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setUnavailableDonorData={setUnavailableDonorData}
                                 setUnavailableDonorProfileData={setUnavailableDonorProfileData}
                                 setDaysProfile={setDaysProfile}

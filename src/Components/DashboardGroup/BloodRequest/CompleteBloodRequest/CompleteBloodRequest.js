@@ -1,5 +1,4 @@
 import React from 'react';
-import Loading from '../../../Shared/Loading/Loading';
 import { useQuery } from 'react-query';
 import CompleteBloodRequestRow from './CompleteBloodRequestRow';
 import { useState } from 'react';
@@ -8,7 +7,6 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 import CompleteBloodProfileModal from './CompleteBloodProfileModal';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import ReactPaginate from 'react-paginate';
 
 const CompleteBloodRequest = () => {
@@ -37,7 +35,7 @@ const CompleteBloodRequest = () => {
     const handlePageClick = (event) => {
         setPageNumber(event.selected)
     };
-
+    const skipIndex = (limit * pageNumber) + 1
 
     return (
         <div className='mb-5'>
@@ -79,7 +77,7 @@ const CompleteBloodRequest = () => {
                                 key={completeSingleBloodRequest._id}
                                 completeSingleBloodRequest={completeSingleBloodRequest}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setBloodRequestDeleteData={setBloodRequestDeleteData}
                                 setBloodRequestProfileData={setBloodRequestProfileData}
                             ></CompleteBloodRequestRow>)

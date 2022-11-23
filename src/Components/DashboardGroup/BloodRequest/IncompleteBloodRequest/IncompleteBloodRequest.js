@@ -36,6 +36,7 @@ const IncompleteBloodRequest = () => {
     const handlePageClick = (event) => {
         setPageNumber(event.selected)
     };
+    const skipIndex = (limit * pageNumber) + 1
 
     return (
         <div className='mb-5'>
@@ -77,7 +78,7 @@ const IncompleteBloodRequest = () => {
                                 key={incompleteSingleBloodRequest._id}
                                 incompleteSingleBloodRequest={incompleteSingleBloodRequest}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setBloodRequestData={setBloodRequestData}
                                 setBloodRequestProfileData={setBloodRequestProfileData}
                             ></IncompleteRequestRow>)

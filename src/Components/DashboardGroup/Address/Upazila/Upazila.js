@@ -25,6 +25,8 @@ const Upazila = () => {
         setUpazilaPageNumber(event.selected)
     };
 
+    const skipIndex = (upazilaLimit * upazilaPageNumber) + 1
+
     return (
         <div className='mb-5'>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Upazila</h2>
@@ -69,7 +71,7 @@ const Upazila = () => {
                                 key={upazila._id}
                                 upazila={upazila}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                             ></UpazilaRow>)
                         }
                     </tbody>

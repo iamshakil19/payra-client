@@ -27,6 +27,7 @@ const Union = () => {
         setUnionPageNumber(event.selected)
     };
 
+    const skipIndex = (unionLimit * unionPageNumber) + 1
 
     return (
         <div className='mb-5'>
@@ -77,7 +78,7 @@ const Union = () => {
                                 key={union._id}
                                 union={union}
                                 refetch={refetch}
-                                index={index + 1}
+                                index={index + skipIndex}
                                 setUnionDeleteData={setUnionDeleteData}
                             ></UnionRow>)
                         }
