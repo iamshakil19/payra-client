@@ -53,7 +53,7 @@ const Header = () => {
 
                     <li><span className='nav-link'><ActiveRoute to="/aboutUs"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>আমাদের সম্পর্কে</span></ActiveRoute></span></li>
 
-                    <li className='lg:hidden'><span className='nav-link'><ActiveRoute to="/leaderBoard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>লিডারবোর্ড</span></ActiveRoute></span></li>
+                    <li className=''><span className='nav-link'><ActiveRoute to="/leaderBoard"><span className='hover:text-[#FE3C47] duration-300 ease-in-out transition-all'>লিডারবোর্ড</span></ActiveRoute></span></li>
 
                     {
                         user && <>
@@ -89,7 +89,6 @@ const Header = () => {
                                         </Link>
                                     </li>
                                 }
-                                <li className='font-semibold'> <Link to={"/leaderBoard"}>Leader Board</Link> </li>
 
                                 <li onClick={handleLogout} className="font-semibold text-red-500"> <a>Logout</a> </li>
                             </ul>

@@ -8,7 +8,7 @@ import Footer from '../Shared/Footer/Footer';
 const LeaderBoard = () => {
 
     const navigate = useNavigate()
-    const { data: leaderBoardData, isLoading } = useQuery('leaderBoard', () => fetch('http://localhost:5000/top-donor', {
+    const { data: leaderBoardData, isLoading } = useQuery('leaderBoard', () => fetch('https://payra.onrender.com/top-donor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
