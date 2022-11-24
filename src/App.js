@@ -22,7 +22,6 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import RequireAdmin from './Components/ProtectedRoute/RequireAdmin';
 import AddContact from './Components/DashboardGroup/AddContact/AddContact';
 import FrontEndContact from './Components/Contact/FrontEndContact';
-import AllContact from './Components/Contact/AllContact';
 import AvailableDonor from './Components/DashboardGroup/DonorList/AvailableDonors/AvailableDonor';
 import UnavailableDonor from './Components/DashboardGroup/DonorList/UnavailableDonors/UnavailableDonor';
 import Settings from './Components/DashboardGroup/Settings/Settings';
@@ -38,7 +37,6 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/contact' element={<FrontEndContact />}></Route>
-        <Route path='/all-contact' element={<AllContact />}></Route>
 
         <Route path='/donorRegistration' element={<BloodDonorRegistration />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>

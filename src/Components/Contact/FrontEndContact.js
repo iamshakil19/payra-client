@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Header from '../Header/Header';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
 import FrontEndContactCard from './FrontEndContactCard';
 import { useForm } from 'react-hook-form';
-import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
 import PageTitle from '../Shared/PageTitle';
 import Footer from '../Shared/Footer/Footer';
+import ReactPaginate from 'react-paginate';
 
 const Contact = () => {
-    const navigate = useNavigate()
+
+    const [pageNumber, setPageNumber] = useState(0)
+
     const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
     const status = "incomplete"
 
 
-    const { data: contacts, isLoading, refetch } = useQuery('contacts', () => fetch('https://payra.onrender.com/contacts', {
+    const { data, isLoading, refetch } = useQuery(['frontContacts', pageNumber], () => fetch(`https://payra.onrender.com/contacts?pageNumber=${pageNumber}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -25,10 +26,6 @@ const Contact = () => {
     })
         .then(res => res.json()))
 
-    if (isLoading) {
-        return <Loading />
-    }
-    const top4Data = contacts.slice(0, 4)
 
     const onSubmit = data => {
         const newData = { ...data, status }
@@ -49,9 +46,9 @@ const Contact = () => {
             })
     };
 
-    const navigateToAllContact = () => {
-        navigate('/all-contact')
-    }
+    const handlePageClick = (event) => {
+        setPageNumber(event.selected)
+    };
 
     return (
         <div className='donor-registration-bg min-h-screen'>
@@ -65,23 +62,33 @@ const Contact = () => {
 
                             <h1 className="text-4xl font-bold bangla-font text-white tracking-wide sm:text-5xl text-center mb-3">জরুরি প্রয়োজনে কল করুন</h1>
 
-                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5'>
 
                                 {
-                                    top4Data?.map(contact => <FrontEndContactCard
+                                    data?.contacts?.map(contact => <FrontEndContactCard
                                         key={contact._id}
                                         contact={contact}
                                     ></FrontEndContactCard>)
                                 }
                             </div>
-                            {contacts?.length > 4 &&
-                                <div className='flex justify-center'>
-                                    <button onClick={navigateToAllContact} className=' h-11 w-32 rounded-full mt-5 bg-white text-black font-bold hover:bg-[#FE3C47] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center'>
-                                        <span className='poppins-font mr-1'>See More</span>
-                                        <span className='ml-1'> <FaArrowRight /> </span>
-                                    </button>
-                                </div>
-                            }
+                            <div>
+                                <ReactPaginate
+                                    breakLabel="..."
+                                    nextLabel=">"
+                                    onPageChange={handlePageClick}
+                                    pageRangeDisplayed={3}
+                                    marginPagesDisplayed={2}
+                                    pageCount={data?.pageCount}
+                                    previousLabel="<"
+                                    renderOnZeroPageCount={null}
+                                    breakClassName="hidden lg:block py-[8px] px-[15px] cursor-pointer rounded-sm"
+                                    containerClassName="list-none flex items-center justify-center poppins-font text-[17px] mt-5"
+                                    pageLinkClassName=' cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 hidden lg:block bg-white text-gray-500 px-4 py-2 text-sm'
+                                    previousLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-l-md mr-3 lg:mr-0 hover:border-indigo-500'
+                                    nextLinkClassName='cursor-pointer border border-gray-300 border-collapse font-semibold hover:bg-indigo-50 ml-3 lg:ml-0 lg:block bg-white text-gray-500 px-4 py-2 text-sm rounded-r-md hover:border-indigo-500'
+                                    activeLinkClassName='z-10 bg-indigo-100 border-indigo-500 text-indigo-600'
+                                />
+                            </div>
                         </div>
                     </section>
 
