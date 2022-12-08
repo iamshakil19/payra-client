@@ -25,11 +25,11 @@ const Header = () => {
     }
 
     if (loading) {
-        return <div class="flex items-center justify-center ml-2 h-[70px]">
-            <div class="w-10 h-10 border-b-2 border-red-500 rounded-full animate-spin"></div>
+        return <div className="flex items-center justify-center ml-2 h-[70px]">
+            <div className="w-10 h-10 border-b-2 border-red-500 rounded-full animate-spin"></div>
         </div>
     }
- 
+
 
     return (
         <div className='top-0 sticky z-50'>
@@ -39,7 +39,7 @@ const Header = () => {
                         <AiOutlineMenu />
                     </label>
                 }
-                
+
                 <div className='logo-container'> <Link to={"/"}>
                     <img className='w-20' src={logo} alt="" />
                 </Link></div>

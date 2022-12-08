@@ -61,7 +61,7 @@ const AvailableDonor = () => {
     const [bloodGroupFilterData, setBloodGroupFilterData] = useState("")
     const [genderFilterData, setGenderFilterData] = useState({ man: false, women: false })
 
-    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`https://payra.onrender.com/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
+    const { data, isLoading, refetch } = useQuery(['availableDonorList', limit, pageNumber, sortByDonateCount, donorSearchData, selectedUnion, villageFilterData, bloodGroupFilterData, selectedUpazila, selectedDivision, selectedDistrict], () => fetch(`http://localhost:5000/available-donor?limit=${limit}&pageNumber=${pageNumber}&sortByDonateCount=${sortByDonateCount}&donorSearchData=${donorSearchData}&unionFilterData=${unionFilterData}&villageFilterData=${villageFilterData}&bloodGroupFilterData=${bloodGroupFilterData}&upazilaFilterData=${upazilaFilterData}&districtFilterData=${districtFilterData}&divisionFilterData=${divisionFilterData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -77,7 +77,7 @@ const AvailableDonor = () => {
             return res.json()
         }))
 
-    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('https://payra.onrender.com/divisions', {
+    const { data: divisionData, divisionIsLoading } = useQuery(['allDivisions'], () => fetch('http://localhost:5000/divisions', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -86,7 +86,7 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('https://payra.onrender.com/districts', {
+    const { data: districtData, districtIsLoading } = useQuery(['allDistricts'], () => fetch('http://localhost:5000/districts', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -95,7 +95,7 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('https://payra.onrender.com/upazilasForForm', {
+    const { data: upazilaData, upazilaIsLoading } = useQuery(['allUpazilas'], () => fetch('http://localhost:5000/upazilasForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -104,7 +104,7 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('https://payra.onrender.com/unionsForForm', {
+    const { data: unionData, unionIsLoading } = useQuery(['allunions'], () => fetch('http://localhost:5000/unionsForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -113,7 +113,7 @@ const AvailableDonor = () => {
     })
         .then(res => res.json()))
 
-    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('https://payra.onrender.com/villagesForForm', {
+    const { data: villageData, villageIsLoading } = useQuery(['allvillage'], () => fetch('http://localhost:5000/villagesForForm', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -141,7 +141,7 @@ const AvailableDonor = () => {
     return (
         <div className='mb-5'>
             <div className='flex items-center justify-between mb-3'>
-                <div className="z-50 w-56 lg:block hidden">
+                <div className="z-50">
                     <Menu as="div" className="relative inline-block text-left">
                         <div>
                             <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-100 border border-slate-500 shadow-md">
@@ -162,7 +162,7 @@ const AvailableDonor = () => {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute left-0 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-[#F5F7FF] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="absolute left-0 mt-2 w-80 lg:w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-[#F5F7FF] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="px-3 py-3 rounded-md shadow-md border border-gray-300">
 
                                     <section className='grid grid-cols-2 gap-3'>

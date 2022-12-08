@@ -9,7 +9,7 @@ const Footer = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
     const onSubmit = async data => {
-        console.log(data);
+
 
     };
 

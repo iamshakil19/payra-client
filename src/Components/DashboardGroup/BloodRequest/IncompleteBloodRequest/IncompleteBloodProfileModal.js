@@ -23,7 +23,7 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
             status: newStatus,
             submissionTime: submissionTime
         }
-        fetch(`https://payra.onrender.com/blood-request-status/${_id}`, {
+        fetch(`http://localhost:5000/blood-request-status/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -32,7 +32,6 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 refetch()
                 setIncompleteRefetch(current => !current)
                 setBloodRequestProfileData(null)
@@ -43,12 +42,12 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
 
     return (
         <div className=''>
-            <input type="checkbox" id="incomplete-blood-request-profile-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box bg-[#F5F7FF]">
-                    <label for="incomplete-blood-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <div class="avatar w-full">
-                        <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
+            <input type="checkbox" id="incomplete-blood-request-profile-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box bg-[#F5F7FF]">
+                    <label htmlFor="incomplete-blood-request-profile-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div className="avatar w-full">
+                        <div className="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             <img src={user} alt='' />
                         </div>
                     </div>
@@ -97,20 +96,20 @@ const IncompleteBloodProfileModal = ({ bloodRequestProfileData, setBloodRequestP
                             <p className='mb-1 bangla-font'>হিমোগ্লোবিন: <span className='font-bold '> {hemoglobin ? hemoglobin : <span className='bangla-font'>জানা নেই</span>}</span></p>
                             <p className='mb-1 bangla-font'>রোগীর সমস্যা:  <span className='font-bold'>{patient_problem}</span></p>
                             <div className='mb-1 bangla-font flex'>স্টাটাস:
-                                <div class="flex items-center justify-start ml-2">
-                                    <div class="w-5 h-5 border-b-2 border-orange-600 rounded-full animate-spin"></div>
+                                <div className="flex items-center justify-start ml-2">
+                                    <div className="w-5 h-5 border-b-2 border-orange-600 rounded-full animate-spin"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className='flex justify-end mt-3'>
-                        <label onClick={() => { setBloodRequestData(bloodRequestProfileData); handleProfileData() }} for="incomplete-blood-request-delete-modal" className='btn btn-sm w-20 bg-red-500 border-0 hover:bg-red-600'>Decline</label>
+                        <label onClick={() => { setBloodRequestData(bloodRequestProfileData); handleProfileData() }} htmlFor="incomplete-blood-request-delete-modal" className='btn btn-sm w-20 bg-red-500 border-0 hover:bg-red-600'>Decline</label>
 
                         <label onClick={handleStatus} className='btn btn-sm w-20 bg-green-600 border-0 hover:bg-green-700 ml-4'>Done</label>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

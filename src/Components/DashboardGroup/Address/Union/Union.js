@@ -14,7 +14,7 @@ const Union = () => {
     const [isUnionAddModal, setIsUnionAddModal] = useState(false)
     const [unionDeleteData, setUnionDeleteData] = useState(null)
 
-    const { data, isLoading, refetch } = useQuery(['union', unionLimit, unionPageNumber, unionSearchData], () => fetch(`https://payra.onrender.com/unions?unionLimit=${unionLimit}&unionPageNumber=${unionPageNumber}&unionSearchData=${unionSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['union', unionLimit, unionPageNumber, unionSearchData], () => fetch(`http://localhost:5000/unions?unionLimit=${unionLimit}&unionPageNumber=${unionPageNumber}&unionSearchData=${unionSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

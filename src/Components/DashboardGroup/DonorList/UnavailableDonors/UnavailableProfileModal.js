@@ -10,7 +10,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
     const { donationCount, name, age, gender, number1, number2, bloodGroup, upazila, union, village, division, district, available, _id } = unavailableDonorProfileData
 
     const handleDonate = () => {
-        fetch(`https://payra.onrender.com/handleAvailability/${_id}`, {
+        fetch(`http://localhost:5000/handleAvailability/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -28,12 +28,12 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
 
     return (
         <div className=''>
-            <input type="checkbox" id="available-donor-profile-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box bg-[#F5F7FF]">
-                    <label for="available-donor-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <div class="avatar w-full">
-                        <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
+            <input type="checkbox" id="available-donor-profile-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box bg-[#F5F7FF]">
+                    <label htmlFor="available-donor-profile-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div className="avatar w-full">
+                        <div className="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             {gender === "পুরুষ" &&
                                 <img src={maleUser} alt="" />
                             }
@@ -105,7 +105,7 @@ const UnavailableProfileModal = ({ unavailableDonorProfileData, setUnavailableDo
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

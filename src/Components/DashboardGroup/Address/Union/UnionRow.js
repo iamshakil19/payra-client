@@ -11,7 +11,7 @@ const UnionRow = ({ union, index, refetch, setUnionDeleteData }) => {
             <td className='poppins-font p-2 '>{union_id}</td>
             <td className='poppins-font p-2 '>{upazila_id}</td>
             <td className='p-2'>
-                <label onClick={() => setUnionDeleteData(union)} for="union-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+                <label onClick={() => setUnionDeleteData(union)} htmlFor="union-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>
         </tr>
     );

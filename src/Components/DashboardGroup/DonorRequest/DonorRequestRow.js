@@ -17,7 +17,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             status: newStatus,
             acceptedTime: acceptedTime
         }
-        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
+        fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -26,7 +26,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+
                 refetch()
                 setIncompleteRefetch(current => !current)
                 toast.success('Donor Verified')
@@ -38,9 +38,9 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
         <tr className='hover'>
             <th className='p-2 pl-4 poppins-font w-7 '>{index}</th>
             <td className='p-2 pt-3 pb-1.5'>
-                <div class="avatar cursor-pointer">
-                    <div class="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setProfileDonorRequest(donorRequest)} for="donor-request-profile-modal" className='cursor-pointer'>
+                <div className="avatar cursor-pointer">
+                    <div className="w-9 rounded-full ring ring-orange-500 ring-offset-[#F5F7FF] ring-offset-2">
+                        <label onClick={() => setProfileDonorRequest(donorRequest)} htmlFor="donor-request-profile-modal" className='cursor-pointer'>
                             {gender === "পুরুষ" &&
                                 <img src={maleUser} alt="" />
                             }
@@ -90,7 +90,7 @@ const DonorRequestRow = ({ donorRequest, index, setDonorData, setProfileDonorReq
             <td className='bangla-font p-2 '>{village}</td>
             <td className='p-2'><button onClick={handleStatus} className='btn btn-sm w-16 bg-green-600 border-0 hover:bg-green-700'>Accept</button></td>
             <td className='p-2'>
-                <label onClick={() => setDonorData(donorRequest)} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+                <label onClick={() => setDonorData(donorRequest)} htmlFor="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>
         </tr>
     );

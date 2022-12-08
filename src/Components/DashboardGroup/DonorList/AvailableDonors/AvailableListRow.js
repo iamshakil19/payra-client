@@ -13,9 +13,9 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
         <tr className='hover'>
             <th className='p-2 pl-4 poppins-font w-7'>{index}</th>
             <td className='p-2 pt-3 pb-1.5'>
-                <div class="avatar cursor-pointer">
-                    <div class="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
-                        <label onClick={() => setAvailableDonorProfileData(donorSingleData)} for="available-donor-profile-modal" className='cursor-pointer'>
+                <div className="avatar cursor-pointer">
+                    <div className="w-9 rounded-full ring ring-green-500 ring-offset-[#F5F7FF] ring-offset-2">
+                        <label onClick={() => setAvailableDonorProfileData(donorSingleData)} htmlFor="available-donor-profile-modal" className='cursor-pointer'>
                             {gender === "পুরুষ" &&
                                 <img src={maleUser} alt="" />
                             }
@@ -65,15 +65,15 @@ const AvailableListRow = ({ donorSingleData, index, setAvailableDonorData, setAv
             <td className='bangla-font p-2'>{village}</td>
             <td className='bangla-font p-2'>{donationCount} বার</td>
             <td className='bangla-font p-2'>
-                <label onClick={() => { setEditDonorData(donorSingleData) }} for="edit-donor-modal" className=' w-8 h-8 text-center bg-indigo-200 text-xl text-indigo-800 border border-indigo-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-indigo-500 hover:text-white hover:border-indigo-600 transition-all ease-in-out duration-200'><span className=''><MdEdit /></span></label>
+                <label onClick={() => { setEditDonorData(donorSingleData) }} htmlFor="edit-donor-modal" className=' w-8 h-8 text-center bg-indigo-200 text-xl text-indigo-800 border border-indigo-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-indigo-500 hover:text-white hover:border-indigo-600 transition-all ease-in-out duration-200'><span className=''><MdEdit /></span></label>
             </td>
 
             <td className='bangla-font p-2'>
-                <label onClick={() => setDonateModal(donorSingleData)} for="donate-modal" className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'><span className=''>Donate</span></label>
+                <label onClick={() => setDonateModal(donorSingleData)} htmlFor="donate-modal" className='btn btn-sm bg-red-500 hover:bg-red-700 border-0'><span className=''>Donate</span></label>
             </td>
 
             <td className='p-2'>
-                <label onClick={() => { setAvailableDonorData(donorSingleData) }} for="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+                <label onClick={() => { setAvailableDonorData(donorSingleData) }} htmlFor="donor-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>
         </tr>
     );

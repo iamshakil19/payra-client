@@ -36,7 +36,7 @@ const Dashboard = () => {
     const [admin, adminLoading, adminRole] = useAdmin(user)
 
 
-    const { data: allDonorRequest, donorLoading } = useQuery(['donorRequest', incompleteRefetch], () => fetch('https://payra.onrender.com/donor-request', {
+    const { data: allDonorRequest, donorLoading } = useQuery(['donorRequest', incompleteRefetch], () => fetch('http://localhost:5000/donor-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -52,7 +52,7 @@ const Dashboard = () => {
             return res.json()
         }))
 
-    const { data: incompleteBloodList, bloodLoading } = useQuery(['incompleteBloodList', incompleteRefetch], () => fetch('https://payra.onrender.com/incomplete-blood-request', {
+    const { data: incompleteBloodList, bloodLoading } = useQuery(['incompleteBloodList', incompleteRefetch], () => fetch('http://localhost:5000/incomplete-blood-request', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -88,8 +88,8 @@ const Dashboard = () => {
                                     <div className='lg:flex lg:justify-between mb-2'>
 
                                         <div className='lg:flex items-center hidden '>
-                                            <div class="avatar online">
-                                                <div class="w-11 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border">
+                                            <div className="avatar online">
+                                                <div className="w-11 rounded-full shadow-gray-500 shadow-lg cursor-pointer border-slate-300 border">
                                                     <img src={user?.photoURL ? user.photoURL : userImage} alt="" />
                                                 </div>
                                             </div>
@@ -146,8 +146,8 @@ const Dashboard = () => {
                                         <li><Link to={"/dashboard/settings"}><span className='flex items-center poppins-font'> <span className='text-lg'><AiFillSetting /></span> <span className='ml-2 text-[16px]'>Settings</span> </span></Link></li>
 
                                         <div className='flex items-center mt-12 px-4 lg:hidden'>
-                                            <div class="avatar online">
-                                                <div class="w-10 rounded-full cursor-pointer">
+                                            <div className="avatar online">
+                                                <div className="w-10 rounded-full cursor-pointer">
                                                     <img src={user?.photoURL ? user.photoURL : userImage} alt="" />
                                                 </div>
                                             </div>

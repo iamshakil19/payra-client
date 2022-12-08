@@ -10,7 +10,7 @@ const VillageRow = ({ village, index, refetch, setVillageDeleteData }) => {
             <td className='bangla-font p-2 '>{bn_name}</td>
             <td className='poppins-font p-2 '>{union_id}</td>
             <td className='p-2'>
-                <label onClick={() => setVillageDeleteData(village)} for="village-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+                <label onClick={() => setVillageDeleteData(village)} htmlFor="village-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
             </td>
 
         </tr>

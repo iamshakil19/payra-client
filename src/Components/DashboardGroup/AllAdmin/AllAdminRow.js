@@ -10,7 +10,7 @@ const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
         const adminPromotionInfo = {
             role: "superAdmin"
         }
-        fetch(`https://payra.onrender.com/admin/accessibility/${email}`, {
+        fetch(`http://localhost:5000/admin/accessibility/${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -36,7 +36,7 @@ const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
         const adminPromotionInfo = {
             role: "admin"
         }
-        fetch(`https://payra.onrender.com/admin/accessibility/${email}`, {
+        fetch(`http://localhost:5000/admin/accessibility/${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -71,13 +71,13 @@ const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
             }
             <td className='p-2'>
                 {role !== 'superAdmin' ?
-                    <label onClick={handlePromotion} for="admin-confirmation-modal" className='btn btn-sm w-20 bg-green-600 border-0 hover:bg-green-700'>Promote</label>
+                    <label onClick={handlePromotion} htmlFor="admin-confirmation-modal" className='btn btn-sm w-20 bg-green-600 border-0 hover:bg-green-700'>Promote</label>
                     :
-                    email !== "shakilahmed.pure@gmail.com" && <label onClick={handleDemotion} for="admin-confirmation-modal" className='btn btn-sm w-20 bg-yellow-400 border-0 hover:bg-yellow-500'>Demote</label>
+                    email !== "shakilahmed.pure@gmail.com" && <label onClick={handleDemotion} htmlFor="admin-confirmation-modal" className='btn btn-sm w-20 bg-yellow-400 border-0 hover:bg-yellow-500'>Demote</label>
                 }
             </td>
             <td className='p-2'>
-                {email !== "shakilahmed.pure@gmail.com" && <label onClick={() => setAdminDeleteData(admin)} for="admin-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+                {email !== "shakilahmed.pure@gmail.com" && <label onClick={() => setAdminDeleteData(admin)} htmlFor="admin-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
                 }
             </td>
         </tr>

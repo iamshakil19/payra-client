@@ -10,12 +10,12 @@ const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
 
     return (
         <div className=''>
-            <input type="checkbox" id="complete-blood-profile-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box bg-[#F5F7FF]">
-                    <label for="complete-blood-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <div class="avatar w-full">
-                        <div class="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
+            <input type="checkbox" id="complete-blood-profile-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box bg-[#F5F7FF]">
+                    <label htmlFor="complete-blood-profile-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div className="avatar w-full">
+                        <div className="w-16 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             <img src={user} alt='' />
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const CompleteBloodProfileModal = ({ bloodRequestProfileData }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

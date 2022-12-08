@@ -24,7 +24,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
             status: newStatus,
             acceptedTime: acceptedTime
         }
-        fetch(`https://payra.onrender.com/donorStatus/${_id}`, {
+        fetch(`http://localhost:5000/donorStatus/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -33,7 +33,7 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+
                 refetch()
                 setIncompleteRefetch(current => !current)
                 setProfileDonorRequest(null)
@@ -43,12 +43,12 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
 
     return (
         <div className=''>
-            <input type="checkbox" id="donor-request-profile-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box bg-[#F5F7FF]">
-                    <label for="donor-request-profile-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <div class="avatar w-full">
-                        <div class="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
+            <input type="checkbox" id="donor-request-profile-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box bg-[#F5F7FF]">
+                    <label htmlFor="donor-request-profile-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div className="avatar w-full">
+                        <div className="w-16 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2 text-center mx-auto">
                             {gender === "পুরুষ" &&
                                 <img src={maleUser} alt="" />
                             }
@@ -118,13 +118,13 @@ const DonorRequestProfileModal = ({ profileDonorRequest, setProfileDonorRequest,
                         </div>
                     </div>
                     <div className='flex justify-end mt-3'>
-                        <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} for="donor-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
+                        <label onClick={() => { setDonorData(profileDonorRequest); handleProfileData() }} htmlFor="donor-delete-modal" className='btn btn-sm bg-red-500 border-0 hover:bg-red-600'>Delete</label>
 
                         <label onClick={handleStatus} className='btn btn-sm  bg-green-600 border-0 hover:bg-green-700 ml-4'>Accept</label>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

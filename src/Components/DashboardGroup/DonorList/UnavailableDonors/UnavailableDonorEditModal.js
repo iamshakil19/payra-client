@@ -10,8 +10,8 @@ const UnavailableDonorEditModal = ({ editUnavailableDonor, refetch, setEditUnava
     const onSubmit = data => {
         const donationNum = Number(data.donationCount)
         const newData = { ...data, donationCount: donationNum }
-        console.log(newData);
-        fetch(`https://payra.onrender.com/donorInfo/${_id}`, {
+
+        fetch(`http://localhost:5000/donorInfo/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',
