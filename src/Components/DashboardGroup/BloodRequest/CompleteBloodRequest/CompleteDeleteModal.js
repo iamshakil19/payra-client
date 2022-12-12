@@ -6,7 +6,7 @@ const CompleteDeleteModal = ({ bloodRequestDeleteData, setBloodRequestDeleteData
     const { _id } = bloodRequestDeleteData
 
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/deleteBloodRequest/${_id}`;
+        const url = `https://payra.onrender.com/deleteBloodRequest/${_id}`;
         fetch(url, {
             method: "DELETE"
         })

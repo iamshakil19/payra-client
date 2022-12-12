@@ -10,7 +10,7 @@ const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
         const adminPromotionInfo = {
             role: "superAdmin"
         }
-        fetch(`http://localhost:5000/admin/accessibility/${email}`, {
+        fetch(`https://payra.onrender.com/admin/accessibility/${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -36,7 +36,7 @@ const AllAdminRow = ({ admin, refetch, index, setAdminDeleteData }) => {
         const adminPromotionInfo = {
             role: "admin"
         }
-        fetch(`http://localhost:5000/admin/accessibility/${email}`, {
+        fetch(`https://payra.onrender.com/admin/accessibility/${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

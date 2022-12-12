@@ -9,7 +9,7 @@ const ContactUpdateModal = ({ contactUpdateData, setContactUpdateData, refetch }
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        fetch(`http://localhost:5000/contact/${_id}`, {
+        fetch(`https://payra.onrender.com/contact/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',

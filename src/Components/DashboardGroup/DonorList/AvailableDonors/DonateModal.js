@@ -17,7 +17,7 @@ const DonateModal = ({ setDonateModal, refetch, donateModal }) => {
             note: Number(data.note)
         }
 
-        fetch(`http://localhost:5000/donationCount/${_id}`, {
+        fetch(`https://payra.onrender.com/donationCount/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

@@ -12,7 +12,7 @@ const Upazila = () => {
     const [upazilaPageNumber, setUpazilaPageNumber] = useState(0)
 
 
-    const { data, isLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`http://localhost:5000/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`https://payra.onrender.com/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

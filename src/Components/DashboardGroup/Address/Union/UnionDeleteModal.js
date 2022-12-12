@@ -5,7 +5,7 @@ const UnionDeleteModal = ({ refetch, unionDeleteData, setUnionDeleteData }) => {
     const { _id, name } = unionDeleteData
 
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/unions/${_id}`;
+        const url = `https://payra.onrender.com/unions/${_id}`;
         fetch(url, {
             method: "DELETE",
             headers: {

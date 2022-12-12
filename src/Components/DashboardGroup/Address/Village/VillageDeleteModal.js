@@ -5,7 +5,7 @@ const VillageDeleteModal = ({ refetch, setVillageDeleteData, villageDeleteData }
     const { _id, name } = villageDeleteData
 
     const handleDeleteData = () => {
-        const url = `http://localhost:5000/villages/${_id}`;
+        const url = `https://payra.onrender.com/villages/${_id}`;
         fetch(url, {
             method: "DELETE",
             headers: {
