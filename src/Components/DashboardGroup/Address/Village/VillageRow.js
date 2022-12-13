@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const VillageRow = ({ village, index, refetch, setVillageDeleteData }) => {
     const { name, bn_name, union_id } = village
@@ -9,8 +9,13 @@ const VillageRow = ({ village, index, refetch, setVillageDeleteData }) => {
             <td className='poppins-font p-2 '>{name}</td>
             <td className='bangla-font p-2 '>{bn_name}</td>
             <td className='poppins-font p-2 '>{union_id}</td>
-            <td className='p-2'>
-                <label onClick={() => setVillageDeleteData(village)} htmlFor="village-delete-modal" className=' w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+            <td className='p-2 flex'>
+                <label onClick={() => { }} htmlFor="edit-donor-modal" className=' w-8 h-8 text-center bg-indigo-200 text-xl text-indigo-800 border border-indigo-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-indigo-500 hover:text-white hover:border-indigo-600 transition-all ease-in-out duration-200 mr-2'><span className=''><MdEdit /></span></label>
+
+                <label onClick={() => setVillageDeleteData(village)} htmlFor="village-delete-modal" className='ml-2 w-8 h-8 text-center bg-red-200 text-xl text-red-500 border border-red-300 rounded-md cursor-pointer flex justify-center items-center hover:bg-red-500 hover:text-white hover:border-red-600 transition-all ease-in-out duration-200'><span className=''><MdDelete /></span></label>
+
+
+
             </td>
 
         </tr>

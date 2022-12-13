@@ -4,15 +4,17 @@ import { FaSearch } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import Loading from '../../../Shared/Loading/Loading';
+import UpazilaEditModal from './UpazilaEditModal';
 import UpazilaRow from './UpazilaRow';
 
 const Upazila = () => {
     const [upazilaSearchData, setUpazilaSearchData] = useState("")
     const [upazilaLimit, setUpazilaLimit] = useState(5)
     const [upazilaPageNumber, setUpazilaPageNumber] = useState(0)
+    const [upazilaEditData, setUpazilaEditData] = useState(null)
 
 
-    const { data, isLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`https://payra.onrender.com/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
+    const { data, isLoading, refetch } = useQuery(['upazila', upazilaLimit, upazilaPageNumber, upazilaSearchData], () => fetch(`http://localhost:5000/upazilas?upazilaLimit=${upazilaLimit}&upazilaPageNumber=${upazilaPageNumber}&upazilaSearchData=${upazilaSearchData}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -63,6 +65,7 @@ const Upazila = () => {
                             <th className='poppins-font text-[15px] pl-2'>Bangla Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Upazila Id</th>
                             <th className='poppins-font text-[15px] pl-2'>District Id</th>
+                            <th className='poppins-font text-[15px] pl-2'>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,11 +75,20 @@ const Upazila = () => {
                                 upazila={upazila}
                                 refetch={refetch}
                                 index={index + skipIndex}
+                                setUpazilaEditData={setUpazilaEditData}
                             ></UpazilaRow>)
                         }
                     </tbody>
                 </table>
             </div>
+
+            {upazilaEditData && <UpazilaEditModal
+                upazilaEditData={upazilaEditData}
+                refetch={refetch}
+                setUpazilaEditData={setUpazilaEditData}
+            ></UpazilaEditModal>
+
+            }
 
             <div>
                 <ReactPaginate

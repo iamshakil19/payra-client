@@ -10,7 +10,7 @@ const UnionAddModal = ({ refetch, setIsUnionAddModal }) => {
         const upazila_id = Number(data.upazila_id)
         const newData = { ...data, union_id, upazila_id }
 
-        fetch('https://payra.onrender.com/unions', {
+        fetch('http://localhost:5000/unions', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

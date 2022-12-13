@@ -16,7 +16,7 @@ const CompleteBloodRequest = () => {
     const [limit, setLimit] = useState(10)
     const [pageNumber, setPageNumber] = useState(0)
 
-    const { data, isLoading, refetch } = useQuery(['completeBloodList', limit, pageNumber], () => fetch(`https://payra.onrender.com/complete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
+    const { data, isLoading, refetch } = useQuery(['completeBloodList', limit, pageNumber], () => fetch(`http://localhost:5000/complete-blood-request?limit=${limit}&pageNumber=${pageNumber}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
