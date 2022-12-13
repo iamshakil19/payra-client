@@ -34,7 +34,7 @@ const Village = () => {
         <div className='mb-5'>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Village</h2>
 
-            <div className='hidden lg:flex items-center justify-between mb-3'>
+            <div className='lg:flex items-center justify-between mb-3'>
                 <div>
                     <form action="" className='search-bar'>
                         <input onChange={(e) => setVillageSearchData(e.target.value)} autoComplete='off' type="text" placeholder='Search village' name='donorSearchText' />
@@ -42,7 +42,7 @@ const Village = () => {
                     </form>
                 </div>
 
-                <div>
+                <div className='hidden lg:block'>
                     <div className='inline'>
                         <label htmlFor="village-add-button" onClick={() => setIsVillageAddModal(true)} className="btn btn-sm mr-5 bg-[#17203F] poppins-font">Add Village</label>
                     </div>
@@ -69,6 +69,7 @@ const Village = () => {
                             <th className='poppins-font text-[15px] pl-2'>English Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Bangla Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Union Id</th>
+                            <th className='poppins-font text-[15px] pl-2'>Edit</th>
                             <th className='poppins-font text-[15px] pl-2'>Action</th>
                         </tr>
                     </thead>

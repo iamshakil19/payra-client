@@ -33,7 +33,7 @@ const Upazila = () => {
         <div className='mb-5'>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Upazila</h2>
 
-            <div className='hidden lg:flex items-center justify-between mb-3'>
+            <div className='lg:flex items-center justify-between mb-3'>
                 <div>
                     <form action="" className='search-bar'>
                         <input onChange={(e) => setUpazilaSearchData(e.target.value)} autoComplete='off' type="text" placeholder='Search upazila' name='donorSearchText' />
@@ -41,7 +41,7 @@ const Upazila = () => {
                     </form>
                 </div>
 
-                <div className='inline'>
+                <div className='lg:inline hidden'>
                     <span className='poppins-font'>Show : </span>
                     <select onChange={(e) => setUpazilaLimit(e.target.value)} defaultValue={upazilaLimit} className="py-1 px-1 bg-slate-200 font-semibold outline-none rounded-sm poppins-font">
                         <option selected className='font-semibold' value="5">5</option>

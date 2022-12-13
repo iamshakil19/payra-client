@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import Loading from '../../../Shared/Loading/Loading';
 import UnionAddModal from './UnionAddModal';
 import UnionDeleteModal from './UnionDeleteModal';
+import UnionEditModal from './UnionEditModal';
 import UnionRow from './UnionRow';
 
 const Union = () => {
@@ -13,6 +14,7 @@ const Union = () => {
     const [unionPageNumber, setUnionPageNumber] = useState(0)
     const [isUnionAddModal, setIsUnionAddModal] = useState(false)
     const [unionDeleteData, setUnionDeleteData] = useState(null)
+    const [unionEditData, setUnionEditData] = useState(null)
 
     const { data, isLoading, refetch } = useQuery(['union', unionLimit, unionPageNumber, unionSearchData], () => fetch(`http://localhost:5000/unions?unionLimit=${unionLimit}&unionPageNumber=${unionPageNumber}&unionSearchData=${unionSearchData}`, {
         method: 'GET',
@@ -33,7 +35,7 @@ const Union = () => {
         <div className='mb-5'>
             <h2 className='text-xl font-semibold poppins-font mb-4 text-[#17203F] text-center'>All Union</h2>
 
-            <div className='hidden lg:flex items-center justify-between mb-3'>
+            <div className='lg:flex items-center justify-between mb-3'>
                 <div>
                     <form action="" className='search-bar'>
                         <input onChange={(e) => setUnionSearchData(e.target.value)} autoComplete='off' type="text" placeholder='Search union' name='donorSearchText' />
@@ -41,7 +43,7 @@ const Union = () => {
                     </form>
                 </div>
 
-                <div>
+                <div className='hidden lg:block'>
                     <div className='inline'>
                         <label htmlFor="union-add-button" onClick={() => setIsUnionAddModal(true)} className="btn btn-sm mr-5 bg-[#17203F] poppins-font">Add Union</label>
                     </div>
@@ -69,6 +71,7 @@ const Union = () => {
                             <th className='poppins-font text-[15px] pl-2'>Bangla Name</th>
                             <th className='poppins-font text-[15px] pl-2'>Union Id</th>
                             <th className='poppins-font text-[15px] pl-2'>Upazila Id</th>
+                            <th className='poppins-font text-[15px] pl-2'>Edit</th>
                             <th className='poppins-font text-[15px] pl-2'>Action</th>
                         </tr>
                     </thead>
@@ -80,6 +83,7 @@ const Union = () => {
                                 refetch={refetch}
                                 index={index + skipIndex}
                                 setUnionDeleteData={setUnionDeleteData}
+                                setUnionEditData={setUnionEditData}
                             ></UnionRow>)
                         }
                     </tbody>
@@ -91,6 +95,14 @@ const Union = () => {
                     setIsUnionAddModal={setIsUnionAddModal}
                     refetch={refetch}
                 ></UnionAddModal>
+            }
+
+            {
+                unionEditData && <UnionEditModal
+                unionEditData={unionEditData}
+                setUnionEditData={setUnionEditData}
+                    refetch={refetch}
+                ></UnionEditModal>
             }
 
             {
