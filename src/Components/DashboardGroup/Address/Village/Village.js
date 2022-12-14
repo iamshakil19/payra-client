@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import Loading from '../../../Shared/Loading/Loading';
 import VillageAddModal from './VillageAddModal';
 import VillageDeleteModal from './VillageDeleteModal';
+import VillageEditModal from './VillageEditModal';
 import VillageRow from './VillageRow';
 
 const Village = () => {
@@ -14,6 +15,7 @@ const Village = () => {
     const [isVillageAddModal, setIsVillageAddModal] = useState(false)
     const [villagePageNumber, setVillagePageNumber] = useState(0)
     const [villageDeleteData, setVillageDeleteData] = useState(null)
+    const [villageEditData, setVillageEditData] = useState(null)
 
     const { data, isLoading, refetch } = useQuery(['village', villageLimit, villagePageNumber, villageSearchData], () => fetch(`http://localhost:5000/villages?villageLimit=${villageLimit}&villagePageNumber=${villagePageNumber}&villageSearchData=${villageSearchData}`, {
         method: 'GET',
@@ -78,9 +80,9 @@ const Village = () => {
                             data?.villages?.map((village, index) => <VillageRow
                                 key={village._id}
                                 village={village}
-                                refetch={refetch}
                                 index={index + skipIndex}
                                 setVillageDeleteData={setVillageDeleteData}
+                                setVillageEditData={setVillageEditData}
                             ></VillageRow>)
                         }
                     </tbody>
@@ -92,6 +94,14 @@ const Village = () => {
                     refetch={refetch}
                     setIsVillageAddModal={setIsVillageAddModal}
                 ></VillageAddModal>
+            }
+
+            {
+                villageEditData && <VillageEditModal
+                    refetch={refetch}
+                    villageEditData={villageEditData}
+                    setVillageEditData={setVillageEditData}
+                ></VillageEditModal>
             }
 
             {

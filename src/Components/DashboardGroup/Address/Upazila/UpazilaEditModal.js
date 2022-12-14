@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast';
 
 const UpazilaEditModal = ({ upazilaEditData, refetch, setUpazilaEditData }) => {
     const {_id, upazila_id, district_id, name, bn_name} = upazilaEditData
-    console.log(upazilaEditData);
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 

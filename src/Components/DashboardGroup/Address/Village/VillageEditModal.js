@@ -2,17 +2,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
+const VillageEditModal = ({ refetch, villageEditData, setVillageEditData }) => {
+    const { bn_name, name, union_id, _id } = villageEditData
 
-    const { bn_name, name, upazila_id, union_id, _id } = unionEditData
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        const upazilaIdNum = Number(data.upazila_id)
         const unionIdNum = Number(data.union_id)
-        const newData = { ...data, upazila_id: upazilaIdNum, union_id: unionIdNum }
+        const newData = { ...data, union_id: unionIdNum }
 
-        fetch(`http://localhost:5000/unions/${_id}`, {
+        fetch(`http://localhost:5000/villages/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',
@@ -24,22 +23,22 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
             .then(data => {
                 if (data.success) {
                     refetch()
-                    setUnionEditData(null)
-                    toast.success("Union Info Updated")
+                    setVillageEditData(null)
+                    toast.success("Village Info Updated")
                 }
             })
     };
 
-    const handleUnionUpdateData = () => {
-        setUnionEditData(null)
+    const handleVillageUpdateData = () => {
+        setVillageEditData(null)
     }
-    
+
     return (
         <div>
-            <input type="checkbox" id="edit-union-modal" className="modal-toggle" />
+            <input type="checkbox" id="edit-village-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
-                    <label onClick={handleUnionUpdateData} htmlFor="edit-union-modal" className="btn btn-sm btn-circle bg-[#0F1631] absolute right-2 top-2">✕</label>
+                    <label onClick={handleVillageUpdateData} htmlFor="edit-village-modal" className="btn btn-sm btn-circle bg-[#0F1631] absolute right-2 top-2">✕</label>
                     <h2 className="font-bold text-lg">Update Upazila Info</h2>
 
                     <div>
@@ -47,13 +46,13 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
                             <div className=''>
                                 <div className="form-control w-full mx-auto max-w-xs ">
                                     <label className="label">
-                                        <span className="label-text text-[#141C39] poppins-font">Union Name (English) <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-[#141C39] poppins-font">Upazila Name (English) <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input defaultValue={name} type="text" placeholder="Type Upazila Name (English)" className={`input h-10 input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.name && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("name", {
                                             required: {
                                                 value: true,
-                                                message: "Union is required"
+                                                message: "Name is required"
                                             }
                                         })}
                                     />
@@ -66,13 +65,13 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
 
                                 <div className="form-control w-full mx-auto max-w-xs ">
                                     <label className="label">
-                                        <span className="label-text text-[#141C39] poppins-font">Union Name (Bangla)  <span className='text-red-500 font-extrabold'>*</span></span>
+                                        <span className="label-text text-[#141C39] poppins-font">Upazila Name (Bangla)  <span className='text-red-500 font-extrabold'>*</span></span>
                                     </label>
                                     <input defaultValue={bn_name} type="text" placeholder="Type Upazila Name (Bangla)" className={`input h-10 input-bordered w-full max-w-xs lg:max-w-full focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.bn_name && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
                                         {...register("bn_name", {
                                             required: {
                                                 value: true,
-                                                message: "Union Bangla name is required"
+                                                message: "Bangla name is required"
                                             }
                                         })}
                                     />
@@ -92,32 +91,13 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
 
                                             required: {
                                                 value: true,
-                                                message: "Union id required"
+                                                message: "Upazila id required"
                                             }
                                         })}
                                     />
                                     {
                                         errors?.union_id && <label className="label">
                                             {errors?.union_id && <span className="label-text-alt text-red-500">{errors.union_id.message}</span>}
-                                        </label>
-                                    }
-                                </div>
-
-                                <div className="form-control mx-auto w-full max-w-xs">
-                                    <label className="label">
-                                        <span className="label-text text-[#141C39] poppins-font">Upazila ID <span className='text-red-500 font-extrabold'>*</span></span>
-                                    </label>
-                                    <input defaultValue={upazila_id} type="number" placeholder="( Optional )" className={`input h-10 input-bordered w-full max-w-xs focus:border-blue-500 focus:ring-blue-500 focus:ring-1 ${errors.upazila_id && "focus:border-red-500 border-red-500 focus:ring-red-500 focus:ring-1"}`}
-                                        {...register("upazila_id", {
-                                            required: {
-                                                value: true,
-                                                message: "Upazila id required"
-                                            }
-                                        })}
-                                    />
-                                    {
-                                        errors?.upazila_id && <label className="label">
-                                            {errors?.upazila_id && <span className="label-text-alt text-red-500">{errors.upazila_id.message}</span>}
                                         </label>
                                     }
                                 </div>
@@ -134,4 +114,4 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
     );
 };
 
-export default UnionEditModal;
+export default VillageEditModal;
