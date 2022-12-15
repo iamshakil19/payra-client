@@ -3,15 +3,17 @@ import logo from '../../../Resources/Logos/logo.png'
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineInstagram, AiOutlineTwitter, AiOutlineGoogle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+    const navigate = useNavigate()
     const currentYear = new Date().getFullYear();
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
 
     const onSubmit = async data => {
 
-
     };
+
 
     return (
         <div className='bg-black py-16 px-5'>
@@ -23,15 +25,15 @@ const Footer = () => {
                 <div className='md:flex justify-center'>
                     <div>
                         <img src={logo} alt="" className='w-20 block mb-3' />
-                        <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">About Brand</a></p>
+                        <p onClick={() => navigate("/leaderBoard")} className='text-slate-400 poppins-font hover:text-white text-[14px] cursor-pointer'>Leader Board</p>
                         <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">FAQ</a></p>
-                        <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">Contact</a></p>
+                        <p onClick={() => navigate("/contact")} className='text-slate-400 poppins-font hover:text-white text-[14px] cursor-pointer'>Contact</p>
                     </div>
                 </div>
                 <div className='md:flex justify-center'>
                     <div>
                         <h3 className='text-slate-200 poppins-font font-bold  text-[16px] mb-3'>EXPLORE PAYRA</h3>
-                        <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">About Us</a></p>
+                        <p onClick={() => navigate("/aboutUs")} className='text-slate-400 poppins-font hover:text-white text-[14px] cursor-pointer'>About Us</p>
                         <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">News & articles</a></p>
                         <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">Our Offers</a></p>
                         <p ><a className='text-slate-400 poppins-font hover:text-white text-[14px]' href="#">Custom Order</a></p>
@@ -74,7 +76,7 @@ const Footer = () => {
             </div>
             <div className="border-b my-10 border-slate-400"></div>
             <div className='text-center'>
-                <span data-tip="Link not set yet" className='tooltip text-slate-200 text-xl mx-2 border-2 cursor-pointer hover:bg-slate-200 hover:text-black transition-all duration-200 ease-in-out border-slate-200 p-1 inline-block rounded-full'><FaFacebookF /></span>
+                <a target={'_blank'} data-tip="Payra" href="https://www.facebook.com/payraBloodDonation/" className='tooltip text-slate-200 text-xl mx-2 border-2 cursor-pointer hover:bg-slate-200 hover:text-black transition-all duration-200 ease-in-out border-slate-200 p-1 inline-block rounded-full'><FaFacebookF /></a>
                 <span data-tip="Link not set yet" className='tooltip text-slate-200 text-xl mx-2 border-2 cursor-pointer hover:bg-slate-200 hover:text-black transition-all duration-200 ease-in-out border-slate-200 p-1 inline-block rounded-full'><AiOutlineInstagram /></span>
                 <span data-tip="Link not set yet" className='tooltip text-slate-200 text-xl mx-2 border-2 cursor-pointer hover:bg-slate-200 hover:text-black transition-all duration-200 ease-in-out border-slate-200 p-1 inline-block rounded-full'><AiOutlineTwitter /></span>
                 <span data-tip="Link not set yet" className='tooltip text-slate-200 text-xl mx-2 border-2 cursor-pointer hover:bg-slate-200 hover:text-black transition-all duration-200 ease-in-out border-slate-200 p-1 inline-block rounded-full'><AiOutlineGoogle /></span>

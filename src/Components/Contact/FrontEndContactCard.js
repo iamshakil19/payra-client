@@ -14,7 +14,7 @@ const FrontEndContactCard = ({ contact }) => {
                     </div>
                 </div>
 
-                <h2 className="card-title px-5 flex justify-center poppins-font">{name}</h2>
+                <h2 className="card-title px-2 flex justify-center poppins-font">{name}</h2>
                 <div className='flex justify-center items-center'>
                     <div>
                         <p className='text-2xl'> <FiPhoneCall /> </p>

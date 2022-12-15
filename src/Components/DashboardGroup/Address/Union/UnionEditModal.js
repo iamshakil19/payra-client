@@ -33,7 +33,7 @@ const UnionEditModal = ({ setUnionEditData, refetch, unionEditData }) => {
     const handleUnionUpdateData = () => {
         setUnionEditData(null)
     }
-    
+
     return (
         <div>
             <input type="checkbox" id="edit-union-modal" className="modal-toggle" />

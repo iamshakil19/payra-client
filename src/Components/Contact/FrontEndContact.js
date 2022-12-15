@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import PageTitle from '../Shared/PageTitle';
 import Footer from '../Shared/Footer/Footer';
 import ReactPaginate from 'react-paginate';
+import swal from 'sweetalert';
 
 const Contact = () => {
 
@@ -40,8 +41,12 @@ const Contact = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    toast.success("Your request has been sent")
-                    reset()
+                    swal({
+                        title: "Good job!",
+                        text: "আপনার রিকোয়েস্টটি আমাদের কাছে এসেছে, শিঘ্রই আমাদের একজন প্রতিনিধি আপনার সাথে যোগাযোগ করবে। বেশি জরুরি হলে আমাদের দেওয়া নাম্বারে সরাসরি ফোন করুন।",
+                        icon: "success",
+                    });
+                    // reset()
                 }
             })
     };

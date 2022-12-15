@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 const UpazilaEditModal = ({ upazilaEditData, refetch, setUpazilaEditData }) => {
-    const {_id, upazila_id, district_id, name, bn_name} = upazilaEditData
+    const { _id, upazila_id, district_id, name, bn_name } = upazilaEditData
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 

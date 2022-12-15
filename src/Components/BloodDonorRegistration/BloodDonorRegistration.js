@@ -8,6 +8,7 @@ import Footer from '../Shared/Footer/Footer';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading/Loading';
 import { useEffect } from 'react';
+import swal from 'sweetalert';
 
 
 const BloodDonorRegistration = () => {
@@ -39,7 +40,11 @@ const BloodDonorRegistration = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    toast.success("Your submission has been sent")
+                    swal({
+                    title: "Good job bravo!",
+                    text: "Your submission has been sent",
+                    icon: "success",
+                    });
                     reset()
                 } else {
                     toast.error("Submission failed")

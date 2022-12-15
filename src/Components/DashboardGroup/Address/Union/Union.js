@@ -99,8 +99,8 @@ const Union = () => {
 
             {
                 unionEditData && <UnionEditModal
-                unionEditData={unionEditData}
-                setUnionEditData={setUnionEditData}
+                    unionEditData={unionEditData}
+                    setUnionEditData={setUnionEditData}
                     refetch={refetch}
                 ></UnionEditModal>
             }
