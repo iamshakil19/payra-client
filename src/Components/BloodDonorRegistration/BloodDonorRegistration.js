@@ -41,9 +41,9 @@ const BloodDonorRegistration = () => {
             .then(data => {
                 if (data.insertedId) {
                     swal({
-                    title: "Good job bravo!",
-                    text: "Your submission has been sent",
-                    icon: "success",
+                        title: "Good job bravo!",
+                        text: "Your submission has been sent",
+                        icon: "success",
                     });
                     reset()
                 } else {

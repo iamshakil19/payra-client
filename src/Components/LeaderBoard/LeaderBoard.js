@@ -93,9 +93,9 @@ const LeaderBoard = () => {
 
                     {leaderBoardNormalDonar?.map((singleDonor, index) => <div className='grid grid-cols-3 bg-white py-3.5 px-2 sm:px-5 rounded-lg mb-3'>
                         {singleDonor.name.length > 15 ?
-                            <p className='poppins-font flex items-center font-semibold text-sm'> <span className='mr-3'>{index + 1}</span> {singleDonor.name.slice(0, 15)}... </p>
+                            <p className='poppins-font flex items-center font-semibold text-sm whitespace-nowrap overflow-hidden'> <span className='mr-3'>{index + 1}</span> {singleDonor.name.slice(0, 15)}... </p>
                             :
-                            <p className='poppins-font flex items-center font-semibold text-sm'> <span className='mr-3'>{index + 6}</span> {singleDonor.name} </p>
+                            <p className='poppins-font flex items-center font-semibold text-sm whitespace-nowrap overflow-hidden'> <span className='mr-3'>{index + 6}</span> {singleDonor.name} </p>
                         }
                         {singleDonor.bloodGroup === "oPositive" &&
                             <p className='capitalize poppins-font text-red-500 font-bold text-center'>O+</p>
